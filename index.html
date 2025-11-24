@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OrderPool – Briefs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-page: #f6f6fc;
+      --bg-surface: #ffffff;
+      --bg-surface-soft: #f1f2f9;
+      --border-subtle: #e3e5f0;
+      --text-main: #1f1534;
+      --text-muted: #7a7b8f;
+      --text-link: #4f46e5;
+      --purple: #6246ea;
+      --purple-dark: #4026c4;
+      --purple-soft: #f0ecff;
+      --green: #1abc9c;
+      --yellow: #f6a623;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 8px 18px rgba(15, 23, 42, 0.08);
+      --shadow-card: 0 4px 14px rgba(15, 23, 42, 0.05);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
+        "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
+    .header {
+      background: #ffffff;
+      border-bottom: 1px solid #ecebf5;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .logo {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .brand {
+      font-weight: 600;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 4px 0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-link.active {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--purple);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .header-btn {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .header-btn.primary {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(98, 70, 234, 0.35);
+    }
+
+    .header-btn.primary:hover {
+      background: var(--purple-dark);
+    }
+
+    /* MAIN PAGE WRAPPER */
+
+    .page {
+      max-width: 1200px;
+      margin: 24px auto 40px;
+      padding: 0 24px;
+    }
+
+    /* TOP TABS */
+
+    .top-tabs {
+      display: inline-flex;
+      background: var(--bg-surface-soft);
+      border-radius: var(--radius-pill);
+      padding: 4px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .top-tab {
+      border-radius: var(--radius-pill);
+      padding: 8px 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .top-tab--active {
+      background: #ffffff;
+      color: var(--text-main);
+      box-shadow: var(--shadow-card);
+    }
+
+    .top-tab:hover:not(.top-tab--active) {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* TOOLBAR */
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-left {
+      flex: 1;
+      min-width: 260px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .search-input {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(227, 229, 240, 0.7);
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .search-input input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      font-family: inherit;
+      color: inherit;
+      background: transparent;
+    }
+
+    .search-icon {
+      font-size: 15px;
+      opacity: 0.65;
+    }
+
+    .chip-button,
+    .select-input {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chip-button span.icon {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .select-input .caret {
+      font-size: 10px;
+      opacity: 0.9;
+    }
+
+    .toolbar-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .toggle-box {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+      background: #fff;
+    }
+
+    /* TRENDING */
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .section-heading-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--purple);
+      border-top-color: transparent;
+      transform: rotate(45deg);
+      opacity: 0.7;
+    }
+
+    .trending-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .trend-card {
+      flex: 1 1 260px;
+      max-width: 320px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      padding: 12px 16px;
+      border: 1px solid rgba(227, 229, 240, 0.8);
+    }
+
+    .trend-id {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .trend-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .trend-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* TABLE */
+
+    .table-card {
+      background: var(--bg-surface);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(227, 229, 240, 0.9);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead {
+      background: #fafbff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    th,
+    td {
+      padding: 14px 20px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th:last-child,
+    td:last-child {
+      text-align: right;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fcfcff;
+    }
+
+    tbody tr:hover {
+      background: #f3f4ff;
+    }
+
+    .brief-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brief-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-link);
+      cursor: pointer;
+    }
+
+    .brief-sub {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid;
+    }
+
+    .status-open {
+      color: var(--green);
+      border-color: rgba(26, 188, 156, 0.25);
+      background: rgba(26, 188, 156, 0.06);
+    }
+
+    .status-shortlist {
+      color: var(--yellow);
+      border-color: rgba(246, 166, 35, 0.25);
+      background: rgba(246, 166, 35, 0.06);
+    }
+
+    .bookmark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      margin-right: 10px;
+      color: var(--text-muted);
+      font-size: 14px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      background: var(--purple);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(98, 70, 234, 0.4);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .primary-button:hover {
+      background: #4b3adb;
+    }
+
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: #fcfcff;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .pagination {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pagination-link {
+      color: var(--text-link);
+      cursor: pointer;
+    }
+
+    .pagination-link.disabled {
+      color: var(--text-muted);
+      cursor: default;
+    }
+
+    .pagination-page {
+      min-width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      background: var(--purple-dark);
+      color: #f3eafe;
+      margin-top: 40px;
+      padding-top: 32px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 28px;
+      display: grid;
+      grid-template-columns: 2.2fr 1.4fr 1.4fr 2fr;
+      gap: 40px;
+    }
+
+    .footer-col h4,
+    .footer-col h3 {
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .brand-col h3 {
+      margin-top: 8px;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 8px 0 0;
+      color: #d9cffc;
+    }
+
+    .logo-footer {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #e4ddff;
+    }
+
+    .footer-col p {
+      font-size: 13px;
+      margin: 4px 0 6px;
+      color: #d9cffc;
+    }
+
+    .footer-col a:hover {
+      text-decoration: underline;
+    }
+
+    /* Stay in the loop form */
+
+    .newsletter-form {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 8px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      min-width: 0;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: #c5bdf5;
+    }
+
+    .newsletter-button {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #ffffff;
+      color: var(--purple-dark);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .newsletter-button:hover {
+      background: #f5f3ff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      margin-top: 4px;
+      padding: 10px 24px 16px;
+      font-size: 12px;
+      color: #d3c9ff;
+    }
+
+    .footer-bottom-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #e4ddff;
+      margin-left: 6px;
+      margin-right: 6px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .nav {
+        display: none;
+      }
+
+      .page {
+        margin-top: 16px;
+      }
+
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .toolbar-right {
+        justify-content: flex-start;
+      }
+
+      th:nth-child(2),
+      td:nth-child(2),
+      th:nth-child(3),
+      td:nth-child(3) {
+        display: none; /* hide category + MOQ on narrow widths */
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 32px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        padding: 10px 16px;
+      }
+
+      .header-actions {
+        display: none;
+      }
+
+      .page {
+        padding: 0 16px 32px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .newsletter-button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <!-- Replace logo-op.png with your real logo path -->
+        <img src="logo-op.png" alt="OrderPool logo" class="logo" />
+        <span class="brand">OrderPool</span>
+      </div>
+
+      <nav class="nav">
+        <a href="#" class="nav-link active">Briefs</a>
+        <a href="#" class="nav-link">Manufacturers</a>
+        <a href="#" class="nav-link">How it works</a>
+        <a href="#" class="nav-link">Resources</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="header-btn">Sign in</button>
+        <button class="header-btn primary">Join</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page">
+    <!-- Top Tabs -->
+    <div class="top-tabs">
+      <div class="top-tab top-tab--active">Briefs</div>
+      <div class="top-tab">Manufacturers</div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="search-input">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search briefs…" />
+        </div>
+
+        <button class="chip-button">
+          <span class="icon">⏳</span>
+          Filters
+        </button>
+      </div>
+
+      <div class="toolbar-right">
+        <span class="toolbar-label">Category</span>
+        <div class="select-input">
+          <span>All</span>
+          <span class="caret">▾</span>
+        </div>
+
+        <span class="toolbar-label">Sort</span>
+        <div class="select-input">
+          <span>Recently updated</span>
+          <span class="caret">▾</span>
+        </div>
+
+        <label class="toggle">
+          <span class="toggle-box"></span>
+          <span>Saved only</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Trending -->
+    <div class="section-heading">
+      <span class="section-heading-icon"></span>
+      <span>Trending projects</span>
+    </div>
+
+    <div class="trending-row">
+      <article class="trend-card">
+        <div class="trend-id">BR–1842</div>
+        <div class="trend-title">Concert T-Shirt</div>
+        <div class="trend-meta">Apparel • MOQ 1,000</div>
+      </article>
+
+      <article class="trend-card">
+        <div class="trend-id">BR–1038</div>
+        <div class="trend-title">Sunglasses</div>
+        <div class="trend-meta">Accessories • MOQ 800</div>
+      </article>
+
+      <article class="trend-card">
+        <div class="trend-id">BR–1832</div>
+        <div class="trend-title">Totebag</div>
+        <div class="trend-meta">Apparel • MOQ 1,200</div>
+      </article>
+    </div>
+
+    <!-- Table -->
+    <section class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Brief</th>
+            <th>Category</th>
+            <th>MOQ</th>
+            <th>Updated</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1 -->
+          <tr>
+            <td>
+              <div class="brief-main">
+                <div class="brief-title">Concert T-Shirt</div>
+                <div class="brief-sub">
+                  <span class="status-pill status-open">Open</span>
+                  <span>BR–1842</span>
+                </div>
+              </div>
+            </td>
+            <td>Apparel</td>
+            <td>1,000</td>
+            <td>May 21</td>
+            <td>
+              <span class="bookmark">☆</span>
+              <button class="primary-button">Request Access</button>
+            </td>
+          </tr>
+
+          <!-- Row 2 -->
+          <tr>
+            <td>
+              <div class="brief-main">
+                <div class="brief-title">Sunglasses</div>
+                <div class="brief-sub">
+                  <span class="status-pill status-shortlist">Shortlist</span>
+                  <span>BR–1038</span>
+                </div>
+              </div>
+            </td>
+            <td>Accessories</td>
+            <td>800</td>
+            <td>May 20</td>
+            <td>
+              <span class="bookmark">☆</span>
+              <button class="primary-button">Request Access</button>
+            </td>
+          </tr>
+
+          <!-- Row 3 -->
+          <tr>
+            <td>
+              <div class="brief-main">
+                <div class="brief-title">Totebag</div>
+                <div class="brief-sub">
+                  <span class="status-pill status-open">Open</span>
+                  <span>BR–1832</span>
+                </div>
+              </div>
+            </td>
+            <td>Apparel</td>
+            <td>1,200</td>
+            <td>May 19</td>
+            <td>
+              <span class="bookmark">☆</span>
+              <button class="primary-button">Request Access</button>
+            </td>
+          </tr>
+
+          <!-- Row 4 -->
+          <tr>
+            <td>
+              <div class="brief-main">
+                <div class="brief-title">USB-C Hub</div>
+                <div class="brief-sub">
+                  <span class="status-pill status-open">Open</span>
+                  <span>BR–1821</span>
+                </div>
+              </div>
+            </td>
+            <td>Electronics</td>
+            <td>500</td>
+            <td>May 19</td>
+            <td>
+              <span class="bookmark">☆</span>
+              <button class="primary-button">Request Access</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-footer">
+        <span>Showing 4 results</span>
+        <div class="pagination">
+          <span class="pagination-link disabled">Previous</span>
+          <span class="pagination-page">1</span>
+          <span class="pagination-link">Next</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <!-- Brand -->
+      <div class="footer-col brand-col">
+        <img src="logo-op.png" alt="OrderPool logo" class="logo-footer" />
+        <h3>OrderPool</h3>
+        <p class="footer-desc">
+          Where publishers and manufacturers collaborate
+          to create products.
+        </p>
+      </div>
+
+      <!-- For Publishers -->
+      <div class="footer-col">
+        <h4>For Publishers</h4>
+        <a href="#">Post a concept</a>
+        <a href="#">Find a manufacturer</a>
+        <a href="#">Case studies</a>
+      </div>
+
+      <!-- For Manufacturers -->
+      <div class="footer-col">
+        <h4>For Manufacturers</h4>
+        <a href="#">Discover briefs</a>
+        <a href="#">Capabilities</a>
+        <a href="#">Safety &amp; compliance</a>
+      </div>
+
+      <!-- Stay in the loop -->
+      <div class="footer-col">
+        <h4>Stay in the loop</h4>
+        <form class="newsletter-form" action="#" method="post">
+          <input
+            type="email"
+            name="email"
+            class="newsletter-input"
+            placeholder="you@example.com"
+            required
+          />
+          <button type="submit" class="newsletter-button">
+            Subscribe
+          </button>
+        </form>
+        <p>We respect your privacy.</p>
+        <a href="#">Unsubscribe anytime.</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2025 OrderPool. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="#">Privacy</a> ·
+          <a href="#">Terms</a> ·
+          <a href="#">Contact</a> ·
+          <a href="#">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
