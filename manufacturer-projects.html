@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OrderPool – Manufacturer Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="index.html">
+          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
+        </a>
+        <span class="brand">OrderPool</span>
+      </div>
+
+      <nav class="nav">
+        <a href="manufacturer-dashboard.html" class="nav-link">Dashboard</a>
+        <a href="briefs.html" class="nav-link">Briefs</a>
+        <a href="manufacturer-projects.html" class="nav-link active">Projects</a>
+        <a href="manufacturer-capabilities.html" class="nav-link">Capabilities</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="submit-quote.html" class="header-btn primary">Create Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page">
+    <!-- HERO / INTRO -->
+    <section class="section projects-hero">
+      <div class="projects-hero-top">
+        <h1>Your projects</h1>
+        <p>
+          See every active collaboration in one place — from sampling to production
+          and payouts.
+        </p>
+      </div>
+
+      <div class="projects-stats">
+        <div class="projects-stat-card">
+          <div class="projects-stat-label">Active projects</div>
+          <div class="projects-stat-value">5</div>
+        </div>
+        <div class="projects-stat-card">
+          <div class="projects-stat-label">In sampling</div>
+          <div class="projects-stat-value">2</div>
+        </div>
+        <div class="projects-stat-card">
+          <div class="projects-stat-label">In production</div>
+          <div class="projects-stat-value">3</div>
+        </div>
+        <div class="projects-stat-card">
+          <div class="projects-stat-label">On-time milestones</div>
+          <div class="projects-stat-value">94%</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS TABLE -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Active projects</h2>
+        <a href="manufacturer-dashboard.html" class="link-small">Back to dashboard</a>
+      </div>
+
+      <div class="table-shell">
+        <table class="mini-table projects-table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Publisher</th>
+              <th>Stage</th>
+              <th>Units</th>
+              <th>Ship date</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-link">Concert T-Shirt</td>
+              <td>Nova Publishing</td>
+              <td>Production</td>
+              <td>1,000</td>
+              <td>Jun 18</td>
+              <td><span class="status-pill status-open">On track</span></td>
+              <td>
+                <a href="project-dashboard.html" class="table-action-link">View project →</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-link">Sunglasses</td>
+              <td>Northline Media</td>
+              <td>Sampling</td>
+              <td>800</td>
+              <td>Jul 02</td>
+              <td><span class="status-pill status-shortlist">Sampling</span></td>
+              <td>
+                <a href="project-dashboard.html" class="table-action-link">View project →</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-link">Totebag</td>
+              <td>Bright Pages</td>
+              <td>Quoting</td>
+              <td>1,200</td>
+              <td>Jun 24</td>
+              <td><span class="status-pill status-quoted">Quoting</span></td>
+              <td>
+                <a href="project-dashboard.html" class="table-action-link">View project →</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-link">USB-C Hub</td>
+              <td>AudioWorks</td>
+              <td>Sampling</td>
+              <td>500</td>
+              <td>Jul 10</td>
+              <td><span class="status-pill status-open">On track</span></td>
+              <td>
+                <a href="project-dashboard.html" class="table-action-link">View project →</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-link">Hardcover Boxset</td>
+              <td>Pixel Co.</td>
+              <td>Production</td>
+              <td>2,500</td>
+              <td>Aug 01</td>
+              <td><span class="status-pill status-open">On track</span></td>
+              <td>
+                <a href="project-dashboard.html" class="table-action-link">View project →</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+        <p class="footer-brand-text">
+          Where publishers and manufacturers collaborate to create products.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Publishers</h4>
+        <a href="briefs-new.html">Post a concept</a>
+        <a href="for-manufacturers.html">Find a manufacturer</a>
+        <a href="case-studies.html">Case studies</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Manufacturers</h4>
+        <a href="briefs.html">Discover briefs</a>
+        <a href="manufacturer-capabilities.html">Capabilities</a>
+        <a href="safety.html">Safety &amp; compliance</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in the loop</h4>
+        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
+          <input
+            type="email"
+            name="email"
+            class="newsletter-input"
+            placeholder="you@example.com"
+            required
+          />
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+        <p>We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2025 OrderPool. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a> ·
+          <a href="terms.html">Terms</a> ·
+          <a href="contact.html">Contact</a> ·
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

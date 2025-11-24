@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OrderPool – Briefs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="index.html">
+          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
+        </a>
+        <span class="brand">OrderPool</span>
+      </div>
+
+      <nav class="nav">
+        <a href="for-publishers.html" class="nav-link">For Publishers</a>
+        <a href="for-manufacturers.html" class="nav-link">For Manufacturers</a>
+        <a href="briefs.html" class="nav-link active">Briefs</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="briefs-new.html" class="header-btn primary">Post a brief</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page briefs-page">
+
+    <!-- FILTER BAR -->
+    <section class="section briefs-filters">
+      <div class="briefs-filters-row">
+        <div class="briefs-search">
+          <label class="label" for="briefSearch">Search briefs</label>
+          <input
+            id="briefSearch"
+            type="text"
+            class="input search-input"
+            placeholder="Search by title, ID or publisher"
+          />
+        </div>
+
+        <div class="briefs-filter-group">
+          <div class="briefs-filter">
+            <label class="label" for="categoryFilter">Category</label>
+            <select id="categoryFilter" class="select">
+              <option>All</option>
+              <option>Apparel</option>
+              <option>Accessories</option>
+              <option>Electronics</option>
+            </select>
+          </div>
+
+          <div class="briefs-filter">
+            <label class="label" for="statusFilter">Status</label>
+            <select id="statusFilter" class="select">
+              <option>All</option>
+              <option>Open</option>
+              <option>Shortlist</option>
+              <option>Quoted</option>
+              <option>Closed</option>
+            </select>
+          </div>
+
+          <div class="briefs-filter">
+            <label class="label" for="sortFilter">Sort</label>
+            <select id="sortFilter" class="select">
+              <option>Recently updated</option>
+              <option>MOQ: low to high</option>
+              <option>MOQ: high to low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRIEFS TABLE -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Open briefs</h2>
+        <span class="briefs-count">Showing 4 results</span>
+      </div>
+
+      <div class="table-shell">
+        <table class="mini-table briefs-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>MOQ</th>
+              <th>Status</th>
+              <th>Updated</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BR-1842</td>
+              <td class="table-link">Concert T-Shirt</td>
+              <td>Apparel</td>
+              <td>1,000</td>
+              <td><span class="status-pill status-open">Open</span></td>
+              <td>May 28</td>
+              <td>
+                <a href="brief-detail.html" class="table-action-link">View brief →</a>
+              </td>
+            </tr>
+            <tr>
+              <td>BR-1038</td>
+              <td class="table-link">Sunglasses</td>
+              <td>Accessories</td>
+              <td>800</td>
+              <td><span class="status-pill status-shortlist">Shortlist</span></td>
+              <td>Jun 02</td>
+              <td>
+                <a href="brief-detail.html" class="table-action-link">View brief →</a>
+              </td>
+            </tr>
+            <tr>
+              <td>BR-1832</td>
+              <td class="table-link">Totebag</td>
+              <td>Apparel</td>
+              <td>1,200</td>
+              <td><span class="status-pill status-quoted">Quoted</span></td>
+              <td>May 24</td>
+              <td>
+                <a href="brief-detail.html" class="table-action-link">View brief →</a>
+              </td>
+            </tr>
+            <tr>
+              <td>BR-1921</td>
+              <td class="table-link">USB-C Hub</td>
+              <td>Electronics</td>
+              <td>500</td>
+              <td><span class="status-pill status-open">Open</span></td>
+              <td>May 19</td>
+              <td>
+                <a href="brief-detail.html" class="table-action-link">View brief →</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="briefs-pagination">
+        <span class="briefs-count">Showing 4 results</span>
+        <div class="briefs-page-controls">
+          <button class="chip small" disabled>Previous</button>
+          <span class="briefs-page-number">1</span>
+          <button class="chip small">Next</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+        <p class="footer-brand-text">
+          Where publishers and manufacturers collaborate to create products.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Publishers</h4>
+        <a href="briefs-new.html">Post a concept</a>
+        <a href="for-manufacturers.html">Find a manufacturer</a>
+        <a href="case-studies.html">Case studies</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Manufacturers</h4>
+        <a href="briefs.html">Discover briefs</a>
+        <a href="manufacturer-capabilities.html">Capabilities</a>
+        <a href="safety.html">Safety &amp; compliance</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in the loop</h4>
+        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
+          <input
+            type="email"
+            name="email"
+            class="newsletter-input"
+            placeholder="you@example.com"
+            required
+          />
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+        <p>We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2025 OrderPool. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a> ·
+          <a href="terms.html">Terms</a> ·
+          <a href="contact.html">Contact</a> ·
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

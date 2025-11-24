@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OrderPool – Manufacturer Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="index.html">
+          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
+        </a>
+        <span class="brand">OrderPool</span>
+      </div>
+
+      <nav class="nav">
+        <span class="nav-link active">Manufacturer Dashboard</span>
+      </nav>
+
+      <div class="header-actions">
+        <a href="submit-quote.html" class="header-btn primary">Create Quote</a>
+        <a href="project-messages.html" class="header-btn secondary">New Message</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page dashboard-page">
+    <!-- Top KPIs -->
+    <section class="dash-row dash-row-top">
+      <div class="metric-card">
+        <div class="metric-icon">📄</div>
+        <div class="metric-main">
+          <div class="metric-value">12</div>
+          <div class="metric-label">Open Briefs</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">✅</div>
+        <div class="metric-main">
+          <div class="metric-value">5</div>
+          <div class="metric-label">Active Orders</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">💵</div>
+        <div class="metric-main">
+          <div class="metric-value">$24.8k</div>
+          <div class="metric-label">Payouts Due</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">⏱</div>
+        <div class="metric-main">
+          <div class="metric-value">94%</div>
+          <div class="metric-label">On-Time Milestones</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart + Alerts -->
+    <section class="dash-row">
+      <div class="dash-card chart-card">
+        <div class="dash-card-header">
+          <h2>Weekly GMV</h2>
+          <button class="chip small">Last 30d ▾</button>
+        </div>
+        <div class="chart-shell">
+          <!-- Simple static SVG chart -->
+          <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="gmvGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4c3df0" stop-opacity="0.32" />
+                <stop offset="100%" stop-color="#4c3df0" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <!-- fill area -->
+            <path d="M0 30 L10 20 L25 23 L40 15 L55 18 L70 28 L90 14 L100 18 L100 40 L0 40 Z"
+              fill="url(#gmvGradient)"/>
+            <!-- line -->
+            <path d="M0 30 L10 20 L25 23 L40 15 L55 18 L70 28 L90 14 L100 18"
+              fill="none" stroke="#4c3df0" stroke-width="1.5" stroke-linecap="round" />
+            <!-- x axis -->
+            <line x1="0" y1="30" x2="100" y2="30" stroke="#e1e3f0" stroke-width="0.5" />
+          </svg>
+          <div class="chart-axis">
+            <div>$0k</div><div>$0.8k</div><div>$1.7k</div><div>$2.5k</div><div>$3.4k</div>
+          </div>
+          <div class="chart-days">
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card alerts-card">
+        <div class="dash-card-header">
+          <h2>Alerts</h2>
+        </div>
+        <ul class="alerts-list">
+          <li>Sample for <strong>Totebag</strong> awaiting approval.</li>
+          <li>Quote for <strong>Sunglasses</strong> expiring in 48h.</li>
+          <li>Compliance doc missing for <strong>Concert T-Shirt</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Active Briefs + Today -->
+    <section class="dash-row">
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h2>Active Briefs</h2>
+          <a href="briefs.html" class="link-small">View all</a>
+        </div>
+        <div class="table-shell">
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>MOQ</th>
+                <th>Status</th>
+                <th>Due</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>BR-1842</td>
+                <td class="table-link">Concert T-Shirt</td>
+                <td>1,000</td>
+                <td><span class="status-pill status-open">Open</span></td>
+                <td>May 28</td>
+              </tr>
+              <tr>
+                <td>BR-1038</td>
+                <td class="table-link">Sunglasses</td>
+                <td>800</td>
+                <td><span class="status-pill status-shortlist">Shortlist</span></td>
+                <td>Jun 02</td>
+              </tr>
+              <tr>
+                <td>BR-1832</td>
+                <td class="table-link">Totebag</td>
+                <td>1,200</td>
+                <td><span class="status-pill status-quoted">Quoted</span></td>
+                <td>May 24</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dash-card today-card">
+        <div class="dash-card-header">
+          <h2>Today</h2>
+        </div>
+        <ul class="today-list">
+          <li>
+            <span class="today-dot today-dot-green"></span>
+            Ship headset sample
+            <span class="today-meta">Today</span>
+          </li>
+          <li>
+            <span class="today-dot today-dot-green"></span>
+            Reply to colorway question (Totebag)
+            <span class="today-meta">in 4h</span>
+          </li>
+          <li>
+            <span class="today-dot today-dot-amber"></span>
+            Upload REACH certificate
+            <span class="today-meta">Tomorrow</span>
+          </li>
+        </ul>
+        <button class="button-primary full-width">Add Task</button>
+      </div>
+    </section>
+
+    <!-- Messages + Payouts -->
+    <section class="dash-row">
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h2>Messages</h2>
+        </div>
+        <ul class="messages-list">
+          <li>
+            <span class="msg-from">AudioWorks</span>
+            <span class="msg-snippet">Can we switch to 220gsm?</span>
+            <span class="msg-meta">2m ago</span>
+          </li>
+          <li>
+            <span class="msg-from">Nova Publishing</span>
+            <span class="msg-snippet">Approved v2 sample.</span>
+            <span class="msg-meta">1h ago</span>
+          </li>
+          <li>
+            <span class="msg-from">Pixel Co.</span>
+            <span class="msg-snippet">Need carton dims.</span>
+            <span class="msg-meta">Yesterday</span>
+          </li>
+        </ul>
+        <a href="project-messages.html" class="button-secondary-link">Open Inbox</a>
+      </div>
+
+      <div class="dash-card payouts-card">
+        <div class="dash-card-header">
+          <h2>Payouts</h2>
+        </div>
+        <p class="payouts-next">
+          Next milestone due <strong>May 25</strong>: <strong>$12,400</strong>
+        </p>
+        <div class="payouts-grid">
+          <div class="payout-stat">
+            <div class="payout-label">This month</div>
+            <div class="payout-value">$48.2k</div>
+          </div>
+          <div class="payout-stat">
+            <div class="payout-label">Quarter</div>
+            <div class="payout-value">$162k</div>
+          </div>
+          <div class="payout-stat">
+            <div class="payout-label">YTD</div>
+            <div class="payout-value">$702k</div>
+          </div>
+        </div>
+        <button class="button-primary full-width">View Billing</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+        <p class="footer-brand-text">
+          Where publishers and manufacturers collaborate to create products.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Publishers</h4>
+        <a href="briefs-new.html">Post a concept</a>
+        <a href="for-manufacturers.html">Find a manufacturer</a>
+        <a href="case-studies.html">Case studies</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Manufacturers</h4>
+        <a href="briefs.html">Discover briefs</a>
+        <a href="manufacturer-capabilities.html">Capabilities</a>
+        <a href="safety.html">Safety &amp; compliance</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in the loop</h4>
+        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
+          <input
+            type="email"
+            name="email"
+            class="newsletter-input"
+            placeholder="you@example.com"
+            required
+          />
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+        <p>We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2025 OrderPool. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a> ·
+          <a href="terms.html">Terms</a> ·
+          <a href="contact.html">Contact</a> ·
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

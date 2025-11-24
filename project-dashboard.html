@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OrderPool – Project Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="index.html">
+          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
+        </a>
+        <span class="brand">OrderPool</span>
+      </div>
+
+      <nav class="nav">
+        <span class="nav-link active">Project Dashboard</span>
+      </nav>
+
+      <div class="header-actions">
+        <a href="manufacturer-projects.html" class="header-btn secondary">Back to Projects</a>
+        <a href="project-messages.html" class="header-btn primary">New Message</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page dashboard-page">
+    <!-- Top summary metrics -->
+    <section class="dash-row dash-row-top">
+      <div class="metric-card">
+        <div class="metric-icon">🎧</div>
+        <div class="metric-main">
+          <div class="metric-label">Project</div>
+          <div class="metric-value">Concert T-Shirt</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">📌</div>
+        <div class="metric-main">
+          <div class="metric-label">Status</div>
+          <div class="metric-value">
+            <span class="project-badge badge-active">In Production</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">📦</div>
+        <div class="metric-main">
+          <div class="metric-label">Units</div>
+          <div class="metric-value">1,000</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon">📅</div>
+        <div class="metric-main">
+          <div class="metric-label">Ship Date</div>
+          <div class="metric-value">Jun 18</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline + Key dates -->
+    <section class="dash-row">
+      <div class="dash-card timeline-card">
+        <div class="dash-card-header">
+          <h2>Production Timeline</h2>
+          <span class="timeline-meta">65% complete</span>
+        </div>
+
+        <div class="timeline-bar">
+          <div class="timeline-bar-fill" style="width:65%;"></div>
+        </div>
+
+        <div class="timeline-steps">
+          <div class="timeline-step timeline-step-complete">
+            <span class="timeline-step-dot"></span>
+            <span class="timeline-step-label">Concept</span>
+          </div>
+          <div class="timeline-step timeline-step-complete">
+            <span class="timeline-step-dot"></span>
+            <span class="timeline-step-label">Sampling</span>
+          </div>
+          <div class="timeline-step timeline-step-active">
+            <span class="timeline-step-dot"></span>
+            <span class="timeline-step-label">Production</span>
+          </div>
+          <div class="timeline-step">
+            <span class="timeline-step-dot"></span>
+            <span class="timeline-step-label">QA</span>
+          </div>
+          <div class="timeline-step">
+            <span class="timeline-step-dot"></span>
+            <span class="timeline-step-label">Ship</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h2>Key Dates</h2>
+          <a class="link-small" href="project-timeline.html">View timeline</a>
+        </div>
+        <ul class="date-list">
+          <li>
+            <span class="date-label">Fabric booked</span>
+            <span class="date-meta">May 10</span>
+          </li>
+          <li>
+            <span class="date-label">Samples approved</span>
+            <span class="date-meta">May 24</span>
+          </li>
+          <li>
+            <span class="date-label">Production complete</span>
+            <span class="date-meta">Jun 12 (target)</span>
+          </li>
+          <li>
+            <span class="date-label">Ship to DC</span>
+            <span class="date-meta">Jun 18 (target)</span>
+          </li>
+        </ul>
+        <button class="button-primary full-width">Add milestone</button>
+      </div>
+    </section>
+
+    <!-- Tasks + Approvals -->
+    <section class="dash-row">
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h2>Tasks</h2>
+          <a href="project-milestones.html" class="link-small">View all</a>
+        </div>
+        <ul class="task-list">
+          <li>
+            <span class="task-check task-check-done">✓</span>
+            <div class="task-main">
+              <div class="task-title task-title-done">Lock artwork placement</div>
+              <div class="task-meta">Completed · May 21</div>
+            </div>
+          </li>
+          <li>
+            <span class="task-check">○</span>
+            <div class="task-main">
+              <div class="task-title">Confirm final size curve</div>
+              <div class="task-meta">Due today</div>
+            </div>
+          </li>
+          <li>
+            <span class="task-check">○</span>
+            <div class="task-main">
+              <div class="task-title">Share carton spec with logistics</div>
+              <div class="task-meta">Due in 2 days</div>
+            </div>
+          </li>
+        </ul>
+        <button class="button-primary full-width">Add task</button>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h2>Approvals</h2>
+        </div>
+        <ul class="approvals-list">
+          <li>
+            <div class="approvals-main">
+              <div class="approvals-title">PP sample photos</div>
+              <div class="approvals-meta">Awaiting publisher sign-off</div>
+            </div>
+            <span class="project-badge badge-pending">Pending</span>
+          </li>
+          <li>
+            <div class="approvals-main">
+              <div class="approvals-title">Neck label print</div>
+              <div class="approvals-meta">Approved May 19</div>
+            </div>
+            <span class="project-badge badge-approved">Approved</span>
+          </li>
+          <li>
+            <div class="approvals-main">
+              <div class="approvals-title">Care label copy</div>
+              <div class="approvals-meta">Changes requested</div>
+            </div>
+            <span class="project-badge badge-warning">Review</span>
+          </li>
+        </ul>
+        <a href="project-approvals.html" class="button-secondary-link">Manage approvals</a>
+      </div>
+    </section>
+
+    <!-- Messages + Files -->
+    <section class="dash-row">
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h2>Messages</h2>
+          <a href="project-messages.html" class="link-small">Open thread</a>
+        </div>
+        <ul class="messages-list">
+          <li>
+            <span class="msg-from">Nova Publishing</span>
+            <span class="msg-snippet">Looks good — can we see the neck label zoomed in?</span>
+            <span class="msg-meta">3m ago</span>
+          </li>
+          <li>
+            <span class="msg-from">You</span>
+            <span class="msg-snippet">Uploading updated placement diagram now.</span>
+            <span class="msg-meta">22m ago</span>
+          </li>
+          <li>
+            <span class="msg-from">Nova Publishing</span>
+            <span class="msg-snippet">Approved colorway B for production.</span>
+            <span class="msg-meta">Yesterday</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <h2>Files</h2>
+          <a href="project-files.html" class="link-small">View all</a>
+        </div>
+        <ul class="file-list">
+          <li>
+            <div class="file-main">
+              <span class="file-name">OP-TSHIRT-artwork-v3.ai</span>
+              <span class="file-meta">Artwork • Uploaded by you · 2h ago</span>
+            </div>
+          </li>
+          <li>
+            <div class="file-main">
+              <span class="file-name">size-curve-final.xlsx</span>
+              <span class="file-meta">Sizing • Uploaded by Nova Publishing · Yesterday</span>
+            </div>
+          </li>
+          <li>
+            <div class="file-main">
+              <span class="file-name">bulk-po-2025-06.pdf</span>
+              <span class="file-meta">PO • Uploaded by Nova Publishing · May 18</span>
+            </div>
+          </li>
+        </ul>
+        <button class="button-primary full-width">Upload file</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (same as other pages) -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+        <p class="footer-brand-text">
+          Where publishers and manufacturers collaborate to create products.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Publishers</h4>
+        <a href="briefs-new.html">Post a concept</a>
+        <a href="for-manufacturers.html">Find a manufacturer</a>
+        <a href="case-studies.html">Case studies</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>For Manufacturers</h4>
+        <a href="briefs.html">Discover briefs</a>
+        <a href="manufacturer-capabilities.html">Capabilities</a>
+        <a href="safety.html">Safety &amp; compliance</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay in the loop</h4>
+        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
+          <input
+            type="email"
+            name="email"
+            class="newsletter-input"
+            placeholder="you@example.com"
+            required
+          />
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+        <p>We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© 2025 OrderPool. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a> ·
+          <a href="terms.html">Terms</a> ·
+          <a href="contact.html">Contact</a> ·
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
