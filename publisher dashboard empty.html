@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Publisher dashboard — Order Pool</title>
+  <meta name="description" content="Publisher dashboard for Order Pool." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- APP HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="brand">Order Pool</span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link active" href="/publisher-dashboard-empty.html">Dashboard</a>
+        <a class="nav-link" href="/publisher-briefs-empty.html">Briefs</a>
+        <a class="nav-link" href="/publisher-orders-empty.html">Orders</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/dashboard-settings.html" class="header-btn secondary">Settings</a>
+        <a href="/publisher-brief-new.html" class="header-btn primary">Create brief</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- DASHBOARD HERO -->
+    <section class="section">
+      <h1>Publisher dashboard</h1>
+      <p>
+        You don’t have any briefs yet. Create your first brief to publish it to the pool and start tracking progress.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/publisher-brief-new.html" class="hero-cta-btn publishers">Create your first brief</a>
+        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
+      </div>
+
+      <div class="publisher-stats">
+        <div class="stat-pill">
+          <div class="stat-label">Drafts</div>
+          <div class="stat-desc">0</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">In pool</div>
+          <div class="stat-desc">0</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Active orders</div>
+          <div class="stat-desc">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMPTY PANELS -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Your workspace</h2>
+        <a class="featured-link" href="/publisher-brief-new.html">Create brief →</a>
+      </div>
+
+      <div class="featured-row">
+        <!-- Briefs panel -->
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Briefs</div>
+            <p class="collab-desc">
+              Drafts and submitted briefs will show up here.
+              A paid submission converts your brief into a quote request visible to manufacturers.
+            </p>
+            <a class="featured-link" href="/publisher-briefs-empty.html">Go to briefs →</a>
+          </div>
+        </div>
+
+        <!-- Orders panel -->
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Orders</div>
+            <p class="collab-desc">
+              When a manufacturer accepts your quote request, it becomes an order.
+              You’ll track progress here from acceptance to fulfillment.
+            </p>
+            <a class="featured-link" href="/publisher-orders-empty.html">Go to orders →</a>
+          </div>
+        </div>
+
+        <!-- Updates panel -->
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Updates</div>
+            <p class="collab-desc">
+              Manufacturer updates syndicate to your dashboard.
+              Once you have active orders, updates will appear here automatically.
+            </p>
+            <a class="featured-link" href="/how-it-works.html">Learn about syndication →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONBOARDING CHECKLIST -->
+    <section class="section">
+      <div class="get-started-grid">
+        <div class="get-started-card">
+          <h2>Start here</h2>
+          <p>
+            A simple path to get your first request into the pool.
+          </p>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>1) Create a brief</h3>
+              </div>
+              <p>
+                Define what you’re producing (quantity, timeline, constraints, sampling needs).
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>2) Submit + pay</h3>
+              </div>
+              <p>
+                Submitting and paying publishes your request to the manufacturer quote pool.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>3) Get accepted</h3>
+              </div>
+              <p>
+                A manufacturer accepts the request. Your quote request becomes a trackable order.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>4) Track progress</h3>
+              </div>
+              <p>
+                Manufacturer updates syndicate to this dashboard until the order is fulfilled.
+              </p>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a class="button-primary" href="/publisher-brief-new.html">Create brief</a>
+            <a class="button-secondary" href="/pricing.html">Pricing</a>
+          </div>
+        </div>
+
+        <div class="get-started-card">
+          <h2>What a “good” brief includes</h2>
+          <p>
+            You can keep it lightweight — just enough for manufacturers to decide quickly.
+          </p>
+
+          <div class="publisher-feature-grid">
+            <div class="pub-feature-card">
+              <h3>Quantity + MOQ</h3>
+              <p>Target units and acceptable minimums.</p>
+            </div>
+
+            <div class="pub-feature-card">
+              <h3>Timeline</h3>
+              <p>When you need samples and when you need production complete.</p>
+            </div>
+
+            <div class="pub-feature-card">
+              <h3>Requirements</h3>
+              <p>Materials, finish, packaging, compliance, constraints.</p>
+            </div>
+
+            <div class="pub-feature-card">
+              <h3>Success criteria</h3>
+              <p>What “done” means so execution stays aligned.</p>
+            </div>
+          </div>
+
+          <div class="featured-row">
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Want an example?</div>
+                <p class="collab-desc">
+                  Browse case studies to see what “brief → pool → order” looks like.
+                </p>
+                <a class="featured-link" href="/case-studies.html">View case studies →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-text">
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Publisher</h4>
+        <a href="/publisher-brief-new.html">Create brief</a>
+        <a href="/publisher-briefs-empty.html">Briefs</a>
+        <a href="/publisher-orders-empty.html">Orders</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© Order Pool</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

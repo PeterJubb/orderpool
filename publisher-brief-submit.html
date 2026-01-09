@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit brief — Publisher — Order Pool</title>
+  <meta name="description" content="Submit and pay to publish a brief into the manufacturer quote pool." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- APP HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="brand">Order Pool</span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
+        <a class="nav-link active" href="/publisher-briefs-full.html">Briefs</a>
+        <a class="nav-link" href="/publisher-orders-full.html">Orders</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/publisher-brief-detail-draft.html" class="header-btn secondary">Back</a>
+        <a href="/publisher-brief-detail-submitted.html" class="header-btn primary">View submitted</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- TITLE -->
+    <section class="section">
+      <h1>Submit brief</h1>
+      <p>
+        Submitting publishes your request to the manufacturer quote pool. Once published, this brief becomes locked.
+      </p>
+
+      <div class="publisher-stats">
+        <div class="stat-pill">
+          <div class="stat-label">Brief</div>
+          <div class="stat-desc">Accessory packaging refresh</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Current state</div>
+          <div class="stat-desc">Draft</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">After submission</div>
+          <div class="stat-desc">In pool</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="section">
+      <div class="get-started-grid">
+
+        <!-- LEFT: CONFIRMATION -->
+        <div class="get-started-card">
+          <h2>Confirm details</h2>
+          <p>
+            Manufacturers will decide quickly based on what’s here. Confirm the essentials before publishing.
+          </p>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Quantity</h3>
+              </div>
+              <p>2,500 units • MOQ: 1,000 units</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Timeline</h3>
+              </div>
+              <p>Samples in 2 weeks • Production in 6 weeks</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Constraints</h3>
+              </div>
+              <p>Matte finish, spot UV on logo, shelf-ready, insert tray</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Assets</h3>
+              </div>
+              <p>Brand guide + dieline + reference images attached</p>
+            </div>
+          </div>
+
+          <div class="featured-row">
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Locked after publish</div>
+                <p class="collab-desc">
+                  Once in the pool, you can’t edit this brief. If scope changes, create a new brief.
+                </p>
+                <a class="featured-link" href="/publisher-brief-detail-draft.html">Edit draft →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: PAYMENT + SUBMIT -->
+        <div class="get-started-card">
+          <h2>Pay & publish</h2>
+          <p>
+            Payment publishes this brief into the quote pool where manufacturers can accept the work.
+          </p>
+
+          <form class="form" action="#" method="post">
+
+            <div class="faq-list">
+              <div class="faq-item">
+                <div class="faq-question-row">
+                  <h3>Submission fee</h3>
+                </div>
+                <p>$___ (placeholder)</p>
+              </div>
+
+              <div class="faq-item">
+                <div class="faq-question-row">
+                  <h3>Payment method</h3>
+                </div>
+                <p>Card (placeholder)</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="billing-email">Billing email</label>
+              <input class="form-input" id="billing-email" name="billingEmail" type="email" placeholder="billing@company.com" />
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="po">PO / reference (optional)</label>
+              <input class="form-input" id="po" name="po" type="text" placeholder="e.g., PO-1042" />
+            </div>
+
+            <div class="faq-list">
+              <div class="faq-item">
+                <div class="faq-question-row">
+                  <h3>Confirm</h3>
+                </div>
+                <p>
+                  By publishing, you confirm this brief is accurate and ready for manufacturers to accept.
+                  You agree to the <a href="/terms.html">Terms</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button-primary" type="submit">Pay & publish</button>
+              <a class="button-secondary" href="/publisher-brief-detail-draft.html">Back to draft</a>
+            </div>
+
+            <p class="cs-hero-sub">
+              After publishing, this will appear as “In pool” until a manufacturer accepts it and it becomes an order.
+            </p>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-text">
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Publisher</h4>
+        <a href="/publisher-dashboard-full.html">Dashboard</a>
+        <a href="/publisher-briefs-full.html">Briefs</a>
+        <a href="/publisher-orders-full.html">Orders</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© Order Pool</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

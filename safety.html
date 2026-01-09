@@ -1,101 +1,219 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>OrderPool – PAGE TITLE HERE</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safety & Trust — Order Pool</title>
+  <meta name="description" content="How Order Pool handles transparency, privacy boundaries, and trust in a shared manufacturing request pool." />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <!-- HEADER (same on all pages) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <a href="index.html">
-          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
-        </a>
-        <span class="brand">OrderPool</span>
+        <span class="brand">Order Pool</span>
       </div>
 
       <nav class="nav">
-        <a href="mission.html" class="nav-link">Mission</a>
-        <a href="value.html" class="nav-link">Value</a>
-        <a href="team.html" class="nav-link">Team</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link" href="/for-publishers.html">Publishers</a>
+        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
+        <a class="nav-link" href="/pricing.html">Pricing</a>
       </nav>
 
       <div class="header-actions">
-        <a href="get-started.html" class="header-btn primary">Get Started</a>
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
       </div>
     </div>
   </header>
 
-<main class="page">
-  <section class="section">
-    <h1>Safety & Compliance</h1>
-    <p>
-      Outline the safety, testing and compliance expectations for collaborations
-      on OrderPool.
-    </p>
-  </section>
-</main>
+  <!-- PAGE -->
+  <main class="page">
 
+    <!-- HERO -->
+    <section class="section">
+      <h1>Safety & trust</h1>
+      <p>
+        Order Pool is designed to be transparent without exposing sensitive details.
+        Public tracking is status-only, while order execution stays anchored to private dashboards and updates.
+      </p>
 
+      <div class="hero-ctas">
+        <a href="/public-orders.html" class="hero-cta-btn publishers">View public orders</a>
+        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
+      </div>
+    </section>
 
-  <!-- FOOTER (same on all pages) -->
+    <!-- WHAT IS PUBLIC vs PRIVATE -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Public vs private</h2>
+        <a class="featured-link" href="/privacy.html">Privacy policy →</a>
+      </div>
+
+      <div class="publisher-feature-grid">
+        <div class="pub-feature-card">
+          <h3>What’s public</h3>
+          <p>
+            Accepted orders can be visible publicly with status-only tracking (e.g., accepted, in progress, fulfilled).
+            Public views are designed to build trust without revealing private communications.
+          </p>
+        </div>
+
+        <div class="pub-feature-card">
+          <h3>What’s private</h3>
+          <p>
+            Brief details, sensitive requirements, pricing, and manufacturer-to-publisher updates live inside the platform
+            and appear on dashboards based on role permissions.
+          </p>
+        </div>
+
+        <div class="pub-feature-card">
+          <h3>How updates work</h3>
+          <p>
+            Manufacturers update the order from the order detail page. Those updates syndicate to the publisher dashboard
+            to reduce back-and-forth and keep execution aligned.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST MECHANISMS -->
+    <section class="section">
+      <h1>Trust mechanisms</h1>
+      <p>
+        The platform’s structure is meant to prevent ambiguity, reduce disputes, and keep work moving.
+      </p>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Explicit states</div>
+          <div class="how-desc">
+            Orders move through clear states from acceptance to fulfillment.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Single source of truth</div>
+          <div class="how-desc">
+            The order is anchored to the original brief plus an update stream.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Role-based visibility</div>
+          <div class="how-desc">
+            Publishers and manufacturers see what they need, public sees status only.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Auditability</div>
+          <div class="how-desc">
+            Updates are timestamped and tied to the order’s lifecycle.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDELINES -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Guidelines</h2>
+        <a class="featured-link" href="/terms.html">Terms →</a>
+      </div>
+
+      <div class="featured-row">
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Publishers</div>
+            <p class="collab-desc">
+              Use clear specs and constraints. Treat the brief as the anchor for execution.
+              Track progress through the dashboard rather than email threads.
+            </p>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Manufacturers</div>
+            <p class="collab-desc">
+              Accept work you can deliver. Post milestone updates in the order detail page so publishers stay aligned.
+              Keep sensitive details inside the platform.
+            </p>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Public</div>
+            <p class="collab-desc">
+              Public tracking exists to show progress and accountability.
+              It is not a place for negotiations, pricing, or private communications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <h1>Have a question about trust or privacy?</h1>
+      <p>
+        We’ll help you understand what’s visible, what’s private, and how orders move through the platform.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/contact.html" class="hero-cta-btn publishers">Contact</a>
+        <a href="/privacy.html" class="hero-cta-btn manufacturers">Privacy</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <!-- Brand column -->
-      <div class="footer-col">
-        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+      <div>
         <p class="footer-brand-text">
-          Where publishers and manufacturers collaborate to create products.
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
 
-      <!-- For Publishers -->
       <div class="footer-col">
-        <h4>For Publishers</h4>
-        <a href="briefs-new.html">Post a concept</a>
-        <a href="for-manufacturers.html">Find a manufacturer</a>
-        <a href="case-studies.html">Case studies</a>
+        <h4>Product</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/public-orders.html">Public orders</a>
       </div>
 
-      <!-- For Manufacturers -->
       <div class="footer-col">
-        <h4>For Manufacturers</h4>
-        <a href="briefs.html">Discover briefs</a>
-        <a href="manufacturer-capabilities.html">Capabilities</a>
-        <a href="safety.html">Safety &amp; compliance</a>
+        <h4>Company</h4>
+        <a href="/mission.html">Mission</a>
+        <a href="/team.html">Team</a>
+        <a href="/contact.html">Contact</a>
       </div>
 
-      <!-- Stay in the loop -->
       <div class="footer-col">
-        <h4>Stay in the loop</h4>
-        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
-          <input
-            type="email"
-            name="email"
-            class="newsletter-input"
-            placeholder="you@example.com"
-            required
-          />
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-        <p>We respect your privacy. Unsubscribe anytime.</p>
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <span>© 2025 OrderPool. All rights reserved.</span>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a> ·
-          <a href="terms.html">Terms</a> ·
-          <a href="contact.html">Contact</a> ·
-          <a href="#top">Back to top</a>
-        </div>
+        <span>© Order Pool</span>
       </div>
     </div>
   </footer>

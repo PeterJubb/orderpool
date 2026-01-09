@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order status — Public — Order Pool</title>
+  <meta name="description" content="Public status-only order tracking for Order Pool." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- HEADER (PUBLIC) -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="brand">Order Pool</span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link active" href="/public-orders.html">Public orders</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="section">
+      <h1>Order status</h1>
+      <p>
+        This is a public, status-only view. It shows progress states and public-safe updates.
+        Sensitive details (pricing, specs, assets, identities) are not displayed.
+      </p>
+
+      <div class="publisher-stats">
+        <div class="stat-pill">
+          <div class="stat-label">Order</div>
+          <div class="stat-desc">ORD-11804</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Category</div>
+          <div class="stat-desc">Packaging</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Current state</div>
+          <div class="stat-desc">Production</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Last update</div>
+          <div class="stat-desc">2 days ago</div>
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="/public-orders.html" class="hero-cta-btn manufacturers">Back to public orders</a>
+        <a href="/how-it-works.html" class="hero-cta-btn publishers">How it works</a>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="section">
+      <div class="get-started-grid">
+
+        <!-- LEFT: PROGRESS -->
+        <div class="get-started-card">
+          <h2>Progress</h2>
+          <p>
+            Orders move through a shared state machine so everyone stays aligned.
+          </p>
+
+          <div class="featured-row">
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">State timeline</div>
+                <p class="collab-desc">
+                  Accepted → Sampling → <strong>Production</strong> → Shipping → Fulfilled
+                </p>
+                <span class="cs-hero-sub">
+                  Some orders may skip or repeat states depending on the work.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Accepted</h3>
+              </div>
+              <p>Work was accepted by a manufacturer and converted into an order.</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Sampling</h3>
+              </div>
+              <p>Samples or proofs are in progress / being reviewed.</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Production</h3>
+              </div>
+              <p>Manufacturing is underway.</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Shipping</h3>
+              </div>
+              <p>Order is being prepared for delivery and shipment is in motion.</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Fulfilled</h3>
+              </div>
+              <p>Order is complete.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: PUBLIC FEED -->
+        <div class="get-started-card">
+          <h2>Public updates</h2>
+          <p>
+            Updates are summarized for public visibility. Private notes and attachments are not shown.
+          </p>
+
+          <div class="featured-row">
+
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Production started</div>
+                <p class="collab-desc">
+                  Production is underway. Next update expected after a mid-run check.
+                </p>
+                <span class="cs-hero-sub">2 days ago</span>
+              </div>
+            </div>
+
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Sampling completed</div>
+                <p class="collab-desc">
+                  Sampling stage completed and approved.
+                </p>
+                <span class="cs-hero-sub">6 days ago</span>
+              </div>
+            </div>
+
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Order accepted</div>
+                <p class="collab-desc">
+                  A manufacturer accepted the work and the order entered execution.
+                </p>
+                <span class="cs-hero-sub">10 days ago</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Why can’t I see more details?</h3>
+              </div>
+              <p>
+                This page intentionally hides sensitive information like pricing, specs, assets, and company identities.
+              </p>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a class="button-primary" href="/get-started.html">Get started</a>
+            <a class="button-secondary" href="/auth-signin.html">Sign in</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-text">
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Public</h4>
+        <a href="/public-orders.html">Public orders</a>
+        <a href="/how-it-works.html">How it works</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="/auth-signin.html">Sign in</a>
+        <a href="/auth-join.html">Create account</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© Order Pool</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

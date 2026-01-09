@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manufacturer dashboard — Order Pool</title>
+  <meta name="description" content="Manufacturer dashboard with active orders and update workflow." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- APP HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="brand">Order Pool</span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link active" href="/manufacturer-dashboard-full.html">Dashboard</a>
+        <a class="nav-link" href="/manufacturer-quote-pool-full.html">Quote pool</a>
+        <a class="nav-link" href="/manufacturer-orders-full.html">Orders</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/dashboard-settings.html" class="header-btn secondary">Settings</a>
+        <a href="/manufacturer-quote-pool-full.html" class="header-btn primary">Browse pool</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="section">
+      <h1>Manufacturer dashboard</h1>
+      <p>
+        Track active work, post milestone updates, and keep publishers aligned. Updates you post syndicate automatically.
+      </p>
+
+      <div class="publisher-stats">
+        <div class="stat-pill">
+          <div class="stat-label">Active orders</div>
+          <div class="stat-desc">2</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Updates due</div>
+          <div class="stat-desc">1</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Pool available</div>
+          <div class="stat-desc">4</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Completed</div>
+          <div class="stat-desc">3</div>
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="/manufacturer-order-detail-editable.html" class="hero-cta-btn manufacturers">Post an update</a>
+        <a href="/manufacturer-quote-pool-full.html" class="hero-cta-btn publishers">Find work in pool</a>
+      </div>
+    </section>
+
+    <!-- PRIORITIES -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Today</h2>
+        <span class="cs-hero-sub">What needs attention</span>
+      </div>
+
+      <div class="featured-row">
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Update due: Seasonal apparel run</div>
+            <p class="collab-desc">
+              ORD-11722 • Sampling • Last update: 6 days ago • Publisher is waiting for next milestone.
+            </p>
+            <div class="form-actions">
+              <a class="button-primary" href="/manufacturer-order-detail-editable.html">Open & post update</a>
+              <a class="button-secondary" href="/manufacturer-orders-full.html">All orders</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">New requests in the pool</div>
+            <p class="collab-desc">
+              1 new request today. Pull work that fits your capacity.
+            </p>
+            <div class="form-actions">
+              <a class="button-primary" href="/manufacturer-quote-pool-full.html">Browse pool</a>
+              <a class="button-secondary" href="/dashboard-settings.html">Update capabilities</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ACTIVE WORK -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Active orders</h2>
+        <span class="cs-hero-sub">In progress</span>
+      </div>
+
+      <div class="featured-row">
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Retail display packaging</div>
+            <p class="collab-desc">
+              ORD-11804 • Production • Last update: 2 days ago
+            </p>
+            <div class="publisher-stats">
+              <div class="stat-pill">
+                <div class="stat-label">Next</div>
+                <div class="stat-desc">Mid-run QC</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">ETA</div>
+                <div class="stat-desc">(date)</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Visibility</div>
+                <div class="stat-desc">Publisher synced</div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <a class="button-primary" href="/manufacturer-order-detail-editable.html">Open order</a>
+              <a class="button-secondary" href="/public-order-detail.html">Public view</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">Seasonal apparel run</div>
+            <p class="collab-desc">
+              ORD-11722 • Sampling • Last update: 6 days ago
+            </p>
+            <div class="publisher-stats">
+              <div class="stat-pill">
+                <div class="stat-label">Next</div>
+                <div class="stat-desc">Sample photos</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">ETA</div>
+                <div class="stat-desc">(date)</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Visibility</div>
+                <div class="stat-desc">Publisher synced</div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <a class="button-primary" href="/manufacturer-order-detail-editable.html">Open order</a>
+              <a class="button-secondary" href="/public-order-detail.html">Public view</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section class="section">
+      <div class="get-started-grid">
+
+        <div class="get-started-card">
+          <h2>Workflow</h2>
+          <p>
+            The simple loop: pull work from the pool, execute, and update.
+          </p>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Pull</h3>
+              </div>
+              <p>Browse the quote pool and accept work that fits.</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Execute</h3>
+              </div>
+              <p>Manage sampling, production, shipping, and fulfillment.</p>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question-row">
+                <h3>Update</h3>
+              </div>
+              <p>Post milestones in Order Pool — updates syndicate to publishers automatically.</p>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a class="button-primary" href="/manufacturer-quote-pool-full.html">Browse pool</a>
+            <a class="button-secondary" href="/manufacturer-orders-full.html">View orders</a>
+          </div>
+        </div>
+
+        <div class="get-started-card">
+          <h2>Capacity & fit</h2>
+          <p>
+            Keep your capabilities and lead times current so you see the right work.
+          </p>
+
+          <div class="publisher-feature-grid">
+            <div class="pub-feature-card">
+              <h3>Capabilities</h3>
+              <p>What you can reliably produce.</p>
+            </div>
+            <div class="pub-feature-card">
+              <h3>Lead times</h3>
+              <p>Sampling + production windows you can hit.</p>
+            </div>
+            <div class="pub-feature-card">
+              <h3>Minimums</h3>
+              <p>MOQs and preferred run sizes.</p>
+            </div>
+            <div class="pub-feature-card">
+              <h3>Regions</h3>
+              <p>Where you ship and constraints.</p>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a class="button-primary" href="/dashboard-settings.html">Update settings</a>
+            <a class="button-secondary" href="/how-it-works.html">How it works</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-text">
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Manufacturer</h4>
+        <a href="/manufacturer-dashboard-full.html">Dashboard</a>
+        <a href="/manufacturer-quote-pool-full.html">Quote pool</a>
+        <a href="/manufacturer-orders-full.html">Orders</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© Order Pool</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,205 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>OrderPool – PAGE TITLE HERE</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Pool — briefs in, orders out</title>
+  <meta name="description" content="Order Pool is a shared manufacturing request pool where publishers submit paid briefs and manufacturers pull work." />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <!-- HEADER (same on all pages) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <a href="index.html">
-          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
-        </a>
-        <span class="brand">OrderPool</span>
+        <span class="brand">Order Pool</span>
       </div>
 
       <nav class="nav">
-        <a href="mission.html" class="nav-link">Mission</a>
-        <a href="value.html" class="nav-link">Value</a>
-        <a href="team.html" class="nav-link">Team</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a class="nav-link active" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link" href="/for-publishers.html">Publishers</a>
+        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
+        <a class="nav-link" href="/pricing.html">Pricing</a>
       </nav>
 
       <div class="header-actions">
-        <a href="get-started.html" class="header-btn primary">Get Started</a>
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
       </div>
     </div>
   </header>
 
- <main class="page">
-  <section class="hero-card">
-    <div class="hero-top">
-      <h1>Where publishers and manufacturers collaborate and create products</h1>
-      <p>
-        OrderPool connects publishers and manufacturers to co-create custom
-        physical products — from first sketch to production-ready launch.
-      </p>
+  <!-- PAGE -->
+  <main class="page">
 
-      <div class="hero-ctas">
-        <a href="for-publishers.html" class="hero-cta-btn publishers">For Publishers</a>
-        <a href="for-manufacturers.html" class="hero-cta-btn manufacturers">For Manufacturers</a>
+    <!-- HERO -->
+    <section class="hero-card">
+      <div class="hero-top">
+        <h1>Briefs in. Orders out.</h1>
+        <p>
+          Order Pool is a shared manufacturing request pool.
+          Publishers submit paid briefs. Manufacturers pull work.
+          Orders are tracked from acceptance to fulfillment.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="/get-started.html" class="hero-cta-btn publishers">
+            I’m a publisher
+          </a>
+          <a href="/get-started.html" class="hero-cta-btn manufacturers">
+            I’m a manufacturer
+          </a>
+        </div>
       </div>
-    </div>
 
-    <div class="featured-header">
-      <h2>Featured Collaborations</h2>
-      <a href="briefs.html" class="featured-link">
-        View all
-        <span>➜</span>
-      </a>
-    </div>
+      <!-- FEATURED / LIVE PROOF -->
+      <div class="featured-header">
+        <h2>Live production activity</h2>
+        <a href="/public-orders.html" class="featured-link">
+          View public orders →
+        </a>
+      </div>
 
-    <div class="featured-row">
-      <!-- Concert T-shirt -->
-      <article class="collab-card">
-        <img
-          src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=60"
-          alt="Concert T-shirt on rack"
-          class="collab-img"
-        />
-        <div class="collab-body">
-          <div class="collab-title">Concert T-Shirt</div>
-          <p class="collab-desc">
-            A limited run tee created with a specialist apparel factory for a touring band.
-          </p>
-          <div class="collab-footer">
-            <span>View brief</span><span>➜</span>
+      <div class="featured-row">
+        <div class="collab-card">
+          <div class="collab-img"></div>
+          <div class="collab-body">
+            <div class="collab-title">Apparel production run</div>
+            <p class="collab-desc">
+              5,000 units • Vietnam • In production
+            </p>
+            <div class="collab-footer">View order →</div>
           </div>
         </div>
-      </article>
 
-      <!-- Sunglasses -->
-      <article class="collab-card">
-        <img
-          src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=60"
-          alt="Sunglasses"
-          class="collab-img"
-        />
-        <div class="collab-body">
-          <div class="collab-title">Sunglasses</div>
-          <p class="collab-desc">
-            Custom frames produced through a manufacturer focused on optical accessories.
-          </p>
-          <div class="collab-footer">
-            <span>View brief</span><span>➜</span>
+        <div class="collab-card">
+          <div class="collab-img"></div>
+          <div class="collab-body">
+            <div class="collab-title">Packaging samples</div>
+            <p class="collab-desc">
+              Short-run • Shenzhen • Sampling
+            </p>
+            <div class="collab-footer">View order →</div>
           </div>
         </div>
-      </article>
 
-      <!-- Totebag -->
-      <article class="collab-card">
-        <img
-          src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=900&q=60"
-          alt="Fabric tote bag"
-          class="collab-img"
-        />
-        <div class="collab-body">
-          <div class="collab-title">Totebag</div>
-          <p class="collab-desc">
-            A branded tote created with a cut-and-sew partner experienced in retail merch.
-          </p>
-          <div class="collab-footer">
-            <span>View brief</span><span>➜</span>
+        <div class="collab-card">
+          <div class="collab-img"></div>
+          <div class="collab-body">
+            <div class="collab-title">Injection-mold tooling</div>
+            <p class="collab-desc">
+              Tooling • Taiwan • Completed
+            </p>
+            <div class="collab-footer">View order →</div>
           </div>
         </div>
-      </article>
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <section class="how-section">
-    <h2>How It Works</h2>
-    <div class="how-grid">
-      <div class="how-card">
-        <div class="how-icon">💡</div>
-        <div class="how-title">Connect</div>
-        <p class="how-desc">
-          Publishers share product concepts and requirements with vetted manufacturers.
-        </p>
-      </div>
-      <div class="how-card">
-        <div class="how-icon">🤝</div>
-        <div class="how-title">Collaborate</div>
-        <p class="how-desc">
-          Match on MOQ, category, certifications and timelines to find the right fit.
-        </p>
-      </div>
-      <div class="how-card">
-        <div class="how-icon">🏭</div>
-        <div class="how-title">Manufacture</div>
-        <p class="how-desc">
-          Manage quotes, samples, approvals and production milestones in one place.
-        </p>
-      </div>
-      <div class="how-card">
-        <div class="how-icon">🚀</div>
-        <div class="how-title">Launch</div>
-        <p class="how-desc">
-          Deliver finished products with confidence, traceability and clear communication.
-        </p>
-      </div>
-    </div>
-  </section>
-</main>
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+      <h2>How Order Pool works</h2>
 
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-icon">1</div>
+          <div class="how-title">Create a brief</div>
+          <div class="how-desc">
+            Publishers submit a standardized production brief and pay a fee.
+          </div>
+        </div>
 
-  <!-- FOOTER (same on all pages) -->
+        <div class="how-card">
+          <div class="how-icon">2</div>
+          <div class="how-title">Enter the pool</div>
+          <div class="how-desc">
+            The brief becomes a quote request visible to manufacturers.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">3</div>
+          <div class="how-title">Work is pulled</div>
+          <div class="how-desc">
+            Manufacturers accept work when it fits their capacity.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">4</div>
+          <div class="how-title">Tracked publicly</div>
+          <div class="how-desc">
+            Accepted orders are tracked through production and fulfillment.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLE SPLIT -->
+    <section class="section">
+      <div class="get-started-grid">
+        <div class="get-started-card">
+          <h2>For publishers</h2>
+          <p>
+            Submit once. Reach many manufacturers.
+            Track progress without emails or spreadsheets.
+          </p>
+          <a href="/for-publishers.html" class="button-primary">
+            Learn more
+          </a>
+        </div>
+
+        <div class="get-started-card">
+          <h2>For manufacturers</h2>
+          <p>
+            Pull work when you’re ready.
+            Clear briefs, clean execution, no bidding chaos.
+          </p>
+          <a href="/for-manufacturers.html" class="button-primary">
+            Learn more
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <!-- Brand column -->
-      <div class="footer-col">
-        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+      <div>
         <p class="footer-brand-text">
-          Where publishers and manufacturers collaborate to create products.
+          Order Pool is a shared manufacturing request platform built on
+          transparency and execution.
         </p>
       </div>
 
-      <!-- For Publishers -->
       <div class="footer-col">
-        <h4>For Publishers</h4>
-        <a href="briefs-new.html">Post a concept</a>
-        <a href="for-manufacturers.html">Find a manufacturer</a>
-        <a href="case-studies.html">Case studies</a>
+        <h4>Product</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/public-orders.html">Public orders</a>
       </div>
 
-      <!-- For Manufacturers -->
       <div class="footer-col">
-        <h4>For Manufacturers</h4>
-        <a href="briefs.html">Discover briefs</a>
-        <a href="manufacturer-capabilities.html">Capabilities</a>
-        <a href="safety.html">Safety &amp; compliance</a>
+        <h4>Company</h4>
+        <a href="/mission.html">Mission</a>
+        <a href="/team.html">Team</a>
+        <a href="/contact.html">Contact</a>
       </div>
 
-      <!-- Stay in the loop -->
       <div class="footer-col">
-        <h4>Stay in the loop</h4>
-        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
-          <input
-            type="email"
-            name="email"
-            class="newsletter-input"
-            placeholder="you@example.com"
-            required
-          />
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-        <p>We respect your privacy. Unsubscribe anytime.</p>
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <span>© 2025 OrderPool. All rights reserved.</span>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a> ·
-          <a href="terms.html">Terms</a> ·
-          <a href="contact.html">Contact</a> ·
-          <a href="#top">Back to top</a>
-        </div>
+        <span>© Order Pool</span>
       </div>
     </div>
   </footer>

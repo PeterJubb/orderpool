@@ -1,102 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>OrderPool – PAGE TITLE HERE</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing — Order Pool</title>
+  <meta name="description" content="Simple pricing for publishers and manufacturers. Pay to publish briefs, pull work from the pool, and track orders through fulfillment." />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <!-- HEADER (same on all pages) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <a href="index.html">
-          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
-        </a>
-        <span class="brand">OrderPool</span>
+        <span class="brand">Order Pool</span>
       </div>
 
       <nav class="nav">
-        <a href="mission.html" class="nav-link">Mission</a>
-        <a href="value.html" class="nav-link">Value</a>
-        <a href="team.html" class="nav-link">Team</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link" href="/for-publishers.html">Publishers</a>
+        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
+        <a class="nav-link active" href="/pricing.html">Pricing</a>
       </nav>
 
       <div class="header-actions">
-        <a href="get-started.html" class="header-btn primary">Get Started</a>
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
       </div>
     </div>
   </header>
 
-<main class="page">
-  <section class="section">
-    <h1>Pricing</h1>
-    <p>
-      We’re currently working with early partners on custom pricing. If you’re
-      interested in joining, reach out via the contact page.
-    </p>
-  </section>
-</main>
+  <!-- PAGE -->
+  <main class="page">
 
+    <!-- PRICING HERO -->
+    <section class="section">
+      <h1>Pricing</h1>
+      <p>
+        Keep it simple: publishers pay to publish a brief into the pool.
+        Manufacturers pull work and manage orders. Public tracking is status-only.
+      </p>
 
+      <div class="hero-ctas">
+        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
+        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
+      </div>
+    </section>
 
+    <!-- PLANS -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Plans</h2>
+        <a class="featured-link" href="/contact.html">Talk to us →</a>
+      </div>
 
-  <!-- FOOTER (same on all pages) -->
+      <div class="get-started-grid">
+        <!-- Publisher plan -->
+        <div class="get-started-card">
+          <h2>Publishers</h2>
+          <p>
+            Pay to convert a brief into a quote request and publish it to the manufacturer pool.
+            Track accepted orders with syndicated updates.
+          </p>
+
+          <div class="publisher-stats">
+            <div class="stat-pill">
+              <div class="stat-label">Per brief</div>
+              <div class="stat-desc">Submission fee</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Syndication</div>
+              <div class="stat-desc">Updates to dashboard</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Tracking</div>
+              <div class="stat-desc">Accepted → fulfilled</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;"></div>
+          <a href="/get-started.html" class="button-primary">Create a brief</a>
+        </div>
+
+        <!-- Manufacturer plan -->
+        <div class="get-started-card">
+          <h2>Manufacturers</h2>
+          <p>
+            Browse quote requests, accept work that fits your capacity,
+            and manage orders from a single order detail page.
+          </p>
+
+          <div class="publisher-stats">
+            <div class="stat-pill">
+              <div class="stat-label">Quote pool</div>
+              <div class="stat-desc">Browse requests</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Orders</div>
+              <div class="stat-desc">Manage execution</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Updates</div>
+              <div class="stat-desc">Syndicated progress</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;"></div>
+          <a href="/get-started.html" class="button-primary">Browse the pool</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT'S INCLUDED -->
+    <section class="how-section">
+      <h2>What’s included</h2>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Standard briefs</div>
+          <div class="how-desc">
+            One clean format for scope, timeline, quantity, and constraints.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Quote pool</div>
+          <div class="how-desc">
+            Manufacturers review quote requests and accept work that fits.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Order management</div>
+          <div class="how-desc">
+            Orders move through clear states from accepted to fulfilled.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">✓</div>
+          <div class="how-title">Public tracking</div>
+          <div class="how-desc">
+            Status-only visibility for accepted orders — no sensitive details.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <h2>FAQ</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question-row">
+            <h3>What does a publisher pay for?</h3>
+          </div>
+          <p>
+            Publishing a brief into the pool. The fee converts the brief into a quote request visible to manufacturers.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question-row">
+            <h3>Do manufacturers pay to browse?</h3>
+          </div>
+          <p>
+            Manufacturers can browse and accept work in the pool, then manage accepted orders and post updates.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question-row">
+            <h3>What shows publicly?</h3>
+          </div>
+          <p>
+            Only accepted orders and their status. Pricing and private notes remain private.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <h1>Ready to start?</h1>
+      <p>
+        Choose a role and take the next step.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
+        <a href="/auth-signin.html" class="hero-cta-btn manufacturers">Sign in</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <!-- Brand column -->
-      <div class="footer-col">
-        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+      <div>
         <p class="footer-brand-text">
-          Where publishers and manufacturers collaborate to create products.
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
 
-      <!-- For Publishers -->
       <div class="footer-col">
-        <h4>For Publishers</h4>
-        <a href="briefs-new.html">Post a concept</a>
-        <a href="for-manufacturers.html">Find a manufacturer</a>
-        <a href="case-studies.html">Case studies</a>
+        <h4>Product</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/public-orders.html">Public orders</a>
       </div>
 
-      <!-- For Manufacturers -->
       <div class="footer-col">
-        <h4>For Manufacturers</h4>
-        <a href="briefs.html">Discover briefs</a>
-        <a href="manufacturer-capabilities.html">Capabilities</a>
-        <a href="safety.html">Safety &amp; compliance</a>
+        <h4>Company</h4>
+        <a href="/mission.html">Mission</a>
+        <a href="/team.html">Team</a>
+        <a href="/contact.html">Contact</a>
       </div>
 
-      <!-- Stay in the loop -->
       <div class="footer-col">
-        <h4>Stay in the loop</h4>
-        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
-          <input
-            type="email"
-            name="email"
-            class="newsletter-input"
-            placeholder="you@example.com"
-            required
-          />
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-        <p>We respect your privacy. Unsubscribe anytime.</p>
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <span>© 2025 OrderPool. All rights reserved.</span>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a> ·
-          <a href="terms.html">Terms</a> ·
-          <a href="contact.html">Contact</a> ·
-          <a href="#top">Back to top</a>
-        </div>
+        <span>© Order Pool</span>
       </div>
     </div>
   </footer>

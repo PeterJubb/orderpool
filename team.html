@@ -1,149 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>OrderPool – Team</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team — Order Pool</title>
+  <meta name="description" content="Meet the team building Order Pool." />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
   <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <a href="index.html">
-          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
-        </a>
-        <span class="brand">OrderPool</span>
+        <span class="brand">Order Pool</span>
       </div>
 
       <nav class="nav">
-        <a href="mission.html" class="nav-link">Mission</a>
-        <a href="value.html" class="nav-link">Value</a>
-        <a href="team.html" class="nav-link active">Team</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link" href="/for-publishers.html">Publishers</a>
+        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
+        <a class="nav-link" href="/pricing.html">Pricing</a>
       </nav>
 
       <div class="header-actions">
-        <a href="get-started.html" class="header-btn primary">Get Started</a>
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
       </div>
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="page team-page">
-    <section class="section team-hero">
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="section">
       <h1>Team</h1>
       <p>
-        OrderPool is built by people who have worked in publishing, manufacturing
-        and product operations — focused on making collaboration between the two
-        radically easier.
+        We’re building Order Pool to make manufacturing requests clearer, pull-based, and trackable —
+        from paid brief to fulfilled order.
       </p>
+
+      <div class="hero-ctas">
+        <a href="/mission.html" class="hero-cta-btn manufacturers">Mission</a>
+        <a href="/contact.html" class="hero-cta-btn publishers">Contact</a>
+      </div>
     </section>
 
     <!-- TEAM GRID -->
     <section class="section">
-      <div class="team-grid">
+      <div class="section-header-row">
+        <h2>People</h2>
+        <a class="featured-link" href="/case-studies.html">See the work →</a>
+      </div>
 
-        <!-- Alistair Moss — CEO -->
-        <article class="team-card">
+      <div class="cs-grid">
+        <!-- Member 1 -->
+        <article class="cs-card">
           <div class="team-avatar-photo">
-            <img src="Alistair.jpeg" alt="Alistair Moss" />
+            <img src="assets/team/peter.jpg" alt="Team member photo" />
           </div>
-          <div class="team-text">
-            <h2 class="team-name">Alistair Moss</h2>
-            <div class="team-role">CEO</div>
-            <p class="team-bio">
-              Leads strategy, partnerships, and long-term vision for how publishers
-              and manufacturers collaborate globally.
-            </p>
-          </div>
+          <h3>Peter Jubb</h3>
+          <p class="cs-hero-sub">
+            Product & UX. Building the system, flows, and UI for briefs → pool → orders → tracking.
+          </p>
+          <a class="cs-link" href="/contact.html">Reach out →</a>
         </article>
 
-        <!-- Peter Jubb — CXO -->
-        <article class="team-card">
+        <!-- Member 2 -->
+        <article class="cs-card">
           <div class="team-avatar-photo">
-            <img src="peter.jpeg" alt="Peter Jubb" />
+            <img src="assets/team/member-2.jpg" alt="Team member photo" />
           </div>
-          <div class="team-text">
-            <h2 class="team-name">Peter Jubb</h2>
-            <div class="team-role">CXO</div>
-            <p class="team-bio">
-              Owns the full experience — connecting publishers and manufacturers through
-              clear workflows, tooling, and thoughtful design.
-            </p>
-          </div>
+          <h3>Team member</h3>
+          <p class="cs-hero-sub">
+            Ops / partnerships. Helps connect publishers and manufacturers and shape the marketplace rules.
+          </p>
+          <a class="cs-link" href="/contact.html">Reach out →</a>
         </article>
 
-        <!-- Robert Hostler — CTO -->
-        <article class="team-card">
+        <!-- Member 3 -->
+        <article class="cs-card">
           <div class="team-avatar-photo">
-            <img src="robert.jpeg" alt="Robert Hostler" />
+            <img src="assets/team/member-3.jpg" alt="Team member photo" />
           </div>
-          <div class="team-text">
-            <h2 class="team-name">Robert Hostler</h2>
-            <div class="team-role">CTO</div>
-            <p class="team-bio">
-              Oversees platform engineering, security, infrastructure and ensures the
-              system scales with complex global manufacturing.
-            </p>
-          </div>
+          <h3>Team member</h3>
+          <p class="cs-hero-sub">
+            Engineering. Builds the platform infrastructure, syndication, and order state tracking.
+          </p>
+          <a class="cs-link" href="/contact.html">Reach out →</a>
         </article>
 
+        <!-- Member 4 -->
+        <article class="cs-card">
+          <div class="team-avatar-photo">
+            <img src="assets/team/member-4.jpg" alt="Team member photo" />
+          </div>
+          <h3>Team member</h3>
+          <p class="cs-hero-sub">
+            Growth. Helps publishers discover the platform and keeps the value proposition sharp.
+          </p>
+          <a class="cs-link" href="/contact.html">Reach out →</a>
+        </article>
+      </div>
+
+      <p class="cs-hero-sub">
+        Replace placeholders with real names/roles as you finalize the roster. Photos are optional — initials work too.
+      </p>
+    </section>
+
+    <!-- VALUES / WORKING STYLE -->
+    <section class="section">
+      <h1>How we work</h1>
+      <p>
+        We optimize for clarity and execution: fewer moving parts, explicit states, and updates that stay in the right place.
+      </p>
+
+      <div class="publisher-feature-grid">
+        <div class="pub-feature-card">
+          <h3>Simple flows</h3>
+          <p>Brief → pool → acceptance → order → fulfillment.</p>
+        </div>
+
+        <div class="pub-feature-card">
+          <h3>One source of truth</h3>
+          <p>Execution stays anchored to the original brief and the order’s update stream.</p>
+        </div>
+
+        <div class="pub-feature-card">
+          <h3>Respect attention</h3>
+          <p>Dashboards stay current via syndication — no status meetings required.</p>
+        </div>
       </div>
     </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <h1>Want to work together?</h1>
+      <p>
+        If you’re a publisher or manufacturer exploring Order Pool, we’d love to talk.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
+        <a href="/contact.html" class="hero-cta-btn manufacturers">Contact</a>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-col">
-        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+      <div>
         <p class="footer-brand-text">
-          Where publishers and manufacturers collaborate to create products.
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
 
       <div class="footer-col">
-        <h4>For Publishers</h4>
-        <a href="briefs-new.html">Post a concept</a>
-        <a href="for-manufacturers.html">Find a manufacturer</a>
-        <a href="case-studies.html">Case studies</a>
+        <h4>Product</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/public-orders.html">Public orders</a>
       </div>
 
       <div class="footer-col">
-        <h4>For Manufacturers</h4>
-        <a href="briefs.html">Discover briefs</a>
-        <a href="manufacturer-capabilities.html">Capabilities</a>
-        <a href="safety.html">Safety &amp; compliance</a>
+        <h4>Company</h4>
+        <a href="/mission.html">Mission</a>
+        <a href="/team.html">Team</a>
+        <a href="/contact.html">Contact</a>
       </div>
 
       <div class="footer-col">
-        <h4>Stay in the loop</h4>
-        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
-          <input
-            type="email"
-            name="email"
-            class="newsletter-input"
-            placeholder="you@example.com"
-            required
-          />
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-        <p>We respect your privacy. Unsubscribe anytime.</p>
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <span>© 2025 OrderPool. All rights reserved.</span>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a> ·
-          <a href="terms.html">Terms</a> ·
-          <a href="contact.html">Contact</a> ·
-          <a href="#top">Back to top</a>
-        </div>
+        <span>© Order Pool</span>
       </div>
     </div>
   </footer>

@@ -1,104 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>OrderPool – PAGE TITLE HERE</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forgot password — Order Pool</title>
+  <meta name="description" content="Reset your Order Pool password." />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <!-- HEADER (same on all pages) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <a href="index.html">
-          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
-        </a>
-        <span class="brand">OrderPool</span>
+        <span class="brand">Order Pool</span>
       </div>
 
       <nav class="nav">
-        <a href="mission.html" class="nav-link">Mission</a>
-        <a href="value.html" class="nav-link">Value</a>
-        <a href="team.html" class="nav-link">Team</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link" href="/pricing.html">Pricing</a>
       </nav>
 
       <div class="header-actions">
-        <a href="get-started.html" class="header-btn primary">Get Started</a>
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
       </div>
     </div>
   </header>
 
-<main class="page">
-  <section class="section">
-    <h1>Forgot Password</h1>
-    <form class="form">
-      <div class="form-row">
-        <label class="label">Email</label>
-        <input type="email" class="input" placeholder="you@example.com" />
+  <!-- PAGE -->
+  <main class="page">
+
+    <section class="section">
+      <div class="get-started-grid">
+
+        <!-- FORM -->
+        <div class="get-started-card">
+          <h1>Forgot your password?</h1>
+          <p>
+            Enter your email and we’ll send a password reset link.
+          </p>
+
+          <form class="form" action="#" method="post">
+            <div class="form-row">
+              <label class="form-label" for="email">Email</label>
+              <input
+                class="form-input"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                required
+              />
+            </div>
+
+            <div class="form-actions">
+              <button class="button-primary" type="submit">Send reset link</button>
+              <a class="button-secondary" href="/auth-signin.html">Back to sign in</a>
+            </div>
+          </form>
+
+          <p class="cs-hero-sub">
+            Don’t have an account?
+            <a href="/auth-join.html">Create one</a>
+          </p>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="get-started-card">
+          <h2>Need help?</h2>
+          <p>
+            If you’re having trouble accessing your account, contact support and include the email you used to sign up.
+          </p>
+
+          <div class="publisher-stats">
+            <div class="stat-pill">
+              <div class="stat-label">Tip</div>
+              <div class="stat-desc">Check spam/junk folders</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Tip</div>
+              <div class="stat-desc">Try alternate emails</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Support</div>
+              <div class="stat-desc">We can help route you</div>
+            </div>
+          </div>
+
+          <div class="featured-row">
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Contact support</div>
+                <p class="collab-desc">
+                  Use the contact page to reach us.
+                </p>
+                <a class="featured-link" href="/contact.html">Contact →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
-      <button type="submit" class="button-primary">Send reset link</button>
-    </form>
-  </section>
-</main>
+    </section>
 
+  </main>
 
-
-  <!-- FOOTER (same on all pages) -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <!-- Brand column -->
-      <div class="footer-col">
-        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+      <div>
         <p class="footer-brand-text">
-          Where publishers and manufacturers collaborate to create products.
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
 
-      <!-- For Publishers -->
       <div class="footer-col">
-        <h4>For Publishers</h4>
-        <a href="briefs-new.html">Post a concept</a>
-        <a href="for-manufacturers.html">Find a manufacturer</a>
-        <a href="case-studies.html">Case studies</a>
+        <h4>Product</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
       </div>
 
-      <!-- For Manufacturers -->
       <div class="footer-col">
-        <h4>For Manufacturers</h4>
-        <a href="briefs.html">Discover briefs</a>
-        <a href="manufacturer-capabilities.html">Capabilities</a>
-        <a href="safety.html">Safety &amp; compliance</a>
+        <h4>Company</h4>
+        <a href="/mission.html">Mission</a>
+        <a href="/team.html">Team</a>
+        <a href="/contact.html">Contact</a>
       </div>
 
-      <!-- Stay in the loop -->
       <div class="footer-col">
-        <h4>Stay in the loop</h4>
-        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
-          <input
-            type="email"
-            name="email"
-            class="newsletter-input"
-            placeholder="you@example.com"
-            required
-          />
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-        <p>We respect your privacy. Unsubscribe anytime.</p>
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <span>© 2025 OrderPool. All rights reserved.</span>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a> ·
-          <a href="terms.html">Terms</a> ·
-          <a href="contact.html">Contact</a> ·
-          <a href="#top">Back to top</a>
-        </div>
+        <span>© Order Pool</span>
       </div>
     </div>
   </footer>

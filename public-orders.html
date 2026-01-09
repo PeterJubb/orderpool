@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Public orders — Order Pool</title>
+  <meta name="description" content="Public status tracking for orders in Order Pool." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- HEADER (PUBLIC) -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="brand">Order Pool</span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link active" href="/public-orders.html">Public orders</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="section">
+      <h1>Public orders</h1>
+      <p>
+        Status-only tracking for active and completed orders.
+        No sensitive specs, pricing, or private assets are shown here.
+      </p>
+
+      <div class="publisher-stats">
+        <div class="stat-pill">
+          <div class="stat-label">Active</div>
+          <div class="stat-desc">6</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Completed</div>
+          <div class="stat-desc">18</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Updated today</div>
+          <div class="stat-desc">3</div>
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
+        <a href="/auth-join.html" class="hero-cta-btn publishers">Create account</a>
+      </div>
+    </section>
+
+    <!-- FILTERS (STATIC) -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Browse</h2>
+        <span class="cs-hero-sub">Status-only view</span>
+      </div>
+
+      <div class="publisher-feature-grid">
+        <div class="pub-feature-card">
+          <h3>State</h3>
+          <p>Sampling, production, shipping, fulfilled</p>
+        </div>
+        <div class="pub-feature-card">
+          <h3>Category</h3>
+          <p>Packaging, apparel, printing</p>
+        </div>
+        <div class="pub-feature-card">
+          <h3>Recency</h3>
+          <p>Most recently updated first</p>
+        </div>
+        <div class="pub-feature-card">
+          <h3>Region</h3>
+          <p>Broad shipping region only</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTIVE ORDERS -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Active</h2>
+        <span class="cs-hero-sub">In progress</span>
+      </div>
+
+      <div class="featured-row">
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">ORD-11804</div>
+            <p class="collab-desc">
+              Packaging • In production • Updated 2 days ago
+            </p>
+            <div class="publisher-stats">
+              <div class="stat-pill">
+                <div class="stat-label">State</div>
+                <div class="stat-desc">Production</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Region</div>
+                <div class="stat-desc">North America</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Visibility</div>
+                <div class="stat-desc">Status-only</div>
+              </div>
+            </div>
+            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">ORD-11722</div>
+            <p class="collab-desc">
+              Apparel • Sampling • Updated yesterday
+            </p>
+            <div class="publisher-stats">
+              <div class="stat-pill">
+                <div class="stat-label">State</div>
+                <div class="stat-desc">Sampling</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Region</div>
+                <div class="stat-desc">Global</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Visibility</div>
+                <div class="stat-desc">Status-only</div>
+              </div>
+            </div>
+            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">ORD-11690</div>
+            <p class="collab-desc">
+              Printing • Shipping • Updated today
+            </p>
+            <div class="publisher-stats">
+              <div class="stat-pill">
+                <div class="stat-label">State</div>
+                <div class="stat-desc">Shipping</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Region</div>
+                <div class="stat-desc">Canada</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Visibility</div>
+                <div class="stat-desc">Status-only</div>
+              </div>
+            </div>
+            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COMPLETED -->
+    <section class="section">
+      <div class="section-header-row">
+        <h2>Completed</h2>
+        <span class="cs-hero-sub">Fulfilled</span>
+      </div>
+
+      <div class="featured-row">
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">ORD-11411</div>
+            <p class="collab-desc">
+              Packaging • Fulfilled • Completed 3 weeks ago
+            </p>
+            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">ORD-11302</div>
+            <p class="collab-desc">
+              Display • Fulfilled • Completed 6 weeks ago
+            </p>
+            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-body">
+            <div class="collab-title">ORD-11012</div>
+            <p class="collab-desc">
+              Printing • Fulfilled • Completed 4 months ago
+            </p>
+            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="get-started-card">
+        <h2>Want your own orders tracked?</h2>
+        <p>
+          Publishers create briefs. Manufacturers accept work. Everyone stays aligned through shared updates.
+        </p>
+
+        <div class="form-actions">
+          <a class="button-primary" href="/get-started.html">Get started</a>
+          <a class="button-secondary" href="/auth-signin.html">Sign in</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-text">
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Public</h4>
+        <a href="/public-orders.html">Public orders</a>
+        <a href="/how-it-works.html">How it works</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="/auth-signin.html">Sign in</a>
+        <a href="/auth-join.html">Create account</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© Order Pool</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

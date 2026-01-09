@@ -1,101 +1,176 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>OrderPool – PAGE TITLE HERE</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Newsletter — Order Pool</title>
+  <meta name="description" content="Get updates from Order Pool: product progress, new features, and marketplace learnings." />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <!-- HEADER (same on all pages) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="header-left">
-        <a href="index.html">
-          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
-        </a>
-        <span class="brand">OrderPool</span>
+        <span class="brand">Order Pool</span>
       </div>
 
       <nav class="nav">
-        <a href="mission.html" class="nav-link">Mission</a>
-        <a href="value.html" class="nav-link">Value</a>
-        <a href="team.html" class="nav-link">Team</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link" href="/for-publishers.html">Publishers</a>
+        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
+        <a class="nav-link" href="/pricing.html">Pricing</a>
       </nav>
 
       <div class="header-actions">
-        <a href="get-started.html" class="header-btn primary">Get Started</a>
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
       </div>
     </div>
   </header>
 
-<main class="page">
-  <section class="section">
-    <h1>Newsletter</h1>
-    <p>
-      Thanks for your interest. Newsletter subscriptions will be handled here.
-    </p>
-  </section>
-</main>
+  <!-- PAGE -->
+  <main class="page">
 
+    <!-- HERO -->
+    <section class="section">
+      <h1>Newsletter</h1>
+      <p>
+        Occasional updates on product progress, marketplace lessons, and new features.
+        No spam. Unsubscribe anytime.
+      </p>
 
+      <div class="hero-ctas">
+        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
+        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
+      </div>
+    </section>
 
+    <!-- SUBSCRIBE -->
+    <section class="section">
+      <div class="get-started-grid">
 
-  <!-- FOOTER (same on all pages) -->
+        <!-- Form -->
+        <div class="get-started-card">
+          <h2>Subscribe</h2>
+          <p>
+            Choose your role so we can send you the most relevant updates.
+          </p>
+
+          <form class="form" action="#" method="post">
+            <div class="form-row">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-input" id="email" name="email" type="email" placeholder="you@company.com" />
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="role">I’m most interested as a…</label>
+              <select class="form-select" id="role" name="role">
+                <option value="" selected disabled>Select one</option>
+                <option value="publisher">Publisher</option>
+                <option value="manufacturer">Manufacturer</option>
+                <option value="both">Both</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="topics">Topics (optional)</label>
+              <select class="form-select" id="topics" name="topics">
+                <option value="product" selected>Product updates</option>
+                <option value="marketplace">Marketplace learnings</option>
+                <option value="case-studies">Case studies</option>
+                <option value="all">Everything</option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button class="button-primary" type="submit">Subscribe</button>
+              <a class="button-secondary" href="/privacy.html">Privacy</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right column -->
+        <div class="get-started-card">
+          <h2>What you’ll get</h2>
+          <p>
+            Short, useful updates. A focus on clarity and execution — not hype.
+          </p>
+
+          <div class="publisher-stats">
+            <div class="stat-pill">
+              <div class="stat-label">Shipping notes</div>
+              <div class="stat-desc">New pages & flows</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Marketplace learnings</div>
+              <div class="stat-desc">What’s working</div>
+            </div>
+            <div class="stat-pill">
+              <div class="stat-label">Examples</div>
+              <div class="stat-desc">Brief → order</div>
+            </div>
+          </div>
+
+          <div class="featured-row">
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Prefer to explore instead?</div>
+                <p class="collab-desc">
+                  You can always skip the newsletter and go straight to the product.
+                </p>
+                <div class="hero-ctas">
+                  <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
+                  <a href="/public-orders.html" class="hero-cta-btn manufacturers">Public orders</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <!-- Brand column -->
-      <div class="footer-col">
-        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
+      <div>
         <p class="footer-brand-text">
-          Where publishers and manufacturers collaborate to create products.
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
 
-      <!-- For Publishers -->
       <div class="footer-col">
-        <h4>For Publishers</h4>
-        <a href="briefs-new.html">Post a concept</a>
-        <a href="for-manufacturers.html">Find a manufacturer</a>
-        <a href="case-studies.html">Case studies</a>
+        <h4>Product</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/public-orders.html">Public orders</a>
       </div>
 
-      <!-- For Manufacturers -->
       <div class="footer-col">
-        <h4>For Manufacturers</h4>
-        <a href="briefs.html">Discover briefs</a>
-        <a href="manufacturer-capabilities.html">Capabilities</a>
-        <a href="safety.html">Safety &amp; compliance</a>
+        <h4>Company</h4>
+        <a href="/mission.html">Mission</a>
+        <a href="/team.html">Team</a>
+        <a href="/contact.html">Contact</a>
       </div>
 
-      <!-- Stay in the loop -->
       <div class="footer-col">
-        <h4>Stay in the loop</h4>
-        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
-          <input
-            type="email"
-            name="email"
-            class="newsletter-input"
-            placeholder="you@example.com"
-            required
-          />
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-        <p>We respect your privacy. Unsubscribe anytime.</p>
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <span>© 2025 OrderPool. All rights reserved.</span>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a> ·
-          <a href="terms.html">Terms</a> ·
-          <a href="contact.html">Contact</a> ·
-          <a href="#top">Back to top</a>
-        </div>
+        <span>© Order Pool</span>
       </div>
     </div>
   </footer>
