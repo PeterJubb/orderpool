@@ -19,7 +19,7 @@
       </div>
 
       <div class="header-actions">
-        <span class="cs-hero-sub">Internal / Stakeholder index</span>
+        <span class="cs-hero-sub">Internal / stakeholder navigation</span>
       </div>
     </div>
   </header>
@@ -30,44 +30,74 @@
     <section class="section">
       <h1>Index (internal)</h1>
       <p>
-        This page links to all Order Pool screens — including empty states, full states,
-        and system pages that are normally unreachable through standard navigation.
+        Internal listing of all pages in Order Pool, sorted by flow state.
+        Includes empty/full variants and pages outside the normal signed-in experience.
       </p>
 
       <div class="publisher-stats">
         <div class="stat-pill">
-          <div class="stat-label">Audience</div>
-          <div class="stat-desc">Stakeholders / QA</div>
+          <div class="stat-label">Purpose</div>
+          <div class="stat-desc">QA / demo / stakeholders</div>
         </div>
         <div class="stat-pill">
-          <div class="stat-label">Visibility</div>
+          <div class="stat-label">Discoverability</div>
           <div class="stat-desc">Not linked publicly</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Robots</div>
+          <div class="stat-desc">No index</div>
         </div>
       </div>
     </section>
 
-    <!-- MARKETING / ENTRY -->
+    <!-- HOME / INDEXES -->
     <section class="section">
-      <h2>Public / Entry</h2>
+      <h2>Homepages / Indexes</h2>
+      <p class="cs-hero-sub">Fast entry points for demos and reviews</p>
+
+      <h3>Primary</h3>
+      <ul class="faq-list">
+        <li><a href="/index.html">index.html (main landing)</a></li>
+        <li><a href="/get-started.html">get-started.html (role chooser)</a></li>
+        <li><a href="/index2.html">index2.html (this internal index)</a></li>
+      </ul>
+
+      <h3>Gemini x2</h3>
+      <ul class="faq-list">
+        <li><span class="cs-hero-sub">Add links here (e.g., Gemini homepage variant #1)</span></li>
+        <li><span class="cs-hero-sub">Add links here (e.g., Gemini homepage variant #2)</span></li>
+      </ul>
+
+      <h3>Claude x2</h3>
+      <ul class="faq-list">
+        <li><span class="cs-hero-sub">Add links here (e.g., Claude homepage variant #1)</span></li>
+        <li><span class="cs-hero-sub">Add links here (e.g., Claude homepage variant #2)</span></li>
+      </ul>
+    </section>
+
+    <!-- STATE 0: PUBLIC MARKETING / CONTENT -->
+    <section class="section">
+      <h2>State 0 — Public marketing & content</h2>
 
       <ul class="faq-list">
-        <li><a href="/index.html">index.html (Landing)</a></li>
-        <li><a href="/get-started.html">get-started.html</a></li>
         <li><a href="/for-publishers.html">for-publishers.html</a></li>
         <li><a href="/for-manufacturers.html">for-manufacturers.html</a></li>
         <li><a href="/how-it-works.html">how-it-works.html</a></li>
         <li><a href="/pricing.html">pricing.html</a></li>
+
         <li><a href="/value.html">value.html</a></li>
         <li><a href="/mission.html">mission.html</a></li>
         <li><a href="/team.html">team.html</a></li>
         <li><a href="/case-studies.html">case-studies.html</a></li>
         <li><a href="/case-study-example.html">case-study-example.html</a></li>
+        <li><a href="/newsletter-subscribe.html">newsletter-subscribe.html</a></li>
+        <li><a href="/contact.html">contact.html</a></li>
       </ul>
     </section>
 
-    <!-- AUTH -->
+    <!-- STATE 1: AUTH -->
     <section class="section">
-      <h2>Auth / Account lifecycle</h2>
+      <h2>State 1 — Auth & account lifecycle</h2>
 
       <ul class="faq-list">
         <li><a href="/auth-signin.html">auth-signin.html</a></li>
@@ -77,10 +107,10 @@
       </ul>
     </section>
 
-    <!-- PUBLISHER FLOW -->
+    <!-- STATE 2: PUBLISHER — BRIEF -->
     <section class="section">
-      <h2>Publisher flow</h2>
-      <p class="cs-hero-sub">Brief → Pool → Order → Updates</p>
+      <h2>State 2 — Publisher: brief lifecycle</h2>
+      <p class="cs-hero-sub">Draft → submit + pay → submitted (in pool)</p>
 
       <h3>Dashboards</h3>
       <ul class="faq-list">
@@ -88,17 +118,67 @@
         <li><a href="/publisher-dashboard-full.html">publisher-dashboard-full.html</a></li>
       </ul>
 
-      <h3>Briefs</h3>
+      <h3>Briefs list</h3>
       <ul class="faq-list">
         <li><a href="/publisher-briefs-empty.html">publisher-briefs-empty.html</a></li>
         <li><a href="/publisher-briefs-full.html">publisher-briefs-full.html</a></li>
+      </ul>
+
+      <h3>Brief creation & states</h3>
+      <ul class="faq-list">
         <li><a href="/publisher-brief-new.html">publisher-brief-new.html</a></li>
         <li><a href="/publisher-brief-detail-draft.html">publisher-brief-detail-draft.html</a></li>
         <li><a href="/publisher-brief-submit.html">publisher-brief-submit.html</a></li>
         <li><a href="/publisher-brief-detail-submitted.html">publisher-brief-detail-submitted.html</a></li>
       </ul>
 
-      <h3>Orders</h3>
+      <h3>Publisher “modules”</h3>
+      <ul class="faq-list">
+        <li><a href="/publisher-quotes.html">publisher-quotes.html</a></li>
+        <li><a href="/publisher-concepts.html">publisher-concepts.html</a></li>
+        <li><a href="/publisher-samples.html">publisher-samples.html</a></li>
+        <li><a href="/publisher-production.html">publisher-production.html</a></li>
+      </ul>
+    </section>
+
+    <!-- STATE 3: MANUFACTURER — POOL -->
+    <section class="section">
+      <h2>State 3 — Manufacturer: quote pool</h2>
+      <p class="cs-hero-sub">Browse pool → view detail → accept</p>
+
+      <h3>Dashboards</h3>
+      <ul class="faq-list">
+        <li><a href="/manufacturer-dashboard-empty.html">manufacturer-dashboard-empty.html</a></li>
+        <li><a href="/manufacturer-dashboard-full.html">manufacturer-dashboard-full.html</a></li>
+      </ul>
+
+      <h3>Pool + detail</h3>
+      <ul class="faq-list">
+        <li><a href="/manufacturer-quote-pool-empty.html">manufacturer-quote-pool-empty.html</a></li>
+        <li><a href="/manufacturer-quote-pool-full.html">manufacturer-quote-pool-full.html</a></li>
+        <li><a href="/manufacturer-quote-detail.html">manufacturer-quote-detail.html</a></li>
+      </ul>
+
+      <h3>Manufacturer “modules”</h3>
+      <ul class="faq-list">
+        <li><a href="/manufacturer-capabilities.html">manufacturer-capabilities.html</a></li>
+        <li><a href="/manufacturer-projects.html">manufacturer-projects.html</a></li>
+      </ul>
+    </section>
+
+    <!-- STATE 4: ORDERS (EXECUTION) -->
+    <section class="section">
+      <h2>State 4 — Orders (execution)</h2>
+      <p class="cs-hero-sub">Accepted → sampling → production → shipping → fulfilled</p>
+
+      <h3>Manufacturer orders</h3>
+      <ul class="faq-list">
+        <li><a href="/manufacturer-orders-empty.html">manufacturer-orders-empty.html</a></li>
+        <li><a href="/manufacturer-orders-full.html">manufacturer-orders-full.html</a></li>
+        <li><a href="/manufacturer-order-detail-editable.html">manufacturer-order-detail-editable.html</a></li>
+      </ul>
+
+      <h3>Publisher orders</h3>
       <ul class="faq-list">
         <li><a href="/publisher-orders-empty.html">publisher-orders-empty.html</a></li>
         <li><a href="/publisher-orders-full.html">publisher-orders-full.html</a></li>
@@ -107,35 +187,10 @@
       </ul>
     </section>
 
-    <!-- MANUFACTURER FLOW -->
+    <!-- STATE 5: PROJECT LAYER (SHARED WORKSPACE) -->
     <section class="section">
-      <h2>Manufacturer flow</h2>
-      <p class="cs-hero-sub">Pool → Accept → Execute → Update</p>
-
-      <h3>Dashboards</h3>
-      <ul class="faq-list">
-        <li><a href="/manufacturer-dashboard-empty.html">manufacturer-dashboard-empty.html</a></li>
-        <li><a href="/manufacturer-dashboard-full.html">manufacturer-dashboard-full.html</a></li>
-      </ul>
-
-      <h3>Quote pool</h3>
-      <ul class="faq-list">
-        <li><a href="/manufacturer-quote-pool-empty.html">manufacturer-quote-pool-empty.html</a></li>
-        <li><a href="/manufacturer-quote-pool-full.html">manufacturer-quote-pool-full.html</a></li>
-        <li><a href="/manufacturer-quote-detail.html">manufacturer-quote-detail.html</a></li>
-      </ul>
-
-      <h3>Orders</h3>
-      <ul class="faq-list">
-        <li><a href="/manufacturer-orders-empty.html">manufacturer-orders-empty.html</a></li>
-        <li><a href="/manufacturer-orders-full.html">manufacturer-orders-full.html</a></li>
-        <li><a href="/manufacturer-order-detail-editable.html">manufacturer-order-detail-editable.html</a></li>
-      </ul>
-    </section>
-
-    <!-- PROJECT / SHARED -->
-    <section class="section">
-      <h2>Shared / Project layer</h2>
+      <h2>State 5 — Shared project layer</h2>
+      <p class="cs-hero-sub">Cross-functional workspace views</p>
 
       <ul class="faq-list">
         <li><a href="/project-dashboard.html">project-dashboard.html</a></li>
@@ -148,9 +203,10 @@
       </ul>
     </section>
 
-    <!-- PUBLIC TRANSPARENCY -->
+    <!-- STATE 6: PUBLIC TRANSPARENCY -->
     <section class="section">
-      <h2>Public transparency</h2>
+      <h2>State 6 — Public transparency</h2>
+      <p class="cs-hero-sub">Status-only views</p>
 
       <ul class="faq-list">
         <li><a href="/public-orders.html">public-orders.html</a></li>
@@ -158,9 +214,9 @@
       </ul>
     </section>
 
-    <!-- SETTINGS / SYSTEM -->
+    <!-- STATE 7: SETTINGS / SYSTEM -->
     <section class="section">
-      <h2>Settings / system</h2>
+      <h2>State 7 — Settings & internal system</h2>
 
       <ul class="faq-list">
         <li><a href="/dashboard.html">dashboard.html</a></li>
@@ -170,9 +226,20 @@
       </ul>
     </section>
 
-    <!-- ERRORS / EDGE -->
+    <!-- STATE 8: LEGAL / TRUST -->
     <section class="section">
-      <h2>Error / edge states</h2>
+      <h2>State 8 — Legal & trust</h2>
+
+      <ul class="faq-list">
+        <li><a href="/privacy.html">privacy.html</a></li>
+        <li><a href="/terms.html">terms.html</a></li>
+        <li><a href="/safety.html">safety.html</a></li>
+      </ul>
+    </section>
+
+    <!-- STATE 9: ERROR / EDGE -->
+    <section class="section">
+      <h2>State 9 — Error & edge states</h2>
 
       <ul class="faq-list">
         <li><a href="/404.html">404.html</a></li>
@@ -185,9 +252,7 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <p class="footer-brand-text">
-        Internal navigation index. Do not link publicly.
-      </p>
+      <p class="footer-brand-text">Internal navigation index. Do not link publicly.</p>
     </div>
   </footer>
 

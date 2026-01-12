@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Pool – briefs in, orders out</title>
+  <meta name="description" content="Order Pool is a shared manufacturing request pool where publishers submit paid briefs and manufacturers pull work." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Bold & Vivid Enhancements */
+    .hero-card h1 {
+      font-size: 4.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #5835E0 0%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    
+    .hero-top p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      font-weight: 500;
+      color: #444;
+      max-width: 800px;
+    }
+    
+    .hero-cta-btn {
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 1.25rem 2.5rem;
+      border-radius: 16px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(88, 53, 224, 0.2);
+      text-decoration: none;
+      color: white;
+    }
+    
+    .hero-cta-btn.publishers {
+      background: linear-gradient(135deg, #5835E0 0%, #8B5CF6 100%);
+    }
+    
+    .hero-cta-btn.manufacturers {
+      background: linear-gradient(135deg, #EC4899 0%, #F97316 100%);
+    }
+    
+    .hero-cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(88, 53, 224, 0.3);
+    }
+    
+    .featured-header h2 {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    
+    .collab-card {
+      transition: all 0.3s ease;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    
+    .collab-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    
+    .collab-img {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #5835E0 0%, #8B5CF6 100%);
+    }
+    
+    .collab-img svg {
+      width: 80px;
+      height: 80px;
+      filter: drop-shadow(0 4px 12px rgba(255,255,255,0.3));
+    }
+    
+    .collab-card:nth-child(2) .collab-img {
+      background: linear-gradient(135deg, #EC4899 0%, #F97316 100%);
+    }
+    
+    .collab-card:nth-child(3) .collab-img {
+      background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+    }
+    
+    .collab-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    
+    .collab-desc {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #666;
+    }
+    
+    .collab-footer {
+      font-weight: 700;
+      color: #5835E0;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .collab-footer:hover {
+      color: #8B5CF6;
+    }
+    
+    .how-section h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .how-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #5835E0 0%, #8B5CF6 100%);
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px rgba(88, 53, 224, 0.4);
+    }
+    
+    .how-card:nth-child(2) .how-icon {
+      background: linear-gradient(135deg, #EC4899 0%, #F97316 100%);
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+    }
+    
+    .how-card:nth-child(3) .how-icon {
+      background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    }
+    
+    .how-card:nth-child(4) .how-icon {
+      background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+    }
+    
+    .how-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    
+    .how-desc {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: #555;
+    }
+    
+    .get-started-card h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+    }
+    
+    .get-started-card p {
+      font-size: 1.25rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      color: #444;
+    }
+    
+    .button-primary {
+      display: inline-block;
+      padding: 1.25rem 2.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #5835E0 0%, #8B5CF6 100%);
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(88, 53, 224, 0.3);
+    }
+    
+    .button-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(88, 53, 224, 0.4);
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    
+    .status-production {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+    
+    .status-sampling {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+    
+    .status-completed {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    
+    body {
+      background: linear-gradient(180deg, #FDFBFF 0%, #F8F7FF 100%);
+    }
+    
+    .page {
+      background: transparent;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="brand">
+          <svg class="brand-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="35" cy="50" r="25" stroke="#5835E0" stroke-width="10" fill="none"/>
+            <path d="M60 30 H85 C92 30 95 33 95 40 V60 C95 67 92 70 85 70 H60 V85 H70 V95 H60 V70 V30 Z" fill="#5835E0"/>
+          </svg>
+          Order Pool
+        </span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link active" href="/">Home</a>
+        <a class="nav-link" href="/how-it-works.html">How it works</a>
+        <a class="nav-link" href="/for-publishers.html">Publishers</a>
+        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
+        <a class="nav-link" href="/pricing.html">Pricing</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/get-started.html" class="header-btn primary">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero-card">
+      <div class="hero-top">
+        <h1>Briefs in.<br>Orders out. 🎉</h1>
+        <p>
+          <strong>Order Pool is a shared manufacturing request pool.</strong><br>
+          Publishers submit paid briefs. Manufacturers pull work.<br>
+          Orders are tracked from acceptance to fulfillment. Simple, transparent, effective.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="/get-started.html" class="hero-cta-btn publishers">
+            📝 I'm a publisher
+          </a>
+          <a href="/get-started.html" class="hero-cta-btn manufacturers">
+            🏭 I'm a manufacturer
+          </a>
+        </div>
+      </div>
+
+      <!-- FEATURED / LIVE PROOF -->
+      <div class="featured-header">
+        <h2>✨ Live production activity</h2>
+        <a href="/public-orders.html" class="featured-link">
+          View public orders →
+        </a>
+      </div>
+
+      <div class="featured-row">
+        <div class="collab-card">
+          <div class="collab-img">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 15L30 30V70L50 85L70 70V30L50 15Z" fill="white" opacity="0.9"/>
+              <path d="M50 30L35 40V60L50 70L65 60V40L50 30Z" fill="white" opacity="0.6"/>
+              <circle cx="50" cy="50" r="8" fill="white"/>
+            </svg>
+          </div>
+          <div class="collab-body">
+            <div class="collab-title">Apparel production run</div>
+            <p class="collab-desc">
+              <strong>5,000 units</strong> • Vietnam
+            </p>
+            <span class="status-badge status-production">⚙️ In production</span>
+            <div class="collab-footer">View order →</div>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-img">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="25" y="30" width="50" height="45" rx="4" fill="white" opacity="0.9"/>
+              <rect x="30" y="35" width="40" height="30" fill="white" opacity="0.6"/>
+              <path d="M35 50H65M35 55H60M35 60H55" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="collab-body">
+            <div class="collab-title">Packaging samples</div>
+            <p class="collab-desc">
+              <strong>Short-run</strong> • Shenzhen
+            </p>
+            <span class="status-badge status-sampling">🔬 Sampling</span>
+            <div class="collab-footer">View order →</div>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <div class="collab-img">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 20C30 20 25 30 25 40C25 50 30 80 50 80C70 80 75 50 75 40C75 30 70 20 50 20Z" fill="white" opacity="0.9"/>
+              <ellipse cx="50" cy="40" rx="20" ry="8" fill="white" opacity="0.6"/>
+              <path d="M35 45L50 50L65 45" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="collab-body">
+            <div class="collab-title">Injection-mold tooling</div>
+            <p class="collab-desc">
+              <strong>Tooling</strong> • Taiwan
+            </p>
+            <span class="status-badge status-completed">✅ Completed</span>
+            <div class="collab-footer">View order →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+      <h2>How Order Pool works ⚡</h2>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-icon">1</div>
+          <div class="how-title">Create a brief</div>
+          <div class="how-desc">
+            Publishers submit a <strong>standardized production brief</strong> and pay a fee. Clear requirements, consistent format.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">2</div>
+          <div class="how-title">Enter the pool</div>
+          <div class="how-desc">
+            The brief becomes a <strong>quote request visible to manufacturers</strong>. No chasing, no spam.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">3</div>
+          <div class="how-title">Work is pulled</div>
+          <div class="how-desc">
+            Manufacturers <strong>accept work when it fits their capacity</strong>. Pull, don't push.
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon">4</div>
+          <div class="how-title">Tracked publicly</div>
+          <div class="how-desc">
+            Accepted orders are <strong>tracked through production and fulfillment</strong>. Full transparency.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLE SPLIT -->
+    <section class="section">
+      <div class="get-started-grid">
+        <div class="get-started-card">
+          <h2>For publishers 📝</h2>
+          <p>
+            <strong>Submit once. Reach many manufacturers.</strong><br>
+            Track progress without emails or spreadsheets. Get matched with manufacturers who want your work.
+          </p>
+          <a href="/for-publishers.html" class="button-primary">
+            Learn more →
+          </a>
+        </div>
+
+        <div class="get-started-card">
+          <h2>For manufacturers 🏭</h2>
+          <p>
+            <strong>Pull work when you're ready.</strong><br>
+            Clear briefs, clean execution, no bidding chaos. Choose projects that match your capabilities.
+          </p>
+          <a href="/for-manufacturers.html" class="button-primary">
+            Learn more →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-text">
+          <strong>Order Pool</strong> is a shared manufacturing request platform built on
+          transparency and execution. Making manufacturing collaboration better. 🚀
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/public-orders.html">Public orders</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/mission.html">Mission</a>
+        <a href="/team.html">Team</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/safety.html">Safety</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>© Order Pool • Built for builders</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
