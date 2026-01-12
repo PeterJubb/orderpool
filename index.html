@@ -1,210 +1,674 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Order Pool — briefs in, orders out</title>
-  <meta name="description" content="Order Pool is a shared manufacturing request pool where publishers submit paid briefs and manufacturers pull work." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Aggregated Wholesaling Manufacturing Marketplace</title>
+  <meta
+    name="description"
+    content="Order Pool is an aggregated wholesaling manufacturing marketplace where publishers submit paid production briefs and manufacturers pull, execute, and fulfill orders transparently."
+  />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{
+      width:34px;height:34px;
+      object-fit:contain;
+      display:block;
+    }
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      align-items:center;
+      list-style:none;
+      flex-wrap:wrap;
+      justify-content:center;
+      flex:1;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+      transition:color .2s;
+      padding:.25rem .25rem;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:.95rem;
+      transition:all .2s;
+      border:1px solid transparent;
+      cursor:pointer;
+      font-weight:650;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      white-space:nowrap;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-primary:hover{filter:brightness(.96)}
+
+    /* Hero */
+    .hero{
+      max-width:1200px;
+      margin:0 auto;
+      padding:4.25rem 2rem 2.75rem;
+      text-align:center;
+    }
+    h1{
+      font-size:3.2rem;
+      font-weight:850;
+      margin-bottom:1rem;
+      line-height:1.08;
+      letter-spacing:-.02em;
+    }
+    .subtitle{
+      font-size:1.22rem;
+      color:#334155;
+      margin-bottom:1.35rem;
+      max-width:860px;
+      margin-left:auto;
+      margin-right:auto;
+      line-height:1.55;
+    }
+    .explainer{
+      font-size:1.03rem;
+      color:#64748b;
+      margin-bottom:1.8rem;
+      max-width:760px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .cta-buttons{
+      display:flex;
+      gap:.9rem;
+      justify-content:center;
+      margin-bottom:1rem;
+      flex-wrap:wrap;
+    }
+    .cta-buttons .btn{
+      padding:1rem 1.6rem;
+      font-size:1rem;
+      border-radius:14px;
+    }
+
+    /* Showcase strip (uses your 3 images) */
+    .showcase{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 2rem 3.25rem;
+    }
+    .showcase-grid{
+      display:grid;
+      grid-template-columns:1.6fr 1fr 1fr;
+      gap:1rem;
+      align-items:stretch;
+    }
+    .shot{
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      overflow:hidden;
+      background:#f8fafc;
+      position:relative;
+      min-height:220px;
+    }
+    .shot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .shot .cap{
+      position:absolute;
+      left:14px; bottom:14px;
+      padding:.45rem .7rem;
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      border:1px solid #e5e7eb;
+      color:#0f172a;
+      font-weight:750;
+      font-size:.85rem;
+    }
+    .shot.tall{min-height:320px}
+    .shot.tall img{object-position:center}
+    .shot.small img{object-position:center}
+
+    /* Examples / public proof */
+    .examples-section{
+      background:#f8fafc;
+      padding:4.25rem 2rem;
+      border-top:1px solid #eef2f7;
+      border-bottom:1px solid #eef2f7;
+    }
+    .section-container{
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .section-header{
+      text-align:center;
+      margin-bottom:2.25rem;
+    }
+    .section-header h2{
+      font-size:2.1rem;
+      margin-bottom:.6rem;
+      font-weight:850;
+      letter-spacing:-.01em;
+    }
+    .section-header p{
+      color:#64748b;
+      font-size:1.05rem;
+      margin-bottom:.6rem;
+    }
+    .view-link{
+      color:#3d20ae;
+      font-size:.95rem;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      font-weight:750;
+      border-bottom:1px dashed rgba(61,32,174,.35);
+      padding-bottom:2px;
+    }
+    .view-link:hover{border-bottom-color:rgba(61,32,174,.75)}
+
+    .examples-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:1.25rem;
+    }
+    .example-card{
+      background:#fff;
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+      overflow:hidden;
+      transition:transform .18s, box-shadow .18s;
+    }
+    .example-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(15,23,42,.10);
+    }
+    .example-media{
+      height:160px;
+      background:#f1f5f9;
+      border-bottom:1px solid #e5e7eb;
+    }
+    .example-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .example-body{padding:1.35rem 1.35rem 1.1rem}
+    .example-card h3{
+      font-size:1.2rem;
+      margin-bottom:.75rem;
+      font-weight:800;
+    }
+    .example-meta{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      margin-bottom:1rem;
+    }
+    .meta-tag{
+      font-size:.82rem;
+      color:#475569;
+      background:#f1f5f9;
+      padding:.28rem .7rem;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+    }
+
+    /* How it works */
+    .how-it-works{
+      padding:4.25rem 2rem;
+    }
+    .steps-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:2.25rem;
+      margin-top:2.25rem;
+    }
+    .step{text-align:center}
+    .step-number{
+      display:inline-flex;
+      width:56px;height:56px;
+      border-radius:50%;
+      background:#3d20ae;
+      color:#fff;
+      align-items:center;
+      justify-content:center;
+      font-weight:850;
+      font-size:1.35rem;
+      margin-bottom:1rem;
+    }
+    .step h3{
+      font-size:1.2rem;
+      margin-bottom:.6rem;
+      font-weight:800;
+    }
+    .step p{
+      color:#64748b;
+      font-size:1rem;
+      line-height:1.6;
+      max-width:34ch;
+      margin:0 auto;
+    }
+
+    /* Audience */
+    .audience-section{
+      background:#f8fafc;
+      padding:4.25rem 2rem;
+      border-top:1px solid #eef2f7;
+      border-bottom:1px solid #eef2f7;
+    }
+    .audience-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+      gap:1.25rem;
+      margin-top:2.25rem;
+    }
+    .audience-card{
+      background:#fff;
+      border-radius:18px;
+      padding:2.2rem;
+      border:1px solid #e5e7eb;
+    }
+    .audience-card h3{
+      font-size:1.55rem;
+      margin-bottom:.75rem;
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+    .audience-card p{
+      color:#334155;
+      margin-bottom:1.25rem;
+      font-size:1.02rem;
+      line-height:1.65;
+    }
+
+    /* Tagline */
+    .tagline-section{
+      background:linear-gradient(135deg, rgba(61,32,174,.10), rgba(59,244,156,.12));
+      padding:4.25rem 2rem;
+      text-align:center;
+    }
+    .tagline-section h2{
+      font-size:2.35rem;
+      margin-bottom:.9rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+    .tagline-section p{
+      font-size:1.05rem;
+      color:#475569;
+      max-width:760px;
+      margin:0 auto;
+    }
+
+    /* Footer */
+    footer{
+      background:#fff;
+      border-top:1px solid #e5e7eb;
+      padding:2.75rem 2rem 2rem;
+    }
+    .footer-content{max-width:1200px;margin:0 auto}
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:2rem;
+      margin-bottom:2rem;
+    }
+    .footer-column h4{
+      font-size:.85rem;
+      font-weight:800;
+      margin-bottom:.9rem;
+      text-transform:uppercase;
+      color:#94a3b8;
+      letter-spacing:.06em;
+    }
+    .footer-column ul{list-style:none}
+    .footer-column ul li{margin-bottom:.5rem}
+    .footer-column a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+    }
+    .footer-column a:hover{color:#0f172a}
+    .footer-bottom{
+      border-top:1px solid #e5e7eb;
+      padding-top:1.25rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:#94a3b8;
+      font-size:.92rem;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 900px){
+      h1{font-size:2.55rem}
+      .nav-links{display:none}
+      .showcase-grid{grid-template-columns:1fr}
+      .shot.tall{min-height:240px}
+      .audience-grid{grid-template-columns:1fr}
+      header{padding:1rem 1.25rem}
+      .hero{padding:3.25rem 1.25rem 2.25rem}
+      .showcase{padding:0 1.25rem 2.75rem}
+      .examples-section,.how-it-works,.audience-section,.tagline-section{padding:3.25rem 1.25rem}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/" class="brand" aria-label="Order Pool home">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links" aria-label="Primary navigation">
+        <li><a href="/">Home</a></li>
+        <li><a href="/how-it-works">How it works</a></li>
+        <li><a href="/for-publishers">Publishers</a></li>
+        <li><a href="/for-manufacturers">Manufacturers</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+      </ul>
+
+      <div class="nav-actions" aria-label="Account actions">
+        <a href="/auth-signin" class="btn btn-secondary">Sign in</a>
+        <a href="/get-started" class="btn btn-primary">Get started</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link active" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/for-publishers.html">Publishers</a>
-        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
+  <main>
     <!-- HERO -->
-    <section class="hero-card">
-      <div class="hero-top">
-        <h1>Briefs in. Orders out.</h1>
-        <p>
-          Order Pool is a shared manufacturing request pool.
-          Publishers submit paid briefs. Manufacturers pull work.
-          Orders are tracked from acceptance to fulfillment.
-        </p>
+    <section class="hero" id="home">
+      <h1>Aggregated wholesaling,<br>made executable.</h1>
+      <p class="subtitle">
+        Throw your production brief into the pool. Manufacturers grab what fits their machines.
+        Packaging, production runs, tooling — whatever you need made, someone’s ready to make it.
+      </p>
+      <p class="explainer">
+        No bidding wars. No endless email threads. Just manufacturers pulling work when they have capacity,
+        and you tracking it live until it ships.
+      </p>
 
-        <div class="hero-ctas">
-          <a href="/get-started.html" class="hero-cta-btn publishers">
-            I’m a publisher
-          </a>
-          <a href="/get-started.html" class="hero-cta-btn manufacturers">
-            I’m a manufacturer
-          </a>
+      <div class="cta-buttons">
+        <a href="/get-started" class="btn btn-primary">Post a production brief</a>
+        <a href="/get-started" class="btn btn-secondary">I make things →</a>
+      </div>
+    </section>
+
+    <!-- IMAGE SHOWCASE (your images, not placeholders) -->
+    <section class="showcase" aria-label="Manufacturing examples">
+      <div class="showcase-grid">
+        <div class="shot tall">
+          <img
+            src="Production.jpg"
+            alt="Busy factory floor with rows of workstations and workers producing goods."
+            loading="lazy"
+          />
+          <div class="cap">Production</div>
+        </div>
+
+        <div class="shot small">
+          <img
+            src="3D.jpg"
+            alt="Packaging dieline alongside a 3D rendered red box mockup."
+            loading="lazy"
+          />
+          <div class="cap">Dielines & 3D</div>
+        </div>
+
+        <div class="shot small">
+          <img
+            src="Packaging.jpg"
+            alt="A collection of colorful printed packaging samples including boxes, labels, and cards."
+            loading="lazy"
+          />
+          <div class="cap">Packaging</div>
         </div>
       </div>
+    </section>
 
-      <!-- FEATURED / LIVE PROOF -->
-      <div class="featured-header">
-        <h2>Live production activity</h2>
-        <a href="/public-orders.html" class="featured-link">
-          View public orders →
-        </a>
-      </div>
-
-      <div class="featured-row">
-        <div class="collab-card">
-          <div class="collab-img"></div>
-          <div class="collab-body">
-            <div class="collab-title">Apparel production run</div>
-            <p class="collab-desc">
-              5,000 units • Vietnam • In production
-            </p>
-            <div class="collab-footer">View order →</div>
-          </div>
+    <!-- LIVE PROOF -->
+    <section class="examples-section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Live from the factory floor</h2>
+          <p>Real orders, real manufacturing — visible and trackable.</p>
+          <a href="/public-orders" class="view-link">Browse all public orders →</a>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-img"></div>
-          <div class="collab-body">
-            <div class="collab-title">Packaging samples</div>
-            <p class="collab-desc">
-              Short-run • Shenzhen • Sampling
-            </p>
-            <div class="collab-footer">View order →</div>
-          </div>
-        </div>
+        <div class="examples-grid">
+          <article class="example-card">
+            <div class="example-media">
+              <img
+                src="Production.jpg"
+                alt="Factory production line."
+                loading="lazy"
+              />
+            </div>
+            <div class="example-body">
+              <h3>Multi-station assembly line</h3>
+              <div class="example-meta">
+                <span class="meta-tag">5 stations</span>
+                <span class="meta-tag">In production</span>
+                <span class="meta-tag">Throughput tracked</span>
+              </div>
+              <a href="/public-orders" class="view-link">View order →</a>
+            </div>
+          </article>
 
-        <div class="collab-card">
-          <div class="collab-img"></div>
-          <div class="collab-body">
-            <div class="collab-title">Injection-mold tooling</div>
-            <p class="collab-desc">
-              Tooling • Taiwan • Completed
-            </p>
-            <div class="collab-footer">View order →</div>
-          </div>
+          <article class="example-card">
+            <div class="example-media">
+              <img
+                src="3D.jpg"
+                alt="Packaging dieline and 3D mockup."
+                loading="lazy"
+              />
+            </div>
+            <div class="example-body">
+              <h3>Packaging dielines & mockups</h3>
+              <div class="example-meta">
+                <span class="meta-tag">Dieline</span>
+                <span class="meta-tag">3D mock</span>
+                <span class="meta-tag">Ready for approval</span>
+              </div>
+              <a href="/public-orders" class="view-link">View order →</a>
+            </div>
+          </article>
+
+          <article class="example-card">
+            <div class="example-media">
+              <img
+                src="Packaging.jpg"
+                alt="Printed packaging prototypes."
+                loading="lazy"
+              />
+            </div>
+            <div class="example-body">
+              <h3>Custom packaging run</h3>
+              <div class="example-meta">
+                <span class="meta-tag">Short-run</span>
+                <span class="meta-tag">Color matched</span>
+                <span class="meta-tag">Sampling</span>
+              </div>
+              <a href="/public-orders" class="view-link">View order →</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- HOW IT WORKS -->
-    <section class="how-section">
-      <h2>How Order Pool works</h2>
-
-      <div class="how-grid">
-        <div class="how-card">
-          <div class="how-icon">1</div>
-          <div class="how-title">Create a brief</div>
-          <div class="how-desc">
-            Publishers submit a standardized production brief and pay a fee.
-          </div>
+    <section class="how-it-works" id="how-it-works">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Here’s exactly how it works</h2>
+          <p>Simple mechanics. Clear incentives. Public progress.</p>
         </div>
 
-        <div class="how-card">
-          <div class="how-icon">2</div>
-          <div class="how-title">Enter the pool</div>
-          <div class="how-desc">
-            The brief becomes a quote request visible to manufacturers.
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>You post a brief</h3>
+            <p>Standardized specs, quantities, timelines, and budget — submitted once.</p>
           </div>
-        </div>
 
-        <div class="how-card">
-          <div class="how-icon">3</div>
-          <div class="how-title">Work is pulled</div>
-          <div class="how-desc">
-            Manufacturers accept work when it fits their capacity.
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>It hits the pool</h3>
+            <p>Your request becomes visible to manufacturers who can actually fulfill it.</p>
           </div>
-        </div>
 
-        <div class="how-card">
-          <div class="how-icon">4</div>
-          <div class="how-title">Tracked publicly</div>
-          <div class="how-desc">
-            Accepted orders are tracked through production and fulfillment.
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Work is pulled</h3>
+            <p>Manufacturers accept when it fits capacity. You approve terms and timing.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Tracked to delivery</h3>
+            <p>Milestones update from production through fulfillment — fewer emails, more truth.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ROLE SPLIT -->
-    <section class="section">
-      <div class="get-started-grid">
-        <div class="get-started-card">
-          <h2>For publishers</h2>
-          <p>
-            Submit once. Reach many manufacturers.
-            Track progress without emails or spreadsheets.
-          </p>
-          <a href="/for-publishers.html" class="button-primary">
-            Learn more
-          </a>
-        </div>
+    <!-- AUDIENCE -->
+    <section class="audience-section">
+      <div class="section-container">
+        <div class="audience-grid">
+          <div class="audience-card">
+            <h3>For publishers</h3>
+            <p>
+              Post once, reach many. Reduce quote-chasing and replace “checking in” emails with a
+              single source of truth.
+            </p>
+            <a href="/for-publishers" class="btn btn-primary">Learn more</a>
+          </div>
 
-        <div class="get-started-card">
-          <h2>For manufacturers</h2>
-          <p>
-            Pull work when you’re ready.
-            Clear briefs, clean execution, no bidding chaos.
-          </p>
-          <a href="/for-manufacturers.html" class="button-primary">
-            Learn more
-          </a>
+          <div class="audience-card">
+            <h3>For manufacturers</h3>
+            <p>
+              Pull work when it fits. Clear briefs, real budgets, and the ability to fill downtime
+              with jobs that match your equipment.
+            </p>
+            <a href="/for-manufacturers" class="btn btn-primary">Learn more</a>
+          </div>
         </div>
       </div>
     </section>
 
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on
-          transparency and execution.
+    <!-- TAGLINE -->
+    <section class="tagline-section">
+      <div class="section-container">
+        <h2>Briefs in. Orders out.</h2>
+        <p>
+          Aggregated wholesaling manufacturing — where demand is pooled, work is pulled, and progress is visible.
         </p>
       </div>
+    </section>
+  </main>
 
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/pricing.html">Pricing</a>
-        <a href="/public-orders.html">Public orders</a>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/how-it-works">How it works</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/public-orders">Public orders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/mission">Mission</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/safety">Safety</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/mission.html">Mission</a>
-        <a href="/team.html">Team</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
+      <div class="footer-bottom">
         <span>© Order Pool</span>
+        <span>Aggregated Wholesaling Manufacturing Marketplace</span>
       </div>
     </div>
   </footer>
-
 </body>
 </html>
