@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Settings — Order Pool</title>
-  <meta name="description" content="Account and workspace settings for Order Pool." />
+  <meta name="description" content="Account, notification, and workspace settings for Order Pool." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -18,27 +18,25 @@
       </div>
 
       <nav class="nav">
-        <!-- Choose the right dashboard link depending on role in implementation -->
         <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
         <a class="nav-link" href="/publisher-briefs-full.html">Briefs</a>
         <a class="nav-link" href="/publisher-orders-full.html">Orders</a>
       </nav>
 
       <div class="header-actions">
-        <a href="/publisher-dashboard-full.html" class="header-btn secondary">Back</a>
+        <a href="/publisher-dashboard-full.html" class="header-btn ghost">Back</a>
         <a href="/auth-signin.html" class="header-btn primary">Sign out</a>
       </div>
     </div>
   </header>
 
-  <!-- PAGE -->
   <main class="page">
 
-    <!-- PAGE HEADER -->
+    <!-- PAGE INTRO -->
     <section class="section">
       <h1>Settings</h1>
-      <p>
-        Manage your account, notifications, and workspace defaults. Keep this accurate — it improves fit and reduces back-and-forth.
+      <p class="page-sub">
+        Manage your account details, notifications, and defaults. Keeping this accurate improves matching and reduces back-and-forth.
       </p>
 
       <div class="publisher-stats">
@@ -57,187 +55,148 @@
       </div>
     </section>
 
-    <!-- CONTENT -->
+    <!-- PROFILE + NOTIFICATIONS -->
     <section class="section">
-      <div class="get-started-grid">
+      <div class="auth-grid">
 
-        <!-- LEFT COLUMN -->
-        <div class="get-started-card">
+        <!-- PROFILE -->
+        <div class="auth-card">
           <h2>Profile</h2>
-          <p>Used for invoices, collaboration, and support.</p>
+          <p class="text-muted">Used for invoices, collaboration, and support.</p>
 
-          <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="company">Company / studio name</label>
-              <input class="form-input" id="company" name="company" type="text" placeholder="e.g., North Shore Retail Co." />
+          <form class="form">
+
+            <div class="field">
+              <input id="company" type="text" placeholder=" " />
+              <label for="company">Company / studio name</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="name">Contact name</label>
-              <input class="form-input" id="name" name="name" type="text" placeholder="e.g., Peter Jubb" />
+            <div class="field">
+              <input id="name" type="text" placeholder=" " />
+              <label for="name">Contact name</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="email">Email</label>
-              <input class="form-input" id="email" name="email" type="email" placeholder="you@company.com" />
+            <div class="field">
+              <input id="email" type="email" placeholder=" " />
+              <label for="email">Email address</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="timezone">Timezone</label>
-              <select class="form-select" id="timezone" name="timezone">
-                <option selected>America/Vancouver</option>
+            <div class="field">
+              <select id="timezone">
+                <option>America/Vancouver</option>
                 <option>America/Los_Angeles</option>
                 <option>America/New_York</option>
                 <option>Europe/London</option>
               </select>
+              <label for="timezone">Timezone</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="location">Location (general)</label>
-              <input class="form-input" id="location" name="location" type="text" placeholder="e.g., Vancouver, BC" />
+            <div class="field">
+              <input id="location" type="text" placeholder=" " />
+              <label for="location">Location (general)</label>
             </div>
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Save profile</button>
-              <a class="button-secondary" href="/publisher-dashboard-full.html">Cancel</a>
-            </div>
+            <button class="button-primary button-full">Save profile</button>
           </form>
-
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">Role defaults</div>
-                <p class="collab-desc">
-                  In production, you’ll show either the Publisher nav or Manufacturer nav.
-                  For now, this settings page can be shared.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <div class="get-started-card">
+        <!-- NOTIFICATIONS -->
+        <div class="auth-card auth-side">
           <h2>Notifications</h2>
-          <p>Control how and when you’re notified.</p>
+          <p class="text-muted">Control how and when you’re notified.</p>
 
-          <form class="form" action="#" method="post">
-            <div class="faq-list">
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Email notifications</h3>
-                </div>
-                <p>Order updates, acceptance events, and questions.</p>
-              </div>
+          <ul class="role-list">
+            <li>
+              <strong>Email updates</strong>
+              <span>Orders, acceptance events, questions</span>
+            </li>
+            <li>
+              <strong>Digest</strong>
+              <span>Daily or weekly summary</span>
+            </li>
+            <li>
+              <strong>Critical alerts</strong>
+              <span>Timeline risk, approvals needed</span>
+            </li>
+          </ul>
 
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Digest</h3>
-                </div>
-                <p>Daily or weekly summary (placeholder).</p>
-              </div>
-
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Critical alerts</h3>
-                </div>
-                <p>Timeline risk, shipping changes, approvals needed.</p>
-              </div>
+          <form class="form">
+            <div class="field">
+              <input id="notify-email" type="email" placeholder=" " />
+              <label for="notify-email">Notification email</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="notify-email">Send notifications to</label>
-              <input class="form-input" id="notify-email" name="notifyEmail" type="email" placeholder="alerts@company.com" />
-            </div>
-
-            <div class="form-row">
-              <label class="form-label" for="digest">Digest frequency</label>
-              <select class="form-select" id="digest" name="digest">
-                <option selected>Off</option>
+            <div class="field">
+              <select id="digest">
+                <option>Off</option>
                 <option>Daily</option>
                 <option>Weekly</option>
               </select>
+              <label for="digest">Digest frequency</label>
             </div>
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Save notifications</button>
-              <a class="button-secondary" href="/publisher-dashboard-full.html">Back</a>
-            </div>
+            <button class="button-primary button-full">Save notifications</button>
           </form>
         </div>
 
       </div>
     </section>
 
-    <!-- MANUFACTURER-SPECIFIC -->
+    <!-- MANUFACTURER SETTINGS -->
     <section class="section">
-      <div class="section-header-row">
-        <h2>Manufacturer settings</h2>
-        <span class="cs-hero-sub">Only relevant if you’re a manufacturer</span>
-      </div>
+      <h2>Manufacturer settings</h2>
+      <p class="page-sub">Only relevant if you operate as a manufacturer.</p>
 
-      <div class="get-started-grid">
+      <div class="auth-grid">
 
-        <div class="get-started-card">
-          <h2>Capabilities</h2>
-          <p>
-            Helps you pull the right work and avoid the wrong work.
-          </p>
+        <div class="auth-card">
+          <h3>Capabilities</h3>
 
-          <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="categories">Categories</label>
-              <input class="form-input" id="categories" name="categories" type="text" placeholder="e.g., Packaging, Printing, Corrugate" />
+          <form class="form">
+            <div class="field">
+              <input id="categories" type="text" placeholder=" " />
+              <label for="categories">Categories</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="moq">Typical MOQ</label>
-              <input class="form-input" id="moq" name="moq" type="text" placeholder="e.g., 1,000 units" />
+            <div class="field">
+              <input id="moq" type="text" placeholder=" " />
+              <label for="moq">Typical MOQ</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="regions">Shipping regions</label>
-              <input class="form-input" id="regions" name="regions" type="text" placeholder="e.g., Canada, US, North America" />
+            <div class="field">
+              <input id="regions" type="text" placeholder=" " />
+              <label for="regions">Shipping regions</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="notes">Notes (optional)</label>
-              <textarea class="form-textarea" id="notes" name="notes" rows="5" placeholder="Compliance, materials, constraints, preferred formats…"></textarea>
+            <div class="field">
+              <textarea id="notes" rows="4" placeholder=" "></textarea>
+              <label for="notes">Notes (optional)</label>
             </div>
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Save capabilities</button>
-              <a class="button-secondary" href="/manufacturer-dashboard-full.html">Go to manufacturer dashboard</a>
-            </div>
+            <button class="button-primary button-full">Save capabilities</button>
           </form>
         </div>
 
-        <div class="get-started-card">
-          <h2>Lead times</h2>
-          <p>
-            Set realistic defaults. These help manufacturers decide whether to accept.
-          </p>
+        <div class="auth-card">
+          <h3>Lead times</h3>
 
-          <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="sample">Sampling lead time</label>
-              <input class="form-input" id="sample" name="sampleLeadTime" type="text" placeholder="e.g., 10 business days" />
+          <form class="form">
+            <div class="field">
+              <input id="sample" type="text" placeholder=" " />
+              <label for="sample">Sampling lead time</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="production">Production lead time</label>
-              <input class="form-input" id="production" name="productionLeadTime" type="text" placeholder="e.g., 30 business days" />
+            <div class="field">
+              <input id="production" type="text" placeholder=" " />
+              <label for="production">Production lead time</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="capacity">Current capacity note</label>
-              <input class="form-input" id="capacity" name="capacity" type="text" placeholder="e.g., Taking new work starting Feb 1" />
+            <div class="field">
+              <input id="capacity" type="text" placeholder=" " />
+              <label for="capacity">Current capacity note</label>
             </div>
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Save lead times</button>
-              <a class="button-secondary" href="/manufacturer-quote-pool-full.html">Browse pool</a>
-            </div>
+            <button class="button-primary button-full">Save lead times</button>
           </form>
         </div>
 
@@ -246,81 +205,43 @@
 
     <!-- BILLING + SECURITY -->
     <section class="section">
-      <div class="get-started-grid">
+      <div class="auth-grid">
 
-        <div class="get-started-card">
+        <div class="auth-card">
           <h2>Billing</h2>
-          <p>
-            Billing is used for publisher brief submission fees and any platform plan.
-          </p>
 
-          <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="billing-email">Billing email</label>
-              <input class="form-input" id="billing-email" name="billingEmail" type="email" placeholder="billing@company.com" />
+          <form class="form">
+            <div class="field">
+              <input id="billing-email" type="email" placeholder=" " />
+              <label for="billing-email">Billing email</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="tax">Tax number (optional)</label>
-              <input class="form-input" id="tax" name="taxNumber" type="text" placeholder="e.g., GST / VAT ID" />
+            <div class="field">
+              <input id="tax" type="text" placeholder=" " />
+              <label for="tax">Tax number (optional)</label>
             </div>
 
-            <div class="faq-list">
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Payment method</h3>
-                </div>
-                <p>Card on file (placeholder)</p>
-              </div>
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Invoices</h3>
-                </div>
-                <p>Download invoices (placeholder)</p>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Save billing</button>
-              <a class="button-secondary" href="/pricing.html">View plans</a>
-            </div>
+            <button class="button-primary button-full">Save billing</button>
           </form>
         </div>
 
-        <div class="get-started-card">
+        <div class="auth-card">
           <h2>Security</h2>
-          <p>Keep your account locked down.</p>
 
-          <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="password">Change password</label>
-              <input class="form-input" id="password" name="password" type="password" placeholder="New password" />
+          <form class="form">
+            <div class="field field-password">
+              <input id="new-password" type="password" placeholder=" " />
+              <label for="new-password">New password</label>
+              <button class="password-toggle" type="button">Show</button>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="password2">Confirm password</label>
-              <input class="form-input" id="password2" name="password2" type="password" placeholder="Confirm new password" />
+            <div class="field field-password">
+              <input id="confirm-password" type="password" placeholder=" " />
+              <label for="confirm-password">Confirm password</label>
+              <button class="password-toggle" type="button">Show</button>
             </div>
 
-            <div class="faq-list">
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Two-factor auth</h3>
-                </div>
-                <p>Enable 2FA (placeholder)</p>
-              </div>
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Sessions</h3>
-                </div>
-                <p>Review active sessions (placeholder)</p>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Save security</button>
-              <a class="button-secondary" href="/safety.html">Safety</a>
-            </div>
+            <button class="button-primary button-full">Save security</button>
           </form>
 
           <div class="featured-row">
@@ -328,7 +249,7 @@
               <div class="collab-body">
                 <div class="collab-title">Danger zone</div>
                 <p class="collab-desc">
-                  Delete account (placeholder). This would remove access to dashboards and private data.
+                  Delete account and permanently remove access to dashboards and private data.
                 </p>
                 <a class="featured-link" href="/contact.html">Contact support →</a>
               </div>
@@ -345,37 +266,27 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/pricing.html">Pricing</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/contact.html">Contact</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-      </div>
+      <p class="footer-brand-text">
+        Order Pool is a shared manufacturing request platform built on transparency and execution.
+      </p>
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+      <span>© Order Pool</span>
     </div>
   </footer>
+
+  <!-- password toggle -->
+  <script>
+    document.querySelectorAll(".password-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = btn.parentElement.querySelector("input");
+        const show = input.type === "password";
+        input.type = show ? "text" : "password";
+        btn.textContent = show ? "Hide" : "Show";
+      });
+    });
+  </script>
 
 </body>
 </html>

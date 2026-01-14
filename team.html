@@ -1,193 +1,242 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Team — Order Pool</title>
-  <meta name="description" content="Meet the team building Order Pool." />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Team — Order Pool</title>
+<meta name="description" content="The team building Order Pool." />
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.6;
+}
+
+/* Header */
+.header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:10}
+.header-inner{
+  max-width:1400px;margin:0 auto;padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{font-weight:900;color:#0066ff;font-size:1.25rem}
+.nav{display:flex;gap:1.5rem}
+.nav a{text-decoration:none;color:#666;font-weight:700}
+.nav a.active{color:#0066ff}
+.header-actions{display:flex;gap:.75rem}
+.btn-h{
+  padding:.55rem 1.2rem;border-radius:8px;
+  font-weight:800;text-decoration:none;
+}
+.btn-h.primary{background:#0066ff;color:#fff}
+.btn-h.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+
+/* Layout */
+.page{max-width:1400px;margin:0 auto;padding:2.5rem}
+.section{margin-bottom:5rem}
+h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+h2{font-size:2rem;font-weight:900;letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:900}
+.lead{color:#666;font-size:1.1rem;max-width:900px;margin-top:.75rem}
+
+/* Team grid */
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:26px;
+  margin-top:3rem;
+}
+
+/* Member card */
+.member{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 14px 32px rgba(0,0,0,.05);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.avatar{
+  border-radius:18px;
+  overflow:hidden;
+  aspect-ratio:1/1;
+  background:#eee;
+}
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.role{
+  font-weight:800;
+  font-size:13px;
+  color:#0066ff;
+}
+.member p{color:#666;font-size:.95rem}
+
+/* Principles */
+.principles{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  margin-top:2.5rem;
+}
+.principle{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:20px;
+  padding:22px;
+}
+.principle h3{margin-bottom:6px}
+
+/* CTA */
+.final{
+  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
+  border:1px dashed rgba(0,0,0,.18);
+  border-radius:28px;
+  padding:44px;
+  text-align:center;
+}
+.final-actions{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.final-btn{
+  padding:.85rem 1.5rem;
+  border-radius:14px;
+  font-weight:900;
+  text-decoration:none;
+}
+.final-btn.primary{background:#0066ff;color:#fff}
+.final-btn.secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
+
+@media(max-width:1100px){
+  .team-grid,.principles{grid-template-columns:1fr}
+  .page{padding:1.25rem}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
-      </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/for-publishers.html">Publishers</a>
-        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
-      </div>
+<header class="header">
+  <div class="header-inner">
+    <span class="brand">Order Pool</span>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/how-it-works.html">How it works</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/team.html" class="active">Team</a>
+    </nav>
+    <div class="header-actions">
+      <a href="/auth-signin.html" class="btn-h secondary">Sign in</a>
+      <a href="/get-started.html" class="btn-h primary">Get started</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- PAGE -->
-  <main class="page">
+<main class="page">
 
-    <!-- HERO -->
-    <section class="section">
-      <h1>Team</h1>
+<!-- HERO -->
+<section class="section">
+  <h1>Team</h1>
+  <p class="lead">
+    We’re building Order Pool to make manufacturing requests clearer, pull-based,
+    and trackable — from paid brief to fulfilled order.
+  </p>
+</section>
+
+<!-- TEAM -->
+<section class="section">
+  <h2>People</h2>
+
+  <div class="team-grid">
+
+    <article class="member">
+      <div class="avatar">
+        <img src="peter.jpg" alt="Peter Jubb" />
+      </div>
+      <h3>Peter Jubb</h3>
+      <div class="role">Product & UX</div>
       <p>
-        We’re building Order Pool to make manufacturing requests clearer, pull-based, and trackable —
-        from paid brief to fulfilled order.
+        Designs the system, flows, and interfaces across briefs,
+        the quote pool, orders, and tracking.
       </p>
+    </article>
 
-      <div class="hero-ctas">
-        <a href="/mission.html" class="hero-cta-btn manufacturers">Mission</a>
-        <a href="/contact.html" class="hero-cta-btn publishers">Contact</a>
+    <article class="member">
+      <div class="avatar">
+        <img src="alistair.jpg" alt="Alistair" />
       </div>
-    </section>
-
-    <!-- TEAM GRID -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>People</h2>
-        <a class="featured-link" href="/case-studies.html">See the work →</a>
-      </div>
-
-      <div class="cs-grid">
-        <!-- Member 1 -->
-        <article class="cs-card">
-          <div class="team-avatar-photo">
-            <img src="assets/team/peter.jpg" alt="Team member photo" />
-          </div>
-          <h3>Peter Jubb</h3>
-          <p class="cs-hero-sub">
-            Product & UX. Building the system, flows, and UI for briefs → pool → orders → tracking.
-          </p>
-          <a class="cs-link" href="/contact.html">Reach out →</a>
-        </article>
-
-        <!-- Member 2 -->
-        <article class="cs-card">
-          <div class="team-avatar-photo">
-            <img src="assets/team/member-2.jpg" alt="Team member photo" />
-          </div>
-          <h3>Team member</h3>
-          <p class="cs-hero-sub">
-            Ops / partnerships. Helps connect publishers and manufacturers and shape the marketplace rules.
-          </p>
-          <a class="cs-link" href="/contact.html">Reach out →</a>
-        </article>
-
-        <!-- Member 3 -->
-        <article class="cs-card">
-          <div class="team-avatar-photo">
-            <img src="assets/team/member-3.jpg" alt="Team member photo" />
-          </div>
-          <h3>Team member</h3>
-          <p class="cs-hero-sub">
-            Engineering. Builds the platform infrastructure, syndication, and order state tracking.
-          </p>
-          <a class="cs-link" href="/contact.html">Reach out →</a>
-        </article>
-
-        <!-- Member 4 -->
-        <article class="cs-card">
-          <div class="team-avatar-photo">
-            <img src="assets/team/member-4.jpg" alt="Team member photo" />
-          </div>
-          <h3>Team member</h3>
-          <p class="cs-hero-sub">
-            Growth. Helps publishers discover the platform and keeps the value proposition sharp.
-          </p>
-          <a class="cs-link" href="/contact.html">Reach out →</a>
-        </article>
-      </div>
-
-      <p class="cs-hero-sub">
-        Replace placeholders with real names/roles as you finalize the roster. Photos are optional — initials work too.
-      </p>
-    </section>
-
-    <!-- VALUES / WORKING STYLE -->
-    <section class="section">
-      <h1>How we work</h1>
+      <h3>Alistair</h3>
+      <div class="role">Operations & Partnerships</div>
       <p>
-        We optimize for clarity and execution: fewer moving parts, explicit states, and updates that stay in the right place.
+        Shapes marketplace rules and helps align publisher needs
+        with manufacturer capabilities.
       </p>
+    </article>
 
-      <div class="publisher-feature-grid">
-        <div class="pub-feature-card">
-          <h3>Simple flows</h3>
-          <p>Brief → pool → acceptance → order → fulfillment.</p>
-        </div>
-
-        <div class="pub-feature-card">
-          <h3>One source of truth</h3>
-          <p>Execution stays anchored to the original brief and the order’s update stream.</p>
-        </div>
-
-        <div class="pub-feature-card">
-          <h3>Respect attention</h3>
-          <p>Dashboards stay current via syndication — no status meetings required.</p>
-        </div>
+    <article class="member">
+      <div class="avatar">
+        <img src="bruce.jpg" alt="Bruce" />
       </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-      <h1>Want to work together?</h1>
+      <h3>Bruce</h3>
+      <div class="role">Engineering</div>
       <p>
-        If you’re a publisher or manufacturer exploring Order Pool, we’d love to talk.
+        Builds the platform infrastructure, order state model,
+        and update syndication engine.
       </p>
+    </article>
 
-      <div class="hero-ctas">
-        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
-        <a href="/contact.html" class="hero-cta-btn manufacturers">Contact</a>
-      </div>
-    </section>
+  </div>
+</section>
 
-  </main>
+<!-- PRINCIPLES -->
+<section class="section">
+  <h2>How we work</h2>
+  <p class="lead">
+    We optimize for clarity and execution — fewer moving parts,
+    explicit states, and updates that stay where they belong.
+  </p>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/pricing.html">Pricing</a>
-        <a href="/public-orders.html">Public orders</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/mission.html">Mission</a>
-        <a href="/team.html">Team</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
+  <div class="principles">
+    <div class="principle">
+      <h3>Simple flows</h3>
+      <p>Brief → pool → acceptance → order → fulfillment.</p>
     </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+    <div class="principle">
+      <h3>One source of truth</h3>
+      <p>Status, decisions, and updates stay attached to the order.</p>
     </div>
-  </footer>
+    <div class="principle">
+      <h3>Respect attention</h3>
+      <p>No inbox chaos — updates syndicate automatically.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="final">
+    <h2>Want to work together?</h2>
+    <p class="lead">
+      If you’re a publisher or manufacturer exploring Order Pool,
+      we’d love to talk.
+    </p>
+
+    <div class="final-actions">
+      <a class="final-btn primary" href="/get-started.html">Get started</a>
+      <a class="final-btn secondary" href="/contact.html">Contact</a>
+    </div>
+  </div>
+</section>
+
+</main>
 
 </body>
 </html>

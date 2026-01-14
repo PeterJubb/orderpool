@@ -1,230 +1,275 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Case Studies — Order Pool</title>
-  <meta name="description" content="Real examples of briefs becoming orders — tracked through production and fulfillment." />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Case studies — Order Pool</title>
+<meta name="description" content="Real examples of briefs becoming orders — tracked through production and fulfillment." />
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.6;
+}
+
+/* Header */
+.header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:10}
+.header-inner{
+  max-width:1400px;margin:0 auto;padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{font-weight:900;color:#0066ff;font-size:1.25rem}
+.nav{display:flex;gap:1.5rem}
+.nav a{text-decoration:none;color:#666;font-weight:700}
+.nav a.active{color:#0066ff}
+.header-actions{display:flex;gap:.75rem}
+.btn-h{
+  padding:.55rem 1.2rem;border-radius:8px;
+  font-weight:800;text-decoration:none;
+}
+.btn-h.primary{background:#0066ff;color:#fff}
+.btn-h.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+
+/* Layout */
+.page{max-width:1400px;margin:0 auto;padding:2.5rem}
+.section{margin-bottom:5rem}
+h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+h2{font-size:2rem;font-weight:900;letter-spacing:-.01em}
+.lead{color:#666;font-size:1.1rem;max-width:900px;margin-top:.75rem}
+
+/* Hero */
+.hero-actions{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+.hero-btn{
+  padding:.85rem 1.5rem;border-radius:14px;
+  font-weight:900;text-decoration:none;display:inline-flex;gap:.5rem;
+}
+.hero-btn.primary{background:#0066ff;color:#fff}
+.hero-btn.secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
+
+/* Case grid */
+.case-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+/* Case card */
+.case{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 14px 32px rgba(0,0,0,.05);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.case h3{font-size:1.1rem;font-weight:900}
+.case p{color:#666;font-size:.95rem}
+
+/* Meta */
+.meta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.chip{
+  background:#fafafa;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* Timeline */
+.timeline{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.step{
+  background:rgba(0,102,255,.08);
+  color:#0066ff;
+  border-radius:10px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:900;
+}
+
+/* Outcome */
+.outcome{
+  background:#f9fafb;
+  border:1px dashed rgba(0,0,0,.15);
+  border-radius:16px;
+  padding:14px;
+  font-size:.95rem;
+}
+.outcome strong{display:block;font-weight:900;margin-bottom:4px}
+
+/* CTA */
+.case a{
+  margin-top:auto;
+  font-weight:900;
+  text-decoration:none;
+  color:#0066ff;
+}
+
+/* Final CTA */
+.final{
+  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
+  border:1px dashed rgba(0,0,0,.18);
+  border-radius:28px;
+  padding:44px;
+  text-align:center;
+}
+
+@media(max-width:1100px){
+  .case-grid{grid-template-columns:1fr}
+  .page{padding:1.25rem}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
-      </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/for-publishers.html">Publishers</a>
-        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
-      </div>
+<header class="header">
+  <div class="header-inner">
+    <span class="brand">Order Pool</span>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/how-it-works.html">How it works</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/case-studies.html" class="active">Case studies</a>
+    </nav>
+    <div class="header-actions">
+      <a href="/auth-signin.html" class="btn-h secondary">Sign in</a>
+      <a href="/get-started.html" class="btn-h primary">Get started</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- PAGE -->
-  <main class="page">
+<main class="page">
 
-    <!-- HERO -->
-    <section class="cs-hero">
-      <h1>Case studies</h1>
-      <p class="cs-hero-sub">
-        Examples of briefs entering the pool, being accepted by manufacturers, and tracked through fulfillment.
-      </p>
+<!-- HERO -->
+<section class="section">
+  <h1>Case studies</h1>
+  <p class="lead">
+    Real briefs. Real acceptances. Real execution — tracked end-to-end.
+  </p>
 
-      <div class="hero-ctas">
-        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
-        <a href="/public-orders.html" class="hero-cta-btn publishers">View public orders</a>
-      </div>
-    </section>
+  <div class="hero-actions">
+    <a class="hero-btn primary" href="/get-started.html">🚀 Get started</a>
+    <a class="hero-btn secondary" href="/public-orders.html">👀 View public orders</a>
+  </div>
+</section>
 
-    <!-- FEATURED -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>Featured</h2>
-        <a class="featured-link" href="/case-study-detail.html">See one example →</a>
-      </div>
+<!-- CASES -->
+<section class="section">
+  <div class="case-grid">
 
-      <div class="cs-featured-grid">
-        <article class="cs-featured-card">
-          <div class="cs-img"></div>
-          <div class="cs-body">
-            <h3>Retail display packaging</h3>
-            <p>
-              A standardized brief entered the pool, was accepted quickly, and tracked with clear milestone updates.
-            </p>
-            <a class="cs-link" href="/case-study-detail.html">Read case study →</a>
-          </div>
-        </article>
+    <article class="case">
+      <h3>📦 Retail display packaging</h3>
 
-        <article class="cs-featured-card">
-          <div class="cs-img"></div>
-          <div class="cs-body">
-            <h3>Seasonal apparel run</h3>
-            <p>
-              One brief, one acceptance, one order detail page — updates syndicated to the publisher dashboard.
-            </p>
-            <a class="cs-link" href="/case-study-detail.html">Read case study →</a>
-          </div>
-        </article>
-
-        <article class="cs-featured-card">
-          <div class="cs-img"></div>
-          <div class="cs-body">
-            <h3>Tooling + first articles</h3>
-            <p>
-              Public status tracking helped build trust while sensitive production details stayed private.
-            </p>
-            <a class="cs-link" href="/case-study-detail.html">Read case study →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- MORE STORIES -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>More stories</h2>
-        <a class="featured-link" href="/contact.html">Want yours featured? →</a>
+      <div class="meta">
+        <span class="chip">Packaging</span>
+        <span class="chip">2,500 units</span>
+        <span class="chip">Completed</span>
       </div>
 
-      <div class="cs-grid">
-        <article class="cs-card">
-          <div class="success-meta">Sampling • 10 days</div>
-          <h3>Packaging samples sprint</h3>
-          <p class="cs-hero-sub">
-            Accepted from the pool and delivered with syndicated progress updates.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
-
-        <article class="cs-card">
-          <div class="success-meta">Production • 5,000 units</div>
-          <h3>Accessory batch run</h3>
-          <p class="cs-hero-sub">
-            Clean brief → acceptance → order tracking through completion.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
-
-        <article class="cs-card">
-          <div class="success-meta">Packaging • 2,500 units</div>
-          <h3>Counter display kit</h3>
-          <p class="cs-hero-sub">
-            Reduced back-and-forth by anchoring the order to one standardized request.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
-
-        <article class="cs-card">
-          <div class="success-meta">Tooling • Completed</div>
-          <h3>Mold tooling project</h3>
-          <p class="cs-hero-sub">
-            Clear states and public status-only tracking improved trust in the process.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
-
-        <article class="cs-card">
-          <div class="success-meta">Production • In progress</div>
-          <h3>Print + pack rollout</h3>
-          <p class="cs-hero-sub">
-            Manufacturer-led updates syndicated to publisher dashboards kept everyone aligned.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
-
-        <article class="cs-card">
-          <div class="success-meta">Sampling • Requested</div>
-          <h3>First sample request</h3>
-          <p class="cs-hero-sub">
-            Early-stage project moved from brief to pool with minimal overhead.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
-
-        <article class="cs-card">
-          <div class="success-meta">Production • Completed</div>
-          <h3>Seasonal drop support</h3>
-          <p class="cs-hero-sub">
-            Order detail updates replaced weekly status calls.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
-
-        <article class="cs-card">
-          <div class="success-meta">Packaging • Completed</div>
-          <h3>Retail shelf-ready box</h3>
-          <p class="cs-hero-sub">
-            Standard brief format improved quoting speed and reduced misunderstandings.
-          </p>
-          <a class="cs-link" href="/case-study-detail.html">Read →</a>
-        </article>
+      <div class="timeline">
+        <span class="step">Brief</span>
+        <span class="step">Accepted</span>
+        <span class="step">Production</span>
+        <span class="step">Fulfilled</span>
       </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="section cs-cta">
-      <h1>Want to run your next production through Order Pool?</h1>
       <p>
-        Start with a brief or browse public order tracking.
+        A standardized packaging brief entered the pool and was accepted within days.
       </p>
 
-      <div class="hero-ctas">
-        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
-        <a href="/public-orders.html" class="hero-cta-btn manufacturers">View public orders</a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
+      <div class="outcome">
+        <strong>Outcome</strong>
+        Milestone updates replaced weekly status emails.
       </div>
 
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/pricing.html">Pricing</a>
-        <a href="/public-orders.html">Public orders</a>
+      <a href="/case-study-detail.html">Read case →</a>
+    </article>
+
+    <article class="case">
+      <h3>👕 Seasonal apparel run</h3>
+
+      <div class="meta">
+        <span class="chip">Apparel</span>
+        <span class="chip">5,000 units</span>
+        <span class="chip">In progress</span>
       </div>
 
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="/mission.html">Mission</a>
-        <a href="/team.html">Team</a>
-        <a href="/contact.html">Contact</a>
+      <div class="timeline">
+        <span class="step">Brief</span>
+        <span class="step">Sampling</span>
+        <span class="step">Production</span>
       </div>
 
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
+      <p>
+        One brief converted directly into an owned order with no rebidding.
+      </p>
+
+      <div class="outcome">
+        <strong>Outcome</strong>
+        Manufacturer-led updates syndicated to the publisher dashboard.
       </div>
+
+      <a href="/case-study-detail.html">Read case →</a>
+    </article>
+
+    <article class="case">
+      <h3>🛠️ Tooling + first articles</h3>
+
+      <div class="meta">
+        <span class="chip">Tooling</span>
+        <span class="chip">Completed</span>
+      </div>
+
+      <div class="timeline">
+        <span class="step">Brief</span>
+        <span class="step">Accepted</span>
+        <span class="step">Sampling</span>
+        <span class="step">Approved</span>
+      </div>
+
+      <p>
+        Sensitive specs remained private while status stayed public.
+      </p>
+
+      <div class="outcome">
+        <strong>Outcome</strong>
+        Public tracking improved trust without leaking IP.
+      </div>
+
+      <a href="/case-study-detail.html">Read case →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="final">
+    <h2>Want to run your next production this way?</h2>
+    <p class="lead">
+      Start with a brief or explore how public tracking works.
+    </p>
+
+    <div class="hero-actions" style="justify-content:center">
+      <a class="hero-btn primary" href="/get-started.html">Get started</a>
+      <a class="hero-btn secondary" href="/how-it-works.html">How it works</a>
     </div>
+  </div>
+</section>
 
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
-    </div>
-  </footer>
+</main>
 
 </body>
 </html>

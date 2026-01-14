@@ -4,170 +4,228 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Briefs — Publisher — Order Pool</title>
-  <meta name="description" content="Publisher briefs list with active and draft requests." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Publisher briefs organized by status with clear next actions." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
+      background:#fafafa;
+      color:#1a1a1a;
+      line-height:1.6;
+    }
+
+    /* Header */
+    .header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:100}
+    .header-inner{
+      max-width:1400px;margin:0 auto;padding:1rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:2rem;
+    }
+    .brand{font-weight:900;color:#0066ff}
+    .nav{display:flex;gap:1.5rem}
+    .nav-link{text-decoration:none;color:#666;font-weight:700}
+    .nav-link.active{color:#0066ff}
+    .header-actions{display:flex;gap:.75rem}
+    .header-btn{
+      padding:.55rem 1.2rem;border-radius:8px;
+      text-decoration:none;font-weight:750;white-space:nowrap;
+    }
+    .header-btn.primary{background:#0066ff;color:#fff}
+    .header-btn.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+
+    /* Layout */
+    .page{max-width:1400px;margin:0 auto;padding:2rem}
+    .section{margin-bottom:3rem}
+    h1{font-size:2.4rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.5rem}
+    .lead{color:#666;font-size:1.05rem;max-width:800px}
+
+    /* Chips */
+    .chip{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:4px 10px;border-radius:999px;
+      font-size:12px;font-weight:800;
+      border:1px solid rgba(0,0,0,.1);
+      background:#fff;white-space:nowrap
+    }
+    .draft{background:rgba(0,0,0,.06)}
+    .pool{background:rgba(0,153,255,.1);color:#0077cc}
+    .accepted{background:rgba(0,180,120,.1);color:#1f7a55}
+
+    .meta{
+      display:flex;gap:8px;flex-wrap:wrap;margin-top:8px
+    }
+
+    /* Kanban */
+    .kanban{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .lane{
+      background:#f3f4f6;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:18px;
+      padding:14px;
+    }
+    .lane h2{
+      font-size:1.4rem;font-weight:900;
+      margin-bottom:12px;display:flex;align-items:center;gap:8px
+    }
+    .lane-sub{color:#666;font-size:.9rem;margin-bottom:14px}
+
+    /* Cards */
+    .card{
+      background:#fff;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      padding:16px;
+      margin-bottom:14px;
+      box-shadow:0 12px 28px rgba(0,0,0,.05);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .card-title{font-weight:900;font-size:1.05rem}
+    .card-desc{color:#666;font-size:13px}
+    .card-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+    .btn-primary,.btn-secondary{
+      padding:.6rem 1.1rem;border-radius:10px;
+      font-weight:800;text-decoration:none;
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-size:.9rem;
+    }
+    .btn-primary{background:#0066ff;color:#fff}
+    .btn-secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
+
+    /* CTA */
+    .cta{
+      background:#fff;border:1px dashed rgba(0,0,0,.15);
+      border-radius:18px;padding:26px;text-align:center
+    }
+    .cta h2{font-size:1.8rem;font-weight:900}
+    .cta p{color:#666;margin:10px 0 16px}
+    .cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+    @media(max-width:1100px){
+      .kanban{grid-template-columns:1fr}
+      .page{padding:1.25rem}
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- APP HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+<header class="header">
+  <div class="header-inner">
+    <span class="brand">Order Pool</span>
+    <nav class="nav">
+      <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
+      <a class="nav-link active" href="/publisher-briefs-full.html">Briefs</a>
+      <a class="nav-link" href="/publisher-orders-full.html">Orders</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-btn secondary" href="/dashboard-settings.html">⚙️ Settings</a>
+      <a class="header-btn primary" href="/publisher-brief-new.html">➕ Create brief</a>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- HERO -->
+  <section class="section">
+    <h1>🧾 Briefs</h1>
+    <p class="lead">
+      Draft requests, publish them to the pool, and track which ones convert into orders.
+    </p>
+  </section>
+
+  <!-- KANBAN -->
+  <section class="section">
+    <div class="kanban">
+
+      <!-- DRAFT -->
+      <div class="lane">
+        <h2>✏️ Drafts</h2>
+        <p class="lane-sub">Not yet visible to manufacturers</p>
+
+        <div class="card">
+          <div class="card-title">Accessory packaging refresh</div>
+          <div class="card-desc">Draft • Not submitted</div>
+          <div class="meta">
+            <span class="chip draft">✏️ Draft</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn-primary" href="/publisher-brief-detail-draft.html">Continue editing</a>
+          </div>
+        </div>
       </div>
 
-      <nav class="nav">
-        <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
-        <a class="nav-link active" href="/publisher-briefs-full.html">Briefs</a>
-        <a class="nav-link" href="/publisher-orders-full.html">Orders</a>
-      </nav>
+      <!-- IN POOL -->
+      <div class="lane">
+        <h2>🧲 In pool</h2>
+        <p class="lane-sub">Published and awaiting acceptance</p>
 
-      <div class="header-actions">
-        <a href="/dashboard-settings.html" class="header-btn secondary">Settings</a>
-        <a href="/publisher-brief-new.html" class="header-btn primary">Create brief</a>
+        <div class="card">
+          <div class="card-title">Counter display unit</div>
+          <div class="card-desc">1,000 units • Target Q3</div>
+          <div class="meta">
+            <span class="chip pool">🧲 In pool</span>
+            <span class="chip">📦 1,000 units</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn-secondary" href="/publisher-brief-detail-submitted.html">View brief</a>
+            <a class="btn-secondary" href="/pricing.html">Pricing</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Retail POP signage</div>
+          <div class="card-desc">Awaiting manufacturer acceptance</div>
+          <div class="meta">
+            <span class="chip pool">🧲 In pool</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn-secondary" href="/publisher-brief-detail-submitted.html">View brief</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCEPTED -->
+      <div class="lane">
+        <h2>✅ Accepted</h2>
+        <p class="lane-sub">Converted into active orders</p>
+
+        <div class="card">
+          <div class="card-title">Seasonal apparel run</div>
+          <div class="card-desc">5,000 units • Accepted</div>
+          <div class="meta">
+            <span class="chip accepted">✅ Accepted</span>
+            <span class="chip">🚧 In progress</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn-primary" href="/publisher-order-detail-updated.html">View order</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="cta">
+      <h2>✨ Ready to publish another request?</h2>
+      <p>Create a new brief and submit it when you’re ready.</p>
+      <div class="cta-actions">
+        <a class="btn-primary" href="/publisher-brief-new.html">➕ Create brief</a>
+        <a class="btn-secondary" href="/how-it-works.html">How it works</a>
       </div>
     </div>
-  </header>
+  </section>
 
-  <!-- PAGE -->
-  <main class="page">
-
-    <!-- PAGE HEADER -->
-    <section class="section">
-      <h1>Briefs</h1>
-      <p>
-        Draft, submit, and track production requests before they become orders.
-      </p>
-    </section>
-
-    <!-- BRIEFS LIST -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>Your briefs</h2>
-        <a class="featured-link" href="/publisher-brief-new.html">Create new →</a>
-      </div>
-
-      <div class="featured-row">
-
-        <!-- BRIEF: IN POOL -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Counter display unit</div>
-            <p class="collab-desc">
-              Submitted • In quote pool • 1,000 units • Target: Q3
-            </p>
-            <div class="form-actions">
-              <a class="button-secondary" href="/publisher-brief-detail-submitted.html">
-                View brief
-              </a>
-              <a class="button-secondary" href="/pricing.html">
-                Pricing
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- BRIEF: DRAFT -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Accessory packaging refresh</div>
-            <p class="collab-desc">
-              Draft • Not yet submitted
-            </p>
-            <div class="form-actions">
-              <a class="button-primary" href="/publisher-brief-detail-draft.html">
-                Continue editing
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- BRIEF: ACCEPTED -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Seasonal apparel run</div>
-            <p class="collab-desc">
-              Accepted • Converted to order • 5,000 units
-            </p>
-            <div class="form-actions">
-              <a class="button-secondary" href="/publisher-order-detail-updated.html">
-                View order
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- BRIEF: IN POOL -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Retail POP signage</div>
-            <p class="collab-desc">
-              Submitted • In quote pool • Awaiting acceptance
-            </p>
-            <div class="form-actions">
-              <a class="button-secondary" href="/publisher-brief-detail-submitted.html">
-                View brief
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-      <div class="get-started-card">
-        <h2>Need another request?</h2>
-        <p>
-          Create a new brief and publish it to the pool when ready.
-        </p>
-
-        <div class="form-actions">
-          <a class="button-primary" href="/publisher-brief-new.html">Create brief</a>
-          <a class="button-secondary" href="/how-it-works.html">How it works</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Publisher</h4>
-        <a href="/publisher-dashboard-full.html">Dashboard</a>
-        <a href="/publisher-orders-full.html">Orders</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
-    </div>
-  </footer>
+</main>
 
 </body>
 </html>

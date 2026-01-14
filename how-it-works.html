@@ -1,365 +1,240 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>How it works — Order Pool</title>
-  <meta name="description" content="How Order Pool works for publishers and manufacturers." />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How it works — Order Pool</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.6;
+}
+
+/* Header */
+.header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:10}
+.header-inner{
+  max-width:1400px;margin:0 auto;padding:1rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;gap:2rem;
+}
+.brand{font-weight:900;color:#0066ff;font-size:1.25rem}
+.nav{display:flex;gap:1.5rem}
+.nav a{text-decoration:none;color:#666;font-weight:700}
+.nav a.active{color:#0066ff}
+.header-actions{display:flex;gap:.75rem}
+.btn-h{padding:.55rem 1.2rem;border-radius:8px;font-weight:800;text-decoration:none}
+.btn-h.primary{background:#0066ff;color:#fff}
+.btn-h.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+
+/* Layout */
+.page{max-width:1400px;margin:0 auto;padding:2.5rem}
+.section{margin-bottom:5rem}
+h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+h2{font-size:2rem;font-weight:900;letter-spacing:-.01em}
+h3{font-size:1.1rem;font-weight:900}
+.lead{color:#666;font-size:1.1rem;max-width:900px;margin-top:.75rem}
+
+/* Hero */
+.hero-actions{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+.hero-btn{
+  padding:.85rem 1.5rem;border-radius:14px;
+  font-weight:900;text-decoration:none;display:inline-flex;gap:.5rem;
+}
+.hero-btn.primary{background:#0066ff;color:#fff}
+.hero-btn.secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
+
+/* Pool diagram */
+.pool-diagram{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:24px;margin-top:2.5rem;align-items:center;
+}
+.pool-box{
+  background:#fff;border:1px solid rgba(0,0,0,.08);
+  border-radius:22px;padding:26px;
+  box-shadow:0 10px 28px rgba(0,0,0,.05);
+}
+.pool-center{
+  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
+  border:2px dashed rgba(0,0,0,.15);
+  border-radius:999px;padding:24px 28px;
+  font-weight:900;text-align:center;
+}
+
+/* Lanes */
+.lanes{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:2.5rem;
+}
+.lane{
+  background:#fff;border:1px solid rgba(0,0,0,.08);
+  border-radius:22px;padding:26px;
+}
+.lane h2{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.phase{
+  margin-top:18px;padding-left:14px;border-left:3px solid rgba(0,0,0,.08)
+}
+.phase h3{margin-bottom:4px}
+.phase p{color:#666;font-size:.95rem}
+
+/* Timeline */
+.timeline{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  gap:14px;margin-top:2.5rem;
+}
+.t-step{
+  background:#fff;border:1px solid rgba(0,0,0,.08);
+  border-radius:16px;padding:16px;text-align:center;
+}
+.t-step span{
+  display:inline-flex;width:30px;height:30px;border-radius:10px;
+  background:rgba(0,102,255,.1);color:#0066ff;
+  align-items:center;justify-content:center;font-weight:900;
+  margin-bottom:6px;
+}
+
+/* CTA */
+.final-cta{
+  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
+  border:1px dashed rgba(0,0,0,.18);
+  border-radius:28px;padding:42px;text-align:center;
+}
+
+@media(max-width:1000px){
+  .pool-diagram{grid-template-columns:1fr}
+  .lanes{grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr}
+  .page{padding:1.25rem}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER (PUBLIC) -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
-      </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link active" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/public-orders.html">Public orders</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
-      </div>
+<header class="header">
+  <div class="header-inner">
+    <span class="brand">Order Pool</span>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a class="active" href="/how-it-works.html">How it works</a>
+      <a href="/pricing.html">Pricing</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn-h secondary" href="/auth-signin.html">Sign in</a>
+      <a class="btn-h primary" href="/get-started.html">Get started</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- PAGE -->
-  <main class="page">
+<main class="page">
 
-    <!-- HERO -->
-    <section class="section">
-      <h1>How Order Pool works</h1>
-      <p>
-        Order Pool is a shared manufacturing request platform built on transparency and execution.
-        Publishers publish paid quote requests into a pool. Manufacturers pull work by accepting what fits.
-        Progress updates stay attached to the order and syndicate automatically.
-      </p>
+<!-- HERO -->
+<section class="section">
+  <h1>How Order Pool works</h1>
+  <p class="lead">
+    A pull-based manufacturing system where work is shared once,
+    accepted intentionally, and tracked transparently.
+  </p>
 
-      <div class="hero-ctas">
-        <a href="/get-started.html" class="hero-cta-btn manufacturers">Get started</a>
-        <a href="/public-orders.html" class="hero-cta-btn publishers">See public tracking</a>
+  <div class="hero-actions">
+    <a class="hero-btn primary" href="/get-started.html">🚀 Get started</a>
+    <a class="hero-btn secondary" href="/public-orders.html">👀 See public tracking</a>
+  </div>
+</section>
+
+<!-- POOL MODEL -->
+<section class="section">
+  <h2>The pool model</h2>
+
+  <div class="pool-diagram">
+    <div class="pool-box">
+      <h3>📣 Publishers</h3>
+      <p>Create briefs, submit once, and wait for acceptance.</p>
+    </div>
+
+    <div class="pool-center">🧲 Shared pool</div>
+
+    <div class="pool-box">
+      <h3>🏭 Manufacturers</h3>
+      <p>Pull only the work that fits their capacity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LANES -->
+<section class="section">
+  <h2>Role-based flow</h2>
+
+  <div class="lanes">
+
+    <div class="lane">
+      <h2>📣 Publisher</h2>
+      <p class="lead">You publish once. The system does the rest.</p>
+
+      <div class="phase">
+        <h3>✏️ Draft</h3>
+        <p>Create scope, quantity, timing, constraints.</p>
       </div>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Pool model</div>
-          <div class="stat-desc">Pull-based</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Updates</div>
-          <div class="stat-desc">Syndicated</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Tracking</div>
-          <div class="stat-desc">State machine</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHAT MAKES IT A POOL -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>What makes it a pool?</h2>
-        <span class="cs-hero-sub">This is the core mechanic</span>
+      <div class="phase">
+        <h3>💳 Submit + pay</h3>
+        <p>Publishing places it into the shared pool.</p>
       </div>
 
-      <div class="get-started-grid">
-
-        <div class="get-started-card">
-          <h2>Work is shared</h2>
-          <p>
-            When a publisher submits and pays, their request enters the quote pool.
-            Multiple manufacturers can review it.
-          </p>
-
-          <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Publishers</h3>
-              </div>
-              <p>Create a brief and publish it into the pool as a quote request.</p>
-            </div>
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Manufacturers</h3>
-              </div>
-              <p>Browse the pool and accept only what fits their capability and capacity.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="get-started-card">
-          <h2>Acceptance converts</h2>
-          <p>
-            The moment a manufacturer accepts, the request converts into an order with clear states.
-          </p>
-
-          <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Pool → Order</h3>
-              </div>
-              <p>Acceptance pulls it out of the pool and starts execution.</p>
-            </div>
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>One source of truth</h3>
-              </div>
-              <p>Order detail becomes the canonical place for progress and updates.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PUBLISHER FLOW -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>Publisher flow</h2>
-        <span class="cs-hero-sub">Draft → submit + pay → in pool → accepted → order</span>
-      </div>
-
-      <div class="how-grid">
-        <div class="how-card">
-          <div class="how-icon">1</div>
-          <div class="how-title">Create a brief</div>
-          <div class="how-desc">
-            Draft what you need: quantity, timeline, constraints, assets. It stays private while drafting.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">2</div>
-          <div class="how-title">Submit + pay</div>
-          <div class="how-desc">
-            Publishing converts the brief into a paid quote request. It becomes visible in the pool.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">3</div>
-          <div class="how-title">In the quote pool</div>
-          <div class="how-desc">
-            Manufacturers review and decide fit. You wait for acceptance.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">4</div>
-          <div class="how-title">Manufacturer accepts</div>
-          <div class="how-desc">
-            Acceptance converts the request into an order. It appears in your Orders tab.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">5</div>
-          <div class="how-title">Track through fulfillment</div>
-          <div class="how-desc">
-            You see progress states and a syndicated update stream as the manufacturer executes.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">6</div>
-          <div class="how-title">Stay aligned</div>
-          <div class="how-desc">
-            No email chains. Questions and updates stay attached to the order.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-actions">
-        <a class="button-primary" href="/auth-join.html">Create publisher account</a>
-        <a class="button-secondary" href="/pricing.html">View pricing</a>
-      </div>
-    </section>
-
-    <!-- MANUFACTURER FLOW -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>Manufacturer flow</h2>
-        <span class="cs-hero-sub">Browse pool → accept → manage → update</span>
-      </div>
-
-      <div class="how-grid">
-        <div class="how-card">
-          <div class="how-icon">1</div>
-          <div class="how-title">Set capabilities</div>
-          <div class="how-desc">
-            Define categories, MOQs, lead times, and regions so you pull work that fits.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">2</div>
-          <div class="how-title">Browse the pool</div>
-          <div class="how-desc">
-            Review paid requests. Decide quickly based on quantity, constraints, and timeline.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">3</div>
-          <div class="how-title">Accept a request</div>
-          <div class="how-desc">
-            Acceptance converts it into an order you own. You commit to execution and updates.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">4</div>
-          <div class="how-title">Move through states</div>
-          <div class="how-desc">
-            Accepted → Sampling → Production → Shipping → Fulfilled
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">5</div>
-          <div class="how-title">Post milestone updates</div>
-          <div class="how-desc">
-            Updates you post syndicate to the publisher dashboard automatically.
-          </div>
-        </div>
-
-        <div class="how-card">
-          <div class="how-icon">6</div>
-          <div class="how-title">Finish cleanly</div>
-          <div class="how-desc">
-            Mark fulfilled when complete. Public tracking can reflect status only.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-actions">
-        <a class="button-primary" href="/auth-join.html">Create manufacturer account</a>
-        <a class="button-secondary" href="/dashboard-settings.html">See settings</a>
-      </div>
-    </section>
-
-    <!-- SYNDICATION -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>Updates syndicate automatically</h2>
-        <span class="cs-hero-sub">The anti-email feature</span>
-      </div>
-
-      <div class="get-started-grid">
-
-        <div class="get-started-card">
-          <h2>Manufacturer posts once</h2>
-          <p>
-            Updates posted on the manufacturer order detail page become the single source of truth.
-          </p>
-
-          <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Publisher dashboard</h3>
-              </div>
-              <p>Updates appear automatically in the publisher’s order detail and dashboard views.</p>
-            </div>
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Public status</h3>
-              </div>
-              <p>Optional status-only visibility — no private specs, pricing, or identities.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="get-started-card">
-          <h2>Everyone stays aligned</h2>
-          <p>
-            States + updates reduce ambiguity and keep timelines honest.
-          </p>
-
-          <div class="publisher-feature-grid">
-            <div class="pub-feature-card">
-              <h3>Milestones</h3>
-              <p>Sampling approval, production start, shipping dispatched.</p>
-            </div>
-            <div class="pub-feature-card">
-              <h3>Risk</h3>
-              <p>Call out slips early, attach proof when needed.</p>
-            </div>
-            <div class="pub-feature-card">
-              <h3>Questions</h3>
-              <p>Ask for decisions directly in the order thread.</p>
-            </div>
-            <div class="pub-feature-card">
-              <h3>Trust</h3>
-              <p>Clear progress builds confidence for both sides.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-      <div class="get-started-card">
-        <h2>Ready?</h2>
-        <p>
-          Start with a brief (publisher) or start by browsing the pool (manufacturer).
-        </p>
-
-        <div class="form-actions">
-          <a class="button-primary" href="/get-started.html">Get started</a>
-          <a class="button-secondary" href="/contact.html">Contact</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/pricing.html">Pricing</a>
-        <a href="/public-orders.html">Public orders</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Account</h4>
-        <a href="/auth-signin.html">Sign in</a>
-        <a href="/auth-join.html">Create account</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
+      <div class="phase">
+        <h3>📦 Track</h3>
+        <p>Once accepted, follow progress end-to-end.</p>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
+    <div class="lane">
+      <h2>🏭 Manufacturer</h2>
+      <p class="lead">You pull work that actually fits.</p>
+
+      <div class="phase">
+        <h3>🔎 Browse</h3>
+        <p>Review paid requests only.</p>
+      </div>
+
+      <div class="phase">
+        <h3>✅ Accept</h3>
+        <p>Acceptance converts a request into an order.</p>
+      </div>
+
+      <div class="phase">
+        <h3>📰 Update</h3>
+        <p>Post updates once — they syndicate everywhere.</p>
       </div>
     </div>
-  </footer>
 
+  </div>
+</section>
+
+<!-- STATES -->
+<section class="section">
+  <h2>Order states</h2>
+
+  <div class="timeline">
+    <div class="t-step"><span>1</span>Accepted</div>
+    <div class="t-step"><span>2</span>Sampling</div>
+    <div class="t-step"><span>3</span>Production</div>
+    <div class="t-step"><span>4</span>Shipping</div>
+    <div class="t-step"><span>5</span>Delivered</div>
+    <div class="t-step"><span>6</span>Fulfilled</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="final-cta">
+    <h2>Ready to try it?</h2>
+    <p class="lead">Choose a role and start your first run.</p>
+    <div class="hero-actions" style="justify-content:center">
+      <a class="hero-btn primary" href="/get-started.html">Get started</a>
+      <a class="hero-btn secondary" href="/pricing.html">View pricing</a>
+    </div>
+  </div>
+</section>
+
+</main>
 </body>
 </html>

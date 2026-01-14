@@ -24,7 +24,7 @@
       </nav>
 
       <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
+        <a href="/auth-signin.html" class="header-btn ghost">Sign in</a>
         <a href="/get-started.html" class="header-btn primary">Get started</a>
       </div>
     </div>
@@ -32,140 +32,159 @@
 
   <!-- PAGE -->
   <main class="page">
-
     <section class="section">
-      <div class="get-started-grid">
+      <div class="auth-grid">
 
-        <!-- JOIN FORM -->
-        <div class="get-started-card">
-          <h1>Create account</h1>
-          <p>
-            Choose your role. You can switch later.
-          </p>
+        <!-- JOIN -->
+        <div class="auth-card">
+          <header class="auth-header">
+            <h1>Create your account</h1>
+            <p>Pick your role — you can switch later.</p>
+          </header>
 
           <form class="form" action="#" method="post">
 
-            <div class="form-row">
-              <label class="form-label" for="role">Role</label>
-              <select class="form-select" id="role" name="role" required>
-                <option value="" selected disabled>Select a role</option>
-                <option value="publisher">Publisher</option>
-                <option value="manufacturer">Manufacturer</option>
-              </select>
-            </div>
+            <!-- ROLE (modern segmented cards) -->
+            <fieldset class="role-picker" aria-label="Choose your role">
+              <legend class="sr-only">Role</legend>
 
-            <div class="form-row">
-              <label class="form-label" for="name">Name</label>
+              <label class="role-option">
+                <input type="radio" name="role" value="publisher" required />
+                <span class="role-title">Publisher</span>
+                <span class="role-desc">Create briefs, fund production, track orders</span>
+              </label>
+
+              <label class="role-option">
+                <input type="radio" name="role" value="manufacturer" required />
+                <span class="role-title">Manufacturer</span>
+                <span class="role-desc">Browse quote pools, accept work, update status</span>
+              </label>
+            </fieldset>
+
+            <!-- NAME -->
+            <div class="field">
               <input
-                class="form-input"
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Your name"
                 required
+                placeholder=" "
+                autocomplete="name"
               />
+              <label for="name">Full name</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="email">Email</label>
+            <!-- EMAIL -->
+            <div class="field">
               <input
-                class="form-input"
                 id="email"
                 name="email"
                 type="email"
-                placeholder="you@company.com"
                 required
+                placeholder=" "
+                autocomplete="email"
               />
+              <label for="email">Email address</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="company">Company (optional)</label>
+            <!-- COMPANY -->
+            <div class="field">
               <input
-                class="form-input"
                 id="company"
                 name="company"
                 type="text"
-                placeholder="Company name"
+                placeholder=" "
+                autocomplete="organization"
               />
+              <label for="company">Company (optional)</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="password">Password</label>
+            <!-- PASSWORD -->
+            <div class="field field-password">
               <input
-                class="form-input"
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Create a password"
                 required
+                placeholder=" "
+                autocomplete="new-password"
+                minlength="8"
               />
+              <label for="password">Password (min 8 chars)</label>
+              <button type="button" class="password-toggle" aria-label="Show password">
+                Show
+              </button>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="password2">Confirm password</label>
+            <!-- CONFIRM -->
+            <div class="field field-password">
               <input
-                class="form-input"
                 id="password2"
                 name="password2"
                 type="password"
-                placeholder="Confirm password"
                 required
+                placeholder=" "
+                autocomplete="new-password"
+                minlength="8"
               />
+              <label for="password2">Confirm password</label>
+              <button type="button" class="password-toggle" aria-label="Show confirm password">
+                Show
+              </button>
             </div>
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Create account</button>
-              <a class="button-secondary" href="/auth-signin.html">Already have an account?</a>
-            </div>
+            <!-- TERMS -->
+            <label class="checkbox checkbox-terms">
+              <input type="checkbox" name="terms" required />
+              <span>
+                I agree to the <a href="/terms.html">Terms</a> and <a href="/privacy.html">Privacy</a>.
+              </span>
+            </label>
 
-            <p class="cs-hero-sub">
-              By creating an account, you agree to our
-              <a href="/terms.html">Terms</a> and <a href="/privacy.html">Privacy</a>.
-            </p>
+            <!-- CTA -->
+            <button class="button-primary button-full" type="submit">
+              Create account
+            </button>
+
+            <div class="auth-footer">
+              <span>Already have an account?</span>
+              <a href="/auth-signin.html">Sign in</a>
+            </div>
 
           </form>
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <div class="get-started-card">
+        <!-- CONTEXT -->
+        <aside class="auth-card auth-side">
           <h2>What you’re signing up for</h2>
           <p>
-            Order Pool is a shared manufacturing request pool. Paid briefs enter the pool, manufacturers pull work,
-            and accepted orders are tracked through fulfillment.
+            Order Pool is a shared manufacturing request pool. Paid briefs enter the pool,
+            manufacturers pull work, and accepted orders are tracked through fulfillment.
           </p>
 
-          <div class="publisher-stats">
-            <div class="stat-pill">
-              <div class="stat-label">Publishers</div>
-              <div class="stat-desc">Create briefs → pay → publish</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Manufacturers</div>
-              <div class="stat-desc">Browse pool → accept → update</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Transparency</div>
-              <div class="stat-desc">Public status-only tracking</div>
-            </div>
-          </div>
+          <ul class="role-list">
+            <li>
+              <strong>Publishers</strong>
+              <span>Create briefs → fund production → track delivery</span>
+            </li>
+            <li>
+              <strong>Manufacturers</strong>
+              <span>Browse pool → accept work → update status</span>
+            </li>
+            <li>
+              <strong>Transparency</strong>
+              <span>Public, status-only tracking for accountability</span>
+            </li>
+          </ul>
 
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">Want the walkthrough first?</div>
-                <p class="collab-desc">
-                  See the end-to-end flow before creating an account.
-                </p>
-                <a class="featured-link" href="/how-it-works.html">How it works →</a>
-              </div>
-            </div>
+          <div class="side-cta">
+            <span>Want the walkthrough first?</span>
+            <a href="/how-it-works.html">How it works →</a>
           </div>
-
-        </div>
+        </aside>
 
       </div>
     </section>
-
   </main>
 
   <!-- FOOTER -->
@@ -205,6 +224,20 @@
       </div>
     </div>
   </footer>
+
+  <!-- Minimal JS: show/hide both password fields -->
+  <script>
+    const toggles = document.querySelectorAll(".password-toggle");
+    toggles.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const input = btn.parentElement.querySelector("input");
+        const isPw = input.type === "password";
+        input.type = isPw ? "text" : "password";
+        btn.textContent = isPw ? "Hide" : "Show";
+        btn.setAttribute("aria-label", isPw ? "Hide password" : "Show password");
+      });
+    });
+  </script>
 
 </body>
 </html>

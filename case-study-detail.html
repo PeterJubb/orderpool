@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Case study — Retail display packaging — Order Pool</title>
+<meta name="description" content="How a retail display packaging brief moved through the Order Pool system." />
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.6;
+}
+
+/* Header */
+.header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:10}
+.header-inner{
+  max-width:1400px;margin:0 auto;padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{font-weight:900;color:#0066ff;font-size:1.25rem}
+.nav{display:flex;gap:1.5rem}
+.nav a{text-decoration:none;color:#666;font-weight:700}
+.nav a.active{color:#0066ff}
+.header-actions{display:flex;gap:.75rem}
+.btn-h{
+  padding:.55rem 1.2rem;border-radius:8px;
+  font-weight:800;text-decoration:none;
+}
+.btn-h.primary{background:#0066ff;color:#fff}
+.btn-h.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+
+/* Layout */
+.page{max-width:1400px;margin:0 auto;padding:2.5rem}
+.section{margin-bottom:4.5rem}
+h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+h2{font-size:2rem;font-weight:900;letter-spacing:-.01em}
+h3{font-size:1.1rem;font-weight:900}
+.lead{color:#666;font-size:1.1rem;max-width:900px;margin-top:.75rem}
+
+/* Meta */
+.meta-row{
+  display:flex;gap:12px;flex-wrap:wrap;margin-top:16px
+}
+.chip{
+  background:#fafafa;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:999px;
+  padding:6px 12px;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:26px;
+}
+
+/* Cards */
+.card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 14px 32px rgba(0,0,0,.05);
+}
+.card p{color:#666}
+
+/* Timeline */
+.timeline{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.step{
+  background:rgba(0,102,255,.08);
+  color:#0066ff;
+  border-radius:12px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:900;
+}
+
+/* Stat list */
+.stat-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:14px;
+}
+.stat{
+  background:#fafafa;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:16px;
+  padding:14px;
+}
+.stat strong{display:block;font-weight:900;margin-bottom:2px}
+
+/* Outcome */
+.outcome{
+  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
+  border:1px dashed rgba(0,0,0,.18);
+  border-radius:22px;
+  padding:24px;
+}
+
+/* CTA */
+.final{
+  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
+  border:1px dashed rgba(0,0,0,.18);
+  border-radius:28px;
+  padding:42px;
+  text-align:center;
+}
+.final-actions{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px
+}
+.final-btn{
+  padding:.85rem 1.5rem;border-radius:14px;
+  font-weight:900;text-decoration:none;
+}
+.final-btn.primary{background:#0066ff;color:#fff}
+.final-btn.secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
+
+@media(max-width:1000px){
+  .grid{grid-template-columns:1fr}
+  .page{padding:1.25rem}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <span class="brand">Order Pool</span>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/how-it-works.html">How it works</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/case-studies.html" class="active">Case studies</a>
+    </nav>
+    <div class="header-actions">
+      <a href="/auth-signin.html" class="btn-h secondary">Sign in</a>
+      <a href="/get-started.html" class="btn-h primary">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+<!-- HERO -->
+<section class="section">
+  <h1>📦 Retail display packaging</h1>
+  <p class="lead">
+    A standardized packaging brief entered the pool, was accepted without rebidding,
+    and moved through production with public state tracking.
+  </p>
+
+  <div class="meta-row">
+    <span class="chip">Packaging</span>
+    <span class="chip">2,500 units</span>
+    <span class="chip">Completed</span>
+    <span class="chip">Public tracking enabled</span>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section">
+  <div class="grid">
+
+    <!-- LEFT -->
+    <div class="card">
+      <h2>Brief overview</h2>
+      <p>
+        The publisher needed a short-run retail display with strict shelf-ready
+        requirements and a tight timeline. Rather than sourcing multiple quotes,
+        the brief was published once into the Order Pool.
+      </p>
+
+      <div class="timeline">
+        <span class="step">Brief published</span>
+        <span class="step">Accepted</span>
+        <span class="step">Production</span>
+        <span class="step">Fulfilled</span>
+      </div>
+
+      <h3 style="margin-top:22px">Execution notes</h3>
+      <p>
+        Acceptance converted the request into an owned order immediately.
+        Sampling, production, and shipping updates were posted by the manufacturer
+        and syndicated automatically.
+      </p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="card">
+      <h2>Key details</h2>
+
+      <div class="stat-list">
+        <div class="stat">
+          <strong>Category</strong>
+          Packaging
+        </div>
+        <div class="stat">
+          <strong>Run size</strong>
+          2,500 units
+        </div>
+        <div class="stat">
+          <strong>Timeline</strong>
+          6 weeks total
+        </div>
+        <div class="stat">
+          <strong>Visibility</strong>
+          Status-only public
+        </div>
+      </div>
+
+      <h3 style="margin-top:22px">What stayed private</h3>
+      <p>
+        Pricing, dielines, and internal approvals remained private between
+        publisher and manufacturer.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<section class="section">
+  <div class="outcome">
+    <h2>Outcome</h2>
+    <p class="lead">
+      Weekly status emails were replaced with structured milestone updates.
+      Public tracking improved confidence without exposing sensitive details.
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="final">
+    <h2>Run your next production this way</h2>
+    <p class="lead">
+      Publish once. Let manufacturers pull what fits.
+    </p>
+
+    <div class="final-actions">
+      <a class="final-btn primary" href="/get-started.html">Get started</a>
+      <a class="final-btn secondary" href="/public-orders.html">View public orders</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

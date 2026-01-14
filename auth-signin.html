@@ -24,7 +24,7 @@
       </nav>
 
       <div class="header-actions">
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
+        <a href="/get-started.html" class="header-btn ghost">Get started</a>
       </div>
     </div>
   </header>
@@ -33,87 +33,96 @@
   <main class="page">
 
     <section class="section">
-      <div class="get-started-grid">
+      <div class="auth-grid">
 
-        <!-- SIGN IN FORM -->
-        <div class="get-started-card">
-          <h1>Sign in</h1>
-          <p>
-            Access your dashboard to manage briefs, quotes, and orders.
-          </p>
+        <!-- SIGN IN -->
+        <div class="auth-card">
+          <header class="auth-header">
+            <h1>Welcome back</h1>
+            <p>Sign in to continue to your dashboard.</p>
+          </header>
 
           <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="email">Email</label>
+
+            <!-- EMAIL -->
+            <div class="field">
               <input
-                class="form-input"
                 id="email"
                 name="email"
                 type="email"
-                placeholder="you@company.com"
                 required
+                placeholder=" "
+                autocomplete="email"
               />
+              <label for="email">Email address</label>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="password">Password</label>
+            <!-- PASSWORD -->
+            <div class="field field-password">
               <input
-                class="form-input"
                 id="password"
                 name="password"
                 type="password"
-                placeholder="••••••••"
                 required
+                placeholder=" "
+                autocomplete="current-password"
               />
+              <label for="password">Password</label>
+              <button type="button" class="password-toggle" aria-label="Show password">
+                Show
+              </button>
             </div>
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Sign in</button>
-              <a class="button-secondary" href="/auth-forgot.html">Forgot password?</a>
+            <!-- OPTIONS -->
+            <div class="form-meta">
+              <label class="checkbox">
+                <input type="checkbox" name="remember" />
+                <span>Remember me</span>
+              </label>
+
+              <a href="/auth-forgot.html" class="link-subtle">
+                Forgot password?
+              </a>
             </div>
+
+            <!-- CTA -->
+            <button class="button-primary button-full" type="submit">
+              Sign in
+            </button>
+
           </form>
 
-          <p class="cs-hero-sub">
-            Don’t have an account?
-            <a href="/auth-join.html">Create one</a>
-          </p>
+          <footer class="auth-footer">
+            <span>New to Order Pool?</span>
+            <a href="/auth-join.html">Create an account</a>
+          </footer>
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <div class="get-started-card">
-          <h2>What happens after you sign in</h2>
-          <p>
-            Your dashboard depends on your role.
-          </p>
+        <!-- CONTEXT -->
+        <aside class="auth-card auth-side">
+          <h2>What you’ll see next</h2>
+          <p>Your dashboard adapts to your role.</p>
 
-          <div class="publisher-stats">
-            <div class="stat-pill">
-              <div class="stat-label">Publishers</div>
-              <div class="stat-desc">Briefs, orders, updates</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Manufacturers</div>
-              <div class="stat-desc">Quote pool, orders, updates</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Public</div>
-              <div class="stat-desc">Status-only tracking</div>
-            </div>
+          <ul class="role-list">
+            <li>
+              <strong>Publishers</strong>
+              <span>Create briefs, manage orders, track production</span>
+            </li>
+            <li>
+              <strong>Manufacturers</strong>
+              <span>View quote pools, accept work, manage orders</span>
+            </li>
+            <li>
+              <strong>Public</strong>
+              <span>Track order status only</span>
+            </li>
+          </ul>
+
+          <div class="side-cta">
+            <span>Not sure where to start?</span>
+            <a href="/get-started.html">Choose a role →</a>
           </div>
-
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">New here?</div>
-                <p class="collab-desc">
-                  Start by choosing a role. You can switch later.
-                </p>
-                <a class="featured-link" href="/get-started.html">Get started →</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        </aside>
 
       </div>
     </section>
@@ -123,11 +132,9 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
+      <p class="footer-brand-text">
+        Order Pool is a shared manufacturing request platform built on transparency and execution.
+      </p>
 
       <div class="footer-col">
         <h4>Product</h4>
@@ -151,11 +158,21 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+      <span>© Order Pool</span>
     </div>
   </footer>
+<script>
+  const btn = document.querySelector(".password-toggle");
+  const input = document.querySelector("#password");
+  if (btn && input) {
+    btn.addEventListener("click", () => {
+      const isPw = input.type === "password";
+      input.type = isPw ? "text" : "password";
+      btn.textContent = isPw ? "Hide" : "Show";
+      btn.setAttribute("aria-label", isPw ? "Hide password" : "Show password");
+    });
+  }
+</script>
 
 </body>
 </html>
