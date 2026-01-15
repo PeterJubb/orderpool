@@ -1,247 +1,317 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Manufacturer dashboard — Order Pool</title>
-  <meta name="description" content="Manufacturer dashboard for Order Pool." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Dashboard — Manufacturer — Order Pool</title>
+  <meta name="description" content="Manufacturer dashboard. No accepted work yet." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:900;
+    }
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
+    .section{margin-bottom:3rem}
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+    h3{font-size:1.05rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Stats */
+    .stats{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+    .stat{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem 1rem;
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+    }
+    .stat strong{font-size:1.3rem;font-weight:900}
+    .stat span{
+      font-size:.75rem;
+      color:#64748b;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1.5rem;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.75rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .item{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fafcff;
+    }
+    .item p{font-size:.9rem}
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .feature{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fff;
+    }
+    .feature p{font-size:.85rem}
+
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.75rem;
+    }
+
+    @media(max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      main{padding:2.5rem 1.25rem 3rem}
+      h1{font-size:2.2rem}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/manufacturer-dashboard-empty.html" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- APP HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/manufacturer-dashboard-empty.html" aria-current="page">Dashboard</a></li>
+        <li><a href="/manufacturer-quote-pool-empty.html">Quote pool</a></li>
+        <li><a href="/manufacturer-orders-empty.html">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link active" href="/manufacturer-dashboard-empty.html">Dashboard</a>
-        <a class="nav-link" href="/manufacturer-quote-pool-empty.html">Quote pool</a>
-        <a class="nav-link" href="/manufacturer-orders-empty.html">Orders</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/dashboard-settings.html" class="header-btn secondary">Settings</a>
-        <a href="/manufacturer-quote-pool-empty.html" class="header-btn primary">Browse quote pool</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
+  <main>
     <!-- HERO -->
     <section class="section">
       <h1>Manufacturer dashboard</h1>
-      <p>
+      <p class="lead">
         You haven’t accepted any work yet. Browse the quote pool, accept a request that fits your capacity,
         then manage the order through fulfillment.
       </p>
 
-      <div class="hero-ctas">
-        <a href="/manufacturer-quote-pool-empty.html" class="hero-cta-btn manufacturers">Browse quote pool</a>
-        <a href="/how-it-works.html" class="hero-cta-btn publishers">How it works</a>
+      <div class="actions">
+        <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
+        <a class="btn btn-secondary" href="/how-it-works.html">How it works</a>
       </div>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Pool available</div>
-          <div class="stat-desc">0</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Accepted orders</div>
-          <div class="stat-desc">0</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Updates posted</div>
-          <div class="stat-desc">0</div>
-        </div>
+      <div class="stats">
+        <div class="stat"><strong>0</strong><span>Pool available</span></div>
+        <div class="stat"><strong>0</strong><span>Accepted orders</span></div>
+        <div class="stat"><strong>0</strong><span>Updates posted</span></div>
       </div>
     </section>
 
     <!-- WORKSPACE -->
     <section class="section">
-      <div class="section-header-row">
-        <h2>Your workspace</h2>
-        <a class="featured-link" href="/manufacturer-quote-pool-empty.html">Find work →</a>
-      </div>
+      <h2>Your workspace</h2>
 
-      <div class="featured-row">
-
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Quote pool</div>
-            <p class="collab-desc">
-              Browse paid quote requests from publishers. Accept work that matches your capability and capacity.
-            </p>
-            <a class="featured-link" href="/manufacturer-quote-pool-empty.html">Go to pool →</a>
-          </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Quote pool</h3>
+          <p>Browse paid quote requests from publishers and pull work that fits.</p>
+          <a class="btn btn-secondary" href="/manufacturer-quote-pool-empty.html">Go to pool →</a>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Orders</div>
-            <p class="collab-desc">
-              Once you accept, the request becomes an order. Track milestones and manage delivery here.
-            </p>
-            <a class="featured-link" href="/manufacturer-orders-empty.html">Go to orders →</a>
-          </div>
+        <div class="card">
+          <h3>Orders</h3>
+          <p>Accepted requests become orders you manage through fulfillment.</p>
+          <a class="btn btn-secondary" href="/manufacturer-orders-empty.html">Go to orders →</a>
         </div>
-
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Syndicated updates</div>
-            <p class="collab-desc">
-              When you post updates on an order, they syndicate to the publisher dashboard automatically.
-              No status emails required.
-            </p>
-            <a class="featured-link" href="/how-it-works.html">Learn about updates →</a>
-          </div>
-        </div>
-
       </div>
     </section>
 
     <!-- ONBOARDING -->
     <section class="section">
-      <div class="get-started-grid">
-
-        <div class="get-started-card">
+      <div class="grid">
+        <div class="card">
           <h2>Start here</h2>
-          <p>
-            The fastest path to your first order.
-          </p>
+          <p>The fastest path to your first order.</p>
 
-          <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>1) Browse the pool</h3>
-              </div>
-              <p>
-                Filter requests by category, quantity, and timeline.
-              </p>
+          <div class="list">
+            <div class="item">
+              <h3>1) Browse the pool</h3>
+              <p>Filter requests by category, quantity, and timeline.</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>2) Accept what fits</h3>
-              </div>
-              <p>
-                You pull work based on your capacity — that’s what makes it a pool.
-              </p>
+            <div class="item">
+              <h3>2) Accept what fits</h3>
+              <p>You pull work based on your capacity — that’s what makes it a pool.</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>3) Update milestones</h3>
-              </div>
-              <p>
-                Post progress updates in the order detail page (sampling → production → shipping).
-              </p>
+            <div class="item">
+              <h3>3) Update milestones</h3>
+              <p>Post progress updates (sampling → production → shipping).</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>4) Deliver</h3>
-              </div>
-              <p>
-                Move the order to fulfilled when complete. Public tracking reflects status only.
-              </p>
+            <div class="item">
+              <h3>4) Deliver</h3>
+              <p>Move the order to fulfilled when complete.</p>
             </div>
           </div>
 
-          <div class="form-actions">
-            <a class="button-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
-            <a class="button-secondary" href="/safety.html">Safety & trust</a>
+          <div class="actions">
+            <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
+            <a class="btn btn-secondary" href="/safety.html">Safety & trust</a>
           </div>
         </div>
 
-        <div class="get-started-card">
+        <div class="card">
           <h2>Set expectations</h2>
           <p>
-            Manufacturers win by being clear about what they can deliver. Keep your profile and capacity current.
+            Manufacturers win by being clear about what they can deliver.
+            Keep your profile and capacity current.
           </p>
 
-          <div class="publisher-feature-grid">
-            <div class="pub-feature-card">
+          <div class="feature-grid">
+            <div class="feature">
               <h3>Capabilities</h3>
-              <p>Categories you can produce and typical constraints.</p>
+              <p>Categories you can reliably produce.</p>
             </div>
-
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Lead times</h3>
-              <p>Sampling and production lead times you can reliably hit.</p>
+              <p>Sampling and production windows you can hit.</p>
             </div>
-
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Minimums</h3>
-              <p>MOQs and typical run sizes you prefer.</p>
+              <p>Preferred MOQs and run sizes.</p>
             </div>
-
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Communication</h3>
-              <p>Post updates in-order so publishers stay aligned.</p>
+              <p>Post milestone-based updates.</p>
             </div>
           </div>
 
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">Update your profile</div>
-                <p class="collab-desc">
-                  Make it easier to pick the right work (and avoid the wrong work).
-                </p>
-                <a class="featured-link" href="/dashboard-settings.html">Go to settings →</a>
-              </div>
-            </div>
+          <div class="actions">
+            <a class="btn btn-secondary" href="/dashboard-settings.html">Update settings</a>
           </div>
-
         </div>
-
       </div>
     </section>
-
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Manufacturer</h4>
-        <a href="/manufacturer-dashboard-empty.html">Dashboard</a>
-        <a href="/manufacturer-quote-pool-empty.html">Quote pool</a>
-        <a href="/manufacturer-orders-empty.html">Orders</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
-    </div>
-  </footer>
-
 </body>
 </html>

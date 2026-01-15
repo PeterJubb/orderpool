@@ -1,146 +1,306 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Maintenance — Order Pool</title>
   <meta name="description" content="Order Pool is temporarily unavailable due to scheduled maintenance." />
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – public) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain;display:block}
+    .nav-links{
+      display:flex;gap:1.5rem;align-items:center;list-style:none;flex:1;justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;text-decoration:none;font-size:.95rem;font-weight:700;padding:.25rem;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-actions{
+      display:flex;gap:.75rem;align-items:center;min-width:220px;justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;border-radius:10px;text-decoration:none;font-size:.95rem;
+      border:1px solid transparent;font-weight:650;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+      background:none;cursor:pointer;white-space:nowrap;
+    }
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:4rem 2rem 4.5rem}
+    .section{margin-bottom:3.5rem}
+    h1{
+      font-size:2.8rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.5rem;
+    }
+    h2{
+      font-size:1.5rem;font-weight:900;margin-bottom:.4rem;
+    }
+    h3{
+      font-size:1.1rem;font-weight:900;
+    }
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:800px}
+
+    /* Status pills */
+    .status{
+      display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem;
+    }
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:.45rem .85rem;
+      font-size:.75rem;
+      font-weight:800;
+      background:#f8fafc;
+      color:#475569;
+    }
+    .pill.maintenance{
+      background:rgba(61,32,174,.08);
+      color:#3d20ae;
+      border-color:rgba(61,32,174,.25);
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:1.5rem;
+    }
+
+    /* Cards */
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.75rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    /* FAQ */
+    .faq{display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem}
+    .faq-item{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.75rem .9rem;
+      background:#fafcff;
+    }
+    .faq-item p{font-size:.9rem}
+
+    /* Feature grid */
+    .feature-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.75rem;
+      margin:1rem 0;
+    }
+    .feature{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fff;
+    }
+    .feature p{font-size:.85rem}
+
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.5rem;
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid #e5e7eb;
+      padding:2.5rem 2rem 2rem;
+      background:#fff;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:2rem;
+    }
+    .footer-col h4{
+      font-size:.8rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:#94a3b8;
+      margin-bottom:.75rem;
+    }
+    .footer-col a{
+      display:block;
+      color:#64748b;
+      text-decoration:none;
+      font-size:.9rem;
+      margin-bottom:.4rem;
+    }
+    .footer-col a:hover{color:#0f172a}
+    .footer-bottom{
+      border-top:1px solid #e5e7eb;
+      margin-top:1.5rem;
+      padding-top:1rem;
+      font-size:.9rem;
+      color:#94a3b8;
+      text-align:center;
+    }
+
+    @media(max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      main{padding:3rem 1.25rem}
+      h1{font-size:2.3rem}
+      .footer-inner{grid-template-columns:1fr 1fr}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+        <li><a href="/public-orders.html">Public orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/contact.html">Contact</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-        <a class="nav-link" href="/public-orders.html">Public orders</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/contact.html" class="header-btn secondary">Contact</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
+  <main>
     <!-- HERO -->
     <section class="section">
       <h1>We’ll be right back</h1>
-      <p>
+      <p class="lead">
         Order Pool is temporarily unavailable while we perform scheduled maintenance.
         This helps keep data safe and workflows reliable.
       </p>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Status</div>
-          <div class="stat-desc">Maintenance</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Impact</div>
-          <div class="stat-desc">Temporary</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Estimated return</div>
-          <div class="stat-desc">(time)</div>
-        </div>
+      <div class="status">
+        <span class="pill maintenance">Maintenance</span>
+        <span class="pill">Temporary</span>
+        <span class="pill">Returning soon</span>
       </div>
     </section>
 
     <!-- DETAILS -->
     <section class="section">
-      <div class="get-started-grid">
+      <div class="grid">
 
-        <div class="get-started-card">
+        <!-- LEFT -->
+        <div class="card">
           <h2>What’s happening</h2>
           <p>
             We’re applying updates to improve stability, performance, and reliability.
           </p>
 
-          <div class="faq-list">
+          <div class="faq">
             <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Is my data safe?</h3>
-              </div>
-              <p>
-                Yes. Orders, briefs, and updates are preserved during maintenance.
-              </p>
+              <h3>Is my data safe?</h3>
+              <p>Yes. Orders, briefs, and updates are preserved during maintenance.</p>
             </div>
-
             <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Will drafts be lost?</h3>
-              </div>
-              <p>
-                No. Drafts and in-progress work will be available when the system returns.
-              </p>
+              <h3>Will drafts be lost?</h3>
+              <p>No. Drafts and in-progress work will be available when the system returns.</p>
             </div>
-
             <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Do I need to do anything?</h3>
-              </div>
-              <p>
-                No action needed. Just refresh once maintenance is complete.
-              </p>
+              <h3>Do I need to do anything?</h3>
+              <p>No action needed. Just refresh once maintenance is complete.</p>
             </div>
           </div>
 
-          <p class="cs-hero-sub">
+          <p>
             If you were in the middle of an action, you can safely resume afterward.
           </p>
         </div>
 
-        <div class="get-started-card">
+        <!-- RIGHT -->
+        <div class="card">
           <h2>What you can do meanwhile</h2>
-          <p>
-            Some public pages remain available.
-          </p>
+          <p>Some public pages remain available.</p>
 
-          <div class="publisher-feature-grid">
-            <div class="pub-feature-card">
+          <div class="feature-grid">
+            <div class="feature">
               <h3>Learn how it works</h3>
               <p>Understand the pool model and execution flow.</p>
             </div>
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>View public orders</h3>
               <p>Status-only tracking remains accessible.</p>
             </div>
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Contact support</h3>
               <p>If this outage is unexpected or urgent.</p>
             </div>
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Check status</h3>
-              <p>(Optional) View platform uptime and incidents.</p>
+              <p>View platform uptime and incidents.</p>
             </div>
           </div>
 
-          <div class="form-actions">
-            <a class="button-primary" href="/public-orders.html">Public orders</a>
-            <a class="button-secondary" href="/contact.html">Contact support</a>
+          <div class="actions">
+            <a class="btn btn-primary" href="/public-orders.html">Public orders</a>
+            <a class="btn btn-secondary" href="/contact.html">Contact support</a>
           </div>
         </div>
 
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
+  <footer>
     <div class="footer-inner">
       <div>
-        <p class="footer-brand-text">
+        <p>
           Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
@@ -166,11 +326,8 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+      © Order Pool
     </div>
   </footer>
-
 </body>
 </html>

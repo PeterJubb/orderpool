@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>For publishers — Order Pool</title>
-  <meta
-    name="description"
-    content="Order Pool for publishers: publish paid production briefs into a shared pool, get accepted by the right manufacturer, and track execution with syndicated updates."
-  />
+  <meta name="description" content="Order Pool for publishers: publish paid production briefs, get accepted by the right manufacturer, and track execution with syndicated updates." />
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -19,7 +16,7 @@
       background:#ffffff;
     }
 
-    /* Header */
+    /* Header (canonical) */
     header{
       background:#fff;
       border-bottom:1px solid #e5e7eb;
@@ -46,362 +43,118 @@
       letter-spacing:.2px;
       min-width:180px;
     }
-    .brand img{
-      width:34px;height:34px;
-      object-fit:contain;
-      display:block;
-    }
+    .brand img{width:34px;height:34px;object-fit:contain;display:block}
     .nav-links{
-      display:flex;
-      gap:1.5rem;
-      align-items:center;
-      list-style:none;
-      flex-wrap:wrap;
-      justify-content:center;
-      flex:1;
+      display:flex;gap:1.5rem;align-items:center;list-style:none;flex:1;justify-content:center;
     }
     .nav-links a{
-      color:#64748b;
-      text-decoration:none;
-      font-size:.95rem;
-      transition:color .2s;
-      padding:.25rem .25rem;
+      color:#64748b;text-decoration:none;font-size:.95rem;padding:.25rem;transition:color .2s;
     }
     .nav-links a:hover{color:#0f172a}
-    .nav-links a.active{
-      color:#0f172a;
-      position:relative;
-      font-weight:800;
-    }
-    .nav-links a.active::after{
-      content:"";
-      position:absolute;
-      left:.25rem; right:.25rem; bottom:-.45rem;
-      height:2px;
-      background:#3d20ae;
-      border-radius:999px;
-    }
-
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:800}
     .nav-actions{
-      display:flex;
-      gap:.75rem;
-      align-items:center;
-      min-width:220px;
-      justify-content:flex-end;
+      display:flex;gap:.75rem;align-items:center;min-width:220px;justify-content:flex-end;
     }
     .btn{
-      padding:.65rem 1.15rem;
-      border-radius:10px;
-      text-decoration:none;
-      font-size:.95rem;
-      transition:all .2s;
-      border:1px solid transparent;
-      cursor:pointer;
-      font-weight:650;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.5rem;
-      white-space:nowrap;
-      min-height:42px;
+      padding:.65rem 1.15rem;border-radius:10px;text-decoration:none;font-size:.95rem;
+      border:1px solid transparent;font-weight:650;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;white-space:nowrap;
     }
-    .btn-secondary{
-      background:#fff;
-      color:#0f172a;
-      border-color:#e5e7eb;
-    }
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
     .btn-secondary:hover{background:#f8fafc}
-    .btn-primary{
-      background:#3d20ae;
-      color:#fff;
-      border-color:#3d20ae;
-    }
-    .btn-primary:hover{filter:brightness(.96)}
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
 
     /* Layout helpers */
     .container{max-width:1200px;margin:0 auto;padding:0 2rem}
-    .section{padding:4.25rem 0}
-    .section.alt{
-      background:#f8fafc;
-      border-top:1px solid #eef2f7;
-      border-bottom:1px solid #eef2f7;
-    }
+    .section{padding:4rem 0}
+    .section.alt{background:#f8fafc;border-top:1px solid #eef2f7;border-bottom:1px solid #eef2f7}
 
     /* Hero */
-    .hero{
-      padding:4.25rem 0 2.75rem;
-      text-align:center;
-    }
-    h1{
-      font-size:3.2rem;
-      font-weight:850;
-      margin-bottom:1rem;
-      line-height:1.08;
-      letter-spacing:-.02em;
-    }
-    .subtitle{
-      font-size:1.22rem;
-      color:#334155;
-      margin:0 auto 1.15rem;
-      max-width:860px;
-      line-height:1.55;
-    }
-    .explainer{
-      font-size:1.03rem;
-      color:#64748b;
-      margin:0 auto 1.8rem;
-      max-width:760px;
-    }
-    .cta-buttons{
-      display:flex;
-      gap:.9rem;
-      justify-content:center;
-      margin-top:.35rem;
-      flex-wrap:wrap;
-    }
-    .cta-buttons .btn{
-      padding:1rem 1.6rem;
-      font-size:1rem;
-      border-radius:14px;
-      min-height:46px;
-    }
+    .hero{padding:4.25rem 0 2.75rem;text-align:center}
+    h1{font-size:3.1rem;font-weight:850;line-height:1.08;letter-spacing:-.02em;margin-bottom:1rem}
+    .subtitle{font-size:1.2rem;color:#334155;max-width:860px;margin:0 auto 1rem}
+    .explainer{font-size:1.03rem;color:#64748b;max-width:760px;margin:0 auto 1.8rem}
+    .cta-buttons{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+    .cta-buttons .btn{padding:1rem 1.6rem;font-size:1rem;border-radius:14px}
 
-    /* Stat row */
-    .pill-row{
-      display:flex;
-      gap:.85rem;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:1.9rem;
-    }
+    /* Pills */
+    .pill-row{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap;margin-top:1.75rem}
     .pill{
-      background:#fff;
-      border:1px solid #e5e7eb;
-      border-radius:999px;
-      padding:.55rem .9rem;
-      font-size:.92rem;
-      color:#334155;
-      display:inline-flex;
-      gap:.5rem;
-      align-items:center;
+      background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:.55rem .9rem;
+      font-size:.92rem;color:#334155;display:inline-flex;gap:.5rem;align-items:center;
       box-shadow:0 10px 24px rgba(15,23,42,.06);
     }
-    .pill strong{color:#0f172a;font-weight:850}
+    .pill strong{font-weight:850;color:#0f172a}
     .pill span{color:#64748b}
 
     /* Section header */
-    .section-header{
-      text-align:center;
-      margin-bottom:2.25rem;
-    }
-    .section-header h2{
-      font-size:2.1rem;
-      margin-bottom:.6rem;
-      font-weight:850;
-      letter-spacing:-.01em;
-    }
-    .section-header p{
-      color:#64748b;
-      font-size:1.05rem;
-      margin-bottom:.6rem;
-    }
+    .section-header{text-align:center;margin-bottom:2.25rem}
+    .section-header h2{font-size:2.1rem;font-weight:850;letter-spacing:-.01em;margin-bottom:.5rem}
+    .section-header p{color:#64748b;font-size:1.05rem}
     .view-link{
-      color:#3d20ae;
-      font-size:.95rem;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:.35rem;
-      font-weight:750;
-      border-bottom:1px dashed rgba(61,32,174,.35);
-      padding-bottom:2px;
+      color:#3d20ae;font-size:.95rem;text-decoration:none;font-weight:750;
+      border-bottom:1px dashed rgba(61,32,174,.35);padding-bottom:2px;display:inline-flex;gap:.35rem;align-items:center;
     }
-    .view-link:hover{border-bottom-color:rgba(61,32,174,.75)}
 
     /* Cards */
-    .grid-4{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:1.25rem;
-    }
+    .grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem}
     .card{
-      background:#fff;
-      border-radius:16px;
-      border:1px solid #e5e7eb;
-      padding:1.6rem;
+      background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:1.6rem;
       transition:transform .18s, box-shadow .18s;
     }
-    .card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 14px 28px rgba(15,23,42,.10);
-    }
-    .card h3{
-      font-size:1.2rem;
-      margin-bottom:.75rem;
-      font-weight:850;
-      letter-spacing:-.01em;
-    }
+    .card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(15,23,42,.10)}
+    .card h3{font-size:1.2rem;font-weight:850;margin-bottom:.6rem}
     .card p{color:#64748b}
 
     /* Steps */
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:2.25rem;
-      margin-top:2.25rem;
-    }
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2.25rem;margin-top:2.25rem}
     .step{text-align:center}
     .step-number{
-      display:inline-flex;
-      width:56px;height:56px;
-      border-radius:50%;
-      background:#3d20ae;
-      color:#fff;
-      align-items:center;
-      justify-content:center;
-      font-weight:850;
-      font-size:1.35rem;
-      margin-bottom:1rem;
+      width:56px;height:56px;border-radius:50%;background:#3d20ae;color:#fff;
+      display:inline-flex;align-items:center;justify-content:center;font-weight:850;font-size:1.35rem;margin-bottom:1rem;
     }
-    .step h3{
-      font-size:1.2rem;
-      margin-bottom:.6rem;
-      font-weight:850;
-    }
-    .step p{
-      color:#64748b;
-      font-size:1rem;
-      line-height:1.6;
-      max-width:40ch;
-      margin:0 auto;
-    }
+    .step h3{font-size:1.2rem;font-weight:850;margin-bottom:.5rem}
+    .step p{color:#64748b;max-width:40ch;margin:0 auto}
 
-    /* Split cards (track/private) */
-    .split-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
-      gap:1.25rem;
-      margin-top:2.25rem;
-    }
+    /* Split panels */
+    .split-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:1.25rem;margin-top:2.25rem}
     .panel{
-      background:#fff;
-      border-radius:18px;
-      border:1px solid #e5e7eb;
-      padding:2.1rem;
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
+      background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:2.1rem;display:flex;flex-direction:column;
     }
-    .panel h3{
-      font-size:1.55rem;
-      margin-bottom:.75rem;
-      font-weight:900;
-      letter-spacing:-.01em;
-    }
-    .panel > p{
-      color:#334155;
-      margin-bottom:1.25rem;
-      font-size:1.02rem;
-      line-height:1.65;
-    }
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap:.85rem;
-      margin: .25rem 0 1.35rem;
-      flex:1;
-    }
-    .item{
-      border:1px solid #e5e7eb;
-      border-radius:14px;
-      padding:1rem 1.05rem;
-      background:#f8fafc;
-    }
-    .item strong{
-      display:block;
-      font-weight:900;
-      margin-bottom:.25rem;
-      color:#0f172a;
-    }
+    .panel h3{font-size:1.55rem;font-weight:900;margin-bottom:.6rem}
+    .panel>p{color:#334155;margin-bottom:1.25rem}
+    .list{display:flex;flex-direction:column;gap:.85rem;margin:.25rem 0 1.35rem}
+    .item{border:1px solid #e5e7eb;border-radius:14px;padding:1rem;background:#f8fafc}
+    .item strong{display:block;font-weight:900;margin-bottom:.2rem}
     .item span{color:#64748b}
-
-    /* CTA footer alignment fix */
-    .panel-footer{
-      margin-top:1.15rem;
-      display:flex;
-      gap:.75rem;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .panel-footer .btn{
-      border-radius:14px;
-      padding:.95rem 1.25rem;
-      min-height:46px;
-    }
+    .panel-footer{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:auto}
+    .panel-footer .btn{border-radius:14px;padding:.95rem 1.25rem}
 
     /* Final CTA */
     .cta-band{
       background:linear-gradient(135deg, rgba(61,32,174,.10), rgba(59,244,156,.12));
-      border-top:1px solid #eef2f7;
-      padding:4.25rem 0;
-      text-align:center;
+      border-top:1px solid #eef2f7;padding:4.25rem 0;text-align:center;
     }
-    .cta-band h2{
-      font-size:2.35rem;
-      margin-bottom:.9rem;
-      font-weight:900;
-      letter-spacing:-.02em;
-    }
-    .cta-band p{
-      font-size:1.05rem;
-      color:#475569;
-      max-width:760px;
-      margin:0 auto 1.35rem;
-    }
+    .cta-band h2{font-size:2.35rem;font-weight:900;margin-bottom:.75rem}
+    .cta-band p{color:#475569;max-width:760px;margin:0 auto 1.25rem}
 
     /* Footer */
-    footer{
-      background:#fff;
-      border-top:1px solid #e5e7eb;
-      padding:2.75rem 2rem 2rem;
-    }
+    footer{background:#fff;border-top:1px solid #e5e7eb;padding:2.75rem 2rem 2rem}
     .footer-content{max-width:1200px;margin:0 auto}
-    .footer-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:2rem;
-      margin-bottom:2rem;
-    }
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
     .footer-column h4{
-      font-size:.85rem;
-      font-weight:800;
-      margin-bottom:.9rem;
-      text-transform:uppercase;
-      color:#94a3b8;
-      letter-spacing:.06em;
+      font-size:.85rem;font-weight:800;margin-bottom:.9rem;text-transform:uppercase;color:#94a3b8;letter-spacing:.06em;
     }
     .footer-column ul{list-style:none}
     .footer-column ul li{margin-bottom:.5rem}
-    .footer-column a{
-      color:#64748b;
-      text-decoration:none;
-      font-size:.95rem;
-    }
+    .footer-column a{color:#64748b;text-decoration:none;font-size:.95rem}
     .footer-column a:hover{color:#0f172a}
     .footer-bottom{
-      border-top:1px solid #e5e7eb;
-      padding-top:1.25rem;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      color:#94a3b8;
-      font-size:.92rem;
-      gap:1rem;
-      flex-wrap:wrap;
+      border-top:1px solid #e5e7eb;padding-top:1.25rem;display:flex;justify-content:space-between;align-items:center;
+      color:#94a3b8;font-size:.92rem;gap:1rem;flex-wrap:wrap;
     }
 
-    @media (max-width: 900px){
-      h1{font-size:2.55rem}
+    @media(max-width:900px){
+      h1{font-size:2.45rem}
       .nav-links{display:none}
       header{padding:1rem 1.25rem}
       .container{padding:0 1.25rem}
@@ -421,13 +174,13 @@
       </a>
 
       <ul class="nav-links" aria-label="Primary navigation">
-        <li><a class="active" href="/for-publishers.html">Publishers</a></li>
+        <li><a href="/for-publishers.html" aria-current="page">Publishers</a></li>
         <li><a href="/for-manufacturers.html">Manufacturers</a></li>
         <li><a href="/how-it-works.html">How it works</a></li>
         <li><a href="/pricing.html">Pricing</a></li>
       </ul>
 
-      <div class="nav-actions" aria-label="Account actions">
+      <div class="nav-actions">
         <a href="/auth-signin.html" class="btn btn-secondary">Sign in</a>
         <a href="/get-started.html" class="btn btn-primary">Get started</a>
       </div>
@@ -435,26 +188,22 @@
   </header>
 
   <main>
-
     <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <h1>Publish once.<br>Track everything.</h1>
+        <h1>Publish once.<br/>Track everything.</h1>
         <p class="subtitle">
           Post a paid production brief into the pool. Manufacturers pull what fits their equipment and capacity.
-          You track progress through standardized milestones — without inbox chaos.
         </p>
         <p class="explainer">
-          No quote-chasing. No “checking in” loops. Just a clean order thread, milestone updates, and optional
-          status-only public tracking.
+          No quote-chasing. No “checking in” loops. Just a clean order thread, milestone updates, and optional status-only public tracking.
         </p>
-
         <div class="cta-buttons">
           <a href="/get-started.html" class="btn btn-primary">Post a production brief</a>
           <a href="/how-it-works.html" class="btn btn-secondary">See how it works →</a>
         </div>
 
-        <div class="pill-row" aria-label="Key stats">
+        <div class="pill-row">
           <div class="pill"><strong>Brief</strong><span>Draft → submit</span></div>
           <div class="pill"><strong>Pool</strong><span>Shared visibility</span></div>
           <div class="pill"><strong>Execution</strong><span>Syndicated updates</span></div>
@@ -471,31 +220,16 @@
         </div>
 
         <div class="grid-4">
-          <div class="card">
-            <h3>Less back-and-forth</h3>
-            <p>Updates live on the order. Stop “just checking in” email loops.</p>
-          </div>
-
-          <div class="card">
-            <h3>Clear milestones</h3>
-            <p>Accepted → Sampling → Production → Shipping → Fulfilled.</p>
-          </div>
-
-          <div class="card">
-            <h3>Better manufacturer fit</h3>
-            <p>Manufacturers self-select based on capability and capacity.</p>
-          </div>
-
-          <div class="card">
-            <h3>Status-only transparency</h3>
-            <p>Optional public tracking without leaking sensitive details.</p>
-          </div>
+          <div class="card"><h3>Less back-and-forth</h3><p>Updates live on the order. Stop “just checking in” email loops.</p></div>
+          <div class="card"><h3>Clear milestones</h3><p>Accepted → Sampling → Production → Shipping → Fulfilled.</p></div>
+          <div class="card"><h3>Better manufacturer fit</h3><p>Manufacturers self-select based on capability and capacity.</p></div>
+          <div class="card"><h3>Status-only transparency</h3><p>Optional public tracking without leaking sensitive details.</p></div>
         </div>
       </div>
     </section>
 
     <!-- FLOW -->
-    <section class="section alt" id="how">
+    <section class="section alt">
       <div class="container">
         <div class="section-header">
           <h2>Here’s exactly how it works</h2>
@@ -503,32 +237,13 @@
         </div>
 
         <div class="steps">
-          <div class="step">
-            <div class="step-number">1</div>
-            <h3>Create a brief</h3>
-            <p>Define quantities, constraints, timeline, and attach assets privately.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">2</div>
-            <h3>Submit + pay</h3>
-            <p>Publishing converts your brief into a paid request visible in the pool.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">3</div>
-            <h3>Work is pulled</h3>
-            <p>Manufacturers accept when it fits capacity. You approve terms and timing.</p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">4</div>
-            <h3>Tracked to delivery</h3>
-            <p>Milestones update from sampling through fulfillment — fewer emails, more truth.</p>
-          </div>
+          <div class="step"><div class="step-number">1</div><h3>Create a brief</h3><p>Define quantities, constraints, timeline, and attach assets privately.</p></div>
+          <div class="step"><div class="step-number">2</div><h3>Submit + pay</h3><p>Publishing converts your brief into a paid request visible in the pool.</p></div>
+          <div class="step"><div class="step-number">3</div><h3>Work is pulled</h3><p>Manufacturers accept when it fits capacity. You approve terms and timing.</p></div>
+          <div class="step"><div class="step-number">4</div><h3>Tracked to delivery</h3><p>Milestones update from sampling through fulfillment.</p></div>
         </div>
 
-        <div class="cta-buttons" style="margin-top:2.1rem">
+        <div class="cta-buttons" style="margin-top:2rem">
           <a href="/get-started.html" class="btn btn-primary">Get started</a>
           <a href="/pricing.html" class="btn btn-secondary">View pricing</a>
         </div>
@@ -540,7 +255,7 @@
       <div class="container">
         <div class="section-header">
           <h2>What you track — and what stays private</h2>
-          <p>Everything needed for execution, with status-only public visibility.</p>
+          <p>Status-only public visibility by design.</p>
           <a href="/public-orders.html" class="view-link">Browse public order tracking →</a>
         </div>
 
@@ -548,22 +263,11 @@
           <div class="panel">
             <h3>What you track</h3>
             <p>Everything you need to plan launches and reduce uncertainty.</p>
-
             <div class="list">
-              <div class="item">
-                <strong>State</strong>
-                <span>Sampling, production, shipping, and fulfillment milestones.</span>
-              </div>
-              <div class="item">
-                <strong>Updates</strong>
-                <span>Progress notes, approvals, and risk flags.</span>
-              </div>
-              <div class="item">
-                <strong>Questions</strong>
-                <span>Requests and decisions captured in one place.</span>
-              </div>
+              <div class="item"><strong>State</strong><span>Sampling, production, shipping, fulfillment.</span></div>
+              <div class="item"><strong>Updates</strong><span>Progress notes, approvals, risk flags.</span></div>
+              <div class="item"><strong>Questions</strong><span>Requests and decisions in one place.</span></div>
             </div>
-
             <div class="panel-footer">
               <a class="btn btn-primary" href="/public-orders.html">See public tracking</a>
               <a class="btn btn-secondary" href="/how-it-works.html">Read how it works</a>
@@ -572,23 +276,12 @@
 
           <div class="panel">
             <h3>What stays private</h3>
-            <p>Public views are status-only by design.</p>
-
+            <p>Public views never expose sensitive details.</p>
             <div class="list">
-              <div class="item">
-                <strong>Pricing + unit costs</strong>
-                <span>Never exposed publicly.</span>
-              </div>
-              <div class="item">
-                <strong>Sensitive specs + assets</strong>
-                <span>Dielines, proofs, and brand assets remain private.</span>
-              </div>
-              <div class="item">
-                <strong>Identities</strong>
-                <span>Company identities can remain anonymous in public views.</span>
-              </div>
+              <div class="item"><strong>Pricing</strong><span>Never exposed publicly.</span></div>
+              <div class="item"><strong>Specs & assets</strong><span>Dielines and brand files remain private.</span></div>
+              <div class="item"><strong>Identities</strong><span>Companies can remain anonymous in public views.</span></div>
             </div>
-
             <div class="panel-footer">
               <a class="btn btn-primary" href="/safety.html">Safety & trust</a>
               <a class="btn btn-secondary" href="/contact.html">Contact</a>
@@ -609,7 +302,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
@@ -623,7 +315,6 @@
             <li><a href="/public-orders.html">Public orders</a></li>
           </ul>
         </div>
-
         <div class="footer-column">
           <h4>For</h4>
           <ul>
@@ -631,7 +322,6 @@
             <li><a href="/for-manufacturers.html">Manufacturers</a></li>
           </ul>
         </div>
-
         <div class="footer-column">
           <h4>Legal</h4>
           <ul>
@@ -641,7 +331,6 @@
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
         <span>© Order Pool</span>
         <span>Aggregated Wholesaling Manufacturing Marketplace</span>

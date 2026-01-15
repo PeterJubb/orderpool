@@ -1,242 +1,368 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Public orders — Order Pool</title>
-  <meta name="description" content="Public status tracking for orders in Order Pool." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Public, status-only tracking for orders in Order Pool." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – public) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain;display:block}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      align-items:center;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+      font-weight:700;
+      padding:.25rem;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:900}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:.95rem;
+      border:1px solid transparent;
+      font-weight:650;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.45rem;
+      background:none;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3.5rem 2rem 4rem}
+    .section{margin-bottom:3rem}
+    h1{
+      font-size:2.6rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin-bottom:.4rem;
+    }
+    h2{
+      font-size:1.6rem;
+      font-weight:900;
+      margin-bottom:.4rem;
+    }
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Pills */
+    .meta{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:.45rem .85rem;
+      font-size:.75rem;
+      font-weight:800;
+      background:#f8fafc;
+      color:#475569;
+    }
+
+    /* Stats */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+    .stat{
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:1rem;
+      background:#fff;
+    }
+    .stat strong{
+      font-size:1.4rem;
+      font-weight:900;
+      display:block;
+    }
+    .stat span{
+      font-size:.75rem;
+      font-weight:800;
+      color:#64748b;
+      text-transform:uppercase;
+    }
+
+    /* Cards */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+      margin-top:1.25rem;
+    }
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:1.25rem;
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+    }
+    .card-title{font-weight:900;font-size:1.05rem}
+    .card-sub{font-size:.85rem;color:#64748b}
+    .card-meta{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+    }
+    .card-actions{margin-top:.25rem}
+
+    /* CTA */
+    .cta{
+      border:1px solid #e5e7eb;
+      border-radius:22px;
+      padding:2rem;
+      background:linear-gradient(135deg, rgba(61,32,174,.06), rgba(124,92,255,.08));
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid #e5e7eb;
+      padding:2.5rem 2rem 2rem;
+      background:#fff;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:2rem;
+    }
+    .footer-col h4{
+      font-size:.8rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:#94a3b8;
+      margin-bottom:.75rem;
+    }
+    .footer-col a{
+      display:block;
+      color:#64748b;
+      text-decoration:none;
+      font-size:.9rem;
+      margin-bottom:.4rem;
+    }
+    .footer-col a:hover{color:#0f172a}
+    .footer-bottom{
+      border-top:1px solid #e5e7eb;
+      margin-top:1.5rem;
+      padding-top:1rem;
+      font-size:.9rem;
+      color:#94a3b8;
+      text-align:center;
+    }
+
+    @media(max-width:1000px){
+      .stats{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      main{padding:3rem 1.25rem}
+      h1{font-size:2.2rem}
+      .footer-inner{grid-template-columns:1fr 1fr}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- HEADER (PUBLIC) -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/public-orders.html" aria-current="page">Public orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/auth-signin.html">Sign in</a>
+        <a class="btn btn-primary" href="/get-started.html">Get started</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link active" href="/public-orders.html">Public orders</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
+  <main>
     <!-- HERO -->
     <section class="section">
       <h1>Public orders</h1>
-      <p>
-        Status-only tracking for active and completed orders.
-        No sensitive specs, pricing, or private assets are shown here.
+      <p class="lead">
+        Status-only tracking for active and completed orders. No pricing, specs, or private assets are shown.
       </p>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Active</div>
-          <div class="stat-desc">6</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Completed</div>
-          <div class="stat-desc">18</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Updated today</div>
-          <div class="stat-desc">3</div>
-        </div>
-      </div>
-
-      <div class="hero-ctas">
-        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
-        <a href="/auth-join.html" class="hero-cta-btn publishers">Create account</a>
+      <div class="stats">
+        <div class="stat"><strong>6</strong><span>Active</span></div>
+        <div class="stat"><strong>18</strong><span>Completed</span></div>
+        <div class="stat"><strong>3</strong><span>Updated today</span></div>
       </div>
     </section>
 
-    <!-- FILTERS (STATIC) -->
+    <!-- ACTIVE -->
     <section class="section">
-      <div class="section-header-row">
-        <h2>Browse</h2>
-        <span class="cs-hero-sub">Status-only view</span>
-      </div>
+      <h2>Active</h2>
 
-      <div class="publisher-feature-grid">
-        <div class="pub-feature-card">
-          <h3>State</h3>
-          <p>Sampling, production, shipping, fulfilled</p>
-        </div>
-        <div class="pub-feature-card">
-          <h3>Category</h3>
-          <p>Packaging, apparel, printing</p>
-        </div>
-        <div class="pub-feature-card">
-          <h3>Recency</h3>
-          <p>Most recently updated first</p>
-        </div>
-        <div class="pub-feature-card">
-          <h3>Region</h3>
-          <p>Broad shipping region only</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ACTIVE ORDERS -->
-    <section class="section">
-      <div class="section-header-row">
-        <h2>Active</h2>
-        <span class="cs-hero-sub">In progress</span>
-      </div>
-
-      <div class="featured-row">
-
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">ORD-11804</div>
-            <p class="collab-desc">
-              Packaging • In production • Updated 2 days ago
-            </p>
-            <div class="publisher-stats">
-              <div class="stat-pill">
-                <div class="stat-label">State</div>
-                <div class="stat-desc">Production</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Region</div>
-                <div class="stat-desc">North America</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Visibility</div>
-                <div class="stat-desc">Status-only</div>
-              </div>
-            </div>
-            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">ORD-11804</div>
+          <div class="card-sub">Packaging • Production • Updated 2 days ago</div>
+          <div class="card-meta">
+            <span class="pill">Production</span>
+            <span class="pill">North America</span>
+            <span class="pill">Status-only</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-secondary" href="/public-order-detail.html">View status →</a>
           </div>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">ORD-11722</div>
-            <p class="collab-desc">
-              Apparel • Sampling • Updated yesterday
-            </p>
-            <div class="publisher-stats">
-              <div class="stat-pill">
-                <div class="stat-label">State</div>
-                <div class="stat-desc">Sampling</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Region</div>
-                <div class="stat-desc">Global</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Visibility</div>
-                <div class="stat-desc">Status-only</div>
-              </div>
-            </div>
-            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+        <div class="card">
+          <div class="card-title">ORD-11722</div>
+          <div class="card-sub">Apparel • Sampling • Updated yesterday</div>
+          <div class="card-meta">
+            <span class="pill">Sampling</span>
+            <span class="pill">Global</span>
+            <span class="pill">Status-only</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-secondary" href="/public-order-detail.html">View status →</a>
           </div>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">ORD-11690</div>
-            <p class="collab-desc">
-              Printing • Shipping • Updated today
-            </p>
-            <div class="publisher-stats">
-              <div class="stat-pill">
-                <div class="stat-label">State</div>
-                <div class="stat-desc">Shipping</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Region</div>
-                <div class="stat-desc">Canada</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Visibility</div>
-                <div class="stat-desc">Status-only</div>
-              </div>
-            </div>
-            <a class="featured-link" href="/public-order-detail.html">View status →</a>
+        <div class="card">
+          <div class="card-title">ORD-11690</div>
+          <div class="card-sub">Printing • Shipping • Updated today</div>
+          <div class="card-meta">
+            <span class="pill">Shipping</span>
+            <span class="pill">Canada</span>
+            <span class="pill">Status-only</span>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-secondary" href="/public-order-detail.html">View status →</a>
           </div>
         </div>
-
       </div>
     </section>
 
     <!-- COMPLETED -->
     <section class="section">
-      <div class="section-header-row">
-        <h2>Completed</h2>
-        <span class="cs-hero-sub">Fulfilled</span>
-      </div>
+      <h2>Completed</h2>
 
-      <div class="featured-row">
-
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">ORD-11411</div>
-            <p class="collab-desc">
-              Packaging • Fulfilled • Completed 3 weeks ago
-            </p>
-            <a class="featured-link" href="/public-order-detail.html">View status →</a>
-          </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">ORD-11411</div>
+          <div class="card-sub">Packaging • Fulfilled • 3 weeks ago</div>
+          <a class="btn btn-secondary" href="/public-order-detail.html">View status →</a>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">ORD-11302</div>
-            <p class="collab-desc">
-              Display • Fulfilled • Completed 6 weeks ago
-            </p>
-            <a class="featured-link" href="/public-order-detail.html">View status →</a>
-          </div>
+        <div class="card">
+          <div class="card-title">ORD-11302</div>
+          <div class="card-sub">Display • Fulfilled • 6 weeks ago</div>
+          <a class="btn btn-secondary" href="/public-order-detail.html">View status →</a>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">ORD-11012</div>
-            <p class="collab-desc">
-              Printing • Fulfilled • Completed 4 months ago
-            </p>
-            <a class="featured-link" href="/public-order-detail.html">View status →</a>
-          </div>
+        <div class="card">
+          <div class="card-title">ORD-11012</div>
+          <div class="card-sub">Printing • Fulfilled • 4 months ago</div>
+          <a class="btn btn-secondary" href="/public-order-detail.html">View status →</a>
         </div>
-
       </div>
     </section>
 
     <!-- CTA -->
     <section class="section">
-      <div class="get-started-card">
+      <div class="cta">
         <h2>Want your own orders tracked?</h2>
-        <p>
+        <p class="lead">
           Publishers create briefs. Manufacturers accept work. Everyone stays aligned through shared updates.
         </p>
-
-        <div class="form-actions">
-          <a class="button-primary" href="/get-started.html">Get started</a>
-          <a class="button-secondary" href="/auth-signin.html">Sign in</a>
+        <div class="meta">
+          <a class="btn btn-primary" href="/get-started.html">Get started</a>
+          <a class="btn btn-secondary" href="/auth-signin.html">Sign in</a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
+  <footer>
     <div class="footer-inner">
       <div>
-        <p class="footer-brand-text">
+        <p>
           Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
@@ -262,11 +388,8 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+      © Order Pool
     </div>
   </footer>
-
 </body>
 </html>

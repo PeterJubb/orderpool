@@ -1,267 +1,591 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Order detail — Publisher — Order Pool</title>
-<meta name="description" content="Read-only publisher view of an accepted order with syndicated manufacturer updates." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
-  background:#fafafa;color:#1a1a1a;line-height:1.6;
-}
+  <title>Order detail — Publisher — Order Pool</title>
+  <meta name="description" content="Read-only publisher view of an accepted order with syndicated manufacturer updates." />
 
-/* Header */
-.header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:10}
-.header-inner{
-  max-width:1400px;margin:0 auto;padding:1rem 2rem;
-  display:flex;align-items:center;justify-content:space-between;gap:2rem;
-}
-.brand{font-weight:900;color:#0066ff;font-size:1.25rem}
-.nav{display:flex;gap:1.5rem}
-.nav a{text-decoration:none;color:#666;font-weight:700}
-.nav a.active{color:#0066ff}
-.header-actions{display:flex;gap:.75rem}
-.btn-h{
-  padding:.55rem 1.2rem;border-radius:8px;
-  font-weight:800;text-decoration:none;
-}
-.btn-h.primary{background:#0066ff;color:#fff}
-.btn-h.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
 
-/* Layout */
-.page{max-width:1400px;margin:0 auto;padding:2.5rem}
-.section{margin-bottom:4rem}
-h1{font-size:2.4rem;font-weight:900;letter-spacing:-.02em}
-h2{font-size:1.8rem;font-weight:900}
-h3{font-size:1.05rem;font-weight:900}
-.lead{color:#666;font-size:1.05rem;margin-top:.6rem}
+    /* Header (canonical) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{
+      width:34px;height:34px;
+      object-fit:contain;
+      display:block;
+    }
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      align-items:center;
+      list-style:none;
+      flex-wrap:wrap;
+      justify-content:center;
+      flex:1;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+      transition:color .2s;
+      padding:.25rem .25rem;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:800;
+    }
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      min-width:220px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:.95rem;
+      transition:all .2s;
+      border:1px solid transparent;
+      cursor:pointer;
+      font-weight:650;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      white-space:nowrap;
+      background:transparent;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-primary:hover{filter:brightness(.96)}
 
-/* Meta */
-.meta{
-  display:flex;gap:12px;flex-wrap:wrap;margin-top:14px
-}
-.chip{
-  background:#fff;
-  border:1px solid rgba(0,0,0,.1);
-  border-radius:999px;
-  padding:6px 12px;
-  font-size:12px;
-  font-weight:800;
-}
+    /* Page */
+    main{max-width:1200px;margin:0 auto;padding:2.75rem 2rem 3.25rem}
+    .page-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:1.25rem;
+      flex-wrap:wrap;
+      margin-bottom:1.35rem;
+    }
+    h1{
+      font-size:2.55rem;
+      font-weight:850;
+      line-height:1.12;
+      letter-spacing:-.02em;
+      margin-bottom:.55rem;
+    }
+    .lead{
+      color:#334155;
+      font-size:1.05rem;
+      max-width:72ch;
+    }
 
-/* Grid */
-.grid{
-  display:grid;
-  grid-template-columns:1.25fr .75fr;
-  gap:26px;
-}
+    /* Meta chips */
+    .meta{
+      display:flex;
+      gap:.55rem;
+      flex-wrap:wrap;
+      margin-top:1.05rem;
+    }
+    .chip{
+      font-size:.82rem;
+      color:#475569;
+      background:#f1f5f9;
+      padding:.28rem .7rem;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      font-weight:750;
+    }
 
-/* Card */
-.card{
-  background:#fff;
-  border:1px solid rgba(0,0,0,.08);
-  border-radius:22px;
-  padding:26px;
-  box-shadow:0 14px 32px rgba(0,0,0,.05);
-}
-.card p{color:#666}
+    /* Progress */
+    .progress{
+      display:flex;
+      gap:.55rem;
+      flex-wrap:wrap;
+      margin-top:1rem;
+    }
+    .step{
+      font-size:.82rem;
+      padding:.35rem .65rem;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      color:#64748b;
+      font-weight:800;
+    }
+    .step.active{
+      color:#3d20ae;
+      border-color:rgba(61,32,174,.25);
+      background:rgba(61,32,174,.06);
+    }
 
-/* Progress */
-.progress{
-  display:flex;gap:10px;flex-wrap:wrap;margin-top:14px
-}
-.step{
-  padding:7px 12px;border-radius:12px;
-  font-size:12px;font-weight:900;
-  background:#f2f4f7;color:#777;
-}
-.step.active{
-  background:rgba(0,102,255,.1);
-  color:#0066ff;
-}
+    /* Layout grid */
+    .grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:1.25rem;
+      margin-top:1.35rem;
+      align-items:start;
+    }
 
-/* Read-only banner */
-.readonly{
-  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
-  border:1px dashed rgba(0,0,0,.18);
-  border-radius:18px;
-  padding:18px;
-  font-size:.95rem;
-}
+    /* Cards (canonical-ish) */
+    .card{
+      background:#fff;
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+      overflow:hidden;
+    }
+    .card-body{padding:1.35rem}
+    .card h2{
+      font-size:1.2rem;
+      margin-bottom:.55rem;
+      font-weight:850;
+      letter-spacing:-.01em;
+    }
+    .card p{color:#64748b;font-size:.98rem}
+    .divider{height:1px;background:#eef2f7}
 
-/* Form */
-label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}
-textarea{
-  width:100%;border-radius:14px;border:1px solid #ddd;
-  padding:12px;font-family:inherit;font-size:.95rem;
-}
-.form-actions{
-  display:flex;gap:10px;margin-top:12px;flex-wrap:wrap
-}
-.btn-primary,.btn-secondary{
-  padding:.7rem 1.3rem;border-radius:12px;
-  font-weight:900;text-decoration:none;
-}
-.btn-primary{background:#0066ff;color:#fff}
-.btn-secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
+    /* Read-only banner */
+    .readonly{
+      margin-top:1rem;
+      border-radius:16px;
+      border:1px dashed rgba(15,23,42,.22);
+      background:linear-gradient(135deg, rgba(61,32,174,.08), rgba(59,244,156,.10));
+      padding:1rem 1rem;
+      color:#334155;
+      font-size:.95rem;
+    }
+    .readonly strong{color:#0f172a}
 
-/* Timeline */
-.stream{
-  display:flex;flex-direction:column;gap:14px;margin-top:20px
-}
-.entry{
-  background:#fff;border:1px solid rgba(0,0,0,.08);
-  border-radius:18px;padding:18px;
-}
-.entry strong{font-weight:900}
-.entry .meta{margin-top:6px;font-size:12px;color:#777}
+    /* Details list */
+    .dl{margin-top:1rem;display:grid;gap:.45rem}
+    .dl-row{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      align-items:baseline;
+      padding:.45rem .65rem;
+      border:1px solid #eef2f7;
+      border-radius:12px;
+      background:#fafcff;
+    }
+    .dt{font-weight:850;color:#0f172a}
+    .dd{color:#475569}
 
-/* Footer CTA */
-.footer-cta{
-  background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
-  border:1px dashed rgba(0,0,0,.18);
-  border-radius:26px;
-  padding:38px;text-align:center;
-}
+    /* Form */
+    label{
+      display:block;
+      font-size:.82rem;
+      font-weight:850;
+      color:#334155;
+      margin:.9rem 0 .4rem;
+    }
+    textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      padding:.85rem .9rem;
+      font-family:inherit;
+      font-size:.98rem;
+      color:#0f172a;
+      background:#fff;
+      outline:none;
+      min-height:140px;
+      resize:vertical;
+    }
+    textarea:focus{
+      border-color:rgba(61,32,174,.45);
+      box-shadow:0 0 0 4px rgba(61,32,174,.10);
+    }
+    .form-actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.9rem;
+      align-items:center;
+    }
+    .btn.full{width:100%}
 
-@media(max-width:1000px){
-  .grid{grid-template-columns:1fr}
-  .page{padding:1.25rem}
-}
-</style>
+    /* Stream */
+    .section{
+      margin-top:2.25rem;
+    }
+    .section-head{
+      margin-bottom:1rem;
+    }
+    .section-head h2{
+      font-size:1.55rem;
+      font-weight:900;
+      letter-spacing:-.01em;
+      margin-bottom:.35rem;
+    }
+    .section-head p{
+      color:#64748b;
+      font-size:1.02rem;
+    }
+    .stream{
+      display:grid;
+      gap:.9rem;
+      margin-top:1rem;
+    }
+    .entry{
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .entry-body{padding:1.05rem 1.1rem}
+    .entry-title{
+      font-weight:900;
+      color:#0f172a;
+      margin-bottom:.25rem;
+    }
+    .entry-body p{color:#475569}
+    .entry-meta{
+      margin-top:.6rem;
+      font-size:.85rem;
+      color:#94a3b8;
+      display:flex;
+      gap:.45rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      font-size:.78rem;
+      color:#475569;
+      background:#f1f5f9;
+      padding:.18rem .55rem;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      font-weight:750;
+    }
+
+    /* Footer CTA */
+    .cta{
+      margin-top:2.25rem;
+      border-radius:18px;
+      border:1px solid #e5e7eb;
+      background:linear-gradient(135deg, rgba(61,32,174,.10), rgba(59,244,156,.12));
+      padding:2rem 1.6rem;
+      text-align:center;
+    }
+    .cta h2{
+      font-size:1.65rem;
+      font-weight:900;
+      letter-spacing:-.01em;
+      margin-bottom:.5rem;
+    }
+    .cta p{color:#475569;max-width:70ch;margin:0 auto .95rem}
+
+    /* Footer (canonical) */
+    footer{
+      background:#fff;
+      border-top:1px solid #e5e7eb;
+      padding:2.75rem 2rem 2rem;
+    }
+    .footer-content{max-width:1200px;margin:0 auto}
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:2rem;
+      margin-bottom:2rem;
+    }
+    .footer-column h4{
+      font-size:.85rem;
+      font-weight:800;
+      margin-bottom:.9rem;
+      text-transform:uppercase;
+      color:#94a3b8;
+      letter-spacing:.06em;
+    }
+    .footer-column ul{list-style:none}
+    .footer-column ul li{margin-bottom:.5rem}
+    .footer-column a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+    }
+    .footer-column a:hover{color:#0f172a}
+    .footer-bottom{
+      border-top:1px solid #e5e7eb;
+      padding-top:1.25rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:#94a3b8;
+      font-size:.92rem;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 980px){
+      header{padding:1rem 1.25rem}
+      main{padding:2.25rem 1.25rem 2.75rem}
+      h1{font-size:2.1rem}
+      .nav-links{display:none}
+      .grid{grid-template-columns:1fr}
+      .nav-actions{min-width:auto}
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Canonical header -->
+  <header>
+    <nav>
+      <a href="/" class="brand" aria-label="Order Pool home">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-<header class="header">
-  <div class="header-inner">
-    <span class="brand">Order Pool</span>
-    <nav class="nav">
-      <a href="/publisher-dashboard-full.html">Dashboard</a>
-      <a href="/publisher-briefs-full.html">Briefs</a>
-      <a class="active" href="/publisher-orders-full.html">Orders</a>
+      <ul class="nav-links" aria-label="Primary navigation">
+        <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/publisher-briefs-full.html">Briefs</a></li>
+        <li><a href="/publisher-orders-full.html" aria-current="page">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions" aria-label="Page actions">
+        <a href="/publisher-orders-full.html" class="btn btn-secondary">← Back</a>
+        <a href="/public-order-detail.html" class="btn btn-primary">Public view</a>
+      </div>
     </nav>
-    <div class="header-actions">
-      <a class="btn-h secondary" href="/publisher-orders-full.html">Back</a>
-      <a class="btn-h primary" href="/public-order-detail.html">Public view</a>
-    </div>
-  </div>
-</header>
+  </header>
 
-<main class="page">
+  <main>
+    <!-- HERO -->
+    <section class="page-head" aria-label="Order header">
+      <div>
+        <h1>📦 Retail display packaging</h1>
+        <p class="lead">
+          Read-only view. Manufacturers control state and updates — everything stays attached to the order.
+        </p>
 
-<!-- HERO -->
-<section class="section">
-  <h1>📦 Retail display packaging</h1>
-  <p class="lead">
-    Read-only view. Manufacturer controls state and updates — everything stays attached to the order.
-  </p>
+        <div class="meta" aria-label="Order metadata">
+          <span class="chip">ORD-11804</span>
+          <span class="chip">Production</span>
+          <span class="chip">2,500 units</span>
+          <span class="chip">Updated 2 days ago</span>
+        </div>
 
-  <div class="meta">
-    <span class="chip">ORD-11804</span>
-    <span class="chip">Production</span>
-    <span class="chip">2,500 units</span>
-    <span class="chip">Updated 2 days ago</span>
-  </div>
+        <div class="progress" aria-label="Order progress">
+          <span class="step">Accepted</span>
+          <span class="step">Sampling</span>
+          <span class="step active">Production</span>
+          <span class="step">Shipping</span>
+          <span class="step">Fulfilled</span>
+        </div>
+      </div>
+    </section>
 
-  <div class="progress">
-    <span class="step">Accepted</span>
-    <span class="step">Sampling</span>
-    <span class="step active">Production</span>
-    <span class="step">Shipping</span>
-    <span class="step">Fulfilled</span>
-  </div>
-</section>
+    <!-- CONTENT GRID -->
+    <section class="grid" aria-label="Order content">
+      <!-- LEFT: SUMMARY -->
+      <article class="card">
+        <div class="card-body">
+          <h2>Order summary</h2>
+          <p>
+            This order originated from a paid brief and was accepted by a manufacturer.
+            State changes and milestones are managed by the manufacturer.
+          </p>
 
-<!-- CONTENT -->
-<section class="section">
-  <div class="grid">
+          <div class="readonly" role="note" aria-label="Read-only notice">
+            🔒 <strong>Read-only by design.</strong><br />
+            Manufacturers control state changes. Use notes to ask questions or request confirmation.
+          </div>
 
-    <!-- LEFT -->
-    <div class="card">
-      <h2>Order summary</h2>
+          <div class="dl" aria-label="Order details">
+            <div class="dl-row">
+              <span class="dt">Origin brief:</span>
+              <span class="dd">BRF-02988</span>
+            </div>
+            <div class="dl-row">
+              <span class="dt">Manufacturer:</span>
+              <span class="dd">(Manufacturer name)</span>
+            </div>
+            <div class="dl-row">
+              <span class="dt">Constraints:</span>
+              <span class="dd">Matte finish, spot UV, insert tray, shelf-ready</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- RIGHT: NOTES -->
+      <aside class="card" aria-label="Ask a question">
+        <div class="card-body">
+          <h2>Ask a question</h2>
+          <p>Questions stay attached to the order.</p>
+
+          <label for="note">Note / question</label>
+          <textarea
+            id="note"
+            name="note"
+            rows="6"
+            placeholder="Ask for a photo, confirm timing, clarify a constraint…"
+          ></textarea>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="button" aria-label="Post note">Post note</button>
+            <a class="btn btn-secondary" href="/contact.html">Escalate</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- STREAM -->
+    <section class="section" aria-label="Update stream">
+      <div class="section-head">
+        <h2>Update stream</h2>
+        <p>Syndicated manufacturer updates and publisher notes.</p>
+      </div>
+
+      <div class="stream">
+        <div class="entry">
+          <div class="entry-body">
+            <div class="entry-title">Production started</div>
+            <p>Production run began. First QC checks completed.</p>
+            <div class="entry-meta">
+              <span class="pill">Manufacturer</span>
+              <span>•</span>
+              <span>2 days ago</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-body">
+            <div class="entry-title">Sampling approved</div>
+            <p>Final sample approved. Dieline v4 locked.</p>
+            <div class="entry-meta">
+              <span class="pill">Manufacturer</span>
+              <span>•</span>
+              <span>6 days ago</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-body">
+            <div class="entry-title">Publisher note</div>
+            <p>Can you share photos from first QC checks?</p>
+            <div class="entry-meta">
+              <span class="pill">Publisher</span>
+              <span>•</span>
+              <span>7 days ago</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-body">
+            <div class="entry-title">Order accepted</div>
+            <p>A manufacturer accepted the brief. Request converted into an order.</p>
+            <div class="entry-meta">
+              <span class="pill">Order Pool</span>
+              <span>•</span>
+              <span>10 days ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" aria-label="Public tracking call to action">
+      <h2>Want to see this publicly?</h2>
       <p>
-        This order originated from a paid brief and was accepted by a manufacturer.
-        State changes and milestones are managed by the manufacturer.
+        Public pages show status only — never pricing or private notes.
       </p>
+      <a class="btn btn-primary" href="/public-order-detail.html">View public tracking</a>
+    </section>
+  </main>
 
-      <div class="readonly" style="margin-top:18px">
-        🔒 <strong>Read-only by design.</strong><br />
-        Manufacturers control state changes. Use notes to ask questions or request confirmation.
+  <!-- Canonical footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h4>Publisher</h4>
+          <ul>
+            <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+            <li><a href="/publisher-briefs-full.html">Briefs</a></li>
+            <li><a href="/publisher-orders-full.html">Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/public-orders.html">Public orders</a></li>
+            <li><a href="/how-it-works.html">How it works</a></li>
+            <li><a href="/pricing.html">Pricing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/privacy.html">Privacy</a></li>
+            <li><a href="/terms.html">Terms</a></li>
+            <li><a href="/safety.html">Safety</a></li>
+          </ul>
+        </div>
       </div>
 
-      <h3 style="margin-top:22px">Details</h3>
-      <p><strong>Origin brief:</strong> BRF-02988</p>
-      <p><strong>Manufacturer:</strong> (Manufacturer name)</p>
-      <p><strong>Constraints:</strong> Matte finish, spot UV, insert tray, shelf-ready</p>
-    </div>
-
-    <!-- RIGHT -->
-    <div class="card">
-      <h2>Ask a question</h2>
-      <p>Questions stay attached to the order.</p>
-
-      <label for="note">Note / question</label>
-      <textarea id="note" rows="6" placeholder="Ask for a photo, confirm timing, clarify a constraint…"></textarea>
-
-      <div class="form-actions">
-        <button class="btn-primary">Post note</button>
-        <a class="btn-secondary" href="/contact.html">Escalate</a>
+      <div class="footer-bottom">
+        <span>© Order Pool</span>
+        <span>Aggregated Wholesaling Manufacturing Marketplace</span>
       </div>
     </div>
-
-  </div>
-</section>
-
-<!-- STREAM -->
-<section class="section">
-  <h2>Update stream</h2>
-  <p class="lead">Syndicated manufacturer updates and publisher notes.</p>
-
-  <div class="stream">
-
-    <div class="entry">
-      <strong>Production started</strong>
-      <p>Production run began. First QC checks completed.</p>
-      <div class="meta">Manufacturer • 2 days ago</div>
-    </div>
-
-    <div class="entry">
-      <strong>Sampling approved</strong>
-      <p>Final sample approved. Dieline v4 locked.</p>
-      <div class="meta">Manufacturer • 6 days ago</div>
-    </div>
-
-    <div class="entry">
-      <strong>Publisher note</strong>
-      <p>Can you share photos from first QC checks?</p>
-      <div class="meta">Publisher • 7 days ago</div>
-    </div>
-
-    <div class="entry">
-      <strong>Order accepted</strong>
-      <p>A manufacturer accepted the brief. Request converted into an order.</p>
-      <div class="meta">Order Pool • 10 days ago</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section">
-  <div class="footer-cta">
-    <h2>Want to see this publicly?</h2>
-    <p class="lead">
-      Public pages show status only — never pricing or private notes.
-    </p>
-    <a class="btn-primary" href="/public-order-detail.html">View public tracking</a>
-  </div>
-</section>
-
-</main>
-
+  </footer>
 </body>
 </html>

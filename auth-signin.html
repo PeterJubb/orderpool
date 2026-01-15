@@ -1,140 +1,270 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Sign in — Order Pool</title>
   <meta name="description" content="Sign in to Order Pool to manage briefs, quotes, and orders." />
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – unauthenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain;display:block}
+    .nav-links{
+      display:flex;gap:1.5rem;align-items:center;list-style:none;flex:1;justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;text-decoration:none;font-size:.95rem;font-weight:700;padding:.25rem;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-actions{
+      display:flex;gap:.75rem;align-items:center;min-width:220px;justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;border-radius:10px;text-decoration:none;font-size:.95rem;
+      border:1px solid transparent;font-weight:650;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+      background:none;cursor:pointer;white-space:nowrap;
+    }
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3.5rem 2rem 4rem}
+    h1{
+      font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem;
+    }
+    .lead{color:#475569;font-size:1.05rem}
+
+    /* Auth grid */
+    .auth-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.75rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    /* Form */
+    .field{margin-bottom:.9rem}
+    label{
+      display:block;
+      font-size:.75rem;
+      font-weight:900;
+      color:#475569;
+      margin-bottom:.3rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    input{
+      width:100%;
+      padding:.75rem .85rem;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      font-family:inherit;
+      font-size:.95rem;
+    }
+
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:.85rem;
+      color:#475569;
+      margin:.25rem 0 .75rem;
+    }
+    .row a{
+      color:#3d20ae;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .actions{margin-top:.75rem}
+
+    /* Side */
+    .side-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:.75rem}
+    .side-list li strong{display:block;font-weight:900}
+    .side-list li span{font-size:.85rem;color:#64748b}
+
+    /* Footer */
+    footer{
+      border-top:1px solid #e5e7eb;
+      padding:2.5rem 2rem 2rem;
+      background:#fff;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:2rem;
+    }
+    .footer-col h4{
+      font-size:.8rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:#94a3b8;
+      margin-bottom:.75rem;
+    }
+    .footer-col a{
+      display:block;
+      color:#64748b;
+      text-decoration:none;
+      font-size:.9rem;
+      margin-bottom:.4rem;
+    }
+    .footer-col a:hover{color:#0f172a}
+    .footer-bottom{
+      border-top:1px solid #e5e7eb;
+      margin-top:1.5rem;
+      padding-top:1rem;
+      font-size:.9rem;
+      color:#94a3b8;
+      text-align:center;
+    }
+
+    @media(max-width:1000px){
+      .auth-grid{grid-template-columns:1fr}
+      main{padding:3rem 1.25rem}
+      h1{font-size:2.2rem}
+      .footer-inner{grid-template-columns:1fr 1fr}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/get-started.html">Get started</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/get-started.html" class="header-btn ghost">Get started</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
+  <main>
+    <h1>Welcome back</h1>
+    <p class="lead">Sign in to continue to your dashboard.</p>
 
-    <section class="section">
-      <div class="auth-grid">
-
-        <!-- SIGN IN -->
-        <div class="auth-card">
-          <header class="auth-header">
-            <h1>Welcome back</h1>
-            <p>Sign in to continue to your dashboard.</p>
-          </header>
-
-          <form class="form" action="#" method="post">
-
-            <!-- EMAIL -->
-            <div class="field">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder=" "
-                autocomplete="email"
-              />
-              <label for="email">Email address</label>
-            </div>
-
-            <!-- PASSWORD -->
-            <div class="field field-password">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                placeholder=" "
-                autocomplete="current-password"
-              />
-              <label for="password">Password</label>
-              <button type="button" class="password-toggle" aria-label="Show password">
-                Show
-              </button>
-            </div>
-
-            <!-- OPTIONS -->
-            <div class="form-meta">
-              <label class="checkbox">
-                <input type="checkbox" name="remember" />
-                <span>Remember me</span>
-              </label>
-
-              <a href="/auth-forgot.html" class="link-subtle">
-                Forgot password?
-              </a>
-            </div>
-
-            <!-- CTA -->
-            <button class="button-primary button-full" type="submit">
-              Sign in
-            </button>
-
-          </form>
-
-          <footer class="auth-footer">
-            <span>New to Order Pool?</span>
-            <a href="/auth-join.html">Create an account</a>
-          </footer>
-        </div>
-
-        <!-- CONTEXT -->
-        <aside class="auth-card auth-side">
-          <h2>What you’ll see next</h2>
-          <p>Your dashboard adapts to your role.</p>
-
-          <ul class="role-list">
-            <li>
-              <strong>Publishers</strong>
-              <span>Create briefs, manage orders, track production</span>
-            </li>
-            <li>
-              <strong>Manufacturers</strong>
-              <span>View quote pools, accept work, manage orders</span>
-            </li>
-            <li>
-              <strong>Public</strong>
-              <span>Track order status only</span>
-            </li>
-          </ul>
-
-          <div class="side-cta">
-            <span>Not sure where to start?</span>
-            <a href="/get-started.html">Choose a role →</a>
+    <div class="auth-grid">
+      <!-- FORM -->
+      <div class="card">
+        <form>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" required />
           </div>
-        </aside>
 
+          <div class="field">
+            <label>Password</label>
+            <input type="password" required />
+          </div>
+
+          <div class="row">
+            <label style="display:flex;gap:.4rem;align-items:center;font-size:.85rem">
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <a href="/auth-forgot.html">Forgot password?</a>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Sign in</button>
+          </div>
+        </form>
+
+        <p style="font-size:.9rem;color:#64748b">
+          New to Order Pool? <a href="/auth-join.html" style="color:#3d20ae;font-weight:700">Create an account</a>
+        </p>
       </div>
-    </section>
 
+      <!-- CONTEXT -->
+      <aside class="card">
+        <h2>What you’ll see next</h2>
+        <p class="lead">Your dashboard adapts to your role.</p>
+
+        <ul class="side-list">
+          <li>
+            <strong>Publishers</strong>
+            <span>Create briefs, manage orders, track production</span>
+          </li>
+          <li>
+            <strong>Manufacturers</strong>
+            <span>View quote pools, accept work, manage orders</span>
+          </li>
+          <li>
+            <strong>Public</strong>
+            <span>Status-only order tracking</span>
+          </li>
+        </ul>
+
+        <a class="btn btn-secondary" href="/get-started.html">Choose a role →</a>
+      </aside>
+    </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
+  <footer>
     <div class="footer-inner">
-      <p class="footer-brand-text">
-        Order Pool is a shared manufacturing request platform built on transparency and execution.
-      </p>
+      <div>
+        <p>
+          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        </p>
+      </div>
 
       <div class="footer-col">
         <h4>Product</h4>
@@ -144,7 +274,6 @@
 
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="/mission.html">Mission</a>
         <a href="/team.html">Team</a>
         <a href="/contact.html">Contact</a>
       </div>
@@ -158,21 +287,8 @@
     </div>
 
     <div class="footer-bottom">
-      <span>© Order Pool</span>
+      © Order Pool
     </div>
   </footer>
-<script>
-  const btn = document.querySelector(".password-toggle");
-  const input = document.querySelector("#password");
-  if (btn && input) {
-    btn.addEventListener("click", () => {
-      const isPw = input.type === "password";
-      input.type = isPw ? "text" : "password";
-      btn.textContent = isPw ? "Hide" : "Show";
-      btn.setAttribute("aria-label", isPw ? "Hide password" : "Show password");
-    });
-  }
-</script>
-
 </body>
 </html>

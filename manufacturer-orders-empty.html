@@ -1,198 +1,299 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Orders — Manufacturer — Order Pool</title>
-  <meta name="description" content="Manufacturer orders list for Order Pool." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Manufacturer orders list. No accepted orders yet." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:900;
+    }
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
+    .section{margin-bottom:3rem}
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+    h3{font-size:1.05rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Stats */
+    .stats{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+    .stat{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem 1rem;
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+    }
+    .stat strong{font-size:1.3rem;font-weight:900}
+    .stat span{
+      font-size:.75rem;
+      color:#64748b;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    /* Empty grid */
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1.5rem;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.75rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .item{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fafcff;
+    }
+    .item p{font-size:.9rem}
+
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.75rem;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .feature{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fff;
+    }
+    .feature p{font-size:.85rem}
+
+    @media(max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      main{padding:2.5rem 1.25rem 3rem}
+      h1{font-size:2.2rem}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/manufacturer-dashboard-empty.html" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- APP HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/manufacturer-dashboard-empty.html">Dashboard</a></li>
+        <li><a href="/manufacturer-quote-pool-empty.html">Quote pool</a></li>
+        <li><a href="/manufacturer-orders-empty.html" aria-current="page">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse pool</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/manufacturer-dashboard-empty.html">Dashboard</a>
-        <a class="nav-link" href="/manufacturer-quote-pool-empty.html">Quote pool</a>
-        <a class="nav-link active" href="/manufacturer-orders-empty.html">Orders</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/dashboard-settings.html" class="header-btn secondary">Settings</a>
-        <a href="/manufacturer-quote-pool-empty.html" class="header-btn primary">Browse quote pool</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
-    <!-- HEADER -->
+  <main>
+    <!-- HERO -->
     <section class="section">
       <h1>Orders</h1>
-      <p>
-        Orders appear after you accept a quote request from the pool.
-        Manage progress here and post updates that syndicate to the publisher dashboard.
+      <p class="lead">
+        Orders appear once you accept work from the quote pool.
+        Manage progress, states, and updates here.
       </p>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Active</div>
-          <div class="stat-desc">0</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Completed</div>
-          <div class="stat-desc">0</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Updates posted</div>
-          <div class="stat-desc">0</div>
-        </div>
+      <div class="stats">
+        <div class="stat"><strong>0</strong><span>Active</span></div>
+        <div class="stat"><strong>0</strong><span>Completed</span></div>
+        <div class="stat"><strong>0</strong><span>Updates</span></div>
       </div>
     </section>
 
     <!-- EMPTY STATE -->
     <section class="section">
-      <div class="get-started-grid">
+      <div class="grid">
 
         <!-- LEFT -->
-        <div class="get-started-card">
+        <div class="card">
           <h2>No orders yet</h2>
           <p>
             Accept a request from the quote pool to start your first order.
-            Once accepted, you’ll manage sampling, production, shipping, and fulfillment here.
+            Once accepted, it will move through sampling, production, shipping, and fulfillment.
           </p>
 
-          <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>1) Browse the pool</h3>
-              </div>
-              <p>
-                Find work that matches your capability and current capacity.
-              </p>
+          <div class="list">
+            <div class="item">
+              <h3>1) Browse the pool</h3>
+              <p>Find work that matches your capabilities and capacity.</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>2) Accept a request</h3>
-              </div>
-              <p>
-                Acceptance pulls it out of the pool and converts it into an order.
-              </p>
+            <div class="item">
+              <h3>2) Accept a request</h3>
+              <p>Acceptance converts a request into an active order.</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>3) Post updates</h3>
-              </div>
-              <p>
-                Updates you post on the order detail page syndicate automatically to the publisher dashboard.
-              </p>
+            <div class="item">
+              <h3>3) Post updates</h3>
+              <p>Updates syndicate automatically to the publisher dashboard.</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>4) Fulfill</h3>
-              </div>
-              <p>
-                Move the order to fulfilled when complete. Public tracking reflects status only.
-              </p>
+            <div class="item">
+              <h3>4) Fulfill</h3>
+              <p>Move the order to fulfilled when complete.</p>
             </div>
           </div>
 
-          <div class="form-actions">
-            <a class="button-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
-            <a class="button-secondary" href="/how-it-works.html">How it works</a>
+          <div class="actions">
+            <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
+            <a class="btn btn-secondary" href="/how-it-works.html">How it works</a>
           </div>
         </div>
 
         <!-- RIGHT -->
-        <div class="get-started-card">
+        <div class="card">
           <h2>What you’ll see here</h2>
           <p>
             Orders stay organized with clear states and a shared update stream.
           </p>
 
-          <div class="publisher-feature-grid">
-            <div class="pub-feature-card">
+          <div class="feature-grid">
+            <div class="feature">
               <h3>States</h3>
               <p>Accepted → Sampling → Production → Shipping → Fulfilled.</p>
             </div>
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Updates</h3>
-              <p>Post progress with notes, photos, and milestones.</p>
+              <p>Post progress with notes and milestones.</p>
             </div>
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Syndication</h3>
-              <p>Publisher sees updates automatically — no email chains.</p>
+              <p>Publishers see updates automatically.</p>
             </div>
-            <div class="pub-feature-card">
+            <div class="feature">
               <h3>Clarity</h3>
-              <p>One source of truth for status and expectations.</p>
+              <p>One source of truth for expectations.</p>
             </div>
           </div>
 
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">Improve fit</div>
-                <p class="collab-desc">
-                  Keep your capabilities and lead times current so you pull the right work.
-                </p>
-                <a class="featured-link" href="/dashboard-settings.html">Update settings →</a>
-              </div>
-            </div>
+          <div class="actions">
+            <a class="btn btn-secondary" href="/dashboard-settings.html">Update capabilities</a>
           </div>
-
         </div>
 
       </div>
     </section>
-
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Manufacturer</h4>
-        <a href="/manufacturer-dashboard-empty.html">Dashboard</a>
-        <a href="/manufacturer-quote-pool-empty.html">Quote pool</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
-    </div>
-  </footer>
-
 </body>
 </html>

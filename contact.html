@@ -1,83 +1,262 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Safety & Trust — Order Pool</title>
-  <meta name="description" content="How Order Pool handles transparency, privacy boundaries, and trust in a shared manufacturing request pool." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Safety & trust — Order Pool</title>
+  <meta name="description" content="How Order Pool balances transparency, privacy, and trust in a shared manufacturing request pool." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – public) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      font-weight:800;
+      color:#0f172a;
+      text-decoration:none;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      justify-content:center;
+      flex:1;
+    }
+    .nav-links a{
+      color:#64748b;
+      font-weight:700;
+      font-size:.95rem;
+      text-decoration:none;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      justify-content:flex-end;
+      min-width:220px;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+    .section{margin-bottom:3.5rem}
+    .section-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:.75rem;
+    }
+
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+    h2{font-size:1.6rem;font-weight:900}
+    h3{font-size:1.05rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* CTA row */
+    .hero-actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+
+    /* Grids */
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+      margin-top:1rem;
+    }
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1.25rem;
+      margin-top:1rem;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.5rem;
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+    }
+    .icon{
+      width:34px;height:34px;
+      border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(61,32,174,.08);
+      color:#3d20ae;
+      font-weight:900;
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid #e5e7eb;
+      padding:2.5rem 2rem;
+      margin-top:4rem;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:1.5rem;
+    }
+    .footer-col h4{
+      font-size:.9rem;
+      font-weight:900;
+      margin-bottom:.5rem;
+    }
+    .footer-col a{
+      display:block;
+      color:#64748b;
+      text-decoration:none;
+      font-size:.9rem;
+      margin-bottom:.35rem;
+    }
+    .footer-bottom{
+      max-width:1200px;
+      margin:2rem auto 0;
+      font-size:.85rem;
+      color:#64748b;
+    }
+
+    @media(max-width:1000px){
+      .grid-3,.grid-4{grid-template-columns:1fr}
+      h1{font-size:2.2rem}
+      main{padding:3rem 1.25rem}
+    }
+  </style>
 </head>
 
 <body>
-
   <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
-      </div>
+  <header>
+    <nav>
+      <a href="/" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/for-publishers.html">Publishers</a>
-        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/for-publishers.html">Publishers</a></li>
+        <li><a href="/for-manufacturers.html">Manufacturers</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
 
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/auth-signin.html">Sign in</a>
+        <a class="btn btn-primary" href="/get-started.html">Get started</a>
       </div>
-    </div>
+    </nav>
   </header>
 
   <!-- PAGE -->
-  <main class="page">
-
+  <main>
     <!-- HERO -->
     <section class="section">
       <h1>Safety & trust</h1>
-      <p>
+      <p class="lead">
         Order Pool is designed to be transparent without exposing sensitive details.
-        Public tracking is status-only, while order execution stays anchored to private dashboards and updates.
+        Public tracking is status-only, while execution stays anchored to private dashboards.
       </p>
 
-      <div class="hero-ctas">
-        <a href="/public-orders.html" class="hero-cta-btn publishers">View public orders</a>
-        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/public-orders.html">View public orders</a>
+        <a class="btn btn-secondary" href="/how-it-works.html">How it works</a>
       </div>
     </section>
 
-    <!-- WHAT IS PUBLIC vs PRIVATE -->
+    <!-- PUBLIC VS PRIVATE -->
     <section class="section">
-      <div class="section-header-row">
+      <div class="section-header">
         <h2>Public vs private</h2>
-        <a class="featured-link" href="/privacy.html">Privacy policy →</a>
+        <a class="btn btn-secondary" href="/privacy.html">Privacy policy</a>
       </div>
 
-      <div class="publisher-feature-grid">
-        <div class="pub-feature-card">
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">✓</div>
           <h3>What’s public</h3>
           <p>
-            Accepted orders can be visible publicly with status-only tracking (e.g., accepted, in progress, fulfilled).
-            Public views are designed to build trust without revealing private communications.
+            Accepted orders may be visible publicly with status-only tracking
+            (accepted, in progress, fulfilled).
           </p>
         </div>
 
-        <div class="pub-feature-card">
+        <div class="card">
+          <div class="icon">✓</div>
           <h3>What’s private</h3>
           <p>
-            Brief details, sensitive requirements, pricing, and manufacturer-to-publisher updates live inside the platform
-            and appear on dashboards based on role permissions.
+            Brief details, pricing, assets, and communications live inside
+            role-restricted dashboards.
           </p>
         </div>
 
-        <div class="pub-feature-card">
+        <div class="card">
+          <div class="icon">✓</div>
           <h3>How updates work</h3>
           <p>
-            Manufacturers update the order from the order detail page. Those updates syndicate to the publisher dashboard
-            to reduce back-and-forth and keep execution aligned.
+            Manufacturers post updates on the order detail page.
+            Those updates syndicate automatically to publishers.
           </p>
         </div>
       </div>
@@ -85,107 +264,86 @@
 
     <!-- TRUST MECHANISMS -->
     <section class="section">
-      <h1>Trust mechanisms</h1>
-      <p>
-        The platform’s structure is meant to prevent ambiguity, reduce disputes, and keep work moving.
+      <h2>Trust mechanisms</h2>
+      <p class="lead">
+        The platform structure reduces ambiguity, prevents disputes,
+        and keeps work moving.
       </p>
 
-      <div class="how-grid">
-        <div class="how-card">
-          <div class="how-icon">✓</div>
-          <div class="how-title">Explicit states</div>
-          <div class="how-desc">
-            Orders move through clear states from acceptance to fulfillment.
-          </div>
+      <div class="grid-4">
+        <div class="card">
+          <h3>Explicit states</h3>
+          <p>Orders move through clear, visible lifecycle states.</p>
         </div>
-
-        <div class="how-card">
-          <div class="how-icon">✓</div>
-          <div class="how-title">Single source of truth</div>
-          <div class="how-desc">
-            The order is anchored to the original brief plus an update stream.
-          </div>
+        <div class="card">
+          <h3>Single source of truth</h3>
+          <p>The order is anchored to the original brief plus updates.</p>
         </div>
-
-        <div class="how-card">
-          <div class="how-icon">✓</div>
-          <div class="how-title">Role-based visibility</div>
-          <div class="how-desc">
-            Publishers and manufacturers see what they need, public sees status only.
-          </div>
+        <div class="card">
+          <h3>Role-based visibility</h3>
+          <p>Each role sees exactly what they need — nothing more.</p>
         </div>
-
-        <div class="how-card">
-          <div class="how-icon">✓</div>
-          <div class="how-title">Auditability</div>
-          <div class="how-desc">
-            Updates are timestamped and tied to the order’s lifecycle.
-          </div>
+        <div class="card">
+          <h3>Auditability</h3>
+          <p>Updates are timestamped and tied to the order lifecycle.</p>
         </div>
       </div>
     </section>
 
     <!-- GUIDELINES -->
     <section class="section">
-      <div class="section-header-row">
+      <div class="section-header">
         <h2>Guidelines</h2>
-        <a class="featured-link" href="/terms.html">Terms →</a>
+        <a class="btn btn-secondary" href="/terms.html">Terms</a>
       </div>
 
-      <div class="featured-row">
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Publishers</div>
-            <p class="collab-desc">
-              Use clear specs and constraints. Treat the brief as the anchor for execution.
-              Track progress through the dashboard rather than email threads.
-            </p>
-          </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Publishers</h3>
+          <p>
+            Use clear specs and constraints. Treat the brief as the execution anchor
+            and track progress in-platform.
+          </p>
         </div>
-
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Manufacturers</div>
-            <p class="collab-desc">
-              Accept work you can deliver. Post milestone updates in the order detail page so publishers stay aligned.
-              Keep sensitive details inside the platform.
-            </p>
-          </div>
+        <div class="card">
+          <h3>Manufacturers</h3>
+          <p>
+            Accept work you can deliver. Post milestone updates
+            so expectations stay aligned.
+          </p>
         </div>
-
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Public</div>
-            <p class="collab-desc">
-              Public tracking exists to show progress and accountability.
-              It is not a place for negotiations, pricing, or private communications.
-            </p>
-          </div>
+        <div class="card">
+          <h3>Public</h3>
+          <p>
+            Public tracking shows progress and accountability —
+            not negotiations or private details.
+          </p>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
     <section class="section">
-      <h1>Have a question about trust or privacy?</h1>
-      <p>
-        We’ll help you understand what’s visible, what’s private, and how orders move through the platform.
+      <h2>Have a question about trust or privacy?</h2>
+      <p class="lead">
+        We’ll help clarify what’s visible, what’s private,
+        and how orders move through the platform.
       </p>
 
-      <div class="hero-ctas">
-        <a href="/contact.html" class="hero-cta-btn publishers">Contact</a>
-        <a href="/privacy.html" class="hero-cta-btn manufacturers">Privacy</a>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/contact.html">Contact</a>
+        <a class="btn btn-secondary" href="/privacy.html">Privacy</a>
       </div>
     </section>
-
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer>
     <div class="footer-inner">
       <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        <p>
+          Order Pool is a shared manufacturing request platform
+          built on transparency and execution.
         </p>
       </div>
 
@@ -212,11 +370,8 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+      © Order Pool
     </div>
   </footer>
-
 </body>
 </html>

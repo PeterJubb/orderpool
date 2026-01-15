@@ -1,231 +1,330 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Briefs — Publisher — Order Pool</title>
   <meta name="description" content="Publisher briefs organized by status with clear next actions." />
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
-      background:#fafafa;
-      color:#1a1a1a;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
       line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
     }
 
-    /* Header */
-    .header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:100}
-    .header-inner{
-      max-width:1400px;margin:0 auto;padding:1rem 2rem;
-      display:flex;align-items:center;justify-content:space-between;gap:2rem;
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
-    .brand{font-weight:900;color:#0066ff}
-    .nav{display:flex;gap:1.5rem}
-    .nav-link{text-decoration:none;color:#666;font-weight:700}
-    .nav-link.active{color:#0066ff}
-    .header-actions{display:flex;gap:.75rem}
-    .header-btn{
-      padding:.55rem 1.2rem;border-radius:8px;
-      text-decoration:none;font-weight:750;white-space:nowrap;
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
     }
-    .header-btn.primary{background:#0066ff;color:#fff}
-    .header-btn.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain;display:block}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      align-items:center;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+      font-weight:700;
+      padding:.25rem;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:900}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:.95rem;
+      border:1px solid transparent;
+      font-weight:650;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.45rem;
+      white-space:nowrap;
+      cursor:pointer;
+      background:none;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
 
     /* Layout */
-    .page{max-width:1400px;margin:0 auto;padding:2rem}
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 3.5rem}
     .section{margin-bottom:3rem}
-    h1{font-size:2.4rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.5rem}
-    .lead{color:#666;font-size:1.05rem;max-width:800px}
-
-    /* Chips */
-    .chip{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:4px 10px;border-radius:999px;
-      font-size:12px;font-weight:800;
-      border:1px solid rgba(0,0,0,.1);
-      background:#fff;white-space:nowrap
+    h1{
+      font-size:2.6rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin-bottom:.4rem;
     }
-    .draft{background:rgba(0,0,0,.06)}
-    .pool{background:rgba(0,153,255,.1);color:#0077cc}
-    .accepted{background:rgba(0,180,120,.1);color:#1f7a55}
-
-    .meta{
-      display:flex;gap:8px;flex-wrap:wrap;margin-top:8px
+    .lead{
+      color:#475569;
+      font-size:1.05rem;
+      max-width:900px;
     }
 
     /* Kanban */
     .kanban{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:18px;
+      gap:1.25rem;
+      margin-top:2rem;
     }
     .lane{
-      background:#f3f4f6;
-      border:1px solid rgba(0,0,0,.08);
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
       border-radius:18px;
-      padding:14px;
+      padding:1rem;
     }
     .lane h2{
-      font-size:1.4rem;font-weight:900;
-      margin-bottom:12px;display:flex;align-items:center;gap:8px
+      font-size:1.3rem;
+      font-weight:900;
+      margin-bottom:.25rem;
+      display:flex;
+      gap:.4rem;
+      align-items:center;
     }
-    .lane-sub{color:#666;font-size:.9rem;margin-bottom:14px}
+    .lane-sub{
+      color:#64748b;
+      font-size:.9rem;
+      margin-bottom:.9rem;
+    }
 
     /* Cards */
     .card{
       background:#fff;
-      border:1px solid rgba(0,0,0,.08);
+      border:1px solid #e5e7eb;
       border-radius:16px;
-      padding:16px;
-      margin-bottom:14px;
-      box-shadow:0 12px 28px rgba(0,0,0,.05);
+      padding:1rem;
+      margin-bottom:.85rem;
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:.6rem;
     }
-    .card-title{font-weight:900;font-size:1.05rem}
-    .card-desc{color:#666;font-size:13px}
-    .card-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+    .card-title{font-weight:900;font-size:1rem}
+    .card-desc{color:#64748b;font-size:.85rem}
 
-    .btn-primary,.btn-secondary{
-      padding:.6rem 1.1rem;border-radius:10px;
-      font-weight:800;text-decoration:none;
-      display:inline-flex;align-items:center;gap:.4rem;
-      font-size:.9rem;
+    .meta{
+      display:flex;
+      gap:.4rem;
+      flex-wrap:wrap;
     }
-    .btn-primary{background:#0066ff;color:#fff}
-    .btn-secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
+    .chip{
+      font-size:.72rem;
+      font-weight:800;
+      padding:.25rem .6rem;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      color:#475569;
+    }
+    .chip.draft{background:#f1f5f9}
+    .chip.pool{
+      background:rgba(61,32,174,.08);
+      color:#3d20ae;
+      border-color:rgba(61,32,174,.25);
+    }
+    .chip.accepted{
+      background:rgba(16,185,129,.12);
+      color:#065f46;
+      border-color:rgba(16,185,129,.35);
+    }
+
+    .card-actions{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      margin-top:.25rem;
+    }
 
     /* CTA */
     .cta{
-      background:#fff;border:1px dashed rgba(0,0,0,.15);
-      border-radius:18px;padding:26px;text-align:center
+      background:linear-gradient(135deg, rgba(61,32,174,.08), rgba(59,244,156,.10));
+      border:1px dashed #e5e7eb;
+      border-radius:18px;
+      padding:2rem;
+      text-align:center;
     }
-    .cta h2{font-size:1.8rem;font-weight:900}
-    .cta p{color:#666;margin:10px 0 16px}
-    .cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .cta h2{
+      font-size:1.8rem;
+      font-weight:900;
+      margin-bottom:.4rem;
+    }
+    .cta p{
+      color:#64748b;
+      margin-bottom:1rem;
+    }
 
     @media(max-width:1100px){
       .kanban{grid-template-columns:1fr}
-      .page{padding:1.25rem}
+      main{padding:2.5rem 1.25rem 3rem}
+      h1{font-size:2.2rem}
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/publisher-dashboard-full.html" class="brand" aria-label="Order Pool dashboard">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-<header class="header">
-  <div class="header-inner">
-    <span class="brand">Order Pool</span>
-    <nav class="nav">
-      <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
-      <a class="nav-link active" href="/publisher-briefs-full.html">Briefs</a>
-      <a class="nav-link" href="/publisher-orders-full.html">Orders</a>
+      <ul class="nav-links">
+        <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/publisher-briefs-full.html" aria-current="page">Briefs</a></li>
+        <li><a href="/publisher-orders-full.html">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="/publisher-brief-new.html">Create brief</a>
+      </div>
     </nav>
-    <div class="header-actions">
-      <a class="header-btn secondary" href="/dashboard-settings.html">⚙️ Settings</a>
-      <a class="header-btn primary" href="/publisher-brief-new.html">➕ Create brief</a>
-    </div>
-  </div>
-</header>
+  </header>
 
-<main class="page">
+  <main>
+    <!-- HERO -->
+    <section class="section">
+      <h1>Briefs</h1>
+      <p class="lead">
+        Draft requests, publish them to the pool, and track which ones convert into orders.
+      </p>
+    </section>
 
-  <!-- HERO -->
-  <section class="section">
-    <h1>🧾 Briefs</h1>
-    <p class="lead">
-      Draft requests, publish them to the pool, and track which ones convert into orders.
-    </p>
-  </section>
+    <!-- KANBAN -->
+    <section class="section">
+      <div class="kanban">
 
-  <!-- KANBAN -->
-  <section class="section">
-    <div class="kanban">
+        <!-- DRAFT -->
+        <div class="lane">
+          <h2>✏️ Drafts</h2>
+          <p class="lane-sub">Not yet visible to manufacturers</p>
 
-      <!-- DRAFT -->
-      <div class="lane">
-        <h2>✏️ Drafts</h2>
-        <p class="lane-sub">Not yet visible to manufacturers</p>
-
-        <div class="card">
-          <div class="card-title">Accessory packaging refresh</div>
-          <div class="card-desc">Draft • Not submitted</div>
-          <div class="meta">
-            <span class="chip draft">✏️ Draft</span>
-          </div>
-          <div class="card-actions">
-            <a class="btn-primary" href="/publisher-brief-detail-draft.html">Continue editing</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- IN POOL -->
-      <div class="lane">
-        <h2>🧲 In pool</h2>
-        <p class="lane-sub">Published and awaiting acceptance</p>
-
-        <div class="card">
-          <div class="card-title">Counter display unit</div>
-          <div class="card-desc">1,000 units • Target Q3</div>
-          <div class="meta">
-            <span class="chip pool">🧲 In pool</span>
-            <span class="chip">📦 1,000 units</span>
-          </div>
-          <div class="card-actions">
-            <a class="btn-secondary" href="/publisher-brief-detail-submitted.html">View brief</a>
-            <a class="btn-secondary" href="/pricing.html">Pricing</a>
+          <div class="card">
+            <div class="card-title">Accessory packaging refresh</div>
+            <div class="card-desc">Draft • Not submitted</div>
+            <div class="meta">
+              <span class="chip draft">Draft</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="/publisher-brief-detail-draft.html">Continue editing</a>
+            </div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-title">Retail POP signage</div>
-          <div class="card-desc">Awaiting manufacturer acceptance</div>
-          <div class="meta">
-            <span class="chip pool">🧲 In pool</span>
+        <!-- IN POOL -->
+        <div class="lane">
+          <h2>🧲 In pool</h2>
+          <p class="lane-sub">Published and awaiting acceptance</p>
+
+          <div class="card">
+            <div class="card-title">Counter display unit</div>
+            <div class="card-desc">1,000 units • Target Q3</div>
+            <div class="meta">
+              <span class="chip pool">In pool</span>
+              <span class="chip">1,000 units</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-secondary" href="/publisher-brief-detail-submitted.html">View brief</a>
+              <a class="btn btn-secondary" href="/pricing.html">Pricing</a>
+            </div>
           </div>
-          <div class="card-actions">
-            <a class="btn-secondary" href="/publisher-brief-detail-submitted.html">View brief</a>
+
+          <div class="card">
+            <div class="card-title">Retail POP signage</div>
+            <div class="card-desc">Awaiting manufacturer acceptance</div>
+            <div class="meta">
+              <span class="chip pool">In pool</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-secondary" href="/publisher-brief-detail-submitted.html">View brief</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- ACCEPTED -->
-      <div class="lane">
-        <h2>✅ Accepted</h2>
-        <p class="lane-sub">Converted into active orders</p>
+        <!-- ACCEPTED -->
+        <div class="lane">
+          <h2>✅ Accepted</h2>
+          <p class="lane-sub">Converted into active orders</p>
 
-        <div class="card">
-          <div class="card-title">Seasonal apparel run</div>
-          <div class="card-desc">5,000 units • Accepted</div>
-          <div class="meta">
-            <span class="chip accepted">✅ Accepted</span>
-            <span class="chip">🚧 In progress</span>
-          </div>
-          <div class="card-actions">
-            <a class="btn-primary" href="/publisher-order-detail-updated.html">View order</a>
+          <div class="card">
+            <div class="card-title">Seasonal apparel run</div>
+            <div class="card-desc">5,000 units • Accepted</div>
+            <div class="meta">
+              <span class="chip accepted">Accepted</span>
+              <span class="chip">In progress</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="/publisher-order-detail-updated.html">View order</a>
+            </div>
           </div>
         </div>
+
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section">
-    <div class="cta">
-      <h2>✨ Ready to publish another request?</h2>
-      <p>Create a new brief and submit it when you’re ready.</p>
-      <div class="cta-actions">
-        <a class="btn-primary" href="/publisher-brief-new.html">➕ Create brief</a>
-        <a class="btn-secondary" href="/how-it-works.html">How it works</a>
+    <!-- CTA -->
+    <section class="section">
+      <div class="cta">
+        <h2>Ready to publish another request?</h2>
+        <p>Create a new brief and submit it when you’re ready.</p>
+        <div class="card-actions" style="justify-content:center">
+          <a class="btn btn-primary" href="/publisher-brief-new.html">Create brief</a>
+          <a class="btn btn-secondary" href="/how-it-works.html">How it works</a>
+        </div>
       </div>
-    </div>
-  </section>
-
-</main>
-
+    </section>
+  </main>
 </body>
 </html>

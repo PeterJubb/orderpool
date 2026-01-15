@@ -1,297 +1,356 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Orders — Publisher — Order Pool</title>
-  <meta name="description" content="Publisher orders with progress, timelines, and syndicated updates." />
+  <meta name="description" content="Track accepted orders from sampling through fulfillment with syndicated updates." />
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
-      background:#fafafa;
-      color:#1a1a1a;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
       line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
     }
 
-    /* Header */
-    .header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:100}
-    .header-inner{
-      max-width:1400px;margin:0 auto;padding:1rem 2rem;
-      display:flex;align-items:center;justify-content:space-between;gap:2rem;
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
-    .brand{font-weight:900;color:#0066ff}
-    .nav{display:flex;gap:1.5rem}
-    .nav-link{text-decoration:none;color:#666;font-weight:700}
-    .nav-link.active{color:#0066ff}
-    .header-actions{display:flex;gap:.75rem}
-    .header-btn{
-      padding:.55rem 1.2rem;border-radius:8px;
-      text-decoration:none;font-weight:750;white-space:nowrap;
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
     }
-    .header-btn.primary{background:#0066ff;color:#fff}
-    .header-btn.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain;display:block}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      align-items:center;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+      font-weight:700;
+      padding:.25rem;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:900}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:.95rem;
+      border:1px solid transparent;
+      font-weight:650;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.45rem;
+      white-space:nowrap;
+      background:none;
+      cursor:pointer;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
 
     /* Layout */
-    .page{max-width:1400px;margin:0 auto;padding:2rem}
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 3.5rem}
     .section{margin-bottom:3rem}
-    h1{font-size:2.4rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.5rem}
-    .lead{color:#666;font-size:1.05rem;max-width:800px}
+    h1{
+      font-size:2.6rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin-bottom:.4rem;
+    }
+    h2{
+      font-size:1.6rem;
+      font-weight:900;
+      margin-bottom:.4rem;
+    }
+    .lead{
+      color:#475569;
+      font-size:1.05rem;
+      max-width:900px;
+    }
 
     /* Stats */
-    .stat-row{
-      display:flex;gap:14px;flex-wrap:wrap;margin-top:1.25rem
+    .stats{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
     }
     .stat{
-      background:#fff;border:1px solid rgba(0,0,0,.08);
-      border-radius:14px;padding:14px 18px;
-      display:flex;gap:12px;align-items:center;
-      box-shadow:0 10px 24px rgba(0,0,0,.05)
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem 1rem;
+      display:flex;
+      gap:.75rem;
+      align-items:center;
     }
-    .stat-ico{font-size:22px}
-    .stat-label{font-size:12px;color:#777;font-weight:700}
-    .stat-value{font-size:22px;font-weight:900}
+    .stat strong{font-size:1.3rem;font-weight:900}
+    .stat span{font-size:.75rem;color:#64748b;font-weight:800;text-transform:uppercase}
 
-    /* Section head */
-    .section-head{
-      display:flex;justify-content:space-between;align-items:center;
-      gap:1rem;flex-wrap:wrap;margin-bottom:1rem
-    }
-    .section-head h2{font-size:1.8rem;font-weight:900}
-
-    /* Chips */
-    .chip{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:4px 10px;border-radius:999px;
-      font-size:12px;font-weight:800;
-      border:1px solid rgba(0,0,0,.1);
-      background:#fff;white-space:nowrap
-    }
-    .sampling{background:rgba(125,92,255,.1);color:#6b5cff}
-    .production{background:rgba(0,153,255,.1);color:#0077cc}
-    .shipping{background:rgba(0,180,120,.1);color:#1f7a55}
-    .done{background:rgba(0,0,0,.06)}
-    .due{background:rgba(255,165,0,.15);color:#b45309}
-
-    /* Orders */
+    /* Orders grid */
     .order-grid{
       display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:18px;
+      grid-template-columns:1fr 1fr;
+      gap:1.25rem;
     }
     .order-card{
-      background:#fff;border:1px solid rgba(0,0,0,.08);
-      border-radius:18px;padding:18px;
-      display:flex;flex-direction:column;gap:14px;
-      box-shadow:0 14px 32px rgba(0,0,0,.06)
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:1.25rem;
+      display:flex;
+      flex-direction:column;
+      gap:.85rem;
     }
-    .order-title{font-weight:900;font-size:1.15rem}
-    .order-sub{color:#666;font-size:13px}
-    .order-meta{display:flex;gap:8px;flex-wrap:wrap}
+    .order-title{font-weight:900;font-size:1.1rem}
+    .order-sub{font-size:.85rem;color:#64748b}
 
     /* Timeline */
     .timeline{
-      display:flex;gap:10px;
-      background:#fafafa;border:1px solid rgba(0,0,0,.08);
-      border-radius:14px;padding:10px
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
     }
-    .t-step{
-      display:flex;align-items:center;gap:6px;
-      font-size:12px;color:#666
+    .step{
+      font-size:.75rem;
+      font-weight:900;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      color:#64748b;
+      background:#fff;
     }
-    .t-dot{
-      width:26px;height:26px;border-radius:9px;
-      display:flex;align-items:center;justify-content:center;
-      background:#fff;border:1px solid rgba(0,0,0,.1)
+    .step.done{
+      background:rgba(16,185,129,.12);
+      color:#065f46;
+      border-color:rgba(16,185,129,.35);
     }
-    .active{font-weight:900;color:#0066ff}
-    .done-step{font-weight:900;color:#1f7a55}
+    .step.active{
+      background:rgba(61,32,174,.08);
+      color:#3d20ae;
+      border-color:rgba(61,32,174,.25);
+    }
 
     /* Progress */
     .progress{
-      height:10px;border-radius:999px;
-      background:rgba(0,0,0,.06);overflow:hidden
+      height:8px;
+      border-radius:999px;
+      background:#f1f5f9;
+      overflow:hidden;
     }
     .progress span{
-      display:block;height:100%;
-      background:linear-gradient(90deg,#0066ff,#7d5cff)
+      display:block;
+      height:100%;
+      background:linear-gradient(90deg,#3d20ae,#7c5cff);
     }
-    .progress-label{
-      display:flex;justify-content:space-between;
-      font-size:12px;color:#666;margin-top:6px
+    .progress-meta{
+      display:flex;
+      justify-content:space-between;
+      font-size:.75rem;
+      color:#64748b;
+      margin-top:.3rem;
     }
 
-    /* Actions */
-    .actions{display:flex;gap:10px;flex-wrap:wrap}
-    .btn-primary,.btn-secondary{
-      padding:.6rem 1.2rem;border-radius:10px;
-      font-weight:800;text-decoration:none;
-      display:inline-flex;align-items:center;gap:.4rem
+    .order-actions{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      margin-top:.25rem;
     }
-    .btn-primary{background:#0066ff;color:#fff}
-    .btn-secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
 
     /* CTA */
     .cta{
-      background:#fff;border:1px dashed rgba(0,0,0,.15);
-      border-radius:18px;padding:26px;text-align:center
+      background:linear-gradient(135deg, rgba(61,32,174,.08), rgba(59,244,156,.10));
+      border:1px dashed #e5e7eb;
+      border-radius:18px;
+      padding:2rem;
+      text-align:center;
     }
-    .cta h2{font-size:1.8rem;font-weight:900}
-    .cta p{color:#666;margin:10px 0 16px}
-    .cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 
-    @media(max-width:900px){
+    @media(max-width:1000px){
       .order-grid{grid-template-columns:1fr}
-      .page{padding:1.25rem}
+      main{padding:2.5rem 1.25rem 3rem}
+      h1{font-size:2.2rem}
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/publisher-dashboard-full.html" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-<header class="header">
-  <div class="header-inner">
-    <span class="brand">Order Pool</span>
-    <nav class="nav">
-      <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
-      <a class="nav-link" href="/publisher-briefs-full.html">Briefs</a>
-      <a class="nav-link active" href="/publisher-orders-full.html">Orders</a>
+      <ul class="nav-links">
+        <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/publisher-briefs-full.html">Briefs</a></li>
+        <li><a href="/publisher-orders-full.html" aria-current="page">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="/publisher-brief-new.html">Create brief</a>
+      </div>
     </nav>
-    <div class="header-actions">
-      <a class="header-btn secondary" href="/dashboard-settings.html">⚙️ Settings</a>
-      <a class="header-btn primary" href="/publisher-brief-new.html">➕ Create brief</a>
-    </div>
-  </div>
-</header>
+  </header>
 
-<main class="page">
+  <main>
+    <!-- HERO -->
+    <section class="section">
+      <h1>Orders</h1>
+      <p class="lead">
+        Accepted work from manufacturers. Updates are syndicated automatically.
+      </p>
 
-  <!-- HERO -->
-  <section class="section">
-    <h1>📦 Orders</h1>
-    <p class="lead">
-      Track accepted work from sampling through fulfillment. Manufacturer updates appear automatically.
-    </p>
+      <div class="stats">
+        <div class="stat"><strong>2</strong><span>Active</span></div>
+        <div class="stat"><strong>4</strong><span>Completed</span></div>
+        <div class="stat"><strong>5</strong><span>Updates this week</span></div>
+      </div>
+    </section>
 
-    <div class="stat-row">
-      <div class="stat"><span class="stat-ico">🚧</span><div><div class="stat-label">Active</div><div class="stat-value">2</div></div></div>
-      <div class="stat"><span class="stat-ico">✅</span><div><div class="stat-label">Completed</div><div class="stat-value">4</div></div></div>
-      <div class="stat"><span class="stat-ico">📰</span><div><div class="stat-label">Updates this week</div><div class="stat-value">5</div></div></div>
-    </div>
-  </section>
+    <!-- ACTIVE -->
+    <section class="section">
+      <h2>Active</h2>
 
-  <!-- ACTIVE -->
-  <section class="section">
-    <div class="section-head">
-      <h2>🚧 Active</h2>
-      <span class="lead">In progress</span>
-    </div>
+      <div class="order-grid">
+        <div class="order-card">
+          <div>
+            <div class="order-title">Retail display packaging</div>
+            <div class="order-sub">ORD-11804 • 2,500 units • Updated 2 days ago</div>
+          </div>
 
-    <div class="order-grid">
+          <div class="timeline">
+            <span class="step done">Sampling</span>
+            <span class="step active">Production</span>
+            <span class="step">Shipping</span>
+            <span class="step">Done</span>
+          </div>
 
-      <!-- Order -->
-      <div class="order-card">
-        <div>
-          <div class="order-title">📦 Retail display packaging</div>
-          <div class="order-sub">ORD-11804 • 2,500 units • Last update: 2 days ago</div>
+          <div>
+            <div class="progress"><span style="width:62%"></span></div>
+            <div class="progress-meta">
+              <span>Next: Mid-run QC</span>
+              <span>ETA Jan 20</span>
+            </div>
+          </div>
+
+          <div class="order-actions">
+            <a class="btn btn-primary" href="/publisher-order-detail-updated.html">View order</a>
+            <a class="btn btn-secondary" href="/public-order-detail.html">Public view</a>
+          </div>
         </div>
 
-        <div class="timeline">
-          <div class="t-step done-step"><span class="t-dot">🟣</span>Sampling</div>
-          <div class="t-step active"><span class="t-dot">🔵</span>Production</div>
-          <div class="t-step"><span class="t-dot">🟢</span>Shipping</div>
-          <div class="t-step"><span class="t-dot">✅</span>Done</div>
-        </div>
+        <div class="order-card">
+          <div>
+            <div class="order-title">Seasonal apparel run</div>
+            <div class="order-sub">ORD-11722 • 5,000 units • Updated yesterday</div>
+          </div>
 
-        <div>
-          <div class="progress"><span style="width:62%"></span></div>
-          <div class="progress-label"><span>Next: Mid-run QC</span><span>ETA Jan 20</span></div>
-        </div>
+          <div class="timeline">
+            <span class="step active">Sampling</span>
+            <span class="step">Production</span>
+            <span class="step">Shipping</span>
+            <span class="step">Done</span>
+          </div>
 
-        <div class="order-meta">
-          <span class="chip production">🔵 Production</span>
-          <span class="chip">👀 Synced</span>
-        </div>
+          <div>
+            <div class="progress"><span style="width:28%"></span></div>
+            <div class="progress-meta">
+              <span>Next: Sample photos</span>
+              <span>ETA Jan 15</span>
+            </div>
+          </div>
 
-        <div class="actions">
-          <a class="btn-primary" href="/publisher-order-detail-updated.html">View order</a>
-          <a class="btn-secondary" href="/public-order-detail.html">Public view</a>
+          <div class="order-actions">
+            <a class="btn btn-primary" href="/publisher-order-detail-updated.html">View order</a>
+            <a class="btn btn-secondary" href="/public-order-detail.html">Public view</a>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Order -->
-      <div class="order-card">
-        <div>
-          <div class="order-title">👕 Seasonal apparel run</div>
-          <div class="order-sub">ORD-11722 • 5,000 units • Last update: yesterday</div>
+    <!-- COMPLETED -->
+    <section class="section">
+      <h2>Completed</h2>
+
+      <div class="order-grid">
+        <div class="order-card">
+          <div class="order-title">Accessory batch run</div>
+          <div class="order-sub">ORD-11411 • Completed 3 weeks ago</div>
+          <a class="btn btn-secondary" href="/publisher-order-detail-updated.html">View order</a>
         </div>
 
-        <div class="timeline">
-          <div class="t-step active"><span class="t-dot">🟣</span>Sampling</div>
-          <div class="t-step"><span class="t-dot">🔵</span>Production</div>
-          <div class="t-step"><span class="t-dot">🟢</span>Shipping</div>
-          <div class="t-step"><span class="t-dot">✅</span>Done</div>
-        </div>
-
-        <div>
-          <div class="progress"><span style="width:28%"></span></div>
-          <div class="progress-label"><span>Next: Sample photos</span><span>ETA Jan 15</span></div>
-        </div>
-
-        <div class="order-meta">
-          <span class="chip sampling">🟣 Sampling</span>
-          <span class="chip due">⏰ Update due</span>
-        </div>
-
-        <div class="actions">
-          <a class="btn-primary" href="/publisher-order-detail-updated.html">View order</a>
-          <a class="btn-secondary" href="/public-order-detail.html">Public view</a>
+        <div class="order-card">
+          <div class="order-title">Counter display kit</div>
+          <div class="order-sub">ORD-11302 • Completed 6 weeks ago</div>
+          <a class="btn btn-secondary" href="/publisher-order-detail-updated.html">View order</a>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- COMPLETED -->
-  <section class="section">
-    <div class="section-head">
-      <h2>✅ Completed</h2>
-      <span class="lead">Fulfilled</span>
-    </div>
-
-    <div class="order-grid">
-
-      <div class="order-card">
-        <div class="order-title">Accessory batch run</div>
-        <div class="order-sub">ORD-11411 • Completed 3 weeks ago</div>
-        <span class="chip done">✅ Fulfilled</span>
-        <a class="btn-secondary" href="/publisher-order-detail-updated.html">View order</a>
+    <!-- CTA -->
+    <section class="section">
+      <div class="cta">
+        <h2>Start another run</h2>
+        <p class="lead">Create and publish a new brief when ready.</p>
+        <div class="order-actions" style="justify-content:center">
+          <a class="btn btn-primary" href="/publisher-brief-new.html">Create brief</a>
+          <a class="btn btn-secondary" href="/publisher-briefs-full.html">View briefs</a>
+        </div>
       </div>
-
-      <div class="order-card">
-        <div class="order-title">Counter display kit</div>
-        <div class="order-sub">ORD-11302 • Completed 6 weeks ago</div>
-        <span class="chip done">✅ Fulfilled</span>
-        <a class="btn-secondary" href="/publisher-order-detail-updated.html">View order</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section">
-    <div class="cta">
-      <h2>✨ Start a new run</h2>
-      <p>Create a new brief and publish it when ready.</p>
-      <div class="cta-actions">
-        <a class="btn-primary" href="/publisher-brief-new.html">➕ Create brief</a>
-        <a class="btn-secondary" href="/publisher-briefs-full.html">🧾 View briefs</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
+    </section>
+  </main>
 </body>
 </html>

@@ -1,148 +1,264 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OrderPool – Index 2 (All Pages)</title>
-
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Index2 — Order Pool</title>
+  <meta name="description" content="Master index of all Order Pool pages grouped by role and state." />
 
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f7f8fa;
-      color: #111;
-      margin: 0;
-      padding: 40px;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      color:#0f172a;
+      background:#ffffff;
+      line-height:1.6;
     }
 
-    h1 {
-      margin-bottom: 8px;
+    header{
+      border-bottom:1px solid #e5e7eb;
+      padding:1.25rem 2rem;
+    }
+    header .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      font-weight:900;
+      text-decoration:none;
+      color:#0f172a;
+    }
+    header img{width:34px;height:34px}
+
+    main{
+      max-width:1200px;
+      margin:0 auto;
+      padding:3rem 2rem 4rem;
     }
 
-    p {
-      color: #555;
-      margin-bottom: 32px;
+    h1{font-size:2.6rem;font-weight:900;margin-bottom:.75rem}
+    h2{font-size:1.6rem;font-weight:900;margin-bottom:.5rem}
+    p{color:#475569}
+
+    .section{margin-bottom:3rem}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:1.25rem;
+      margin-top:1rem;
     }
 
-    .section {
-      margin-bottom: 40px;
+    .card{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:1.25rem;
+      background:#fff;
     }
 
-    .section h2 {
-      border-bottom: 2px solid #e2e5ea;
-      padding-bottom: 6px;
-      margin-bottom: 16px;
+    .card h3{
+      font-size:1.05rem;
+      font-weight:900;
+      margin-bottom:.5rem;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 12px;
+    ul{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:.35rem;
     }
 
-    li a {
-      display: block;
-      padding: 12px 14px;
-      background: #fff;
-      border: 1px solid #e2e5ea;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      transition: all 0.15s ease;
+    a{
+      text-decoration:none;
+      color:#3d20ae;
+      font-weight:600;
+      font-size:.95rem;
+    }
+    a:hover{text-decoration:underline}
+
+    .note{
+      font-size:.85rem;
+      color:#64748b;
+      margin-top:.35rem;
     }
 
-    li a:hover {
-      border-color: #4f46e5;
-      color: #4f46e5;
-      transform: translateY(-1px);
-    }
-
-    .meta {
-      font-size: 12px;
-      color: #666;
-      margin-top: 4px;
-      font-weight: 400;
+    @media(max-width:800px){
+      h1{font-size:2.2rem}
+      main{padding:2.5rem 1.25rem}
     }
   </style>
 </head>
+
 <body>
+<header>
+  <a class="brand" href="/index.html">
+    <img src="Orderpool_logo.png" alt="Order Pool logo" />
+    <span>Order Pool — index2</span>
+  </a>
+</header>
 
-  <h1>📘 OrderPool – Index 2</h1>
-  <p>Complete list of all implemented pages. Use this for QA, demos, and stakeholder walkthroughs.</p>
+<main>
+  <h1>Master page index</h1>
+  <p>
+    This page links to <strong>every Order Pool screen</strong>, grouped by role and state.
+    Use it for stakeholder review, QA, and navigation outside the normal app flow.
+  </p>
 
-  <!-- PUBLIC / MARKETING -->
+  <!-- PUBLIC -->
   <section class="section">
-    <h2>🌍 Public / Marketing</h2>
-    <ul>
-      <li><a href="index.html">Homepage <div class="meta">Primary landing</div></a></li>
-      <li><a href="how-it-works.html">How It Works</a></li>
-      <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="get-started.html">Get Started</a></li>
-      <li><a href="for-publishers.html">For Publishers</a></li>
-      <li><a href="for-manufacturers.html">For Manufacturers</a></li>
-      <li><a href="team.html">Team</a></li>
-    </ul>
-  </section>
+    <h2>Public / Marketing</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Core</h3>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/how-it-works.html">How it works</a></li>
+          <li><a href="/pricing.html">Pricing</a></li>
+          <li><a href="/get-started.html">Get started</a></li>
+        </ul>
+      </div>
 
-  <!-- CASE STUDIES -->
-  <section class="section">
-    <h2>📚 Case Studies</h2>
-    <ul>
-      <li><a href="case-studies.html">Case Studies Index</a></li>
-      <li><a href="case-study-detail.html">Case Study Detail</a></li>
-    </ul>
+      <div class="card">
+        <h3>Audience</h3>
+        <ul>
+          <li><a href="/for-publishers.html">For publishers</a></li>
+          <li><a href="/for-manufacturers.html">For manufacturers</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/mission.html">Mission</a></li>
+          <li><a href="/team.html">Team</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/newsletter-subscribe.html">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- AUTH -->
   <section class="section">
-    <h2>🔐 Authentication</h2>
-    <ul>
-      <li><a href="auth-signin.html">Sign In</a></li>
-      <li><a href="auth-join.html">Join / Sign Up</a></li>
-    </ul>
+    <h2>Authentication</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Auth flows</h3>
+        <ul>
+          <li><a href="/auth-signin.html">Sign in</a></li>
+          <li><a href="/auth-join.html">Join</a></li>
+          <li><a href="/auth-forgot.html">Forgot password</a></li>
+          <li><a href="/auth-reset.html">Reset password</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- PUBLISHER -->
   <section class="section">
-    <h2>🟦 Publisher</h2>
-    <ul>
-      <li><a href="publisher-dashboard-full.html">Publisher Dashboard</a></li>
-      <li><a href="publisher-brief-new.html">New Brief</a></li>
-      <li><a href="publisher-briefs-full.html">Briefs – Full</a></li>
-      <li><a href="publisher-brief-detail-draft.html">Brief Detail – Draft</a></li>
-      <li><a href="publisher-orders-full.html">Orders – Full</a></li>
-      <li><a href="publisher-order-detail-readonly.html">Order Detail – Read-Only</a></li>
-    </ul>
+    <h2>Publisher — App</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Dashboard</h3>
+        <ul>
+          <li><a href="/publisher-dashboard-empty.html">Dashboard (empty)</a></li>
+          <li><a href="/publisher-dashboard-full.html">Dashboard (full)</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Briefs</h3>
+        <ul>
+          <li><a href="/publisher-briefs-empty.html">Briefs (empty)</a></li>
+          <li><a href="/publisher-briefs-full.html">Briefs (full)</a></li>
+          <li><a href="/publisher-brief-new.html">New brief</a></li>
+          <li><a href="/publisher-brief-detail-draft.html">Brief (draft)</a></li>
+          <li><a href="/publisher-brief-submit.html">Brief submit</a></li>
+          <li><a href="/publisher-brief-detail-submitted.html">Brief (submitted)</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Orders</h3>
+        <ul>
+          <li><a href="/publisher-orders-empty.html">Orders (empty)</a></li>
+          <li><a href="/publisher-orders-full.html">Orders (full)</a></li>
+          <li><a href="/publisher-order-detail-updated.html">Order detail</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- MANUFACTURER -->
   <section class="section">
-    <h2>🟩 Manufacturer</h2>
-    <ul>
-      <li><a href="manufacturer-dashboard-full.html">Manufacturer Dashboard</a></li>
-    </ul>
+    <h2>Manufacturer — App</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Dashboard</h3>
+        <ul>
+          <li><a href="/manufacturer-dashboard-empty.html">Dashboard (empty)</a></li>
+          <li><a href="/manufacturer-dashboard-full.html">Dashboard (full)</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Quote pool</h3>
+        <ul>
+          <li><a href="/manufacturer-quote-pool-empty.html">Quote pool (empty)</a></li>
+          <li><a href="/manufacturer-quote-pool-full.html">Quote pool (full)</a></li>
+          <li><a href="/manufacturer-quote-detail.html">Quote detail</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Orders</h3>
+        <ul>
+          <li><a href="/manufacturer-orders-empty.html">Orders (empty)</a></li>
+          <li><a href="/manufacturer-orders-full.html">Orders (full)</a></li>
+          <li><a href="/manufacturer-order-detail-editable.html">Order detail (editable)</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <!-- SETTINGS -->
+  <!-- PUBLIC TRACKING -->
   <section class="section">
-    <h2>⚙️ Settings</h2>
-    <ul>
-      <li><a href="dashboard-settings.html">Dashboard Settings</a></li>
-    </ul>
+    <h2>Public tracking</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Status-only</h3>
+        <ul>
+          <li><a href="/public-orders.html">Public orders</a></li>
+          <li><a href="/public-order-detail.html">Public order detail</a></li>
+        </ul>
+        <p class="note">No pricing or assets exposed</p>
+      </div>
+    </div>
   </section>
 
   <!-- SYSTEM -->
   <section class="section">
-    <h2>🧩 System / Assets</h2>
-    <ul>
-      <li><a href="styles.css">Stylesheet</a></li>
-    </ul>
+    <h2>System / Edge cases</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Errors & maintenance</h3>
+        <ul>
+          <li><a href="/404.html">404</a></li>
+          <li><a href="/500.html">500</a></li>
+          <li><a href="/maintenance.html">Maintenance</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Settings</h3>
+        <ul>
+          <li><a href="/dashboard-settings.html">Dashboard settings</a></li>
+          <li><a href="/safety.html">Safety & trust</a></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
+</main>
 </body>
 </html>

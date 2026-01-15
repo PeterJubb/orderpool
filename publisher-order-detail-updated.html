@@ -1,166 +1,307 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Order detail — Publisher — Order Pool</title>
   <meta name="description" content="Publisher order detail view with syndicated manufacturer updates." />
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:900;
+    }
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
+    .section{margin-bottom:3rem}
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+    h3{font-size:1.05rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Meta pills */
+    .meta{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      margin-top:1.2rem;
+    }
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:.45rem .85rem;
+      font-size:.75rem;
+      font-weight:800;
+      background:#f8fafc;
+      color:#475569;
+    }
+    .pill.state{
+      background:rgba(61,32,174,.08);
+      color:#3d20ae;
+      border-color:rgba(61,32,174,.25);
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1.5rem;
+    }
+
+    /* Cards */
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.5rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    /* Timeline */
+    .timeline{
+      border-left:2px solid #e5e7eb;
+      padding-left:1rem;
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .step{
+      position:relative;
+      font-weight:700;
+    }
+    .step::before{
+      content:"";
+      position:absolute;
+      left:-1.55rem;
+      top:.4rem;
+      width:.6rem;
+      height:.6rem;
+      border-radius:999px;
+      background:#e5e7eb;
+    }
+    .step.active::before{background:#3d20ae}
+
+    /* Form */
+    label{
+      font-size:.75rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      color:#475569;
+      margin-bottom:.25rem;
+      display:block;
+    }
+    textarea{
+      width:100%;
+      padding:.7rem .8rem;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      font-family:inherit;
+      font-size:.95rem;
+      resize:vertical;
+    }
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.5rem;
+    }
+
+    /* Updates */
+    .update{
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:1rem;
+      background:#fafcff;
+      display:flex;
+      flex-direction:column;
+      gap:.4rem;
+    }
+    .update span{
+      font-size:.75rem;
+      font-weight:800;
+      color:#64748b;
+    }
+
+    @media(max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      main{padding:2.5rem 1.25rem}
+      h1{font-size:2.2rem}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/publisher-dashboard-full.html" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- APP HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/publisher-briefs-full.html">Briefs</a></li>
+        <li><a href="/publisher-orders-full.html" aria-current="page">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/publisher-orders-full.html">Back</a>
+        <a class="btn btn-primary" href="/public-order-detail.html">Public view</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
-        <a class="nav-link" href="/publisher-briefs-full.html">Briefs</a>
-        <a class="nav-link active" href="/publisher-orders-full.html">Orders</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/publisher-orders-full.html" class="header-btn secondary">Back</a>
-        <a href="/public-order-detail.html" class="header-btn primary">Public view</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
-    <!-- TITLE / STATE -->
+  <main>
+    <!-- HERO -->
     <section class="section">
       <h1>Retail display packaging</h1>
-      <p>
-        Order detail. Manufacturer updates syndicate here automatically.
+      <p class="lead">
+        Manufacturer updates syndicate here automatically. This is your source of truth for execution.
       </p>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Order</div>
-          <div class="stat-desc">ORD-11804</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">State</div>
-          <div class="stat-desc">In production</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Quantity</div>
-          <div class="stat-desc">2,500 units</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Last update</div>
-          <div class="stat-desc">2 days ago</div>
-        </div>
+      <div class="meta">
+        <span class="pill">Order: ORD-11804</span>
+        <span class="pill state">Production</span>
+        <span class="pill">Qty: 2,500</span>
+        <span class="pill">Updated 2 days ago</span>
       </div>
     </section>
 
     <!-- CONTENT -->
     <section class="section">
-      <div class="get-started-grid">
+      <div class="grid">
 
-        <!-- LEFT: ORDER SUMMARY + PROGRESS -->
-        <div class="get-started-card">
+        <!-- LEFT -->
+        <div class="card">
           <h2>Order summary</h2>
+          <p>Anchored to the original brief.</p>
+
+          <div class="timeline">
+            <div class="step">Accepted</div>
+            <div class="step">Sampling</div>
+            <div class="step active">Production</div>
+            <div class="step">Shipping</div>
+            <div class="step">Fulfilled</div>
+          </div>
+
+          <h3 style="margin-top:.75rem">Details</h3>
           <p>
-            Anchored to the original brief. Execution updates live in the update stream below.
+            Counter display unit • BRF-02988 •
+            <a href="/publisher-brief-detail-submitted.html">View brief</a>
           </p>
-
-          <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Origin brief</h3>
-              </div>
-              <p>
-                Counter display unit • BRF-02988 • <a href="/publisher-brief-detail-submitted.html">View brief</a>
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Manufacturer</h3>
-              </div>
-              <p>
-                (Manufacturer Name) • Accepted 10 days ago
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Timeline</h3>
-              </div>
-              <p>
-                Sampling complete • Production underway • Estimated ship: (date)
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Constraints</h3>
-              </div>
-              <p>
-                Matte finish • Spot UV on logo • Insert tray • Shelf-ready
-              </p>
-            </div>
-          </div>
-
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">Progress</div>
-                <p class="collab-desc">
-                  Accepted → Sampling → <strong>Production</strong> → Shipping → Fulfilled
-                </p>
-                <a class="featured-link" href="/public-order-detail.html">See public status →</a>
-              </div>
-            </div>
-          </div>
-
+          <p>
+            Manufacturer accepted 10 days ago.<br />
+            Constraints: matte finish, spot UV logo, insert tray, shelf-ready.
+          </p>
         </div>
 
-        <!-- RIGHT: ACTIONS + QUICK NOTES -->
-        <div class="get-started-card">
-          <h2>Actions</h2>
+        <!-- RIGHT -->
+        <div class="card">
+          <h2>Post a note</h2>
           <p>
-            Keep questions and requests attached to the order so nothing gets lost in email.
+            Keep questions and requests attached to the order.
           </p>
 
-          <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="note">Add a note / request</label>
-              <textarea
-                class="form-textarea"
-                id="note"
-                name="note"
-                rows="5"
-                placeholder="Ask a question, request a photo, clarify a constraint, confirm a deadline…"
-              ></textarea>
-            </div>
+          <label>Add a note / request</label>
+          <textarea rows="5" placeholder="Ask a question, request a photo, confirm a deadline…"></textarea>
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Post note</button>
-              <a class="button-secondary" href="/contact.html">Escalate</a>
-            </div>
-          </form>
+          <div class="actions">
+            <button class="btn btn-primary">Post note</button>
+            <a class="btn btn-secondary" href="/contact.html">Escalate</a>
+          </div>
 
-          <div class="publisher-stats">
-            <div class="stat-pill">
-              <div class="stat-label">Updates</div>
-              <div class="stat-desc">8</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Open questions</div>
-              <div class="stat-desc">1</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Files</div>
-              <div class="stat-desc">3</div>
-            </div>
+          <div class="meta">
+            <span class="pill">Updates: 8</span>
+            <span class="pill">Open questions: 1</span>
+            <span class="pill">Files: 3</span>
           </div>
         </div>
 
@@ -169,93 +310,35 @@
 
     <!-- UPDATE STREAM -->
     <section class="section">
-      <div class="section-header-row">
-        <h2>Update stream</h2>
-        <span class="cs-hero-sub">Syndicated updates from the manufacturer</span>
-      </div>
+      <h2>Update stream</h2>
+      <p class="lead">Syndicated updates from the manufacturer.</p>
 
-      <div class="featured-row">
-
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Production started</div>
-            <p class="collab-desc">
-              We began the production run today. First QC checks look good. Next update after mid-run inspection.
-            </p>
-            <span class="cs-hero-sub">Manufacturer • 2 days ago</span>
-          </div>
+      <div class="grid">
+        <div class="update">
+          <strong>Production started</strong>
+          <p>First QC checks look good. Next update after mid-run inspection.</p>
+          <span>Manufacturer • 2 days ago</span>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Sampling approved</div>
-            <p class="collab-desc">
-              Final sample approved. Dieline version v4 locked for production.
-            </p>
-            <span class="cs-hero-sub">Manufacturer • 6 days ago</span>
-          </div>
+        <div class="update">
+          <strong>Sampling approved</strong>
+          <p>Dieline v4 locked for production.</p>
+          <span>Manufacturer • 6 days ago</span>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Material confirmation</div>
-            <p class="collab-desc">
-              Matte stock confirmed. Spot UV pass confirmed. Insert tray sourced and approved.
-            </p>
-            <span class="cs-hero-sub">Manufacturer • 8 days ago</span>
-          </div>
+        <div class="update">
+          <strong>Material confirmation</strong>
+          <p>Matte stock and spot UV confirmed. Insert tray approved.</p>
+          <span>Manufacturer • 8 days ago</span>
         </div>
 
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Order accepted</div>
-            <p class="collab-desc">
-              We accepted this request and scheduled sampling immediately.
-            </p>
-            <span class="cs-hero-sub">Order Pool • 10 days ago</span>
-          </div>
+        <div class="update">
+          <strong>Order accepted</strong>
+          <p>Sampling scheduled immediately.</p>
+          <span>Order Pool • 10 days ago</span>
         </div>
-
       </div>
     </section>
-
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Publisher</h4>
-        <a href="/publisher-dashboard-full.html">Dashboard</a>
-        <a href="/publisher-orders-full.html">Orders</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
-    </div>
-  </footer>
-
 </body>
 </html>

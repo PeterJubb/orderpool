@@ -1,249 +1,328 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Quote pool — Manufacturer — Order Pool</title>
-  <meta name="description" content="Manufacturer quote pool with active quote requests." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Manufacturer quote pool with active, paid quote requests." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:900;
+    }
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
+    .section{margin-bottom:3rem}
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Stats */
+    .stats{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+    .stat{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem 1rem;
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+    }
+    .stat strong{font-size:1.3rem;font-weight:900}
+    .stat span{
+      font-size:.75rem;
+      color:#64748b;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    /* Filters */
+    .filter-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1rem;
+      margin-top:1rem;
+    }
+    .filter{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:1rem;
+      background:#fafcff;
+    }
+    .filter h3{font-size:.9rem;font-weight:900;margin-bottom:.25rem}
+    .filter p{font-size:.85rem}
+
+    /* Requests */
+    .request-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.25rem;
+      margin-top:1.25rem;
+    }
+    .request{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:1.25rem;
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+      gap:.85rem;
+    }
+    .request-title{font-weight:900;font-size:1.1rem}
+    .request-sub{font-size:.85rem;color:#64748b}
+
+    .meta{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+    }
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:.4rem .75rem;
+      font-size:.7rem;
+      font-weight:800;
+      background:#f8fafc;
+      color:#475569;
+    }
+
+    .actions{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      margin-top:.25rem;
+    }
+
+    @media(max-width:1000px){
+      .filter-grid{grid-template-columns:1fr 1fr}
+      .request-grid{grid-template-columns:1fr}
+      main{padding:2.5rem 1.25rem}
+      h1{font-size:2.2rem}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/manufacturer-dashboard-full.html" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- APP HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/manufacturer-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/manufacturer-quote-pool-full.html" aria-current="page">Quote pool</a></li>
+        <li><a href="/manufacturer-orders-full.html">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="/manufacturer-orders-full.html">My orders</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/manufacturer-dashboard-full.html">Dashboard</a>
-        <a class="nav-link active" href="/manufacturer-quote-pool-full.html">Quote pool</a>
-        <a class="nav-link" href="/manufacturer-orders-full.html">Orders</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/dashboard-settings.html" class="header-btn secondary">Settings</a>
-        <a href="/manufacturer-orders-full.html" class="header-btn primary">My orders</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
-    <!-- HEADER -->
+  <main>
+    <!-- HERO -->
     <section class="section">
       <h1>Quote pool</h1>
-      <p>
+      <p class="lead">
         Paid quote requests from publishers. Accept work that fits your capacity and capability.
       </p>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Available</div>
-          <div class="stat-desc">4</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Accepted</div>
-          <div class="stat-desc">2</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">New today</div>
-          <div class="stat-desc">1</div>
-        </div>
+      <div class="stats">
+        <div class="stat"><strong>4</strong><span>Available</span></div>
+        <div class="stat"><strong>2</strong><span>Accepted</span></div>
+        <div class="stat"><strong>1</strong><span>New today</span></div>
       </div>
     </section>
 
-    <!-- FILTERS (STATIC) -->
+    <!-- FILTERS -->
     <section class="section">
-      <div class="section-header-row">
-        <h2>Filter</h2>
-        <span class="cs-hero-sub">Optional — scan first, filter later</span>
-      </div>
+      <h2>Filter</h2>
+      <p class="lead">Optional — scan first, filter later.</p>
 
-      <div class="publisher-feature-grid">
-        <div class="pub-feature-card">
+      <div class="filter-grid">
+        <div class="filter">
           <h3>Category</h3>
           <p>Packaging, apparel, printing</p>
         </div>
-        <div class="pub-feature-card">
+        <div class="filter">
           <h3>Quantity</h3>
           <p>Min / max run size</p>
         </div>
-        <div class="pub-feature-card">
+        <div class="filter">
           <h3>Timeline</h3>
           <p>Sampling + production window</p>
         </div>
-        <div class="pub-feature-card">
+        <div class="filter">
           <h3>Region</h3>
           <p>Shipping / compliance</p>
         </div>
       </div>
     </section>
 
-    <!-- QUOTE REQUESTS -->
+    <!-- REQUESTS -->
     <section class="section">
-      <div class="section-header-row">
-        <h2>Available requests</h2>
-        <span class="cs-hero-sub">Select one to review details</span>
-      </div>
+      <h2>Available requests</h2>
 
-      <div class="featured-row">
-
-        <!-- REQUEST -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Retail display packaging</div>
-            <p class="collab-desc">
-              Packaging • 2,500 units • Samples in 2 weeks • Production in 6 weeks
-            </p>
-            <div class="publisher-stats">
-              <div class="stat-pill">
-                <div class="stat-label">MOQ</div>
-                <div class="stat-desc">1,000</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Region</div>
-                <div class="stat-desc">North America</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Posted</div>
-                <div class="stat-desc">2 days ago</div>
-              </div>
-            </div>
-            <div class="form-actions">
-              <a class="button-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
-              <a class="button-secondary" href="/manufacturer-quote-detail.html">View details</a>
-            </div>
+      <div class="request-grid">
+        <div class="request">
+          <div class="request-title">Retail display packaging</div>
+          <div class="request-sub">
+            Packaging • 2,500 units • Samples in 2 weeks • Production in 6 weeks
+          </div>
+          <div class="meta">
+            <span class="pill">MOQ 1,000</span>
+            <span class="pill">North America</span>
+            <span class="pill">Posted 2 days ago</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
+            <a class="btn btn-secondary" href="/manufacturer-quote-detail.html">View details</a>
           </div>
         </div>
 
-        <!-- REQUEST -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Seasonal apparel run</div>
-            <p class="collab-desc">
-              Apparel • 5,000 units • Samples in 3 weeks • Production in 8 weeks
-            </p>
-            <div class="publisher-stats">
-              <div class="stat-pill">
-                <div class="stat-label">Sizes</div>
-                <div class="stat-desc">S–XL</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Region</div>
-                <div class="stat-desc">Global</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Posted</div>
-                <div class="stat-desc">Yesterday</div>
-              </div>
-            </div>
-            <div class="form-actions">
-              <a class="button-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
-              <a class="button-secondary" href="/manufacturer-quote-detail.html">View details</a>
-            </div>
+        <div class="request">
+          <div class="request-title">Seasonal apparel run</div>
+          <div class="request-sub">
+            Apparel • 5,000 units • Samples in 3 weeks • Production in 8 weeks
+          </div>
+          <div class="meta">
+            <span class="pill">Sizes S–XL</span>
+            <span class="pill">Global</span>
+            <span class="pill">Posted yesterday</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
+            <a class="btn btn-secondary" href="/manufacturer-quote-detail.html">View details</a>
           </div>
         </div>
 
-        <!-- REQUEST -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Counter display unit</div>
-            <p class="collab-desc">
-              Display • 1,000 units • Production in 5 weeks
-            </p>
-            <div class="publisher-stats">
-              <div class="stat-pill">
-                <div class="stat-label">Materials</div>
-                <div class="stat-desc">Corrugate</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Region</div>
-                <div class="stat-desc">US only</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Posted</div>
-                <div class="stat-desc">4 days ago</div>
-              </div>
-            </div>
-            <div class="form-actions">
-              <a class="button-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
-              <a class="button-secondary" href="/manufacturer-quote-detail.html">View details</a>
-            </div>
+        <div class="request">
+          <div class="request-title">Counter display unit</div>
+          <div class="request-sub">
+            Display • 1,000 units • Production in 5 weeks
+          </div>
+          <div class="meta">
+            <span class="pill">Corrugate</span>
+            <span class="pill">US only</span>
+            <span class="pill">Posted 4 days ago</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
+            <a class="btn btn-secondary" href="/manufacturer-quote-detail.html">View details</a>
           </div>
         </div>
 
-        <!-- REQUEST -->
-        <div class="collab-card">
-          <div class="collab-body">
-            <div class="collab-title">Print + pack rollout</div>
-            <p class="collab-desc">
-              Printing • 10,000 units • Production in 4 weeks
-            </p>
-            <div class="publisher-stats">
-              <div class="stat-pill">
-                <div class="stat-label">Finish</div>
-                <div class="stat-desc">Matte</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Region</div>
-                <div class="stat-desc">Canada</div>
-              </div>
-              <div class="stat-pill">
-                <div class="stat-label">Posted</div>
-                <div class="stat-desc">Today</div>
-              </div>
-            </div>
-            <div class="form-actions">
-              <a class="button-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
-              <a class="button-secondary" href="/manufacturer-quote-detail.html">View details</a>
-            </div>
+        <div class="request">
+          <div class="request-title">Print + pack rollout</div>
+          <div class="request-sub">
+            Printing • 10,000 units • Production in 4 weeks
+          </div>
+          <div class="meta">
+            <span class="pill">Matte finish</span>
+            <span class="pill">Canada</span>
+            <span class="pill">Posted today</span>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="/manufacturer-quote-detail.html">Review & accept</a>
+            <a class="btn btn-secondary" href="/manufacturer-quote-detail.html">View details</a>
           </div>
         </div>
-
       </div>
     </section>
-
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Manufacturer</h4>
-        <a href="/manufacturer-dashboard-full.html">Dashboard</a>
-        <a href="/manufacturer-orders-full.html">Orders</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/how-it-works.html">How it works</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
-    </div>
-  </footer>
-
 </body>
 </html>

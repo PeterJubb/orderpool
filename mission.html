@@ -1,170 +1,346 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Mission — Order Pool</title>
   <meta name="description" content="Order Pool exists to make manufacturing requests clear, pull-based, and trackable from acceptance to fulfillment." />
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – public) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      font-weight:800;
+      color:#0f172a;
+      text-decoration:none;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      justify-content:center;
+      flex:1;
+    }
+    .nav-links a{
+      color:#64748b;
+      font-weight:700;
+      font-size:.95rem;
+      text-decoration:none;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      justify-content:flex-end;
+      min-width:220px;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+    .section{margin-bottom:3.5rem}
+    .section-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:.75rem;
+    }
+
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+    h2{font-size:1.6rem;font-weight:900}
+    h3{font-size:1.05rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    .hero-actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+
+    /* Grids */
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+      margin-top:1rem;
+    }
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1.25rem;
+      margin-top:1rem;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.5rem;
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+    }
+    .step{
+      display:flex;
+      flex-direction:column;
+      gap:.35rem;
+    }
+    .step span{
+      font-size:.75rem;
+      font-weight:900;
+      text-transform:uppercase;
+      color:#64748b;
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid #e5e7eb;
+      padding:2.5rem 2rem;
+      margin-top:4rem;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:1.5rem;
+    }
+    .footer-col h4{
+      font-size:.9rem;
+      font-weight:900;
+      margin-bottom:.5rem;
+    }
+    .footer-col a{
+      display:block;
+      color:#64748b;
+      text-decoration:none;
+      font-size:.9rem;
+      margin-bottom:.35rem;
+    }
+    .footer-bottom{
+      max-width:1200px;
+      margin:2rem auto 0;
+      font-size:.85rem;
+      color:#64748b;
+    }
+
+    @media(max-width:1000px){
+      .grid-3,.grid-4{grid-template-columns:1fr}
+      h1{font-size:2.2rem}
+      main{padding:3rem 1.25rem}
+    }
+  </style>
 </head>
 
 <body>
-
   <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
-      </div>
+  <header>
+    <nav>
+      <a href="/" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/for-publishers.html">Publishers</a>
-        <a class="nav-link" href="/for-manufacturers.html">Manufacturers</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/for-publishers.html">Publishers</a></li>
+        <li><a href="/for-manufacturers.html">Manufacturers</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
 
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/auth-signin.html">Sign in</a>
+        <a class="btn btn-primary" href="/get-started.html">Get started</a>
       </div>
-    </div>
+    </nav>
   </header>
 
   <!-- PAGE -->
-  <main class="page">
-
+  <main>
     <!-- HERO -->
     <section class="section">
       <h1>Mission</h1>
-      <p>
-        Manufacturing work shouldn’t live in inboxes. Order Pool exists to turn production briefs into
-        trackable orders — with clear ownership, fewer misunderstandings, and less chasing.
+      <p class="lead">
+        Manufacturing work shouldn’t live in inboxes.
+        Order Pool exists to turn production briefs into trackable orders —
+        with clear ownership, fewer misunderstandings, and less chasing.
       </p>
 
-      <div class="hero-ctas">
-        <a href="/how-it-works.html" class="hero-cta-btn manufacturers">How it works</a>
-        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
+      <div class="hero-actions">
+        <a class="btn btn-secondary" href="/how-it-works.html">How it works</a>
+        <a class="btn btn-primary" href="/get-started.html">Get started</a>
       </div>
     </section>
 
     <!-- PRINCIPLES -->
     <section class="section">
-      <div class="section-header-row">
+      <div class="section-header">
         <h2>Principles</h2>
-        <a class="featured-link" href="/safety.html">Safety & trust →</a>
+        <a class="btn btn-secondary" href="/safety.html">Safety & trust</a>
       </div>
 
-      <div class="publisher-feature-grid">
-        <div class="pub-feature-card">
+      <div class="grid-3">
+        <div class="card">
           <h3>Pull beats push</h3>
           <p>
-            Manufacturers accept work when it matches their capacity. Publishers don’t have to chase quotes.
+            Manufacturers accept work when it matches their capacity.
+            Publishers don’t have to chase quotes.
           </p>
         </div>
 
-        <div class="pub-feature-card">
+        <div class="card">
           <h3>Standard briefs</h3>
           <p>
-            One clear format reduces rework, speeds up quoting, and anchors execution to a shared source of truth.
+            One clear format reduces rework, speeds quoting,
+            and anchors execution to a shared source of truth.
           </p>
         </div>
 
-        <div class="pub-feature-card">
+        <div class="card">
           <h3>Transparent progress</h3>
           <p>
-            Accepted orders move through explicit states from acceptance to fulfillment, reducing ambiguity.
+            Accepted orders move through explicit states
+            from acceptance to fulfillment.
           </p>
         </div>
 
-        <div class="pub-feature-card">
+        <div class="card">
           <h3>Updates syndicate</h3>
           <p>
-            Manufacturer updates automatically appear on publisher dashboards, so everyone stays aligned.
+            Manufacturer updates automatically appear on publisher dashboards.
           </p>
         </div>
 
-        <div class="pub-feature-card">
-          <h3>Public status-only tracking</h3>
+        <div class="card">
+          <h3>Status-only public tracking</h3>
           <p>
-            Visibility builds trust without exposing sensitive pricing or private details.
+            Visibility builds trust without exposing sensitive pricing or assets.
           </p>
         </div>
 
-        <div class="pub-feature-card">
+        <div class="card">
           <h3>Less noise, more execution</h3>
           <p>
-            The system is designed to reduce busywork and make delivery the default.
+            The system is designed to reduce busywork
+            and make delivery the default.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- WHAT WE'RE BUILDING -->
+    <!-- WHAT WE’RE BUILDING -->
     <section class="section">
-      <h1>What we’re building</h1>
-      <p>
+      <h2>What we’re building</h2>
+      <p class="lead">
         A shared request pool that treats manufacturing like a modern workflow:
-        a paid brief becomes a quote request, a quote becomes an order, and the order becomes proof of execution.
+        a paid brief becomes a quote request, a quote becomes an order,
+        and the order becomes proof of execution.
       </p>
 
-      <div class="how-grid">
-        <div class="how-card">
-          <div class="how-icon">1</div>
-          <div class="how-title">Brief</div>
-          <div class="how-desc">
-            Publishers create standardized requests that are easy to evaluate.
-          </div>
+      <div class="grid-4">
+        <div class="card step">
+          <span>Step 1</span>
+          <h3>Brief</h3>
+          <p>Publishers create standardized requests that are easy to evaluate.</p>
         </div>
 
-        <div class="how-card">
-          <div class="how-icon">2</div>
-          <div class="how-title">Pool</div>
-          <div class="how-desc">
-            Paid briefs become quote requests visible to manufacturers.
-          </div>
+        <div class="card step">
+          <span>Step 2</span>
+          <h3>Pool</h3>
+          <p>Paid briefs enter a shared quote pool visible to manufacturers.</p>
         </div>
 
-        <div class="how-card">
-          <div class="how-icon">3</div>
-          <div class="how-title">Order</div>
-          <div class="how-desc">
-            Accepted quotes become orders with clear ownership and progress states.
-          </div>
+        <div class="card step">
+          <span>Step 3</span>
+          <h3>Order</h3>
+          <p>Accepted quotes become orders with ownership and states.</p>
         </div>
 
-        <div class="how-card">
-          <div class="how-icon">4</div>
-          <div class="how-title">Proof</div>
-          <div class="how-desc">
-            Public status tracking helps create accountability and trust.
-          </div>
+        <div class="card step">
+          <span>Step 4</span>
+          <h3>Proof</h3>
+          <p>Status tracking creates accountability and trust.</p>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
     <section class="section">
-      <h1>Ready to use Order Pool?</h1>
-      <p>
+      <h2>Ready to use Order Pool?</h2>
+      <p class="lead">
         Choose a role and start your first brief or pull your first request.
       </p>
 
-      <div class="hero-ctas">
-        <a href="/get-started.html" class="hero-cta-btn publishers">Get started</a>
-        <a href="/case-studies.html" class="hero-cta-btn manufacturers">View case studies</a>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/get-started.html">Get started</a>
+        <a class="btn btn-secondary" href="/case-studies.html">View case studies</a>
       </div>
     </section>
-
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer>
     <div class="footer-inner">
       <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
+        <p>
+          Order Pool is a shared manufacturing request platform
+          built on transparency and execution.
         </p>
       </div>
 
@@ -191,11 +367,8 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+      © Order Pool
     </div>
   </footer>
-
 </body>
 </html>

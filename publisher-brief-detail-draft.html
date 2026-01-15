@@ -1,251 +1,366 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Brief (Draft) — Publisher — Order Pool</title>
-  <meta name="description" content="Review and submit a draft brief." />
+  <meta name="description" content="Review and submit a draft production brief." />
 
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
+    *{margin:0;padding:0;box-sizing:border-box}
     body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,sans-serif;
-      background:#fafafa;
-      color:#1a1a1a;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
       line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
     }
 
-    /* Header */
-    .header{background:#fff;border-bottom:1px solid #e5e5e5;position:sticky;top:0;z-index:10}
-    .header-inner{
-      max-width:1400px;margin:0 auto;padding:1rem 2rem;
-      display:flex;align-items:center;justify-content:space-between;gap:2rem;
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
-    .brand{font-weight:900;color:#0066ff}
-    .nav{display:flex;gap:1.5rem}
-    .nav a{text-decoration:none;color:#666;font-weight:700}
-    .nav a.active{color:#0066ff}
-    .header-actions{display:flex;gap:.75rem}
-    .btn-h{
-      padding:.55rem 1.2rem;border-radius:8px;
-      font-weight:800;text-decoration:none;white-space:nowrap;
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
     }
-    .btn-h.primary{background:#0066ff;color:#fff}
-    .btn-h.secondary{border:1px solid #e5e5e5;color:#555;background:#fff}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      letter-spacing:.2px;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain;display:block}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      align-items:center;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-size:.95rem;
+      padding:.25rem;
+      font-weight:700;
+    }
+    .nav-links a:hover{color:#0f172a}
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:900}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-size:.95rem;
+      border:1px solid transparent;
+      font-weight:650;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.45rem;
+      white-space:nowrap;
+      cursor:pointer;
+      background:none;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
 
     /* Layout */
-    .page{max-width:1400px;margin:0 auto;padding:2rem}
-    h1{font-size:2.4rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
-    .lead{color:#666;font-size:1.05rem}
-    .section{margin-bottom:2.5rem}
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 3.5rem}
+    .section{margin-bottom:3rem}
+    h1{
+      font-size:2.6rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin-bottom:.4rem;
+    }
+    h2{
+      font-size:1.5rem;
+      font-weight:900;
+      margin-bottom:.5rem;
+    }
+    .lead{
+      color:#475569;
+      font-size:1.05rem;
+    }
 
     /* State strip */
-    .state-strip{display:flex;gap:10px;margin-top:1rem;flex-wrap:wrap}
-    .state{
-      background:#fff;border:1px solid rgba(0,0,0,.08);
-      padding:8px 14px;border-radius:999px;
-      font-size:13px;font-weight:800;
+    .states{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      margin-top:1.1rem;
     }
-    .state.active{background:rgba(0,102,255,.1);color:#0066ff;border-color:rgba(0,102,255,.35)}
+    .state{
+      padding:.35rem .8rem;
+      border-radius:999px;
+      font-size:.8rem;
+      font-weight:800;
+      border:1px solid #e5e7eb;
+      color:#64748b;
+      background:#fff;
+    }
+    .state.active{
+      color:#3d20ae;
+      border-color:rgba(61,32,174,.3);
+      background:rgba(61,32,174,.08);
+    }
 
     /* Meta pills */
-    .meta-pills{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
-    .pill{
-      background:#fff;border:1px solid rgba(0,0,0,.08);
-      border-radius:14px;padding:10px 14px;
-      font-size:13px;
+    .meta{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:1rem;
     }
-    .pill strong{display:block;font-weight:900;font-size:12px;color:#777}
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.55rem .75rem;
+      font-size:.8rem;
+      background:#f8fafc;
+      color:#475569;
+    }
+    .pill strong{
+      display:block;
+      font-weight:900;
+      color:#0f172a;
+      font-size:.72rem;
+      margin-bottom:.1rem;
+    }
 
     /* Grid */
     .grid{
       display:grid;
       grid-template-columns:1.3fr .9fr;
-      gap:20px;
+      gap:1.25rem;
     }
 
-    /* Cards */
+    /* Card */
     .card{
       background:#fff;
-      border:1px solid rgba(0,0,0,.08);
+      border:1px solid #e5e7eb;
       border-radius:18px;
-      padding:22px;
-      box-shadow:0 14px 32px rgba(0,0,0,.05);
+      padding:1.6rem;
       display:flex;
       flex-direction:column;
-      gap:18px;
+      gap:1rem;
     }
-    .card h2{
-      font-size:1.4rem;
-      font-weight:900;
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
-    .card p{color:#666}
+    .card p{color:#64748b}
 
     /* Form */
-    .row{margin-bottom:14px}
+    .row{margin-bottom:.75rem}
     label{
-      display:block;font-size:12px;font-weight:800;
-      margin-bottom:6px;color:#444;
+      display:block;
+      font-size:.75rem;
+      font-weight:900;
+      color:#475569;
+      margin-bottom:.3rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
     }
     input,select,textarea{
-      width:100%;padding:.7rem .8rem;
-      border-radius:10px;border:1px solid #dcdcdc;
-      font-family:inherit;font-size:.9rem;
+      width:100%;
+      padding:.7rem .8rem;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      font-family:inherit;
+      font-size:.95rem;
     }
     textarea{resize:vertical}
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.75rem;
+    }
 
     /* Checklist */
     .checklist{
-      display:grid;grid-template-columns:1fr 1fr;gap:12px
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.75rem;
     }
     .check{
-      background:#fafafa;border:1px solid rgba(0,0,0,.06);
-      border-radius:14px;padding:14px;
-      font-size:13px;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.75rem;
+      font-size:.85rem;
+      background:#fafcff;
     }
-    .check strong{display:block;font-weight:900;margin-bottom:4px}
+    .check strong{
+      display:block;
+      font-weight:900;
+      margin-bottom:.15rem;
+      color:#0f172a;
+    }
 
-    /* CTA */
-    .cta{
-      background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(125,92,255,.08));
-      border:1px dashed rgba(0,0,0,.18);
+    /* Submit CTA */
+    .submit-box{
+      border:1px dashed #e5e7eb;
       border-radius:18px;
-      padding:18px;
+      padding:1.25rem;
+      background:linear-gradient(135deg, rgba(61,32,174,.08), rgba(59,244,156,.10));
     }
-    .cta-actions{display:flex;gap:10px;flex-wrap:wrap}
 
-    .btn-primary,.btn-secondary{
-      padding:.65rem 1.25rem;border-radius:10px;
-      font-weight:800;text-decoration:none;
-      display:inline-flex;gap:.4rem;align-items:center;
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.5rem;
     }
-    .btn-primary{background:#0066ff;color:#fff}
-    .btn-secondary{border:1px solid #e5e5e5;color:#0066ff;background:#fff}
 
     @media(max-width:1000px){
       .grid{grid-template-columns:1fr}
       .split{grid-template-columns:1fr}
-      .page{padding:1.25rem}
+      main{padding:2.5rem 1.25rem 3rem}
+      h1{font-size:2.2rem}
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/publisher-dashboard-full.html" class="brand" aria-label="Order Pool dashboard">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-<header class="header">
-  <div class="header-inner">
-    <span class="brand">Order Pool</span>
-    <nav class="nav">
-      <a href="/publisher-dashboard-full.html">Dashboard</a>
-      <a href="/publisher-briefs-full.html" class="active">Briefs</a>
-      <a href="/publisher-orders-full.html">Orders</a>
+      <ul class="nav-links">
+        <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/publisher-briefs-full.html" aria-current="page">Briefs</a></li>
+        <li><a href="/publisher-orders-full.html">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/publisher-briefs-full.html">← Back</a>
+        <a class="btn btn-primary" href="/publisher-brief-submit.html">Submit brief</a>
+      </div>
     </nav>
-    <div class="header-actions">
-      <a class="btn-h secondary" href="/publisher-briefs-full.html">← Back</a>
-      <a class="btn-h primary" href="/publisher-brief-submit.html">🚀 Submit brief</a>
-    </div>
-  </div>
-</header>
+  </header>
 
-<main class="page">
+  <main>
+    <!-- HERO -->
+    <section class="section">
+      <h1>Accessory packaging refresh</h1>
+      <p class="lead"><strong>Status:</strong> Draft — private, not visible to manufacturers.</p>
 
-  <!-- HERO -->
-  <section class="section">
-    <h1>🧾 Accessory packaging refresh</h1>
-    <p class="lead"><strong>Status:</strong> ✏️ Draft — private, not visible to manufacturers.</p>
-
-    <div class="state-strip">
-      <div class="state active">✏️ Draft</div>
-      <div class="state">💳 Submit + pay</div>
-      <div class="state">🧲 In pool</div>
-    </div>
-
-    <div class="meta-pills">
-      <div class="pill"><strong>Brief ID</strong>BRF-03104</div>
-      <div class="pill"><strong>Last edited</strong>Today</div>
-      <div class="pill"><strong>Visibility</strong>Private</div>
-    </div>
-  </section>
-
-  <!-- CONTENT -->
-  <section class="section">
-    <div class="grid">
-
-      <!-- LEFT -->
-      <div class="card">
-        <h2>✍️ Brief details</h2>
-
-        <div class="row">
-          <label>Title</label>
-          <input value="Accessory packaging refresh" />
-        </div>
-
-        <div class="row">
-          <label>Category</label>
-          <select>
-            <option selected>Packaging</option>
-            <option>Apparel</option>
-            <option>Printing</option>
-            <option>Tooling</option>
-          </select>
-        </div>
-
-        <div class="row split">
-          <div>
-            <label>Quantity</label>
-            <input value="2,500 units" />
-          </div>
-          <div>
-            <label>Timeline</label>
-            <input value="Samples in 2 weeks • Production in 6 weeks" />
-          </div>
-        </div>
-
-        <div class="row">
-          <label>Requirements</label>
-          <textarea rows="6">Tuck-end carton, matte finish, insert tray, shelf-ready.</textarea>
-        </div>
-
-        <div class="row">
-          <label>Assets / links</label>
-          <textarea rows="4">Brand guide, existing dieline, references.</textarea>
-        </div>
-
-        <div class="cta-actions">
-          <button class="btn-primary">💾 Save changes</button>
-          <a class="btn-secondary" href="/publisher-briefs-full.html">Cancel</a>
-        </div>
+      <div class="states">
+        <span class="state active">Draft</span>
+        <span class="state">Submit + pay</span>
+        <span class="state">In pool</span>
       </div>
 
-      <!-- RIGHT -->
-      <div class="card">
-        <h2>✅ Ready to submit?</h2>
-        <p>This mirrors how manufacturers decide to accept.</p>
+      <div class="meta">
+        <div class="pill"><strong>Brief ID</strong>BRF-03104</div>
+        <div class="pill"><strong>Last edited</strong>Today</div>
+        <div class="pill"><strong>Visibility</strong>Private</div>
+      </div>
+    </section>
 
-        <div class="checklist">
-          <div class="check"><strong>📦 Quantity</strong>Clear target & MOQ</div>
-          <div class="check"><strong>⏱️ Timeline</strong>Realistic deadlines</div>
-          <div class="check"><strong>🚫 Constraints</strong>Non-negotiables listed</div>
-          <div class="check"><strong>🖼️ Assets</strong>References included</div>
+    <!-- CONTENT -->
+    <section class="section">
+      <div class="grid">
+        <!-- LEFT -->
+        <div class="card">
+          <h2>Brief details</h2>
+
+          <div class="row">
+            <label>Title</label>
+            <input value="Accessory packaging refresh" />
+          </div>
+
+          <div class="row">
+            <label>Category</label>
+            <select>
+              <option selected>Packaging</option>
+              <option>Apparel</option>
+              <option>Printing</option>
+              <option>Tooling</option>
+            </select>
+          </div>
+
+          <div class="row split">
+            <div>
+              <label>Quantity</label>
+              <input value="2,500 units" />
+            </div>
+            <div>
+              <label>Timeline</label>
+              <input value="Samples in 2 weeks • Production in 6 weeks" />
+            </div>
+          </div>
+
+          <div class="row">
+            <label>Requirements</label>
+            <textarea rows="5">Tuck-end carton, matte finish, insert tray, shelf-ready.</textarea>
+          </div>
+
+          <div class="row">
+            <label>Assets / links</label>
+            <textarea rows="4">Brand guide, existing dieline, references.</textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary">Save changes</button>
+            <a class="btn btn-secondary" href="/publisher-briefs-full.html">Cancel</a>
+          </div>
         </div>
 
-        <div class="cta">
-          <p><strong>Submitting publishes this brief</strong> to the quote pool and enables manufacturer acceptance.</p>
-          <div class="cta-actions">
-            <a class="btn-primary" href="/publisher-brief-submit.html">🚀 Submit + pay</a>
-            <a class="btn-secondary" href="/pricing.html">Pricing</a>
+        <!-- RIGHT -->
+        <div class="card">
+          <h2>Ready to submit?</h2>
+          <p>This mirrors how manufacturers decide to accept work.</p>
+
+          <div class="checklist">
+            <div class="check"><strong>Quantity</strong>Clear target & MOQ</div>
+            <div class="check"><strong>Timeline</strong>Realistic deadlines</div>
+            <div class="check"><strong>Constraints</strong>Non-negotiables listed</div>
+            <div class="check"><strong>Assets</strong>References included</div>
+          </div>
+
+          <div class="submit-box">
+            <p><strong>Submitting publishes this brief</strong> into the pool and enables manufacturer acceptance.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="/publisher-brief-submit.html">Submit + pay</a>
+              <a class="btn btn-secondary" href="/pricing.html">Pricing</a>
+            </div>
           </div>
         </div>
       </div>
-
-    </div>
-  </section>
-
-</main>
-
+    </section>
+  </main>
 </body>
 </html>

@@ -1,119 +1,278 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Forgot password — Order Pool</title>
-  <meta name="description" content="Reset your Order Pool password." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Request a password reset link for your Order Pool account." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – public) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      font-weight:800;
+      color:#0f172a;
+      text-decoration:none;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      justify-content:center;
+      flex:1;
+    }
+    .nav-links a{
+      color:#64748b;
+      font-weight:700;
+      font-size:.95rem;
+      text-decoration:none;
+    }
+
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      justify-content:flex-end;
+      min-width:220px;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:1.75rem;
+    }
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.75rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    h1{font-size:2.4rem;font-weight:900;letter-spacing:-.02em}
+    h2{font-size:1.4rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem}
+
+    /* Form */
+    label{
+      font-size:.75rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      color:#475569;
+      margin-bottom:.25rem;
+      display:block;
+    }
+    input{
+      width:100%;
+      padding:.75rem .85rem;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      font-size:.95rem;
+      font-family:inherit;
+    }
+    .form-row{display:flex;flex-direction:column;gap:.35rem}
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.5rem;
+    }
+
+    /* Tips */
+    .pill-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fafcff;
+      font-size:.85rem;
+    }
+
+    footer{
+      border-top:1px solid #e5e7eb;
+      padding:2.5rem 2rem;
+      margin-top:4rem;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:1.5rem;
+    }
+    .footer-col h4{
+      font-size:.9rem;
+      font-weight:900;
+      margin-bottom:.5rem;
+    }
+    .footer-col a{
+      display:block;
+      color:#64748b;
+      text-decoration:none;
+      font-size:.9rem;
+      margin-bottom:.35rem;
+    }
+    .footer-bottom{
+      max-width:1200px;
+      margin:2rem auto 0;
+      font-size:.85rem;
+      color:#64748b;
+    }
+
+    @media(max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:2.1rem}
+      main{padding:3rem 1.25rem}
+    }
+  </style>
 </head>
 
 <body>
-
   <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
-      </div>
+  <header>
+    <nav>
+      <a href="/" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/how-it-works.html">How it works</a>
-        <a class="nav-link" href="/pricing.html">Pricing</a>
-      </nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
 
-      <div class="header-actions">
-        <a href="/auth-signin.html" class="header-btn secondary">Sign in</a>
-        <a href="/get-started.html" class="header-btn primary">Get started</a>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/auth-signin.html">Sign in</a>
+        <a class="btn btn-primary" href="/get-started.html">Get started</a>
       </div>
-    </div>
+    </nav>
   </header>
 
   <!-- PAGE -->
-  <main class="page">
+  <main>
+    <div class="grid">
 
-    <section class="section">
-      <div class="get-started-grid">
+      <!-- FORGOT FORM -->
+      <div class="card">
+        <h1>Forgot your password?</h1>
+        <p class="lead">
+          Enter the email you used to sign up and we’ll send you a reset link.
+        </p>
 
-        <!-- FORM -->
-        <div class="get-started-card">
-          <h1>Forgot your password?</h1>
-          <p>
-            Enter your email and we’ll send a password reset link.
-          </p>
-
-          <form class="form" action="#" method="post">
-            <div class="form-row">
-              <label class="form-label" for="email">Email</label>
-              <input
-                class="form-input"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@company.com"
-                required
-              />
-            </div>
-
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Send reset link</button>
-              <a class="button-secondary" href="/auth-signin.html">Back to sign in</a>
-            </div>
-          </form>
-
-          <p class="cs-hero-sub">
-            Don’t have an account?
-            <a href="/auth-join.html">Create one</a>
-          </p>
-        </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="get-started-card">
-          <h2>Need help?</h2>
-          <p>
-            If you’re having trouble accessing your account, contact support and include the email you used to sign up.
-          </p>
-
-          <div class="publisher-stats">
-            <div class="stat-pill">
-              <div class="stat-label">Tip</div>
-              <div class="stat-desc">Check spam/junk folders</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Tip</div>
-              <div class="stat-desc">Try alternate emails</div>
-            </div>
-            <div class="stat-pill">
-              <div class="stat-label">Support</div>
-              <div class="stat-desc">We can help route you</div>
-            </div>
+        <form action="#" method="post">
+          <div class="form-row">
+            <label for="email">Email address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="you@company.com"
+            />
           </div>
 
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">Contact support</div>
-                <p class="collab-desc">
-                  Use the contact page to reach us.
-                </p>
-                <a class="featured-link" href="/contact.html">Contact →</a>
-              </div>
-            </div>
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Send reset link</button>
+            <a class="btn btn-secondary" href="/auth-signin.html">Back to sign in</a>
           </div>
+        </form>
 
-        </div>
-
+        <p style="font-size:.9rem;color:#64748b">
+          Don’t have an account?
+          <a href="/auth-join.html">Create one</a>
+        </p>
       </div>
-    </section>
 
+      <!-- RIGHT COLUMN -->
+      <div class="card">
+        <h2>Need help?</h2>
+        <p>
+          If you don’t see the email, try these first.
+        </p>
+
+        <div class="pill-grid">
+          <div class="pill"><strong>Spam</strong><br/>Check junk folders</div>
+          <div class="pill"><strong>Email</strong><br/>Try another address</div>
+          <div class="pill"><strong>Support</strong><br/>We can help</div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-secondary" href="/contact.html">Contact support</a>
+        </div>
+      </div>
+
+    </div>
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer>
     <div class="footer-inner">
       <div>
-        <p class="footer-brand-text">
+        <p>
           Order Pool is a shared manufacturing request platform built on transparency and execution.
         </p>
       </div>
@@ -140,11 +299,8 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
+      © Order Pool
     </div>
   </footer>
-
 </body>
 </html>

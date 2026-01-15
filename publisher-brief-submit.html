@@ -1,216 +1,306 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Submit brief — Publisher — Order Pool</title>
   <meta name="description" content="Submit and pay to publish a brief into the manufacturer quote pool." />
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:900;
+    }
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
+    .section{margin-bottom:3rem}
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+    h3{font-size:1.05rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Pills */
+    .meta{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:.45rem .85rem;
+      font-size:.75rem;
+      font-weight:800;
+      background:#f8fafc;
+      color:#475569;
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1.5rem;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.75rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .item{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fafcff;
+    }
+    .item p{font-size:.9rem}
+
+    /* Form */
+    label{
+      font-size:.75rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      color:#475569;
+      margin-bottom:.25rem;
+      display:block;
+    }
+    input{
+      width:100%;
+      padding:.7rem .8rem;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      font-family:inherit;
+      font-size:.95rem;
+    }
+
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.75rem;
+    }
+
+    @media(max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      main{padding:2.5rem 1.25rem}
+      h1{font-size:2.2rem}
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <nav>
+      <a href="/publisher-dashboard-full.html" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
 
-  <!-- APP HEADER -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <span class="brand">Order Pool</span>
+      <ul class="nav-links">
+        <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/publisher-briefs-full.html" aria-current="page">Briefs</a></li>
+        <li><a href="/publisher-orders-full.html">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/publisher-brief-detail-draft.html">Back</a>
+        <a class="btn btn-primary" href="/publisher-brief-detail-submitted.html">View submitted</a>
       </div>
-
-      <nav class="nav">
-        <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
-        <a class="nav-link active" href="/publisher-briefs-full.html">Briefs</a>
-        <a class="nav-link" href="/publisher-orders-full.html">Orders</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="/publisher-brief-detail-draft.html" class="header-btn secondary">Back</a>
-        <a href="/publisher-brief-detail-submitted.html" class="header-btn primary">View submitted</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- PAGE -->
-  <main class="page">
-
-    <!-- TITLE -->
+  <main>
+    <!-- HERO -->
     <section class="section">
       <h1>Submit brief</h1>
-      <p>
-        Submitting publishes your request to the manufacturer quote pool. Once published, this brief becomes locked.
+      <p class="lead">
+        Submitting publishes your request to the manufacturer quote pool.
+        Once published, this brief becomes locked.
       </p>
 
-      <div class="publisher-stats">
-        <div class="stat-pill">
-          <div class="stat-label">Brief</div>
-          <div class="stat-desc">Accessory packaging refresh</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Current state</div>
-          <div class="stat-desc">Draft</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">After submission</div>
-          <div class="stat-desc">In pool</div>
-        </div>
+      <div class="meta">
+        <span class="pill">Brief: Accessory packaging refresh</span>
+        <span class="pill">Current: Draft</span>
+        <span class="pill">After submit: In pool</span>
       </div>
     </section>
 
     <!-- CONTENT -->
     <section class="section">
-      <div class="get-started-grid">
+      <div class="grid">
 
-        <!-- LEFT: CONFIRMATION -->
-        <div class="get-started-card">
+        <!-- LEFT -->
+        <div class="card">
           <h2>Confirm details</h2>
           <p>
-            Manufacturers will decide quickly based on what’s here. Confirm the essentials before publishing.
+            Manufacturers decide quickly. Confirm the essentials before publishing.
           </p>
 
-          <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Quantity</h3>
-              </div>
-              <p>2,500 units • MOQ: 1,000 units</p>
+          <div class="list">
+            <div class="item">
+              <h3>Quantity</h3>
+              <p>2,500 units • MOQ 1,000</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Timeline</h3>
-              </div>
+            <div class="item">
+              <h3>Timeline</h3>
               <p>Samples in 2 weeks • Production in 6 weeks</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Constraints</h3>
-              </div>
-              <p>Matte finish, spot UV on logo, shelf-ready, insert tray</p>
+            <div class="item">
+              <h3>Constraints</h3>
+              <p>Matte finish, spot UV logo, shelf-ready, insert tray</p>
             </div>
-
-            <div class="faq-item">
-              <div class="faq-question-row">
-                <h3>Assets</h3>
-              </div>
-              <p>Brand guide + dieline + reference images attached</p>
+            <div class="item">
+              <h3>Assets</h3>
+              <p>Brand guide, dieline, reference images</p>
             </div>
           </div>
 
-          <div class="featured-row">
-            <div class="collab-card">
-              <div class="collab-body">
-                <div class="collab-title">Locked after publish</div>
-                <p class="collab-desc">
-                  Once in the pool, you can’t edit this brief. If scope changes, create a new brief.
-                </p>
-                <a class="featured-link" href="/publisher-brief-detail-draft.html">Edit draft →</a>
-              </div>
-            </div>
+          <div class="actions">
+            <a class="btn btn-secondary" href="/publisher-brief-detail-draft.html">Edit draft</a>
           </div>
         </div>
 
-        <!-- RIGHT: PAYMENT + SUBMIT -->
-        <div class="get-started-card">
+        <!-- RIGHT -->
+        <div class="card">
           <h2>Pay & publish</h2>
           <p>
-            Payment publishes this brief into the quote pool where manufacturers can accept the work.
+            Payment publishes this brief into the pool where manufacturers can accept it.
           </p>
 
-          <form class="form" action="#" method="post">
-
-            <div class="faq-list">
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Submission fee</h3>
-                </div>
-                <p>$___ (placeholder)</p>
-              </div>
-
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Payment method</h3>
-                </div>
-                <p>Card (placeholder)</p>
-              </div>
+          <div class="list">
+            <div class="item">
+              <h3>Submission fee</h3>
+              <p>$___ (placeholder)</p>
             </div>
-
-            <div class="form-row">
-              <label class="form-label" for="billing-email">Billing email</label>
-              <input class="form-input" id="billing-email" name="billingEmail" type="email" placeholder="billing@company.com" />
+            <div class="item">
+              <h3>Payment method</h3>
+              <p>Card (placeholder)</p>
             </div>
+          </div>
 
-            <div class="form-row">
-              <label class="form-label" for="po">PO / reference (optional)</label>
-              <input class="form-input" id="po" name="po" type="text" placeholder="e.g., PO-1042" />
-            </div>
+          <label>Billing email</label>
+          <input type="email" placeholder="billing@company.com" />
 
-            <div class="faq-list">
-              <div class="faq-item">
-                <div class="faq-question-row">
-                  <h3>Confirm</h3>
-                </div>
-                <p>
-                  By publishing, you confirm this brief is accurate and ready for manufacturers to accept.
-                  You agree to the <a href="/terms.html">Terms</a>.
-                </p>
-              </div>
-            </div>
+          <label>PO / reference (optional)</label>
+          <input type="text" placeholder="e.g. PO-1042" />
 
-            <div class="form-actions">
-              <button class="button-primary" type="submit">Pay & publish</button>
-              <a class="button-secondary" href="/publisher-brief-detail-draft.html">Back to draft</a>
-            </div>
-
-            <p class="cs-hero-sub">
-              After publishing, this will appear as “In pool” until a manufacturer accepts it and it becomes an order.
+          <div class="item">
+            <h3>Confirm</h3>
+            <p>
+              By publishing, you confirm this brief is accurate and ready for manufacturers.
+              You agree to the <a href="/terms.html">Terms</a>.
             </p>
+          </div>
 
-          </form>
+          <div class="actions">
+            <button class="btn btn-primary">Pay & publish</button>
+            <a class="btn btn-secondary" href="/publisher-brief-detail-draft.html">Back to draft</a>
+          </div>
 
+          <p style="font-size:.9rem;color:#64748b">
+            After publishing, this brief will appear as <strong>In pool</strong> until accepted.
+          </p>
         </div>
 
       </div>
     </section>
-
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-brand-text">
-          Order Pool is a shared manufacturing request platform built on transparency and execution.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Publisher</h4>
-        <a href="/publisher-dashboard-full.html">Dashboard</a>
-        <a href="/publisher-briefs-full.html">Briefs</a>
-        <a href="/publisher-orders-full.html">Orders</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/pricing.html">Pricing</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/safety.html">Safety</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© Order Pool</span>
-      </div>
-    </div>
-  </footer>
-
 </body>
 </html>
