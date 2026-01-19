@@ -1,104 +1,265 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>OrderPool – PAGE TITLE HERE</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Terms - Order Pool</title>
+    <style>
+        /* Copied minimal styles for layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #0f172a;
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 800;
+            min-width: 180px;
+        }
+
+        .brand img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: .95rem;
+            transition: color .2s;
+            padding: .25rem;
+        }
+
+        .nav-links a:hover {
+            color: #0f172a;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: .75rem;
+            align-items: center;
+            min-width: 220px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: .65rem 1.15rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: .95rem;
+            font-weight: 650;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #0f172a;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-primary {
+            background: #3d20ae;
+            color: #fff;
+            border: 1px solid #3d20ae;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            min-height: 60vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 850;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+
+        footer {
+            background: #fff;
+            border-top: 1px solid #e5e7eb;
+            padding: 2.75rem 2rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: .85rem;
+            font-weight: 800;
+            margin-bottom: .9rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: .06em;
+        }
+
+        .footer-column ul {
+            list-style: none
+        }
+
+        .footer-column ul li {
+            margin-bottom: .5rem
+        }
+
+        .footer-column a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: .95rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            color: #94a3b8;
+            font-size: .92rem;
+        }
+    </style>
 </head>
+
 <body>
+    <header>
+        <nav>
+            <a href="index.html" class="brand" aria-label="Order Pool home">
+                <img src="Orderpool_logo.png" alt="Order Pool logo" />
+                <span>Order Pool</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="how-it-works.html">How it works</a></li>
+                <li><a href="for-publishers.html">Publishers</a></li>
+                <li><a href="for-manufacturers.html">Manufacturers</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="auth-signin.html" class="btn btn-secondary">Sign in</a>
+                <a href="get-started.html" class="btn btn-primary">Get started</a>
+            </div>
+        </nav>
+    </header>
 
-  <!-- HEADER (same on all pages) -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <a href="index.html">
-          <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo" />
-        </a>
-        <span class="brand">OrderPool</span>
-      </div>
+    <main>
+        <h1>Terms of Service</h1>
+        <p>Last updated: January 2026</p>
 
-      <nav class="nav">
-        <a href="mission.html" class="nav-link">Mission</a>
-        <a href="value.html" class="nav-link">Value</a>
-        <a href="team.html" class="nav-link">Team</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using Order Pool, you agree to be bound by these Terms of Service.</p>
 
-      <div class="header-actions">
-        <a href="get-started.html" class="header-btn primary">Get Started</a>
-      </div>
-    </div>
-  </header>
+        <h2>2. Platform Usage</h2>
+        <p>Order Pool is a marketplace connecting publishers and manufacturers. We facilitate transactions but are not a
+            party to the manufacturing contracts themselves.</p>
 
-<main class="page">
-  <section class="section">
-    <h1>Terms of Service</h1>
-    <p>
-      This page will describe the terms and conditions for using OrderPool.
-    </p>
-  </section>
-</main>
+        <h2>3. Publisher Obligations</h2>
+        <p>Publishers must provide accurate briefs and pay for services as agreed.</p>
 
+        <h2>4. Manufacturer Obligations</h2>
+        <p>Manufacturers must fulfill accepted orders according to specifications and timelines.</p>
+    </main>
 
-
-
-  <!-- FOOTER (same on all pages) -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <!-- Brand column -->
-      <div class="footer-col">
-        <img src="Orderpool_logo.png" alt="OrderPool logo" class="logo-footer" />
-        <p class="footer-brand-text">
-          Where publishers and manufacturers collaborate to create products.
-        </p>
-      </div>
-
-      <!-- For Publishers -->
-      <div class="footer-col">
-        <h4>For Publishers</h4>
-        <a href="briefs-new.html">Post a concept</a>
-        <a href="for-manufacturers.html">Find a manufacturer</a>
-        <a href="case-studies.html">Case studies</a>
-      </div>
-
-      <!-- For Manufacturers -->
-      <div class="footer-col">
-        <h4>For Manufacturers</h4>
-        <a href="briefs.html">Discover briefs</a>
-        <a href="manufacturer-capabilities.html">Capabilities</a>
-        <a href="safety.html">Safety &amp; compliance</a>
-      </div>
-
-      <!-- Stay in the loop -->
-      <div class="footer-col">
-        <h4>Stay in the loop</h4>
-        <form class="newsletter-form" action="newsletter-subscribe.html" method="GET">
-          <input
-            type="email"
-            name="email"
-            class="newsletter-input"
-            placeholder="you@example.com"
-            required
-          />
-          <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
-        <p>We respect your privacy. Unsubscribe anytime.</p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <span>© 2025 OrderPool. All rights reserved.</span>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a> ·
-          <a href="terms.html">Terms</a> ·
-          <a href="contact.html">Contact</a> ·
-          <a href="#top">Back to top</a>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="how-it-works.html">How it works</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="public-orders.html">Public orders</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="mission.html">Mission</a></li>
+                        <li><a href="team.html">Team</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                        <li><a href="safety.html">Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© Order Pool</span>
+                <span>Aggregated Wholesaling Manufacturing Marketplace</span>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
-
+    </footer>
 </body>
+
 </html>
+
+
+
+
+
+

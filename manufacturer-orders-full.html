@@ -3,271 +3,190 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <title>Orders — Manufacturer — Order Pool</title>
-  <meta name="description" content="Manufacturer orders list with active and completed work." />
-
+  <title>Quote Pool — Manufacturer — Order Pool</title>
+  <meta name="description" content="Manufacturer quote pool with available requests." />
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
-      line-height:1.6;
-      color:#0f172a;
-      background:#ffffff;
-    }
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.6;color:#0f172a;background:#fff}
 
-    /* Header (canonical – authenticated) */
-    header{
-      background:#fff;
-      border-bottom:1px solid #e5e7eb;
-      padding:1rem 2rem;
-      position:sticky;
-      top:0;
-      z-index:100;
-    }
-    nav{
-      max-width:1200px;
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:1.5rem;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:.75rem;
-      text-decoration:none;
-      color:#0f172a;
-      font-weight:800;
-      min-width:180px;
-    }
+    header{background:#fff;border-bottom:1px solid #e5e7eb;padding:1rem 2rem;position:sticky;top:0;z-index:100}
+    .topnav{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1.5rem}
+    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:#0f172a;font-weight:800;min-width:180px}
     .brand img{width:34px;height:34px;object-fit:contain}
-    .nav-links{
-      display:flex;
-      gap:1.5rem;
-      list-style:none;
-      flex:1;
-      justify-content:center;
-    }
-    .nav-links a{
-      color:#64748b;
-      text-decoration:none;
-      font-weight:700;
-      font-size:.95rem;
-    }
-    .nav-links a[aria-current="page"]{
-      color:#0f172a;
-      font-weight:900;
-    }
-    .nav-actions{
-      display:flex;
-      gap:.75rem;
-      min-width:220px;
-      justify-content:flex-end;
-    }
+    .nav-links{display:flex;gap:1.5rem;list-style:none;flex:1;justify-content:center;flex-wrap:wrap}
+    .nav-links a{color:#64748b;text-decoration:none;font-weight:850;font-size:.95rem}
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:950}
+    .nav-links a:hover{color:#0f172a}
+    .nav-actions{display:flex;gap:.75rem;min-width:220px;justify-content:flex-end;flex-wrap:wrap}
 
-    /* Buttons */
-    .btn{
-      padding:.65rem 1.15rem;
-      border-radius:10px;
-      font-size:.95rem;
-      font-weight:650;
-      border:1px solid transparent;
-      background:none;
-      cursor:pointer;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      white-space:nowrap;
-    }
-    .btn-primary{
-      background:#3d20ae;
-      color:#fff;
-      border-color:#3d20ae;
-    }
-    .btn-secondary{
-      background:#fff;
-      color:#0f172a;
-      border-color:#e5e7eb;
-    }
+    .btn{padding:.65rem 1.15rem;border-radius:10px;font-size:.95rem;font-weight:850;border:1px solid transparent;background:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap}
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+    .btn-primary:hover{filter:brightness(.97)}
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
     .btn-secondary:hover{background:#f8fafc}
 
-    /* Layout */
-    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
-    .section{margin-bottom:3rem}
-    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
-    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
+    h1{font-size:2.6rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.4rem}
     p{color:#475569}
-    .lead{font-size:1.05rem;max-width:900px}
+    .lead{font-size:1.05rem;max-width:920px}
 
-    /* Stats */
-    .stats{
-      display:flex;
-      gap:.75rem;
-      flex-wrap:wrap;
-      margin-top:1.25rem;
-    }
-    .stat{
-      background:#fff;
+    .toolbar{margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .filters{display:flex;gap:.5rem;flex-wrap:wrap}
+    .chip{padding:.55rem .85rem;border-radius:999px;border:1px solid #e5e7eb;background:#fff;font-weight:900;font-size:.85rem;color:#334155}
+    .chip.muted{background:#f8fafc;color:#64748b}
+
+    .list{margin-top:1.5rem;display:grid;grid-template-columns:1fr;gap:1rem}
+    .req{
       border:1px solid #e5e7eb;
-      border-radius:14px;
-      padding:.85rem 1rem;
-      display:flex;
-      gap:.75rem;
+      border-radius:22px;
+      padding:1.15rem;
+      background:#fff;
+      display:grid;
+      grid-template-columns:1.4fr .8fr .7fr .7fr .8fr;
+      gap:12px;
       align-items:center;
     }
-    .stat strong{font-size:1.3rem;font-weight:900}
-    .stat span{font-size:.75rem;color:#64748b;font-weight:800;text-transform:uppercase}
+    .req strong{font-weight:950}
+    .req a{color:#0f172a;text-decoration:none;font-weight:950}
+    .req a:hover{text-decoration:underline}
+    .muted{color:#64748b;font-weight:800;font-size:.9rem}
+    .pill{display:inline-flex;align-items:center;gap:.4rem;padding:6px 10px;border-radius:999px;font-size:.78rem;font-weight:950;border:1px solid #e5e7eb;background:#fff;color:#0f172a;justify-self:start}
+    .pill.blue{background:rgba(61,32,174,.08);border-color:rgba(61,32,174,.18);color:#3d20ae}
+    .pill.gray{background:#f1f5f9;border-color:#e2e8f0;color:#475569}
+    .pill.green{background:rgba(16,185,129,.10);border-color:rgba(16,185,129,.25);color:#047857}
 
-    /* Orders grid */
-    .order-grid{
+    .head{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1.25rem;
-    }
-    .order-card{
-      background:#fff;
-      border:1px solid #e5e7eb;
-      border-radius:18px;
-      padding:1.25rem;
-      display:flex;
-      flex-direction:column;
-      gap:.85rem;
-    }
-    .order-title{font-weight:900;font-size:1.1rem}
-    .order-sub{font-size:.85rem;color:#64748b}
-
-    .order-actions{
-      display:flex;
-      gap:.5rem;
-      flex-wrap:wrap;
-      margin-top:.25rem;
+      grid-template-columns:1.4fr .8fr .7fr .7fr .8fr;
+      gap:12px;
+      padding:0 6px;
+      color:#64748b;
+      font-weight:950;
+      font-size:.82rem;
+      text-transform:uppercase;
+      letter-spacing:.06em;
     }
 
-    /* CTA */
-    .cta{
-      background:linear-gradient(135deg, rgba(61,32,174,.08), rgba(59,244,156,.10));
-      border:1px dashed #e5e7eb;
-      border-radius:18px;
-      padding:2rem;
-      text-align:center;
-    }
+    footer{border-top:1px solid #e5e7eb;background:#fff}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .footer-left{display:flex;align-items:center;gap:.6rem;font-weight:950;color:#0f172a}
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:#64748b;font-weight:850;font-size:.92rem}
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{font-size:.8rem;color:#94a3b8;font-weight:850}
 
     @media(max-width:1000px){
-      .order-grid{grid-template-columns:1fr}
-      main{padding:2.5rem 1.25rem 3rem}
+      main{padding:2.5rem 1.25rem 2rem}
+      header{padding:1rem 1.25rem}
+      .topnav{flex-wrap:wrap;justify-content:center}
+      .brand{min-width:auto}
+      .nav-actions{min-width:auto}
       h1{font-size:2.2rem}
+      .head{display:none}
+      .req{grid-template-columns:1fr;gap:8px}
     }
   </style>
 </head>
-
 <body>
   <header>
-    <nav>
-      <a href="/manufacturer-dashboard-full.html" class="brand">
+    <div class="topnav">
+      <a href="manufacturer-dashboard-full.html" class="brand">
         <img src="Orderpool_logo.png" alt="Order Pool logo" />
         <span>Order Pool</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="/manufacturer-dashboard-full.html">Dashboard</a></li>
-        <li><a href="/manufacturer-quote-pool-full.html">Quote pool</a></li>
-        <li><a href="/manufacturer-orders-full.html" aria-current="page">Orders</a></li>
+        <li><a href="manufacturer-dashboard-full.html">Dashboard</a></li>
+        <li><a href="manufacturer-quote-pool-full.html" aria-current="page">Quote pool</a></li>
+        <li><a href="manufacturer-orders-full.html">Orders</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
-        <a class="btn btn-primary" href="/manufacturer-quote-pool-full.html">Browse pool</a>
+        <a class="btn btn-secondary" href="dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="manufacturer-quote-pool-full.html">Refresh</a>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="section">
-      <h1>Orders</h1>
-      <p class="lead">
-        Manage accepted work through fulfillment. Updates you post syndicate automatically to publishers.
-      </p>
+    <h1>Quote pool</h1>
+    <p class="lead">Pick work that fits your capacity. Accepting converts a request into an order immediately.</p>
 
-      <div class="stats">
-        <div class="stat"><strong>2</strong><span>Active</span></div>
-        <div class="stat"><strong>3</strong><span>Completed</span></div>
-        <div class="stat"><strong>1</strong><span>Updates due</span></div>
+    <div class="toolbar">
+      <div class="filters" aria-label="Filters">
+        <span class="chip">Packaging</span>
+        <span class="chip muted">2k–10k</span>
+        <span class="chip muted">≤ 8 weeks</span>
+        <span class="chip muted">Canada</span>
       </div>
-    </section>
-
-    <!-- ACTIVE -->
-    <section class="section">
-      <h2>Active</h2>
-
-      <div class="order-grid">
-        <div class="order-card">
-          <div>
-            <div class="order-title">Retail display packaging</div>
-            <div class="order-sub">ORD-11804 • 2,500 units • Production • Updated 2 days ago</div>
-          </div>
-
-          <div class="order-actions">
-            <a class="btn btn-primary" href="/manufacturer-order-detail-editable.html">Open order</a>
-            <a class="btn btn-secondary" href="/public-order-detail.html">Public view</a>
-          </div>
-        </div>
-
-        <div class="order-card">
-          <div>
-            <div class="order-title">Seasonal apparel run</div>
-            <div class="order-sub">ORD-11722 • 5,000 units • Sampling • Updated 6 days ago</div>
-          </div>
-
-          <div class="order-actions">
-            <a class="btn btn-primary" href="/manufacturer-order-detail-editable.html">Open order</a>
-            <a class="btn btn-secondary" href="/public-order-detail.html">Public view</a>
-          </div>
-        </div>
+      <div class="filters" aria-label="Sort">
+        <span class="chip muted">Sort: Newest</span>
       </div>
-    </section>
+    </div>
 
-    <!-- COMPLETED -->
-    <section class="section">
-      <h2>Completed</h2>
+    <div class="head" aria-hidden="true">
+      <div>Request</div><div>Category</div><div>Qty</div><div>Timeline</div><div>Status</div>
+    </div>
 
-      <div class="order-grid">
-        <div class="order-card">
-          <div class="order-title">Accessory batch run</div>
-          <div class="order-sub">ORD-11411 • Fulfilled • Completed 3 weeks ago</div>
-          <a class="btn btn-secondary" href="/manufacturer-order-detail-editable.html">View record</a>
+    <section class="list" aria-label="Quote requests">
+      <div class="req">
+        <div>
+          <a href="manufacturer-quote-detail.html">QP-8812 — Retail Display Packaging</a><br />
+          <span class="muted">Shelf-ready · dieline provided · Vancouver, BC</span>
         </div>
-
-        <div class="order-card">
-          <div class="order-title">Counter display kit</div>
-          <div class="order-sub">ORD-11302 • Fulfilled • Completed 6 weeks ago</div>
-          <a class="btn btn-secondary" href="/manufacturer-order-detail-editable.html">View record</a>
-        </div>
-
-        <div class="order-card">
-          <div class="order-title">Print + pack rollout</div>
-          <div class="order-sub">ORD-11012 • Fulfilled • Completed 4 months ago</div>
-          <a class="btn btn-secondary" href="/manufacturer-order-detail-editable.html">View record</a>
-        </div>
+        <div class="muted">Packaging</div>
+        <div class="muted">2,500</div>
+        <div class="muted">6 weeks</div>
+        <div><span class="pill blue">✅ Ready to accept</span></div>
       </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="section">
-      <div class="cta">
-        <h2>Want more work?</h2>
-        <p class="lead">
-          Browse the pool and accept requests that fit your current capacity.
-        </p>
-        <div class="order-actions" style="justify-content:center">
-          <a class="btn btn-primary" href="/manufacturer-quote-pool-full.html">Browse quote pool</a>
-          <a class="btn btn-secondary" href="/dashboard-settings.html">Update capabilities</a>
+      <div class="req">
+        <div>
+          <a href="manufacturer-quote-detail.html">QP-8820 — Product Insert Cards</a><br />
+          <span class="muted">4/4 CMYK · matte · Toronto, ON</span>
         </div>
+        <div class="muted">Print</div>
+        <div class="muted">10,000</div>
+        <div class="muted">5 weeks</div>
+        <div><span class="pill gray">⏳ In review</span></div>
+      </div>
+
+      <div class="req">
+        <div>
+          <a href="manufacturer-quote-detail.html">QP-8841 — Corrugated Shippers</a><br />
+          <span class="muted">B-flute · 1-color · Calgary, AB</span>
+        </div>
+        <div class="muted">Packaging</div>
+        <div class="muted">3,000</div>
+        <div class="muted">7 weeks</div>
+        <div><span class="pill green">⭐ High fit</span></div>
       </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+      <div class="footer-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="for-manufacturers.html">For manufacturers</a>
+        <a href="dashboard-settings.html">Settings</a>
+      </div>
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
 </body>
 </html>
+
+
+
+
+
+
+
+

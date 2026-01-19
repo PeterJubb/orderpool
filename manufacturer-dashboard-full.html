@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>Dashboard — Manufacturer — Order Pool</title>
-  <meta name="description" content="Manufacturer dashboard showing capacity, active orders, and required updates." />
+  <meta name="description" content="Manufacturer dashboard with active work in progress." />
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -16,7 +16,7 @@
       background:#ffffff;
     }
 
-    /* Header (canonical – authenticated) */
+    /* Header (scoped, so footer nav never inherits) */
     header{
       background:#fff;
       border-bottom:1px solid #e5e7eb;
@@ -25,7 +25,7 @@
       top:0;
       z-index:100;
     }
-    nav{
+    .topnav{
       max-width:1200px;
       margin:0 auto;
       display:flex;
@@ -39,357 +39,455 @@
       gap:.75rem;
       text-decoration:none;
       color:#0f172a;
-      font-weight:800;
-      letter-spacing:.2px;
+      font-weight:900;
       min-width:180px;
     }
-    .brand img{width:34px;height:34px;object-fit:contain;display:block}
+    .brand img{width:34px;height:34px;object-fit:contain}
+
     .nav-links{
       display:flex;
       gap:1.5rem;
-      align-items:center;
       list-style:none;
       flex:1;
       justify-content:center;
+      flex-wrap:wrap;
     }
     .nav-links a{
       color:#64748b;
       text-decoration:none;
+      font-weight:850;
       font-size:.95rem;
-      font-weight:700;
-      padding:.25rem;
+    }
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:950;
     }
     .nav-links a:hover{color:#0f172a}
-    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:900}
+
     .nav-actions{
       display:flex;
       gap:.75rem;
-      align-items:center;
       min-width:220px;
       justify-content:flex-end;
+      flex-wrap:wrap;
     }
 
     /* Buttons */
     .btn{
       padding:.65rem 1.15rem;
       border-radius:10px;
-      text-decoration:none;
       font-size:.95rem;
+      font-weight:850;
       border:1px solid transparent;
-      font-weight:650;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.45rem;
-      white-space:nowrap;
       background:none;
       cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
     }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-primary:hover{filter:brightness(.97)}
     .btn-secondary{
       background:#fff;
       color:#0f172a;
       border-color:#e5e7eb;
     }
     .btn-secondary:hover{background:#f8fafc}
-    .btn-primary{
-      background:#3d20ae;
-      color:#fff;
-      border-color:#3d20ae;
+    .btn-ghost{
+      background:transparent;
+      color:#0f172a;
+      border-color:transparent;
     }
+    .btn-ghost:hover{background:#f8fafc}
 
     /* Layout */
-    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 3.5rem}
-    .section{margin-bottom:3rem}
-    h1{
-      font-size:2.6rem;
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
+    .section{margin-bottom:2.75rem}
+    h1{font-size:2.6rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:950;margin-bottom:.4rem}
+    h3{font-size:1.05rem;font-weight:950}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Small pills */
+    .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+    .chip{
+      display:inline-flex;align-items:center;gap:.4rem;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      border-radius:999px;
+      padding:.35rem .65rem;
+      font-size:.78rem;
       font-weight:900;
-      letter-spacing:-.02em;
-      margin-bottom:.4rem;
+      color:#334155;
     }
-    h2{
-      font-size:1.6rem;
-      font-weight:900;
-      margin-bottom:.4rem;
+    .chip.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .chip.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+    .chip.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
+
+    /* Stat tiles */
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-top:1.25rem}
+    .stat{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:1rem 1rem .95rem;
     }
-    .lead{
-      color:#475569;
-      font-size:1.05rem;
-      max-width:900px;
+    .stat .k{font-size:.78rem;font-weight:900;color:#64748b;text-transform:uppercase;letter-spacing:.02em}
+    .stat .v{font-size:1.55rem;font-weight:950;margin-top:.2rem;color:#0f172a}
+    .stat .s{font-size:.85rem;font-weight:850;color:#64748b;margin-top:.15rem}
+
+    /* Grids */
+    .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:1.25rem}
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.25rem 1.25rem 1.1rem;
+    }
+    .card-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+      margin-bottom:.9rem;
     }
 
-    /* KPI */
-    .kpis{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:1rem;
-      margin-top:1.25rem;
-    }
-    .kpi{
-      background:#fff;
+    /* Rows */
+    .rows{display:flex;flex-direction:column;gap:.75rem}
+    .row{
       border:1px solid #e5e7eb;
       border-radius:16px;
       padding:1rem;
+      background:#fafcff;
       display:flex;
-      gap:.75rem;
-      align-items:center;
-    }
-    .kpi strong{font-size:1.4rem;font-weight:900}
-    .kpi span{
-      font-size:.75rem;
-      font-weight:800;
-      color:#64748b;
-      text-transform:uppercase;
-    }
-
-    /* Alerts */
-    .alert-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1.25rem;
-      margin-top:1.25rem;
-    }
-    .alert{
-      border:1px solid #e5e7eb;
-      border-radius:18px;
-      padding:1.25rem;
-      background:#fff;
-    }
-    .alert h3{font-weight:900;margin-bottom:.35rem}
-    .alert p{color:#64748b;font-size:.9rem}
-
-    /* Capacity */
-    .capacity{
-      border:1px dashed #e5e7eb;
-      border-radius:16px;
-      padding:1.25rem;
-      background:linear-gradient(135deg, rgba(61,32,174,.06), rgba(59,244,156,.08));
-      margin-top:1rem;
-    }
-    .meter{
-      height:10px;
-      background:#f1f5f9;
-      border-radius:999px;
-      overflow:hidden;
-      margin:.6rem 0;
-    }
-    .meter span{
-      display:block;
-      height:100%;
-      background:linear-gradient(90deg,#3d20ae,#7c5cff);
-    }
-    .capacity-note{font-size:.85rem;color:#64748b}
-
-    /* Orders */
-    .order-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1.25rem;
-    }
-    .order-card{
-      background:#fff;
-      border:1px solid #e5e7eb;
-      border-radius:18px;
-      padding:1.25rem;
-      display:flex;
-      flex-direction:column;
-      gap:.85rem;
-    }
-    .order-title{font-weight:900;font-size:1.1rem}
-    .order-sub{font-size:.85rem;color:#64748b}
-
-    .timeline{
-      display:flex;
-      gap:.5rem;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:1rem;
       flex-wrap:wrap;
     }
-    .step{
-      font-size:.75rem;
-      font-weight:900;
-      padding:.35rem .6rem;
+    .row .title{font-weight:950;color:#0f172a}
+    .row .meta{color:#64748b;font-weight:800;font-size:.9rem;margin-top:.15rem}
+    .row .right{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+    .badge{
       border-radius:999px;
+      padding:.35rem .65rem;
+      font-weight:950;
+      font-size:.78rem;
       border:1px solid #e5e7eb;
-      color:#64748b;
       background:#fff;
+      color:#334155;
+      white-space:nowrap;
     }
-    .step.done{
-      background:rgba(16,185,129,.12);
-      color:#065f46;
-      border-color:rgba(16,185,129,.35);
-    }
-    .step.active{
-      background:rgba(61,32,174,.08);
-      color:#3d20ae;
-      border-color:rgba(61,32,174,.25);
-    }
+    .badge.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .badge.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+    .badge.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
 
-    .progress{
-      height:8px;
-      border-radius:999px;
-      background:#f1f5f9;
-      overflow:hidden;
-    }
-    .progress span{
-      display:block;
-      height:100%;
-      background:linear-gradient(90deg,#3d20ae,#7c5cff);
-    }
-    .progress-meta{
+    /* Quick actions */
+    .qa{display:flex;flex-direction:column;gap:.65rem;margin-top:.5rem}
+    .qa a{
+      text-decoration:none;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.9rem;
+      background:#fff;
+      color:#0f172a;
       display:flex;
       justify-content:space-between;
-      font-size:.75rem;
-      color:#64748b;
-      margin-top:.3rem;
+      gap:1rem;
+      align-items:center;
+      font-weight:900;
     }
+    .qa a span{color:#64748b;font-weight:850}
+    .qa a:hover{background:#f8fafc}
 
-    .order-actions{
-      display:flex;
-      gap:.5rem;
-      flex-wrap:wrap;
-      margin-top:.25rem;
+    /* Updates list */
+    .updates{display:flex;flex-direction:column;gap:.7rem;margin-top:.5rem}
+    .update{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.9rem;
+      background:#fff;
     }
+    .update .top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .update .top strong{font-weight:950}
+    .update .top em{font-style:normal;color:#64748b;font-weight:850;font-size:.9rem}
+    .update p{margin-top:.35rem;font-size:.95rem}
 
-    @media(max-width:1000px){
-      .kpis,.alert-grid,.order-grid{grid-template-columns:1fr}
-      main{padding:2.5rem 1.25rem 3rem}
-      h1{font-size:2.2rem}
+    /* Footer */
+    footer{border-top:1px solid #e5e7eb;background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:1.25rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    }
+    .footer-left{display:flex;align-items:center;gap:.6rem;font-weight:950;color:#0f172a}
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:#64748b;font-weight:850;font-size:.92rem}
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{font-size:.8rem;color:#94a3b8;font-weight:850}
+
+    @media(max-width:1100px){
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .grid{grid-template-columns:1fr}
+    }
+    @media(max-width:720px){
+      main{padding:2.25rem 1.25rem 2rem}
+      header{padding:1rem 1.25rem}
+      .topnav{flex-wrap:wrap;justify-content:center}
+      .brand{min-width:auto}
+      .nav-actions{min-width:auto}
+      h1{font-size:2.15rem}
     }
   </style>
 </head>
 
 <body>
   <header>
-    <nav>
-      <a href="/manufacturer-dashboard-full.html" class="brand">
+    <div class="topnav">
+      <a href="manufacturer-dashboard-full.html" class="brand">
         <img src="Orderpool_logo.png" alt="Order Pool logo" />
         <span>Order Pool</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="/manufacturer-dashboard-full.html" aria-current="page">Dashboard</a></li>
-        <li><a href="/manufacturer-quote-pool-full.html">Quote pool</a></li>
-        <li><a href="/manufacturer-orders-full.html">Orders</a></li>
+        <li><a href="manufacturer-dashboard-full.html" aria-current="page">Dashboard</a></li>
+        <li><a href="manufacturer-quote-pool-full.html">Quote pool</a></li>
+        <li><a href="manufacturer-orders-full.html">Orders</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
-        <a class="btn btn-primary" href="/manufacturer-quote-pool-full.html">Browse pool</a>
+        <a class="btn btn-secondary" href="dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="manufacturer-quote-pool-full.html">Browse quote pool</a>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
-    <!-- HERO -->
+    <!-- Hero -->
     <section class="section">
       <h1>Manufacturer dashboard</h1>
       <p class="lead">
-        Track active work, manage capacity, and keep publishers aligned with clear updates.
+        Here’s what’s in motion today — active orders, upcoming deadlines, and the next best job
+        to pull from the pool.
       </p>
 
-      <div class="kpis">
-        <div class="kpi"><strong>2</strong><span>Active</span></div>
-        <div class="kpi"><strong>1</strong><span>Updates due</span></div>
-        <div class="kpi"><strong>4</strong><span>In pool</span></div>
-        <div class="kpi"><strong>3</strong><span>Completed</span></div>
-      </div>
-    </section>
-
-    <!-- TODAY -->
-    <section class="section">
-      <h2>Today</h2>
-
-      <div class="alert-grid">
-        <div class="alert">
-          <h3>Update due</h3>
-          <p>
-            <strong>Seasonal apparel run</strong> is awaiting the next sampling milestone.
-          </p>
-          <div class="order-actions">
-            <a class="btn btn-primary" href="/manufacturer-order-detail-editable.html">Post update</a>
-            <a class="btn btn-secondary" href="/manufacturer-orders-full.html">View orders</a>
-          </div>
-        </div>
-
-        <div class="alert">
-          <h3>New pool requests</h3>
-          <p>
-            New briefs match your capabilities and current capacity.
-          </p>
-          <div class="order-actions">
-            <a class="btn btn-primary" href="/manufacturer-quote-pool-full.html">Browse pool</a>
-            <a class="btn btn-secondary" href="/dashboard-settings.html">Update capacity</a>
-          </div>
-        </div>
+      <div class="chips" aria-label="Status highlights">
+        <span class="chip good">✅ On track</span>
+        <span class="chip warn">⏳ 1 deadline this week</span>
+        <span class="chip info">📣 Public tracking enabled</span>
       </div>
 
-      <div class="capacity">
-        <strong>Capacity</strong>
-        <div class="meter"><span style="width:72%"></span></div>
-        <div class="capacity-note">
-          You’re at ~72% planned capacity this week.
+      <div class="stats" aria-label="Key stats">
+        <div class="stat">
+          <div class="k">Active orders</div>
+          <div class="v">3</div>
+          <div class="s">In production / shipping</div>
+        </div>
+        <div class="stat">
+          <div class="k">Updates due</div>
+          <div class="v">2</div>
+          <div class="s">Send milestone notes</div>
+        </div>
+        <div class="stat">
+          <div class="k">Pool matches</div>
+          <div class="v">6</div>
+          <div class="s">Fit your capabilities</div>
+        </div>
+        <div class="stat">
+          <div class="k">Fulfilled (30d)</div>
+          <div class="v">5</div>
+          <div class="s">Delivered successfully</div>
         </div>
       </div>
     </section>
 
-    <!-- ACTIVE ORDERS -->
     <section class="section">
-      <h2>Active orders</h2>
-
-      <div class="order-grid">
-        <div class="order-card">
-          <div>
-            <div class="order-title">Retail display packaging</div>
-            <div class="order-sub">ORD-11804 • Updated 2 days ago</div>
-          </div>
-
-          <div class="timeline">
-            <span class="step done">Sampling</span>
-            <span class="step active">Production</span>
-            <span class="step">Shipping</span>
-            <span class="step">Done</span>
-          </div>
-
-          <div>
-            <div class="progress"><span style="width:62%"></span></div>
-            <div class="progress-meta">
-              <span>Next: Mid-run QC</span>
-              <span>ETA Jan 20</span>
+      <div class="grid">
+        <!-- Left: Active orders -->
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Active orders</h2>
+              <p>Keep these moving with clean milestone updates.</p>
             </div>
+            <a class="btn btn-ghost" href="manufacturer-orders-full.html">View all →</a>
           </div>
 
-          <div class="order-actions">
-            <a class="btn btn-primary" href="/manufacturer-order-detail-editable.html">Open</a>
-            <a class="btn btn-secondary" href="/public-order-detail.html">Public view</a>
+          <div class="rows" aria-label="Active order list">
+            <div class="row">
+              <div>
+                <div class="title">Retail display packaging — 2,500 units</div>
+                <div class="meta">Order #OP-1842 • Vancouver, BC • Next: Production check-in</div>
+              </div>
+              <div class="right">
+                <span class="badge warn">Update due</span>
+                <a class="btn btn-secondary" href="manufacturer-order-detail-editable.html">Open</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <div class="title">Apparel hang tags — 10,000 units</div>
+                <div class="meta">Order #OP-1799 • Richmond, BC • Next: Proof approval</div>
+              </div>
+              <div class="right">
+                <span class="badge info">Sampling</span>
+                <a class="btn btn-secondary" href="manufacturer-order-detail-editable.html">Open</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <div class="title">Counter display tray — 1,200 units</div>
+                <div class="meta">Order #OP-1761 • Burnaby, BC • Next: Ship window</div>
+              </div>
+              <div class="right">
+                <span class="badge good">On track</span>
+                <a class="btn btn-secondary" href="manufacturer-order-detail-editable.html">Open</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="order-card">
-          <div>
-            <div class="order-title">Seasonal apparel run</div>
-            <div class="order-sub">ORD-11722 • Update due</div>
-          </div>
-
-          <div class="timeline">
-            <span class="step active">Sampling</span>
-            <span class="step">Production</span>
-            <span class="step">Shipping</span>
-            <span class="step">Done</span>
-          </div>
-
-          <div>
-            <div class="progress"><span style="width:28%"></span></div>
-            <div class="progress-meta">
-              <span>Next: Sample photos</span>
-              <span>ETA Jan 15</span>
+        <!-- Right: Quick actions -->
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Quick actions</h2>
+              <p>Do the next highest-impact thing.</p>
             </div>
           </div>
 
-          <div class="order-actions">
-            <a class="btn btn-primary" href="/manufacturer-order-detail-editable.html">Open</a>
-            <a class="btn btn-secondary" href="/public-order-detail.html">Public view</a>
+          <div class="qa" aria-label="Quick actions">
+            <a href="manufacturer-order-detail-editable.html">
+              Post milestone update <span>→</span>
+            </a>
+            <a href="manufacturer-quote-pool-full.html">
+              Pull a new job from pool <span>→</span>
+            </a>
+            <a href="dashboard-settings.html">
+              Update capacity & lead times <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+        <!-- Left: Suggested pool matches -->
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Suggested pool matches</h2>
+              <p>High fit based on your capabilities and typical lead times.</p>
+            </div>
+            <a class="btn btn-ghost" href="manufacturer-quote-pool-full.html">Browse pool →</a>
+          </div>
+
+          <div class="rows" aria-label="Suggested pool matches">
+            <div class="row">
+              <div>
+                <div class="title">Shelf-ready carton — 5,000 units</div>
+                <div class="meta">Category: Packaging • Due: 5 weeks • Region: Lower Mainland</div>
+              </div>
+              <div class="right">
+                <span class="badge info">Good fit</span>
+                <a class="btn btn-secondary" href="manufacturer-quote-detail.html">View</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <div class="title">Sticker sheet run — 20,000 units</div>
+                <div class="meta">Category: Print • Due: 3 weeks • Region: BC</div>
+              </div>
+              <div class="right">
+                <span class="badge good">Fast win</span>
+                <a class="btn btn-secondary" href="manufacturer-quote-detail.html">View</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <div class="title">Counter display sleeve — 1,800 units</div>
+                <div class="meta">Category: Packaging • Due: 6 weeks • Region: Lower Mainland</div>
+              </div>
+              <div class="right">
+                <span class="badge info">Fits capacity</span>
+                <a class="btn btn-secondary" href="manufacturer-quote-detail.html">View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Recent updates -->
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Recent updates</h2>
+              <p>What you posted most recently.</p>
+            </div>
+          </div>
+
+          <div class="updates" aria-label="Recent updates list">
+            <div class="update">
+              <div class="top">
+                <strong>Retail display packaging</strong>
+                <em>Today • Production check</em>
+              </div>
+              <p>Press proofs approved. Production starts Monday. Next update after first QC run.</p>
+            </div>
+
+            <div class="update">
+              <div class="top">
+                <strong>Apparel hang tags</strong>
+                <em>Yesterday • Sampling</em>
+              </div>
+              <p>Sample batch complete. Courier pickup scheduled. Awaiting publisher approval.</p>
+            </div>
+
+            <div class="update">
+              <div class="top">
+                <strong>Counter display tray</strong>
+                <em>3 days ago • Shipping</em>
+              </div>
+              <p>Freight booked. Estimated delivery window: Wed–Fri. Tracking posted.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="for-manufacturers.html">For manufacturers</a>
+        <a href="dashboard-settings.html">Settings</a>
+      </div>
+
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
 </body>
 </html>
+
+
+
+
+
+
+
+

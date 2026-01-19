@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Quote request — Manufacturer — Order Pool</title>
-  <meta name="description" content="Manufacturer view of a quote request with an accept action." />
+  <title>Quote request — Detail — Manufacturer — Order Pool</title>
+  <meta name="description" content="Manufacturer view of a quote request in the pool." />
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -16,7 +16,7 @@
       background:#ffffff;
     }
 
-    /* Header (canonical – authenticated) */
+    /* Header (scoped so footer never inherits) */
     header{
       background:#fff;
       border-bottom:1px solid #e5e7eb;
@@ -25,13 +25,14 @@
       top:0;
       z-index:100;
     }
-    nav{
+    .topnav{
       max-width:1200px;
       margin:0 auto;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:1.5rem;
+      flex-wrap:wrap;
     }
     .brand{
       display:flex;
@@ -39,32 +40,33 @@
       gap:.75rem;
       text-decoration:none;
       color:#0f172a;
-      font-weight:800;
-      min-width:180px;
+      font-weight:900;
     }
     .brand img{width:34px;height:34px;object-fit:contain}
     .nav-links{
       display:flex;
-      gap:1.5rem;
+      gap:1.35rem;
       list-style:none;
       flex:1;
       justify-content:center;
+      flex-wrap:wrap;
+      padding:0 .5rem;
     }
     .nav-links a{
       color:#64748b;
       text-decoration:none;
-      font-weight:700;
+      font-weight:850;
       font-size:.95rem;
+      padding:.3rem .2rem;
+      border-radius:10px;
     }
-    .nav-links a[aria-current="page"]{
-      color:#0f172a;
-      font-weight:900;
-    }
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:950}
+    .nav-links a:hover{color:#0f172a;background:#f8fafc}
     .nav-actions{
       display:flex;
       gap:.75rem;
-      min-width:220px;
       justify-content:flex-end;
+      flex-wrap:wrap;
     }
 
     /* Buttons */
@@ -72,7 +74,7 @@
       padding:.65rem 1.15rem;
       border-radius:10px;
       font-size:.95rem;
-      font-weight:650;
+      font-weight:850;
       border:1px solid transparent;
       background:none;
       cursor:pointer;
@@ -82,226 +84,409 @@
       gap:.45rem;
       white-space:nowrap;
     }
-    .btn-primary{
-      background:#3d20ae;
-      color:#fff;
-      border-color:#3d20ae;
-    }
-    .btn-secondary{
-      background:#fff;
-      color:#0f172a;
-      border-color:#e5e7eb;
-    }
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+    .btn-primary:hover{filter:brightness(.97)}
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
     .btn-secondary:hover{background:#f8fafc}
+    .btn-ghost{background:transparent;color:#0f172a;border-color:transparent}
+    .btn-ghost:hover{background:#f8fafc}
 
     /* Layout */
-    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
-    .section{margin-bottom:3rem}
-    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
-    h2{font-size:1.5rem;font-weight:900;margin-bottom:.35rem}
-    h3{font-size:1.05rem;font-weight:900}
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
+    .section{margin-bottom:2.25rem}
+    h1{font-size:2.4rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.35rem;font-weight:950;margin-bottom:.25rem}
+    h3{font-size:1.05rem;font-weight:950}
     p{color:#475569}
-    .lead{font-size:1.05rem;max-width:900px}
+    .lead{font-size:1.05rem;max-width:920px}
 
-    /* Meta pills */
-    .meta{
-      display:flex;
-      gap:.6rem;
-      flex-wrap:wrap;
-      margin-top:1.2rem;
-    }
+    /* Hero meta */
+    .meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
     .pill{
       border:1px solid #e5e7eb;
+      background:#fff;
       border-radius:999px;
-      padding:.45rem .85rem;
-      font-size:.75rem;
-      font-weight:800;
-      background:#f8fafc;
-      color:#475569;
+      padding:.42rem .75rem;
+      font-size:.78rem;
+      font-weight:900;
+      color:#334155;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
     }
+    .pill.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .pill.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+    .pill.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
 
     /* Grid */
-    .grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:1.5rem;
-    }
-
-    /* Cards */
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1.25rem}
     .card{
-      background:#fff;
       border:1px solid #e5e7eb;
-      border-radius:18px;
-      padding:1.5rem;
-      display:flex;
-      flex-direction:column;
-      gap:1rem;
+      border-radius:20px;
+      padding:1.25rem;
+      background:#fff;
+    }
+    .card + .card{margin-top:1.25rem}
+    .card-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap
     }
 
-    /* Lists */
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap:.75rem;
-      margin-top:.5rem;
-    }
-    .item{
+    /* Detail lists */
+    .dl{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:1rem}
+    .kv{
       border:1px solid #e5e7eb;
-      border-radius:14px;
-      padding:.85rem;
+      border-radius:16px;
+      padding:.9rem;
       background:#fafcff;
     }
-    .item p{font-size:.9rem}
+    .kv strong{display:block;font-weight:950;color:#0f172a;margin-bottom:.15rem}
+    .kv span{display:block;color:#64748b;font-weight:800;font-size:.92rem}
+
+    /* Attachments */
+    .attachments{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem}
+    .file{
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+      border:1px solid #e5e7eb;border-radius:16px;padding:.9rem;background:#fff;
+    }
+    .file .left{display:flex;flex-direction:column;gap:.1rem}
+    .file .name{font-weight:950}
+    .file .sub{color:#64748b;font-weight:850;font-size:.9rem}
+
+    /* Notes */
+    .note{
+      border:1px dashed rgba(61,32,174,.35);
+      background:rgba(61,32,174,.06);
+      border-radius:18px;
+      padding:1rem;
+      margin-top:1rem;
+    }
+    .note strong{display:block;font-weight:950;margin-bottom:.25rem}
+
+    /* Sidebar blocks */
+    .stack{display:flex;flex-direction:column;gap:1.25rem}
+    .callout{
+      border-radius:20px;
+      border:1px solid rgba(61,32,174,.25);
+      background:linear-gradient(135deg,rgba(61,32,174,.10),rgba(99,102,241,.08));
+      padding:1.1rem;
+    }
+    .callout p{color:#334155}
+    .callout-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.9rem}
 
     /* Form */
-    label{
-      font-size:.75rem;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      color:#475569;
-      margin-bottom:.25rem;
-      display:block;
-    }
-    input,textarea{
+    .form{margin-top:1rem;display:flex;flex-direction:column;gap:.85rem}
+    .field{display:flex;flex-direction:column;gap:.35rem}
+    label{font-weight:900;color:#0f172a;font-size:.9rem}
+    input, select, textarea{
       width:100%;
-      padding:.7rem .8rem;
-      border-radius:10px;
+      padding:.85rem .9rem;
+      border-radius:14px;
       border:1px solid #e5e7eb;
-      font-family:inherit;
-      font-size:.95rem;
+      background:#fff;
+      color:#0f172a;
+      font-weight:800;
+      outline:none;
     }
-    textarea{resize:vertical}
+    textarea{resize:vertical;min-height:120px}
+    input:focus,select:focus,textarea:focus{border-color:rgba(61,32,174,.5);box-shadow:0 0 0 4px rgba(61,32,174,.08)}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+    .hint{font-size:.85rem;color:#64748b;font-weight:850;margin-top:.1rem}
 
-    .actions{
-      display:flex;
-      gap:.75rem;
-      flex-wrap:wrap;
-      margin-top:.75rem;
+    /* Footer */
+    footer{border-top:1px solid #e5e7eb;background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:1.25rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
     }
+    .footer-left{display:flex;align-items:center;gap:.6rem;font-weight:950;color:#0f172a}
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:#64748b;font-weight:850;font-size:.92rem}
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{font-size:.8rem;color:#94a3b8;font-weight:850}
 
-    @media(max-width:1000px){
+    @media(max-width:1100px){
       .grid{grid-template-columns:1fr}
-      main{padding:2.5rem 1.25rem}
-      h1{font-size:2.2rem}
+      .dl{grid-template-columns:1fr}
+      .row2{grid-template-columns:1fr}
+    }
+    @media(max-width:720px){
+      main{padding:2.25rem 1.25rem 2rem}
+      header{padding:1rem 1.25rem}
+      h1{font-size:2.05rem}
     }
   </style>
 </head>
 
 <body>
+
   <header>
-    <nav>
-      <a href="/manufacturer-dashboard-full.html" class="brand">
+    <div class="topnav">
+      <a class="brand" href="manufacturer-dashboard-full.html">
         <img src="Orderpool_logo.png" alt="Order Pool logo" />
         <span>Order Pool</span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="/manufacturer-dashboard-full.html">Dashboard</a></li>
-        <li><a href="/manufacturer-quote-pool-full.html" aria-current="page">Quote pool</a></li>
-        <li><a href="/manufacturer-orders-full.html">Orders</a></li>
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="manufacturer-dashboard-full.html">Dashboard</a></li>
+        <li><a href="manufacturer-quote-pool-full.html" aria-current="page">Quote pool</a></li>
+        <li><a href="manufacturer-orders-full.html">Orders</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a class="btn btn-secondary" href="/manufacturer-quote-pool-full.html">Back</a>
-        <a class="btn btn-primary" href="/manufacturer-orders-full.html">My orders</a>
+        <a class="btn btn-secondary" href="manufacturer-quote-pool-full.html">Back to pool</a>
+        <a class="btn btn-primary" href="#accept">Accept request</a>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
     <!-- HERO -->
     <section class="section">
-      <h1>Retail display packaging</h1>
+      <h1>Quote request: Retail display packaging</h1>
       <p class="lead">
-        Quote request in the pool. Accepting converts this into an order you’ll manage through fulfillment.
+        A publisher has posted a paid request into the pool. If this fits your capacity,
+        you can accept it and convert it into an owned order immediately.
       </p>
 
-      <div class="meta">
-        <span class="pill">Request: QTE-88014</span>
-        <span class="pill">Category: Packaging</span>
-        <span class="pill">Qty: 2,500</span>
-        <span class="pill">Posted 2 days ago</span>
-      </div>
-
-      <div class="actions">
-        <a class="btn btn-primary" href="#accept">Accept this request</a>
-        <a class="btn btn-secondary" href="/manufacturer-quote-pool-full.html">Back to pool</a>
+      <div class="meta" aria-label="Request meta">
+        <span class="pill info">🧾 Pool request</span>
+        <span class="pill">Qty: 2,500 units</span>
+        <span class="pill">Due: 6 weeks</span>
+        <span class="pill good">Public tracking: status-only</span>
+        <span class="pill warn">Action: Accept or pass</span>
       </div>
     </section>
 
-    <!-- CONTENT -->
     <section class="section">
       <div class="grid">
 
-        <!-- LEFT -->
-        <div class="card">
-          <h2>Brief</h2>
-          <p>Publisher-provided requirements to assess fit quickly.</p>
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Overview</h2>
+                <p>What the publisher needs and what success looks like.</p>
+              </div>
+              <a class="btn btn-ghost" href="#attachments">Jump to files →</a>
+            </div>
 
-          <div class="list">
-            <div class="item">
-              <h3>Publisher</h3>
-              <p>(Publisher name) • (Location)</p>
+            <div class="dl" aria-label="Key fields">
+              <div class="kv">
+                <strong>Category</strong>
+                <span>Packaging (retail display)</span>
+              </div>
+              <div class="kv">
+                <strong>Run size</strong>
+                <span>2,500 units (short-run)</span>
+              </div>
+              <div class="kv">
+                <strong>Ship-to region</strong>
+                <span>Lower Mainland, BC</span>
+              </div>
+              <div class="kv">
+                <strong>Timeline</strong>
+                <span>6 weeks total (incl. sampling)</span>
+              </div>
+              <div class="kv">
+                <strong>Materials</strong>
+                <span>350gsm SBS + matte lamination</span>
+              </div>
+              <div class="kv">
+                <strong>Finishes</strong>
+                <span>Spot UV on logo, glue assembly</span>
+              </div>
             </div>
-            <div class="item">
-              <h3>Quantity + MOQ</h3>
-              <p>Target 2,500 units • MOQ acceptable 1,000+</p>
+
+            <div class="note">
+              <strong>Publisher note</strong>
+              <p>
+                Shelf-ready requirements are strict — please confirm dieline feasibility and
+                provide a sampling plan. We can accept small adjustments if they reduce risk.
+              </p>
             </div>
-            <div class="item">
-              <h3>Timeline</h3>
-              <p>Samples in 2 weeks • Production in 6 weeks</p>
+          </div>
+
+          <div class="card" id="attachments">
+            <div class="card-head">
+              <div>
+                <h2>Attachments</h2>
+                <p>Reference files supplied with the request.</p>
+              </div>
             </div>
-            <div class="item">
-              <h3>Requirements</h3>
-              <p>Matte carton with spot UV on logo. Insert tray required. Shelf-ready.</p>
+
+            <div class="attachments">
+              <div class="file">
+                <div class="left">
+                  <div class="name">Dieline_v3.ai</div>
+                  <div class="sub">Adobe Illustrator • 2.4 MB</div>
+                </div>
+                <a class="btn btn-secondary" href="#">Download</a>
+              </div>
+
+              <div class="file">
+                <div class="left">
+                  <div class="name">Artwork_packaging.zip</div>
+                  <div class="sub">ZIP • 18.1 MB</div>
+                </div>
+                <a class="btn btn-secondary" href="#">Download</a>
+              </div>
+
+              <div class="file">
+                <div class="left">
+                  <div class="name">Retail_shelf_spec.pdf</div>
+                  <div class="sub">PDF • 1.1 MB</div>
+                </div>
+                <a class="btn btn-secondary" href="#">Download</a>
+              </div>
             </div>
-            <div class="item">
-              <h3>Compliance / constraints</h3>
-              <p>Retail durability constraints. Consistency required across the run.</p>
+
+            <div class="note" style="margin-top:1rem;border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10)">
+              <strong>Reminder</strong>
+              <p>
+                Files may include confidential details. Only download if you plan to accept and
+                fulfill the request.
+              </p>
             </div>
-            <div class="item">
-              <h3>Assets</h3>
-              <p>Brand guide • Existing dieline • Reference images</p>
+          </div>
+
+          <div class="card" id="accept">
+            <div class="card-head">
+              <div>
+                <h2>Accept this request</h2>
+                <p>Confirm lead times and any constraints before you take ownership.</p>
+              </div>
             </div>
+
+            <form class="form">
+              <div class="row2">
+                <div class="field">
+                  <label for="sample">Sampling lead time</label>
+                  <input id="sample" type="text" placeholder="e.g., 5–7 business days" />
+                  <div class="hint">How long until a physical sample is ready?</div>
+                </div>
+                <div class="field">
+                  <label for="prod">Production lead time</label>
+                  <input id="prod" type="text" placeholder="e.g., 3–4 weeks" />
+                  <div class="hint">After sample approval, how long for production?</div>
+                </div>
+              </div>
+
+              <div class="row2">
+                <div class="field">
+                  <label for="ship">Shipping method</label>
+                  <select id="ship">
+                    <option>Courier (ground)</option>
+                    <option>Freight</option>
+                    <option>Publisher pickup</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="window">Ship window</label>
+                  <input id="window" type="text" placeholder="e.g., Week 6 (Mon–Thu)" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="constraints">Constraints / notes (optional)</label>
+                <textarea id="constraints" placeholder="Anything the publisher should know before you accept."></textarea>
+                <div class="hint">If you accept, this becomes part of the order record.</div>
+              </div>
+
+              <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.25rem">
+                <button class="btn btn-primary" type="button">Accept & convert to order</button>
+                <a class="btn btn-secondary" href="manufacturer-quote-pool-full.html">Pass for now</a>
+              </div>
+            </form>
           </div>
         </div>
 
-        <!-- RIGHT -->
-        <div class="card" id="accept">
-          <h2>Accept request</h2>
-          <p>
-            Acceptance removes this request from the pool and creates an order.
-            Your updates will syndicate to the publisher dashboard.
-          </p>
-
-          <label>Estimated lead time (optional)</label>
-          <input placeholder="e.g. Samples 10 days, production 30 days" />
-
-          <label>Notes to publisher (optional)</label>
-          <textarea rows="5" placeholder="Anything the publisher should know before acceptance…"></textarea>
-
-          <div class="item">
-            <h3>By accepting, you commit to</h3>
+        <!-- RIGHT COLUMN -->
+        <div class="stack">
+          <div class="callout">
+            <h2>What acceptance means</h2>
             <p>
-              Managing this work as an order, posting milestone updates, and moving the order through
-              states until fulfilled.
+              Accepting converts this request into an owned order. You’ll be able to post
+              sampling/production/shipping milestones, and the publisher can track status.
             </p>
+            <div class="callout-actions">
+              <a class="btn btn-primary" href="#accept">Accept request</a>
+              <a class="btn btn-secondary" href="how-it-works.html">Learn more</a>
+            </div>
           </div>
 
-          <div class="actions">
-            <button class="btn btn-primary">Accept & create order</button>
-            <a class="btn btn-secondary" href="/manufacturer-quote-pool-full.html">Not right now</a>
+          <div class="card">
+            <h2>Publisher expectations</h2>
+            <p>
+              Keep updates structured and milestone-based. If anything slips, post it early so
+              the publisher can adjust.
+            </p>
+
+            <div class="dl" style="grid-template-columns:1fr;margin-top:1rem">
+              <div class="kv">
+                <strong>Update cadence</strong>
+                <span>At every milestone (or weekly during production)</span>
+              </div>
+              <div class="kv">
+                <strong>Visibility</strong>
+                <span>Status-only public tracking (no pricing)</span>
+              </div>
+              <div class="kv">
+                <strong>Approvals</strong>
+                <span>Proof → sample → production → ship</span>
+              </div>
+            </div>
           </div>
 
-          <p style="font-size:.9rem;color:#64748b">
-            After acceptance, this will appear under
-            <a href="/manufacturer-orders-full.html">Orders</a>.
-          </p>
+          <div class="card">
+            <h2>Risk checks</h2>
+            <p>Quick sanity checks before you accept.</p>
+
+            <div class="dl" style="grid-template-columns:1fr;margin-top:1rem">
+              <div class="kv">
+                <strong>Dieline feasibility</strong>
+                <span>Confirm folds, glue tabs, tolerances</span>
+              </div>
+              <div class="kv">
+                <strong>Material availability</strong>
+                <span>SBS stock and lamination lead times</span>
+              </div>
+              <div class="kv">
+                <strong>Finishing capacity</strong>
+                <span>Spot UV schedule and QC plan</span>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="for-manufacturers.html">For manufacturers</a>
+        <a href="dashboard-settings.html">Settings</a>
+      </div>
+
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
+
 </body>
 </html>
+
+
+
+
+
+

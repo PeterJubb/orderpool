@@ -16,7 +16,7 @@
       background:#ffffff;
     }
 
-    /* Header (canonical – authenticated) */
+    /* Header (scoped — avoids breaking footer) */
     header{
       background:#fff;
       border-bottom:1px solid #e5e7eb;
@@ -25,7 +25,7 @@
       top:0;
       z-index:100;
     }
-    nav{
+    .topnav{
       max-width:1200px;
       margin:0 auto;
       display:flex;
@@ -43,6 +43,7 @@
       min-width:180px;
     }
     .brand img{width:34px;height:34px;object-fit:contain}
+
     .nav-links{
       display:flex;
       gap:1.5rem;
@@ -53,13 +54,14 @@
     .nav-links a{
       color:#64748b;
       text-decoration:none;
-      font-weight:700;
+      font-weight:800;
       font-size:.95rem;
     }
     .nav-links a[aria-current="page"]{
       color:#0f172a;
-      font-weight:900;
+      font-weight:950;
     }
+
     .nav-actions{
       display:flex;
       gap:.75rem;
@@ -72,7 +74,7 @@
       padding:.65rem 1.15rem;
       border-radius:10px;
       font-size:.95rem;
-      font-weight:650;
+      font-weight:750;
       border:1px solid transparent;
       background:none;
       cursor:pointer;
@@ -95,21 +97,16 @@
     .btn-secondary:hover{background:#f8fafc}
 
     /* Layout */
-    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
     .section{margin-bottom:3rem}
-    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
-    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
-    h3{font-size:1.05rem;font-weight:900}
+    h1{font-size:2.6rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:950;margin-bottom:.4rem}
+    h3{font-size:1.05rem;font-weight:950}
     p{color:#475569}
     .lead{font-size:1.05rem;max-width:900px}
 
     /* Stats */
-    .stats{
-      display:flex;
-      gap:.75rem;
-      flex-wrap:wrap;
-      margin-top:1.25rem;
-    }
+    .stats{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem}
     .stat{
       background:#fff;
       border:1px solid #e5e7eb;
@@ -119,21 +116,16 @@
       gap:.75rem;
       align-items:center;
     }
-    .stat strong{font-size:1.3rem;font-weight:900}
+    .stat strong{font-size:1.3rem;font-weight:950}
     .stat span{
       font-size:.75rem;
       color:#64748b;
-      font-weight:800;
+      font-weight:900;
       text-transform:uppercase;
     }
 
     /* Grid */
-    .grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:1.5rem;
-    }
-
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1.5rem}
     .card{
       background:#fff;
       border:1px solid #e5e7eb;
@@ -144,12 +136,7 @@
       gap:1rem;
     }
 
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap:.75rem;
-      margin-top:.5rem;
-    }
+    .list{display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem}
     .item{
       border:1px solid #e5e7eb;
       border-radius:14px;
@@ -158,12 +145,7 @@
     }
     .item p{font-size:.9rem}
 
-    .feature-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:.75rem;
-      margin-top:.5rem;
-    }
+    .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem}
     .feature{
       border:1px solid #e5e7eb;
       border-radius:14px;
@@ -172,16 +154,56 @@
     }
     .feature p{font-size:.85rem}
 
-    .actions{
+    .actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem}
+
+    /* Footer (works because header nav is scoped) */
+    footer{
+      border-top:1px solid #e5e7eb;
+      background:#fff;
+    }
+    .footer-inner{
+      max-width:1200px;
+      margin:0 auto;
+      padding:1.25rem 2rem;
       display:flex;
-      gap:.75rem;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
       flex-wrap:wrap;
-      margin-top:.75rem;
+    }
+    .footer-left{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      font-weight:950;
+      color:#0f172a;
+    }
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{
+      display:flex;
+      gap:1.1rem;
+      flex-wrap:wrap;
+    }
+    .footer-links a{
+      text-decoration:none;
+      color:#64748b;
+      font-weight:850;
+      font-size:.92rem;
+    }
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{
+      font-size:.8rem;
+      color:#94a3b8;
+      font-weight:850;
     }
 
     @media(max-width:1000px){
       .grid{grid-template-columns:1fr}
-      main{padding:2.5rem 1.25rem 3rem}
+      main{padding:2.5rem 1.25rem 2rem}
+      header{padding:1rem 1.25rem}
+      .topnav{flex-wrap:wrap;justify-content:center}
+      .brand{min-width:auto}
+      .nav-actions{min-width:auto}
       h1{font-size:2.2rem}
     }
   </style>
@@ -189,27 +211,26 @@
 
 <body>
   <header>
-    <nav>
-      <a href="/manufacturer-dashboard-empty.html" class="brand">
+    <div class="topnav">
+      <a href="manufacturer-dashboard-empty.html" class="brand">
         <img src="Orderpool_logo.png" alt="Order Pool logo" />
         <span>Order Pool</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="/manufacturer-dashboard-empty.html" aria-current="page">Dashboard</a></li>
-        <li><a href="/manufacturer-quote-pool-empty.html">Quote pool</a></li>
-        <li><a href="/manufacturer-orders-empty.html">Orders</a></li>
+        <li><a href="manufacturer-dashboard-empty.html" aria-current="page">Dashboard</a></li>
+        <li><a href="manufacturer-quote-pool-empty.html">Quote pool</a></li>
+        <li><a href="manufacturer-orders-empty.html">Orders</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a class="btn btn-secondary" href="/dashboard-settings.html">Settings</a>
-        <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
+        <a class="btn btn-secondary" href="dashboard-settings.html">Settings</a>
+        <a class="btn btn-primary" href="manufacturer-quote-pool-empty.html">Browse quote pool</a>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="section">
       <h1>Manufacturer dashboard</h1>
       <p class="lead">
@@ -218,8 +239,8 @@
       </p>
 
       <div class="actions">
-        <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
-        <a class="btn btn-secondary" href="/how-it-works.html">How it works</a>
+        <a class="btn btn-primary" href="manufacturer-quote-pool-empty.html">Browse quote pool</a>
+        <a class="btn btn-secondary" href="how-it-works.html">How it works</a>
       </div>
 
       <div class="stats">
@@ -229,7 +250,6 @@
       </div>
     </section>
 
-    <!-- WORKSPACE -->
     <section class="section">
       <h2>Your workspace</h2>
 
@@ -237,18 +257,17 @@
         <div class="card">
           <h3>Quote pool</h3>
           <p>Browse paid quote requests from publishers and pull work that fits.</p>
-          <a class="btn btn-secondary" href="/manufacturer-quote-pool-empty.html">Go to pool →</a>
+          <a class="btn btn-secondary" href="manufacturer-quote-pool-empty.html">Go to pool →</a>
         </div>
 
         <div class="card">
           <h3>Orders</h3>
           <p>Accepted requests become orders you manage through fulfillment.</p>
-          <a class="btn btn-secondary" href="/manufacturer-orders-empty.html">Go to orders →</a>
+          <a class="btn btn-secondary" href="manufacturer-orders-empty.html">Go to orders →</a>
         </div>
       </div>
     </section>
 
-    <!-- ONBOARDING -->
     <section class="section">
       <div class="grid">
         <div class="card">
@@ -275,8 +294,8 @@
           </div>
 
           <div class="actions">
-            <a class="btn btn-primary" href="/manufacturer-quote-pool-empty.html">Browse quote pool</a>
-            <a class="btn btn-secondary" href="/safety.html">Safety & trust</a>
+            <a class="btn btn-primary" href="manufacturer-quote-pool-empty.html">Browse quote pool</a>
+            <a class="btn btn-secondary" href="safety.html">Safety & trust</a>
           </div>
         </div>
 
@@ -307,11 +326,37 @@
           </div>
 
           <div class="actions">
-            <a class="btn btn-secondary" href="/dashboard-settings.html">Update settings</a>
+            <a class="btn btn-secondary" href="dashboard-settings.html">Update settings</a>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="for-manufacturers.html">For manufacturers</a>
+        <a href="dashboard-settings.html">Settings</a>
+      </div>
+
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
 </body>
 </html>
+
+
+
+
+
+
+
+

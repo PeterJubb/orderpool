@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>AI brief wizard — Publisher — Order Pool</title>
+  <meta name="description" content="AI chat wizard that refines a draft brief into a manufacturer-matchable request." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (scoped) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .topnav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:900;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.35rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+      flex-wrap:wrap;
+      padding:0 .5rem;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:850;
+      font-size:.95rem;
+      padding:.3rem .2rem;
+      border-radius:10px;
+    }
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:950}
+    .nav-links a:hover{color:#0f172a;background:#f8fafc}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:850;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+    .btn-primary:hover{filter:brightness(.97)}
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-ghost{background:transparent;color:#0f172a;border-color:transparent}
+    .btn-ghost:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
+    .section{margin-bottom:2.25rem}
+    h1{font-size:2.4rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.35rem;font-weight:950;margin-bottom:.25rem}
+    h3{font-size:1.05rem;font-weight:950}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:920px}
+
+    /* Pills */
+    .meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+    .pill{
+      border:1px solid #e5e7eb;
+      background:#fff;
+      border-radius:999px;
+      padding:.42rem .75rem;
+      font-size:.78rem;
+      font-weight:900;
+      color:#334155;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+    }
+    .pill.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
+    .pill.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .pill.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:1fr .85fr;gap:1.25rem}
+    .card{
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.25rem;
+      background:#fff;
+    }
+    .card-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap
+    }
+
+    /* Left: Chat */
+    .chat-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:.9rem;
+      margin-top:.75rem;
+    }
+    .chat{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      background:#fafcff;
+      padding:1rem;
+      height:520px;
+      overflow:auto;
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+    }
+    .msg{
+      max-width:85%;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:.85rem .9rem;
+      background:#fff;
+    }
+    .msg.ai{
+      background:linear-gradient(135deg,rgba(61,32,174,.10),rgba(99,102,241,.08));
+      border-color:rgba(61,32,174,.18);
+    }
+    .msg .meta-line{
+      font-size:.78rem;
+      font-weight:950;
+      color:#334155;
+      margin-bottom:.25rem;
+    }
+    .msg p{color:#334155;font-weight:800;font-size:.95rem}
+
+    .composer{
+      display:flex;
+      gap:.75rem;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .composer textarea{
+      flex:1;
+      min-height:54px;
+      max-height:140px;
+      resize:vertical;
+      padding:.85rem .9rem;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      color:#0f172a;
+      font-weight:800;
+      outline:none;
+    }
+    .composer textarea:focus{
+      border-color:rgba(61,32,174,.5);
+      box-shadow:0 0 0 4px rgba(61,32,174,.08)
+    }
+
+    /* Right: Summary + checklist */
+    .kv-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:.75rem;
+      margin-top:.75rem;
+    }
+    .kv{
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:.9rem;
+      background:#fff;
+    }
+    .kv strong{display:block;font-weight:950;color:#0f172a;margin-bottom:.15rem}
+    .kv span{display:block;color:#64748b;font-weight:800;font-size:.92rem}
+
+    .checklist{
+      margin-top:.9rem;
+      display:flex;
+      flex-direction:column;
+      gap:.55rem;
+    }
+    .check{
+      display:flex;
+      align-items:flex-start;
+      gap:.6rem;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:.75rem .85rem;
+      background:#fafcff;
+    }
+    .check input{margin-top:.2rem}
+    .check label{font-weight:850;color:#334155}
+    .hint{font-size:.85rem;color:#64748b;font-weight:850;margin-top:.35rem}
+
+    .sticky-actions{
+      margin-top:1rem;
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+    }
+
+    /* Small callout */
+    .note{
+      border:1px dashed rgba(59,130,246,.35);
+      background:rgba(59,130,246,.08);
+      border-radius:18px;
+      padding:1rem;
+      margin-top:1rem;
+    }
+    .note strong{display:block;font-weight:950;margin-bottom:.25rem}
+    .note p{color:#334155;font-weight:800}
+
+    /* Footer */
+    footer{border-top:1px solid #e5e7eb;background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:1.25rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    }
+    .footer-left{display:flex;align-items:center;gap:.6rem;font-weight:950;color:#0f172a}
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:#64748b;font-weight:850;font-size:.92rem}
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{font-size:.8rem;color:#94a3b8;font-weight:850}
+
+    @media(max-width:1100px){
+      .grid{grid-template-columns:1fr}
+      .chat{height:460px}
+    }
+    @media(max-width:720px){
+      main{padding:2.25rem 1.25rem 2rem}
+      header{padding:1rem 1.25rem}
+      h1{font-size:2.05rem}
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="topnav">
+      <a class="brand" href="publisher-dashboard-full.html">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
+
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="publisher-briefs-full.html" aria-current="page">Briefs</a></li>
+        <li><a href="publisher-orders-full.html">Orders</a></li>
+        <li><a href="dashboard-settings.html">Settings</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="publisher-brief-detail-draft.html">Back to draft</a>
+        <a class="btn btn-primary" href="publisher-pay-submit.html">Proceed to payment</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="section">
+      <h1>AI brief wizard</h1>
+      <p class="lead">
+        I’ve analyzed your draft and will ask a few focused questions to make it manufacturer-matchable.
+        The goal: fewer clarifying emails after submission.
+      </p>
+
+      <div class="meta" aria-label="Wizard status">
+        <span class="pill info">🤖 AI analysis complete</span>
+        <span class="pill warn">5 questions remaining</span>
+        <span class="pill good">Match score improving</span>
+      </div>
+
+      <div class="note" aria-label="Flow note">
+        <strong>Publishing requires payment</strong>
+        <p>
+          When you’re ready, you’ll proceed to payment and submit the brief to the pool. No manufacturers can accept until it’s submitted.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+
+        <!-- LEFT: Chat -->
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Chat</h2>
+              <p>Answer in plain language — I’ll structure it.</p>
+            </div>
+            <a class="btn btn-ghost" href="#summary">View extracted summary →</a>
+          </div>
+
+          <div class="chat-wrap">
+            <div class="chat" aria-label="AI chat transcript">
+              <div class="msg ai">
+                <div class="meta-line">Order Pool AI</div>
+                <p>I read your draft. First: what’s the primary success criteria — cost, speed, quality, or minimizing risk?</p>
+              </div>
+
+              <div class="msg">
+                <div class="meta-line">You</div>
+                <p>Quality first, but I can accept small compromises if it reduces risk.</p>
+              </div>
+
+              <div class="msg ai">
+                <div class="meta-line">Order Pool AI</div>
+                <p>Great. Next: do you have target materials + finishes, or should manufacturers propose options?</p>
+              </div>
+
+              <div class="msg ai">
+                <div class="meta-line">Order Pool AI</div>
+                <p>Also — is this shelf-ready packaging with strict retail tolerances (or flexible)?</p>
+              </div>
+            </div>
+
+            <div class="composer" aria-label="Chat composer">
+              <textarea placeholder="Type your answer… (e.g., '350gsm SBS, matte lamination, spot UV on logo')"></textarea>
+              <button class="btn btn-primary" type="button">Send</button>
+              <button class="btn btn-secondary" type="button">Add file</button>
+            </div>
+
+            <div class="hint">
+              Tip: If you’re unsure, say “manufacturers propose options” — the wizard will still structure it.
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Extraction / checklist -->
+        <div>
+          <div class="card" id="summary">
+            <div class="card-head">
+              <div>
+                <h2>Extracted so far</h2>
+                <p>What will be submitted to the pool.</p>
+              </div>
+            </div>
+
+            <div class="kv-grid" aria-label="Extracted summary">
+              <div class="kv">
+                <strong>Category</strong>
+                <span>Packaging (retail display)</span>
+              </div>
+              <div class="kv">
+                <strong>Quantity</strong>
+                <span>2,500 units</span>
+              </div>
+              <div class="kv">
+                <strong>Timeline</strong>
+                <span>~6 weeks total (incl. sampling)</span>
+              </div>
+              <div class="kv">
+                <strong>Success criteria</strong>
+                <span>Quality first, minimize risk</span>
+              </div>
+              <div class="kv">
+                <strong>Visibility</strong>
+                <span>Status-only public tracking</span>
+              </div>
+            </div>
+
+            <div class="hint">
+              This updates live as you answer questions.
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1.25rem">
+            <div class="card-head">
+              <div>
+                <h2>Match readiness</h2>
+                <p>Complete these to maximize manufacturer fit.</p>
+              </div>
+            </div>
+
+            <div class="checklist" aria-label="Match readiness checklist">
+              <div class="check">
+                <input type="checkbox" checked />
+                <label>Clear category + quantity</label>
+              </div>
+              <div class="check">
+                <input type="checkbox" />
+                <label>Materials + finishes defined (or options requested)</label>
+              </div>
+              <div class="check">
+                <input type="checkbox" />
+                <label>Sampling expectations (proofs / physical sample)</label>
+              </div>
+              <div class="check">
+                <input type="checkbox" />
+                <label>Shipping region + delivery constraints</label>
+              </div>
+              <div class="check">
+                <input type="checkbox" />
+                <label>Decision criteria (cost vs speed vs quality)</label>
+              </div>
+            </div>
+
+            <div class="sticky-actions">
+              <a class="btn btn-secondary" href="publisher-brief-detail-draft.html">Edit draft</a>
+              <a class="btn btn-primary" href="publisher-pay-submit.html">Pay & submit</a>
+            </div>
+
+            <div class="hint">
+              In real logic: “Pay & submit” stays disabled until checklist is satisfied.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="for-publishers.html">For publishers</a>
+        <a href="for-manufacturers.html">For manufacturers</a>
+      </div>
+
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+

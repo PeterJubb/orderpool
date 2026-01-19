@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Brief — Draft — Publisher — Order Pool</title>
-  <meta name="description" content="Publisher draft brief detail page. Review and proceed to AI wizard to refine before publishing." />
+  <title>Brief — Published — Publisher — Order Pool</title>
+  <meta name="description" content="Publisher view of a published brief that is live in the pool and available for manufacturers to accept." />
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -90,6 +90,12 @@
     .btn-secondary:hover{background:#f8fafc}
     .btn-ghost{background:transparent;color:#0f172a;border-color:transparent}
     .btn-ghost:hover{background:#f8fafc}
+    .btn-danger{
+      background:#fff;
+      color:#b91c1c;
+      border-color:rgba(239,68,68,.35);
+    }
+    .btn-danger:hover{background:rgba(239,68,68,.06)}
 
     /* Layout */
     main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
@@ -119,7 +125,7 @@
     .pill.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
 
     /* Grid */
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1.25rem}
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.25rem}
     .card{
       border:1px solid #e5e7eb;
       border-radius:20px;
@@ -141,29 +147,37 @@
     .kv strong{display:block;font-weight:950;color:#0f172a;margin-bottom:.15rem}
     .kv span{display:block;color:#64748b;font-weight:800;font-size:.92rem}
 
-    /* Sections / content */
-    .block{margin-top:1rem}
-    .block p{font-weight:800;color:#334155}
-    .note{
-      border:1px dashed rgba(61,32,174,.35);
-      background:rgba(61,32,174,.06);
+    /* Lists / rows */
+    .rows{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
+    .row{
+      border:1px solid #e5e7eb;
       border-radius:18px;
       padding:1rem;
-      margin-top:1rem;
+      background:#fafcff;
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      align-items:flex-start;
     }
-    .note strong{display:block;font-weight:950;margin-bottom:.25rem}
-
-    /* Attachments */
-    .attachments{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem}
-    .file{
-      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-      border:1px solid #e5e7eb;border-radius:16px;padding:.9rem;background:#fff;
+    .row .title{font-weight:950;color:#0f172a}
+    .row .sub{color:#64748b;font-weight:850;font-size:.92rem;margin-top:.15rem}
+    .row .right{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+    .badge{
+      border-radius:999px;
+      padding:.35rem .65rem;
+      font-weight:950;
+      font-size:.78rem;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      color:#334155;
+      white-space:nowrap;
     }
-    .file .left{display:flex;flex-direction:column;gap:.1rem}
-    .file .name{font-weight:950}
-    .file .sub{color:#64748b;font-weight:850;font-size:.9rem}
+    .badge.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .badge.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+    .badge.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
 
-    /* Sidebar widgets */
+    /* Callouts */
     .stack{display:flex;flex-direction:column;gap:1.25rem}
     .callout{
       border-radius:20px;
@@ -174,21 +188,15 @@
     .callout p{color:#334155}
     .callout-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.9rem}
 
-    .checklist{display:flex;flex-direction:column;gap:.55rem;margin-top:.9rem}
-    .check{
-      display:flex;align-items:flex-start;gap:.6rem;
-      border:1px solid #e5e7eb;border-radius:16px;padding:.75rem .85rem;background:#fafcff;
-    }
-    .check input{margin-top:.2rem}
-    .check label{font-weight:850;color:#334155}
-    .hint{font-size:.85rem;color:#64748b;font-weight:850;margin-top:.35rem}
-
-    .actions{
-      display:flex;
-      gap:.75rem;
-      flex-wrap:wrap;
+    /* Visibility box */
+    .note{
+      border:1px dashed rgba(61,32,174,.35);
+      background:rgba(61,32,174,.06);
+      border-radius:18px;
+      padding:1rem;
       margin-top:1rem;
     }
+    .note strong{display:block;font-weight:950;margin-bottom:.25rem}
 
     /* Footer */
     footer{border-top:1px solid #e5e7eb;background:#fff}
@@ -233,7 +241,7 @@
 
       <div class="nav-actions">
         <a class="btn btn-secondary" href="publisher-briefs-full.html">Back to briefs</a>
-        <a class="btn btn-primary" href="publisher-brief-ai-wizard.html">Proceed to AI wizard</a>
+        <a class="btn btn-primary" href="publisher-orders-full.html">View orders</a>
       </div>
     </div>
   </header>
@@ -241,23 +249,18 @@
   <main>
     <!-- HERO -->
     <section class="section">
-      <h1>Draft brief: Retail display packaging</h1>
+      <h1>Published brief: Retail display packaging</h1>
       <p class="lead">
-        Review your draft before publishing. The AI wizard will ask a few targeted questions
-        to make this brief manufacturer-matchable.
+        Your brief is live in the pool. Manufacturers can now accept it and convert it into an order.
+        You’ll see updates here as acceptance and milestones happen.
       </p>
 
-      <div class="meta" aria-label="Draft status">
-        <span class="pill info">📝 Draft</span>
+      <div class="meta" aria-label="Published status">
+        <span class="pill good">✅ Published</span>
+        <span class="pill info">Pool ID: BR-01928</span>
         <span class="pill">Qty: 2,500 units</span>
-        <span class="pill warn">Missing: materials & sampling</span>
-        <span class="pill">Visibility: status-only public</span>
-      </div>
-
-      <div class="actions" aria-label="Primary actions">
-        <a class="btn btn-primary" href="publisher-brief-ai-wizard.html">Proceed to AI wizard</a>
-        <a class="btn btn-secondary" href="#edit">Edit draft</a>
-        <a class="btn btn-ghost" href="how-it-works.html">How publishing works →</a>
+        <span class="pill">Target: 6 weeks</span>
+        <span class="pill warn">Awaiting acceptance</span>
       </div>
     </section>
 
@@ -269,10 +272,10 @@
           <div class="card">
             <div class="card-head">
               <div>
-                <h2>Brief overview</h2>
-                <p>What manufacturers will see in the pool.</p>
+                <h2>Brief details</h2>
+                <p>What manufacturers see in the pool (structured).</p>
               </div>
-              <a class="btn btn-ghost" href="#attachments">Jump to attachments →</a>
+              <a class="btn btn-ghost" href="public-order-detail.html">Preview public page →</a>
             </div>
 
             <div class="dl" aria-label="Brief fields">
@@ -293,174 +296,145 @@
                 <span>Lower Mainland, BC</span>
               </div>
               <div class="kv">
-                <strong>Visibility</strong>
-                <span>Status-only public tracking</span>
+                <strong>Materials & finishes</strong>
+                <span>350gsm SBS, matte lamination, spot UV</span>
+              </div>
+              <div class="kv">
+                <strong>Sampling</strong>
+                <span>Physical sample required before production</span>
               </div>
               <div class="kv">
                 <strong>Decision criteria</strong>
-                <span>Not set (AI wizard will ask)</span>
-              </div>
-            </div>
-
-            <div class="block">
-              <h3 style="margin-top:1.25rem">Description</h3>
-              <p style="margin-top:.35rem">
-                We need a short-run retail display with shelf-ready requirements. Timeline is tight.
-                Prefer manufacturers who can handle sampling and provide a clear QC plan.
-              </p>
-            </div>
-
-            <div class="note">
-              <strong>Why the wizard matters</strong>
-              <p>
-                Manufacturers match best when materials, finishes, sampling expectations, and delivery constraints are explicit.
-                The wizard turns your draft into structured fields without extra form work.
-              </p>
-            </div>
-          </div>
-
-          <!-- Attachments -->
-          <div class="card" id="attachments" style="margin-top:1.25rem">
-            <div class="card-head">
-              <div>
-                <h2>Attachments</h2>
-                <p>Optional — add dielines, reference photos, or specs.</p>
-              </div>
-              <button class="btn btn-secondary" type="button">Add file</button>
-            </div>
-
-            <div class="attachments" aria-label="Attachment list">
-              <div class="file">
-                <div class="left">
-                  <div class="name">Retail_shelf_spec.pdf</div>
-                  <div class="sub">PDF • 1.1 MB</div>
-                </div>
-                <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-                  <button class="btn btn-secondary" type="button">Preview</button>
-                  <button class="btn btn-ghost" type="button">Remove</button>
-                </div>
-              </div>
-
-              <div class="file">
-                <div class="left">
-                  <div class="name">Reference_photo.jpg</div>
-                  <div class="sub">JPG • 620 KB</div>
-                </div>
-                <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-                  <button class="btn btn-secondary" type="button">Preview</button>
-                  <button class="btn btn-ghost" type="button">Remove</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="hint">
-              Tip: If you don’t have dielines yet, the wizard can ask manufacturers to propose options.
-            </div>
-          </div>
-
-          <!-- Editable area (placeholder for future form) -->
-          <div class="card" id="edit" style="margin-top:1.25rem">
-            <div class="card-head">
-              <div>
-                <h2>Edit draft</h2>
-                <p>Quick edits before the wizard. (This is a placeholder editor state.)</p>
-              </div>
-            </div>
-
-            <div class="dl" aria-label="Editable quick fields">
-              <div class="kv">
-                <strong>Quantity</strong>
-                <span>2,500 (edit in future)</span>
-              </div>
-              <div class="kv">
-                <strong>Timeline</strong>
-                <span>6 weeks (edit in future)</span>
-              </div>
-              <div class="kv">
-                <strong>Ship-to region</strong>
-                <span>Lower Mainland, BC (edit in future)</span>
+                <span>Quality first, minimize risk</span>
               </div>
               <div class="kv">
                 <strong>Visibility</strong>
-                <span>Status-only public (edit in future)</span>
+                <span>Status-only public tracking</span>
               </div>
             </div>
 
-            <div class="actions">
-              <a class="btn btn-primary" href="publisher-brief-ai-wizard.html">Proceed to AI wizard</a>
-              <a class="btn btn-secondary" href="publisher-briefs-full.html">Save & return</a>
+            <div class="note">
+              <strong>Visibility rules</strong>
+              <p>
+                Manufacturers see all private details after acceptance. The public page shows only milestone status — no pricing or files.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1.25rem">
+            <div class="card-head">
+              <div>
+                <h2>Manufacturer activity</h2>
+                <p>What’s happening in the pool right now.</p>
+              </div>
             </div>
 
-            <div class="hint">
-              In real app logic: edits here update the wizard’s analysis input.
+            <div class="rows" aria-label="Manufacturer activity list">
+              <div class="row">
+                <div>
+                  <div class="title">Your brief is discoverable in the pool</div>
+                  <div class="sub">6 manufacturers match your category + region</div>
+                </div>
+                <div class="right">
+                  <span class="badge info">In pool</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="title">No acceptance yet</div>
+                  <div class="sub">You’ll be notified immediately when a manufacturer accepts</div>
+                </div>
+                <div class="right">
+                  <span class="badge warn">Waiting</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="title">Suggested improvement</div>
+                  <div class="sub">Add alternate material option to widen matches</div>
+                </div>
+                <div class="right">
+                  <a class="btn btn-secondary" href="publisher-brief-detail-draft.html">Duplicate as draft</a>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
         <!-- RIGHT -->
         <div class="stack">
           <div class="callout">
-            <h2>Next step: AI wizard</h2>
+            <h2>What happens next</h2>
             <p>
-              The wizard asks only what’s missing. You’ll end with a structured brief that’s easy for manufacturers to accept.
+              Manufacturers can accept at any time. Once accepted, you’ll see an order created automatically with milestones and updates.
             </p>
             <div class="callout-actions">
-              <a class="btn btn-primary" href="publisher-brief-ai-wizard.html">Proceed to AI wizard</a>
-              <a class="btn btn-secondary" href="publisher-briefs-full.html">Not now</a>
+              <a class="btn btn-primary" href="public-orders.html">View public orders</a>
+              <a class="btn btn-secondary" href="publisher-orders-full.html">Go to orders</a>
             </div>
           </div>
 
           <div class="card">
-            <h2>Readiness checklist</h2>
-            <p>These drive matching quality.</p>
+            <h2>Controls</h2>
+            <p>Manage your published brief.</p>
 
-            <div class="checklist" aria-label="Readiness checklist">
-              <div class="check">
-                <input type="checkbox" checked />
-                <label>Category + quantity</label>
+            <div class="rows" style="margin-top:1rem">
+              <div class="row" style="background:#fff">
+                <div>
+                  <div class="title">Pause brief</div>
+                  <div class="sub">Hide from the pool without deleting</div>
+                </div>
+                <div class="right">
+                  <button class="btn btn-secondary" type="button">Pause</button>
+                </div>
               </div>
-              <div class="check">
-                <input type="checkbox" checked />
-                <label>Timeline + region</label>
+
+              <div class="row" style="background:#fff">
+                <div>
+                  <div class="title">Duplicate as draft</div>
+                  <div class="sub">Create a new draft version for changes</div>
+                </div>
+                <div class="right">
+                  <a class="btn btn-secondary" href="publisher-brief-detail-draft.html">Duplicate</a>
+                </div>
               </div>
-              <div class="check">
-                <input type="checkbox" />
-                <label>Materials + finishes</label>
-              </div>
-              <div class="check">
-                <input type="checkbox" />
-                <label>Sampling expectations</label>
-              </div>
-              <div class="check">
-                <input type="checkbox" />
-                <label>Decision criteria</label>
+
+              <div class="row" style="background:rgba(239,68,68,.05);border-color:rgba(239,68,68,.25)">
+                <div>
+                  <div class="title">Cancel brief</div>
+                  <div class="sub">Remove from pool (use only if needed)</div>
+                </div>
+                <div class="right">
+                  <button class="btn btn-danger" type="button">Cancel</button>
+                </div>
               </div>
             </div>
 
-            <div class="hint">
-              The wizard will fill the unchecked items by asking targeted questions.
-            </div>
-          </div>
-
-          <div class="card">
-            <h2>Preview: what manufacturers see</h2>
-            <p>
-              Once published, manufacturers can accept without rebidding. The cleaner the brief, the faster it converts to an order.
+            <p style="margin-top:.75rem;color:#64748b;font-weight:850;font-size:.9rem">
+              In real logic: some actions become disabled after acceptance.
             </p>
+          </div>
+
+          <div class="card">
+            <h2>Notifications</h2>
+            <p>Who gets alerted when a manufacturer accepts.</p>
 
             <div class="dl" style="grid-template-columns:1fr;margin-top:1rem">
               <div class="kv">
-                <strong>Public tracking</strong>
-                <span>Status-only (no pricing or files)</span>
+                <strong>Primary</strong>
+                <span>ops@northshorestudio.com</span>
               </div>
               <div class="kv">
-                <strong>Private details</strong>
-                <span>Pricing, dielines, approvals, files</span>
+                <strong>Backup</strong>
+                <span>production@northshorestudio.com</span>
               </div>
-              <div class="kv">
-                <strong>Conversion</strong>
-                <span>Acceptance → owned order</span>
-              </div>
+            </div>
+
+            <div class="callout-actions" style="margin-top:1rem">
+              <a class="btn btn-secondary" href="dashboard-settings.html">Edit notification settings</a>
             </div>
           </div>
 

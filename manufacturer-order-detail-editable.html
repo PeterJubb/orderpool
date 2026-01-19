@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Order detail — Manufacturer — Order Pool</title>
-  <meta name="description" content="Manufacturer order detail page to manage state and post syndicated updates." />
+  <title>Order — Detail — Manufacturer — Order Pool</title>
+  <meta name="description" content="Manufacturer order detail page with editable milestones and updates." />
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -16,7 +16,7 @@
       background:#ffffff;
     }
 
-    /* Header (canonical – authenticated) */
+    /* Header (scoped, so footer nav never inherits) */
     header{
       background:#fff;
       border-bottom:1px solid #e5e7eb;
@@ -25,13 +25,14 @@
       top:0;
       z-index:100;
     }
-    nav{
+    .topnav{
       max-width:1200px;
       margin:0 auto;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:1.5rem;
+      flex-wrap:wrap;
     }
     .brand{
       display:flex;
@@ -39,29 +40,33 @@
       gap:.75rem;
       text-decoration:none;
       color:#0f172a;
-      font-weight:800;
-      min-width:180px;
+      font-weight:900;
     }
     .brand img{width:34px;height:34px;object-fit:contain}
     .nav-links{
       display:flex;
-      gap:1.5rem;
+      gap:1.35rem;
       list-style:none;
       flex:1;
       justify-content:center;
+      flex-wrap:wrap;
+      padding:0 .5rem;
     }
     .nav-links a{
       color:#64748b;
       text-decoration:none;
-      font-weight:700;
+      font-weight:850;
       font-size:.95rem;
+      padding:.3rem .2rem;
+      border-radius:10px;
     }
-    .nav-links a.active{color:#0f172a;font-weight:900}
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:950}
+    .nav-links a:hover{color:#0f172a;background:#f8fafc}
     .nav-actions{
       display:flex;
       gap:.75rem;
-      min-width:220px;
       justify-content:flex-end;
+      flex-wrap:wrap;
     }
 
     /* Buttons */
@@ -69,7 +74,7 @@
       padding:.65rem 1.15rem;
       border-radius:10px;
       font-size:.95rem;
-      font-weight:650;
+      font-weight:850;
       border:1px solid transparent;
       background:none;
       cursor:pointer;
@@ -77,262 +82,582 @@
       display:inline-flex;
       align-items:center;
       gap:.45rem;
+      white-space:nowrap;
     }
-    .btn-primary{
-      background:#3d20ae;
-      color:#fff;
-      border-color:#3d20ae;
-    }
-    .btn-secondary{
-      background:#fff;
-      color:#0f172a;
-      border-color:#e5e7eb;
-    }
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+    .btn-primary:hover{filter:brightness(.97)}
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
     .btn-secondary:hover{background:#f8fafc}
+    .btn-ghost{background:transparent;color:#0f172a;border-color:transparent}
+    .btn-ghost:hover{background:#f8fafc}
+    .btn-danger{
+      background:#fff;
+      color:#b91c1c;
+      border-color:rgba(239,68,68,.35);
+    }
+    .btn-danger:hover{background:rgba(239,68,68,.06)}
 
     /* Layout */
-    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
-    .section{margin-bottom:3rem}
-    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
-    h2{font-size:1.5rem;font-weight:900;margin-bottom:.35rem}
-    h3{font-size:1.1rem;font-weight:900}
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
+    .section{margin-bottom:2.25rem}
+    h1{font-size:2.4rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.35rem;font-weight:950;margin-bottom:.25rem}
+    h3{font-size:1.05rem;font-weight:950}
     p{color:#475569}
-    .lead{font-size:1.05rem;max-width:900px}
+    .lead{font-size:1.05rem;max-width:920px}
 
-    /* Meta pills */
-    .meta{
-      display:flex;
-      gap:.6rem;
-      flex-wrap:wrap;
-      margin-top:1.2rem;
-    }
+    /* Hero meta */
+    .meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
     .pill{
       border:1px solid #e5e7eb;
+      background:#fff;
       border-radius:999px;
-      padding:.45rem .85rem;
-      font-size:.75rem;
-      font-weight:800;
-      background:#f8fafc;
-      color:#475569;
+      padding:.42rem .75rem;
+      font-size:.78rem;
+      font-weight:900;
+      color:#334155;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
     }
-    .pill.state{
-      background:rgba(61,32,174,.08);
-      color:#3d20ae;
-      border-color:rgba(61,32,174,.25);
-    }
+    .pill.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .pill.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+    .pill.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
 
     /* Grid */
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1.5rem;
-    }
-
-    /* Cards */
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1.25rem}
     .card{
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.25rem;
       background:#fff;
-      border:1px solid #e5e7eb;
-      border-radius:18px;
-      padding:1.5rem;
-      display:flex;
-      flex-direction:column;
-      gap:1rem;
+    }
+    .card + .card{margin-top:1.25rem}
+    .card-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap
     }
 
-    /* Timeline */
-    .timeline{
-      border-left:2px solid #e5e7eb;
-      padding-left:1rem;
-      display:flex;
-      flex-direction:column;
-      gap:.75rem;
-    }
-    .step{position:relative}
-    .step::before{
-      content:"";
-      position:absolute;
-      left:-1.55rem;
-      top:.35rem;
-      width:.6rem;
-      height:.6rem;
-      border-radius:999px;
-      background:#e5e7eb;
-    }
-    .step.active::before{background:#3d20ae}
-
-    /* Form */
-    label{
-      font-size:.75rem;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      color:#475569;
-      margin-bottom:.25rem;
-      display:block;
-    }
-    input,select,textarea{
-      width:100%;
-      padding:.7rem .8rem;
-      border-radius:10px;
+    /* Key/Value blocks */
+    .dl{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:1rem}
+    .kv{
       border:1px solid #e5e7eb;
-      font-family:inherit;
-      font-size:.95rem;
-    }
-    textarea{resize:vertical}
-    .actions{
-      display:flex;
-      gap:.75rem;
-      flex-wrap:wrap;
-      margin-top:.5rem;
-    }
-
-    /* Updates */
-    .update{
-      border:1px solid #e5e7eb;
-      border-radius:14px;
+      border-radius:16px;
       padding:.9rem;
       background:#fafcff;
     }
-    .update span{
-      font-size:.75rem;
-      font-weight:800;
-      color:#64748b;
-    }
+    .kv strong{display:block;font-weight:950;color:#0f172a;margin-bottom:.15rem}
+    .kv span{display:block;color:#64748b;font-weight:800;font-size:.92rem}
 
-    @media(max-width:1000px){
+    /* Milestones */
+    .ms{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
+    .ms-row{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:1rem;
+      background:#fff;
+    }
+    .ms-top{
+      display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;
+    }
+    .ms-title{
+      display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;
+      font-weight:950;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;background:#cbd5e1;
+      box-shadow:0 0 0 4px rgba(203,213,225,.35);
+    }
+    .dot.good{background:#10b981;box-shadow:0 0 0 4px rgba(16,185,129,.18)}
+    .dot.warn{background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.20)}
+    .dot.info{background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.18)}
+    .ms-meta{color:#64748b;font-weight:850;font-size:.92rem;margin-top:.25rem}
+
+    .ms-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+
+    /* Mini form controls */
+    .form{margin-top:.85rem;display:flex;flex-direction:column;gap:.75rem}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+    .field{display:flex;flex-direction:column;gap:.35rem}
+    label{font-weight:900;color:#0f172a;font-size:.9rem}
+    input, select, textarea{
+      width:100%;
+      padding:.85rem .9rem;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      color:#0f172a;
+      font-weight:800;
+      outline:none;
+    }
+    textarea{resize:vertical;min-height:110px}
+    input:focus,select:focus,textarea:focus{border-color:rgba(61,32,174,.5);box-shadow:0 0 0 4px rgba(61,32,174,.08)}
+    .hint{font-size:.85rem;color:#64748b;font-weight:850;margin-top:.1rem}
+
+    /* Updates */
+    .updates{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem}
+    .update{
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:1rem;
+      background:#fafcff;
+    }
+    .update .top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .update .top strong{font-weight:950}
+    .update .top em{font-style:normal;color:#64748b;font-weight:850;font-size:.9rem}
+    .update p{margin-top:.35rem;font-size:.95rem}
+
+    /* Sidebar callouts */
+    .stack{display:flex;flex-direction:column;gap:1.25rem}
+    .callout{
+      border-radius:20px;
+      border:1px solid rgba(61,32,174,.25);
+      background:linear-gradient(135deg,rgba(61,32,174,.10),rgba(99,102,241,.08));
+      padding:1.1rem;
+    }
+    .callout p{color:#334155}
+    .callout-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.9rem}
+    .divider{height:1px;background:#e5e7eb;margin:.85rem 0}
+
+    /* Footer */
+    footer{border-top:1px solid #e5e7eb;background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:1.25rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    }
+    .footer-left{display:flex;align-items:center;gap:.6rem;font-weight:950;color:#0f172a}
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:#64748b;font-weight:850;font-size:.92rem}
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{font-size:.8rem;color:#94a3b8;font-weight:850}
+
+    @media(max-width:1100px){
       .grid{grid-template-columns:1fr}
-      main{padding:2.5rem 1.25rem}
-      h1{font-size:2.2rem}
+      .dl{grid-template-columns:1fr}
+      .row2{grid-template-columns:1fr}
+    }
+    @media(max-width:720px){
+      main{padding:2.25rem 1.25rem 2rem}
+      header{padding:1rem 1.25rem}
+      h1{font-size:2.05rem}
     }
   </style>
 </head>
 
 <body>
+
   <header>
-    <nav>
-      <a href="/manufacturer-dashboard-full.html" class="brand">
+    <div class="topnav">
+      <a class="brand" href="manufacturer-orders-full.html">
         <img src="Orderpool_logo.png" alt="Order Pool logo" />
         <span>Order Pool</span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="/manufacturer-dashboard-full.html">Dashboard</a></li>
-        <li><a href="/manufacturer-quote-pool-full.html">Quote pool</a></li>
-        <li><a href="/manufacturer-orders-full.html" class="active">Orders</a></li>
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="manufacturer-dashboard-full.html">Dashboard</a></li>
+        <li><a href="manufacturer-quote-pool-full.html">Quote pool</a></li>
+        <li><a href="manufacturer-orders-full.html" aria-current="page">Orders</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a class="btn btn-secondary" href="/manufacturer-orders-full.html">Back</a>
-        <a class="btn btn-primary" href="/public-order-detail.html">Public view</a>
+        <a class="btn btn-secondary" href="manufacturer-orders-full.html">Back to orders</a>
+        <a class="btn btn-primary" href="#post-update">Post update</a>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
     <!-- HERO -->
     <section class="section">
-      <h1>Retail display packaging</h1>
+      <h1>Order: Retail display packaging</h1>
       <p class="lead">
-        Manage execution here. Updates you post will syndicate to the publisher automatically.
+        Manage milestones, post structured updates, and keep the publisher confidently informed.
+        This page is editable for the manufacturer.
       </p>
 
-      <div class="meta">
-        <span class="pill">Order: ORD-11804</span>
-        <span class="pill state">State: Production</span>
-        <span class="pill">Qty: 2,500</span>
-        <span class="pill">Publisher hidden</span>
+      <div class="meta" aria-label="Order meta">
+        <span class="pill info">#OP-1842</span>
+        <span class="pill">Qty: 2,500 units</span>
+        <span class="pill">Ship-to: Lower Mainland, BC</span>
+        <span class="pill warn">Next update due: 2 days</span>
+        <span class="pill good">Public tracking: status-only</span>
       </div>
     </section>
 
-    <!-- CONTENT -->
     <section class="section">
       <div class="grid">
-        <!-- LEFT -->
-        <div class="card">
-          <h2>Order progress</h2>
-          <p>Orders move through a shared, auditable state machine.</p>
 
-          <div class="timeline">
-            <div class="step"><strong>Accepted</strong></div>
-            <div class="step"><strong>Sampling</strong></div>
-            <div class="step active"><strong>Production</strong></div>
-            <div class="step"><strong>Shipping</strong></div>
-            <div class="step"><strong>Fulfilled</strong></div>
+        <!-- LEFT -->
+        <div>
+          <!-- Overview -->
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Order overview</h2>
+                <p>Core details and what’s required.</p>
+              </div>
+              <a class="btn btn-ghost" href="#files">Jump to files →</a>
+            </div>
+
+            <div class="dl" aria-label="Key order fields">
+              <div class="kv">
+                <strong>Category</strong>
+                <span>Packaging (retail display)</span>
+              </div>
+              <div class="kv">
+                <strong>Timeline</strong>
+                <span>6 weeks total (incl. sampling)</span>
+              </div>
+              <div class="kv">
+                <strong>Materials</strong>
+                <span>350gsm SBS + matte lamination</span>
+              </div>
+              <div class="kv">
+                <strong>Finishes</strong>
+                <span>Spot UV on logo, glue assembly</span>
+              </div>
+            </div>
+
+            <div class="note" style="margin-top:1rem;border:1px dashed rgba(245,158,11,.35);background:rgba(245,158,11,.10);border-radius:18px;padding:1rem">
+              <strong style="display:block;font-weight:950;margin-bottom:.25rem">Publisher note</strong>
+              <p>
+                Shelf-ready requirements are strict. Please confirm dieline feasibility early and post any risk immediately.
+              </p>
+            </div>
           </div>
 
-          <h2>Update state</h2>
-          <p>Keep this accurate. Publishers plan launches and logistics from it.</p>
+          <!-- Milestones -->
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Milestones</h2>
+                <p>Keep progress visible and structured.</p>
+              </div>
+            </div>
 
-          <label>Current state</label>
-          <select>
-            <option>Accepted</option>
-            <option>Sampling</option>
-            <option selected>Production</option>
-            <option>Shipping</option>
-            <option>Fulfilled</option>
-          </select>
+            <div class="ms" aria-label="Milestones list">
 
-          <label>Estimated ship date (optional)</label>
-          <input placeholder="e.g. Feb 12" />
+              <div class="ms-row">
+                <div class="ms-top">
+                  <div>
+                    <div class="ms-title"><span class="dot good"></span> Proofs approved</div>
+                    <div class="ms-meta">Completed • Jan 12, 2026</div>
+                  </div>
+                  <div class="ms-actions">
+                    <button class="btn btn-secondary" type="button">Edit</button>
+                  </div>
+                </div>
+              </div>
 
-          <div class="actions">
-            <button class="btn btn-primary">Save state</button>
-            <a class="btn btn-secondary" href="/manufacturer-orders-full.html">Cancel</a>
+              <div class="ms-row">
+                <div class="ms-top">
+                  <div>
+                    <div class="ms-title"><span class="dot info"></span> Sampling in progress</div>
+                    <div class="ms-meta">In progress • Target: Jan 22, 2026</div>
+                  </div>
+                  <div class="ms-actions">
+                    <button class="btn btn-secondary" type="button">Update</button>
+                    <button class="btn btn-ghost" type="button">Mark complete</button>
+                  </div>
+                </div>
+
+                <form class="form" aria-label="Update sampling milestone">
+                  <div class="row2">
+                    <div class="field">
+                      <label for="sample-target">Target date</label>
+                      <input id="sample-target" type="date" />
+                    </div>
+                    <div class="field">
+                      <label for="sample-status">Status</label>
+                      <select id="sample-status">
+                        <option>In progress</option>
+                        <option>Blocked</option>
+                        <option>Ready for approval</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label for="sample-note">Note</label>
+                    <textarea id="sample-note" placeholder="What changed since last update?"></textarea>
+                    <div class="hint">Keep it factual and milestone-based.</div>
+                  </div>
+
+                  <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+                    <button class="btn btn-primary" type="button">Save milestone update</button>
+                    <button class="btn btn-secondary" type="button">Cancel</button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="ms-row">
+                <div class="ms-top">
+                  <div>
+                    <div class="ms-title"><span class="dot"></span> Production</div>
+                    <div class="ms-meta">Not started • Planned: Jan 29, 2026</div>
+                  </div>
+                  <div class="ms-actions">
+                    <button class="btn btn-secondary" type="button">Start</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ms-row">
+                <div class="ms-top">
+                  <div>
+                    <div class="ms-title"><span class="dot"></span> Shipping</div>
+                    <div class="ms-meta">Not started • Planned: Feb 12, 2026</div>
+                  </div>
+                  <div class="ms-actions">
+                    <button class="btn btn-secondary" type="button">Plan</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ms-row">
+                <div class="ms-top">
+                  <div>
+                    <div class="ms-title"><span class="dot"></span> Fulfilled</div>
+                    <div class="ms-meta">Not started</div>
+                  </div>
+                  <div class="ms-actions">
+                    <button class="btn btn-secondary" type="button">Mark fulfilled</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Files -->
+          <div class="card" id="files">
+            <div class="card-head">
+              <div>
+                <h2>Files</h2>
+                <p>Order attachments and production docs.</p>
+              </div>
+            </div>
+
+            <div class="updates" aria-label="Files list">
+              <div class="update" style="background:#fff">
+                <div class="top">
+                  <strong>Dieline_v3.ai</strong>
+                  <em>2.4 MB</em>
+                </div>
+                <p>Latest approved dieline for production.</p>
+                <div style="margin-top:.6rem">
+                  <a class="btn btn-secondary" href="#">Download</a>
+                </div>
+              </div>
+
+              <div class="update" style="background:#fff">
+                <div class="top">
+                  <strong>Retail_shelf_spec.pdf</strong>
+                  <em>1.1 MB</em>
+                </div>
+                <p>Shelf-ready requirements and tolerance constraints.</p>
+                <div style="margin-top:.6rem">
+                  <a class="btn btn-secondary" href="#">Download</a>
+                </div>
+              </div>
+
+              <div class="update" style="background:#fff">
+                <div class="top">
+                  <strong>Artwork_packaging.zip</strong>
+                  <em>18.1 MB</em>
+                </div>
+                <p>Artwork bundle and print assets.</p>
+                <div style="margin-top:.6rem">
+                  <a class="btn btn-secondary" href="#">Download</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post update -->
+          <div class="card" id="post-update">
+            <div class="card-head">
+              <div>
+                <h2>Post an update</h2>
+                <p>Structured updates reduce emails and increase trust.</p>
+              </div>
+            </div>
+
+            <form class="form" aria-label="Post update form">
+              <div class="row2">
+                <div class="field">
+                  <label for="type">Update type</label>
+                  <select id="type">
+                    <option>Sampling</option>
+                    <option>Production</option>
+                    <option>Shipping</option>
+                    <option>Risk / delay</option>
+                    <option>General</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="when">Date</label>
+                  <input id="when" type="date" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="msg">Message</label>
+                <textarea id="msg" placeholder="What happened? What’s next? What’s the new ETA (if changed)?"></textarea>
+              </div>
+
+              <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+                <button class="btn btn-primary" type="button">Publish update</button>
+                <button class="btn btn-secondary" type="button">Save draft</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Past updates -->
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Update history</h2>
+                <p>What the publisher has seen so far.</p>
+              </div>
+            </div>
+
+            <div class="updates" aria-label="Update history list">
+              <div class="update">
+                <div class="top">
+                  <strong>Production check</strong>
+                  <em>Jan 19, 2026</em>
+                </div>
+                <p>Press proofs approved. Production starts Monday. Next update after first QC run.</p>
+              </div>
+
+              <div class="update">
+                <div class="top">
+                  <strong>Sampling started</strong>
+                  <em>Jan 16, 2026</em>
+                </div>
+                <p>Materials received. Cutting and test folds underway. Target sample ship: Jan 22.</p>
+              </div>
+
+              <div class="update">
+                <div class="top">
+                  <strong>Order accepted</strong>
+                  <em>Jan 12, 2026</em>
+                </div>
+                <p>Request accepted and converted to an owned order. Kickoff checklist posted.</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- RIGHT -->
-        <div class="card">
-          <h2>Post an update</h2>
-          <p>
-            Updates appear in the publisher dashboard and (optionally) the public view.
-            Keep them milestone-based.
-          </p>
-
-          <label>Title</label>
-          <input placeholder="e.g. Production started" />
-
-          <label>Update</label>
-          <textarea rows="6" placeholder="What changed? What’s next? Any risks?"></textarea>
-
-          <label>Visibility</label>
-          <select>
-            <option>Publisher + internal</option>
-            <option>Internal only</option>
-          </select>
-
-          <div class="actions">
-            <button class="btn btn-primary">Post update</button>
-            <a class="btn btn-secondary" href="/public-order-detail.html">Preview public</a>
+        <div class="stack">
+          <div class="callout">
+            <h2>Keep it predictable</h2>
+            <p>
+              Publishers prefer milestone-based updates. If anything slips, post a risk update early
+              with a new ETA and a mitigation plan.
+            </p>
+            <div class="callout-actions">
+              <a class="btn btn-primary" href="#post-update">Post update</a>
+              <a class="btn btn-secondary" href="how-it-works.html">How it works</a>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- HISTORY -->
-    <section class="section">
-      <h2>Update history</h2>
+          <div class="card">
+            <h2>Publisher</h2>
+            <div class="dl" style="grid-template-columns:1fr;margin-top:1rem">
+              <div class="kv">
+                <strong>Company</strong>
+                <span>North Shore Studio</span>
+              </div>
+              <div class="kv">
+                <strong>Contact</strong>
+                <span>ops@northshorestudio.com</span>
+              </div>
+              <div class="kv">
+                <strong>Visibility</strong>
+                <span>Status-only public tracking</span>
+              </div>
+            </div>
 
-      <div class="grid">
-        <div class="update">
-          <strong>Production started</strong>
-          <p>First QC checks look good. Next update after mid-run inspection.</p>
-          <span>Publisher-visible • 2 days ago</span>
+            <div class="divider"></div>
+
+            <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+              <a class="btn btn-secondary" href="public-order-detail.html">View public page</a>
+              <button class="btn btn-secondary" type="button">Message publisher</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Shipping</h2>
+            <p>Keep tracking and delivery windows current.</p>
+
+            <form class="form" aria-label="Shipping form">
+              <div class="field">
+                <label for="carrier">Carrier</label>
+                <input id="carrier" type="text" placeholder="e.g., UPS Freight" />
+              </div>
+
+              <div class="row2">
+                <div class="field">
+                  <label for="tracking">Tracking #</label>
+                  <input id="tracking" type="text" placeholder="e.g., 1Z…" />
+                </div>
+                <div class="field">
+                  <label for="eta">ETA</label>
+                  <input id="eta" type="date" />
+                </div>
+              </div>
+
+              <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+                <button class="btn btn-primary" type="button">Save shipping</button>
+                <button class="btn btn-secondary" type="button">Clear</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card" style="border-color:rgba(239,68,68,.25);background:rgba(239,68,68,.05)">
+            <h2>Risk / escalation</h2>
+            <p>
+              If this order is at risk, post a delay update and propose a new plan.
+            </p>
+
+            <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem">
+              <button class="btn btn-danger" type="button">Post delay update</button>
+              <button class="btn btn-secondary" type="button">Request scope change</button>
+            </div>
+          </div>
+
         </div>
 
-        <div class="update">
-          <strong>Sampling approved</strong>
-          <p>Dieline v4 locked for production.</p>
-          <span>Publisher-visible • 6 days ago</span>
-        </div>
-
-        <div class="update">
-          <strong>Internal: machine maintenance</strong>
-          <p>No expected impact to timeline.</p>
-          <span>Internal-only • 9 days ago</span>
-        </div>
       </div>
     </section>
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="for-manufacturers.html">For manufacturers</a>
+        <a href="dashboard-settings.html">Settings</a>
+      </div>
+
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
+
 </body>
 </html>
+
+
+
+
+
+

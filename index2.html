@@ -1,264 +1,228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Index2 — Order Pool</title>
-  <meta name="description" content="Master index of all Order Pool pages grouped by role and state." />
-
+  <title>Order Pool — Fun Index</title>
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
-      color:#0f172a;
-      background:#ffffff;
-      line-height:1.6;
+    /* Styling inspired by the emoji-rich, playful UI */
+    body {
+      background-color: #f3f4fb; /* Light playful blue/grey background */
+      padding: 40px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    header{
-      border-bottom:1px solid #e5e7eb;
-      padding:1.25rem 2rem;
-    }
-    header .brand{
-      display:flex;
-      align-items:center;
-      gap:.75rem;
-      font-weight:900;
-      text-decoration:none;
-      color:#0f172a;
-    }
-    header img{width:34px;height:34px}
-
-    main{
-      max-width:1200px;
-      margin:0 auto;
-      padding:3rem 2rem 4rem;
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    h1{font-size:2.6rem;font-weight:900;margin-bottom:.75rem}
-    h2{font-size:1.6rem;font-weight:900;margin-bottom:.5rem}
-    p{color:#475569}
-
-    .section{margin-bottom:3rem}
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:1.25rem;
-      margin-top:1rem;
+    header {
+      text-align: center;
+      margin-bottom: 40px;
     }
 
-    .card{
-      border:1px solid #e5e7eb;
-      border-radius:18px;
-      padding:1.25rem;
-      background:#fff;
+    .logo-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
     }
 
-    .card h3{
-      font-size:1.05rem;
-      font-weight:900;
-      margin-bottom:.5rem;
+    .logo-container img {
+      width: 48px;
+      height: 48px;
     }
 
-    ul{
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:.35rem;
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0;
     }
 
-    a{
-      text-decoration:none;
-      color:#3d20ae;
-      font-weight:600;
-      font-size:.95rem;
-    }
-    a:hover{text-decoration:underline}
-
-    .note{
-      font-size:.85rem;
-      color:#64748b;
-      margin-top:.35rem;
+    .subtitle {
+      color: #64748b;
+      font-size: 1.1rem;
+      margin-top: 10px;
     }
 
-    @media(max-width:800px){
-      h1{font-size:2.2rem}
-      main{padding:2.5rem 1.25rem}
+    .section-group {
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #333;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    /* The "Fun" Card Style */
+    .emoji-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eef0f7;
+      transition: transform 0.2s ease;
+    }
+
+    .emoji-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .emoji-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .link-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .link-list li {
+      margin-bottom: 8px;
+    }
+
+    .link-list a {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #3d20ae; /* Theme purple */
+      font-weight: 700;
+      border-radius: 14px;
+      background: #f8faff;
+      transition: all 0.2s ease;
+    }
+
+    .link-list a:hover {
+      background: #3d20ae;
+      color: #ffffff;
+    }
+
+    .emoji-icon {
+      margin-right: 12px;
+      font-size: 1.2rem;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 10px;
+      font-style: italic;
     }
   </style>
 </head>
-
 <body>
-<header>
-  <a class="brand" href="/index.html">
-    <img src="Orderpool_logo.png" alt="Order Pool logo" />
-    <span>Order Pool — index2</span>
-  </a>
-</header>
 
-<main>
-  <h1>Master page index</h1>
-  <p>
-    This page links to <strong>every Order Pool screen</strong>, grouped by role and state.
-    Use it for stakeholder review, QA, and navigation outside the normal app flow.
-  </p>
+<div class="container">
+  <header>
+    <div class="logo-container">
+      <img src="Orderpool_logo.png" alt="Logo">
+      <h1>Order Pool</h1>
+    </div>
+    <p class="subtitle">✨ Master Sitemap — Jump to any page</p>
+  </header>
 
-  <!-- PUBLIC -->
-  <section class="section">
-    <h2>Public / Marketing</h2>
+  <div class="section-group">
+    <h2 class="section-title">🌍 Public & Marketing</h2>
     <div class="grid">
-      <div class="card">
-        <h3>Core</h3>
-        <ul>
-          <li><a href="/index.html">Home</a></li>
-          <li><a href="/how-it-works.html">How it works</a></li>
-          <li><a href="/pricing.html">Pricing</a></li>
-          <li><a href="/get-started.html">Get started</a></li>
+      <div class="emoji-card">
+        <h3>🏠 Core Pages</h3>
+        <ul class="link-list">
+          <li><a href="index.html"><span class="emoji-icon">🚀</span> Home Page</a></li>
+          <li><a href="how-it-works.html"><span class="emoji-icon">🤔</span> How It Works</a></li>
+          <li><a href="pricing.html"><span class="emoji-icon">💰</span> Pricing Plans</a></li>
+          <li><a href="get-started.html"><span class="emoji-icon">🏁</span> Get Started</a></li>
         </ul>
       </div>
-
-      <div class="card">
-        <h3>Audience</h3>
-        <ul>
-          <li><a href="/for-publishers.html">For publishers</a></li>
-          <li><a href="/for-manufacturers.html">For manufacturers</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Company</h3>
-        <ul>
-          <li><a href="/mission.html">Mission</a></li>
-          <li><a href="/team.html">Team</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-          <li><a href="/newsletter-subscribe.html">Newsletter</a></li>
+      <div class="emoji-card">
+        <h3>🏢 Company</h3>
+        <ul class="link-list">
+          <li><a href="mission.html"><span class="emoji-icon">🎯</span> Mission</a></li>
+          <li><a href="team.html"><span class="emoji-icon">🤝</span> Our Team</a></li>
+          <li><a href="contact.html"><span class="emoji-icon">📧</span> Contact Us</a></li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- AUTH -->
-  <section class="section">
-    <h2>Authentication</h2>
+  <div class="section-group">
+    <h2 class="section-title">💻 Application Portals</h2>
     <div class="grid">
-      <div class="card">
-        <h3>Auth flows</h3>
-        <ul>
-          <li><a href="/auth-signin.html">Sign in</a></li>
-          <li><a href="/auth-join.html">Join</a></li>
-          <li><a href="/auth-forgot.html">Forgot password</a></li>
-          <li><a href="/auth-reset.html">Reset password</a></li>
+      <div class="emoji-card">
+        <h3>👤 Publisher Portal</h3>
+        <ul class="link-list">
+          <li><a href="publisher-dashboard-full.html"><span class="emoji-icon">📈</span> Dashboard</a></li>
+          <li><a href="publisher-briefs-full.html"><span class="emoji-icon">📝</span> My Briefs</a></li>
+          <li><a href="publisher-orders-full.html"><span class="emoji-icon">📦</span> Order History</a></li>
+        </ul>
+      </div>
+
+      <div class="emoji-card">
+        <h3>🏭 Manufacturer Portal</h3>
+        <ul class="link-list">
+          <li><a href="manufacturer-dashboard-full.html"><span class="emoji-icon">📊</span> Dashboard</a></li>
+          <li><a href="manufacturer-quote-pool-full.html"><span class="emoji-icon">🌊</span> Quote Pool</a></li>
+          <li><a href="manufacturer-orders-full.html"><span class="emoji-icon">🛠️</span> Active Orders</a></li>
+        </ul>
+      </div>
+
+      <div class="emoji-card">
+        <h3>🔍 Public Tracking</h3>
+        <ul class="link-list">
+          <li><a href="public-orders.html"><span class="emoji-icon">🌐</span> Global Feed</a></li>
+          <li><a href="public-order-detail.html"><span class="emoji-icon">📍</span> Order Status</a></li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- PUBLISHER -->
-  <section class="section">
-    <h2>Publisher — App</h2>
+  <div class="section-group">
+    <h2 class="section-title">⚙️ System & Auth</h2>
     <div class="grid">
-      <div class="card">
-        <h3>Dashboard</h3>
-        <ul>
-          <li><a href="/publisher-dashboard-empty.html">Dashboard (empty)</a></li>
-          <li><a href="/publisher-dashboard-full.html">Dashboard (full)</a></li>
+      <div class="emoji-card">
+        <h3>🔐 Security</h3>
+        <ul class="link-list">
+          <li><a href="auth-signin.html"><span class="emoji-icon">🔑</span> Sign In</a></li>
+          <li><a href="auth-join.html"><span class="emoji-icon">✨</span> Create Account</a></li>
         </ul>
       </div>
-
-      <div class="card">
-        <h3>Briefs</h3>
-        <ul>
-          <li><a href="/publisher-briefs-empty.html">Briefs (empty)</a></li>
-          <li><a href="/publisher-briefs-full.html">Briefs (full)</a></li>
-          <li><a href="/publisher-brief-new.html">New brief</a></li>
-          <li><a href="/publisher-brief-detail-draft.html">Brief (draft)</a></li>
-          <li><a href="/publisher-brief-submit.html">Brief submit</a></li>
-          <li><a href="/publisher-brief-detail-submitted.html">Brief (submitted)</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Orders</h3>
-        <ul>
-          <li><a href="/publisher-orders-empty.html">Orders (empty)</a></li>
-          <li><a href="/publisher-orders-full.html">Orders (full)</a></li>
-          <li><a href="/publisher-order-detail-updated.html">Order detail</a></li>
+      <div class="emoji-card">
+        <h3>⚠️ Edge Cases</h3>
+        <ul class="link-list">
+          <li><a href="404.html"><span class="emoji-icon">👻</span> 404 Error</a></li>
+          <li><a href="maintenance.html"><span class="emoji-icon">🚧</span> Maintenance</a></li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- MANUFACTURER -->
-  <section class="section">
-    <h2>Manufacturer — App</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Dashboard</h3>
-        <ul>
-          <li><a href="/manufacturer-dashboard-empty.html">Dashboard (empty)</a></li>
-          <li><a href="/manufacturer-dashboard-full.html">Dashboard (full)</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Quote pool</h3>
-        <ul>
-          <li><a href="/manufacturer-quote-pool-empty.html">Quote pool (empty)</a></li>
-          <li><a href="/manufacturer-quote-pool-full.html">Quote pool (full)</a></li>
-          <li><a href="/manufacturer-quote-detail.html">Quote detail</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Orders</h3>
-        <ul>
-          <li><a href="/manufacturer-orders-empty.html">Orders (empty)</a></li>
-          <li><a href="/manufacturer-orders-full.html">Orders (full)</a></li>
-          <li><a href="/manufacturer-order-detail-editable.html">Order detail (editable)</a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- PUBLIC TRACKING -->
-  <section class="section">
-    <h2>Public tracking</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Status-only</h3>
-        <ul>
-          <li><a href="/public-orders.html">Public orders</a></li>
-          <li><a href="/public-order-detail.html">Public order detail</a></li>
-        </ul>
-        <p class="note">No pricing or assets exposed</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SYSTEM -->
-  <section class="section">
-    <h2>System / Edge cases</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Errors & maintenance</h3>
-        <ul>
-          <li><a href="/404.html">404</a></li>
-          <li><a href="/500.html">500</a></li>
-          <li><a href="/maintenance.html">Maintenance</a></li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Settings</h3>
-        <ul>
-          <li><a href="/dashboard-settings.html">Dashboard settings</a></li>
-          <li><a href="/safety.html">Safety & trust</a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-</main>
 </body>
 </html>
+
+
+
+
+
+
