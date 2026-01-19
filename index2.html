@@ -1,228 +1,540 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Order Pool — Fun Index</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <title>index2 — Order Pool v2 pages</title>
+  <meta name="description" content="Index of Order Pool v2 prototype pages with descriptions and header behavior." />
+
   <style>
-    /* Styling inspired by the emoji-rich, playful UI */
-    body {
-      background-color: #f3f4fb; /* Light playful blue/grey background */
-      padding: 40px 20px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .topnav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:900;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.35rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+      flex-wrap:wrap;
+      padding:0 .5rem;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:850;
+      font-size:.95rem;
+      padding:.3rem .2rem;
+      border-radius:10px;
+    }
+    .nav-links a:hover{color:#0f172a;background:#f8fafc}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      justify-content:flex-end;
+      flex-wrap:wrap;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 40px;
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:850;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
     }
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
+    .btn-secondary:hover{background:#f8fafc}
 
-    .logo-container {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
+    main{max-width:1200px;margin:0 auto;padding:2.25rem 2rem 2.5rem}
+    h1{font-size:2.25rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.35rem}
+    p{color:#475569}
+    .lead{max-width:980px}
+
+    .meta{
+      display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem
     }
-
-    .logo-container img {
-      width: 48px;
-      height: 48px;
+    .pill{
+      border:1px solid #e5e7eb;
+      background:#fff;
+      border-radius:999px;
+      padding:.42rem .75rem;
+      font-size:.78rem;
+      font-weight:900;
+      color:#334155;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
     }
+    .pill.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
 
-    h1 {
-      font-size: 3rem;
-      font-weight: 900;
-      color: #0f172a;
-      margin: 0;
+    .card{
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.25rem;
+      background:#fff;
+      margin-top:1.25rem;
     }
-
-    .subtitle {
-      color: #64748b;
-      font-size: 1.1rem;
-      margin-top: 10px;
+    .card-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap
     }
+    h2{font-size:1.25rem;font-weight:950}
+    .hint{font-size:.9rem;color:#64748b;font-weight:850;margin-top:.25rem}
 
-    .section-group {
-      margin-bottom: 50px;
+    /* Table */
+    .table-wrap{
+      margin-top:1rem;
+      overflow:auto;
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      background:#fff;
     }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 900;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #333;
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      min-width:980px;
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
+    thead th{
+      text-align:left;
+      font-size:.78rem;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#475569;
+      background:#f8fafc;
+      border-bottom:1px solid #e5e7eb;
+      padding:.9rem .95rem;
+      position:sticky;
+      top:0;
+      z-index:1;
     }
-
-    /* The "Fun" Card Style */
-    .emoji-card {
-      background: #ffffff;
-      padding: 24px;
-      border-radius: 24px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-      border: 1px solid #eef0f7;
-      transition: transform 0.2s ease;
+    tbody td{
+      padding:.95rem .95rem;
+      border-bottom:1px solid #eef2f7;
+      vertical-align:top;
+      font-weight:850;
+      color:#0f172a;
+      background:#fff;
     }
+    tbody tr:hover td{background:#fafcff}
+    tbody tr:last-child td{border-bottom:none}
 
-    .emoji-card:hover {
-      transform: translateY(-4px);
+    .page a{color:#3d20ae;text-decoration:none;font-weight:950}
+    .page a:hover{text-decoration:underline}
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      font-size:.78rem;
+      font-weight:950;
+      color:#334155;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      white-space:nowrap;
     }
+    .tag.pub{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
+    .tag.mfg{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .tag.public{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+    .tag.shared{border-color:rgba(61,32,174,.25);background:rgba(61,32,174,.06);color:#2e1065}
 
-    .emoji-card h3 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 15px;
-      color: #1e293b;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .muted{color:#64748b;font-weight:850}
+
+    footer{border-top:1px solid #e5e7eb;background:#fff;margin-top:1.75rem}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:1.25rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
     }
+    .footer-left{display:flex;align-items:center;gap:.6rem;font-weight:950;color:#0f172a}
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:#64748b;font-weight:850;font-size:.92rem}
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{font-size:.8rem;color:#94a3b8;font-weight:850}
 
-    .link-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .link-list li {
-      margin-bottom: 8px;
-    }
-
-    .link-list a {
-      display: flex;
-      align-items: center;
-      padding: 10px 15px;
-      text-decoration: none;
-      color: #3d20ae; /* Theme purple */
-      font-weight: 700;
-      border-radius: 14px;
-      background: #f8faff;
-      transition: all 0.2s ease;
-    }
-
-    .link-list a:hover {
-      background: #3d20ae;
-      color: #ffffff;
-    }
-
-    .emoji-icon {
-      margin-right: 12px;
-      font-size: 1.2rem;
-    }
-
-    .note {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      margin-top: 10px;
-      font-style: italic;
+    @media(max-width:720px){
+      header{padding:1rem 1.25rem}
+      main{padding:2rem 1.25rem 2rem}
     }
   </style>
 </head>
+
 <body>
 
-<div class="container">
   <header>
-    <div class="logo-container">
-      <img src="Orderpool_logo.png" alt="Logo">
-      <h1>Order Pool</h1>
+    <div class="topnav">
+      <a class="brand" href="/index2.html">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
+
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/for-publishers.html">For publishers</a></li>
+        <li><a href="/for-manufacturers.html">For manufacturers</a></li>
+        <li><a href="/dashboard-settings.html">Settings</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/public-orders.html">Public orders</a>
+        <a class="btn btn-primary" href="/publisher-dashboard-full.html">Publisher dashboard</a>
+      </div>
     </div>
-    <p class="subtitle">✨ Master Sitemap — Jump to any page</p>
   </header>
 
-  <div class="section-group">
-    <h2 class="section-title">🌍 Public & Marketing</h2>
-    <div class="grid">
-      <div class="emoji-card">
-        <h3>🏠 Core Pages</h3>
-        <ul class="link-list">
-          <li><a href="index.html"><span class="emoji-icon">🚀</span> Home Page</a></li>
-          <li><a href="how-it-works.html"><span class="emoji-icon">🤔</span> How It Works</a></li>
-          <li><a href="pricing.html"><span class="emoji-icon">💰</span> Pricing Plans</a></li>
-          <li><a href="get-started.html"><span class="emoji-icon">🏁</span> Get Started</a></li>
-        </ul>
+  <main>
+    <h1>index2 — v2 prototype pages</h1>
+    <p class="lead">
+      A single table index of key pages, including a short goal statement and what the user sees in the header
+      (nav type / primary actions).
+    </p>
+    <div class="meta">
+      <span class="pill info">Tip: Cmd/Ctrl+F “publisher” or “manufacturer”</span>
+      <span class="pill">Filename-first</span>
+      <span class="pill">v2 header/footer</span>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Publisher submission flow</h2>
+          <div class="hint">Draft → AI wizard → Pay & submit → Published</div>
+        </div>
       </div>
-      <div class="emoji-card">
-        <h3>🏢 Company</h3>
-        <ul class="link-list">
-          <li><a href="mission.html"><span class="emoji-icon">🎯</span> Mission</a></li>
-          <li><a href="team.html"><span class="emoji-icon">🤝</span> Our Team</a></li>
-          <li><a href="contact.html"><span class="emoji-icon">📧</span> Contact Us</a></li>
-        </ul>
+
+      <div class="table-wrap" role="region" aria-label="Publisher submission flow table">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:220px">Page</th>
+              <th style="width:120px">Role</th>
+              <th style="width:420px">Description</th>
+              <th style="width:420px">Header: what the user sees</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="page"><a href="/publisher-brief-detail-draft.html">publisher-brief-detail-draft.html</a></td>
+              <td><span class="tag pub">👤 Publisher</span></td>
+              <td>
+                Draft brief detail. Review the brief, attachments, and “readiness” before refining.
+                Primary CTA routes into the AI wizard.
+              </td>
+              <td>
+                Brand left + publisher nav (Dashboard / Briefs / Orders / Settings). Right actions:
+                <span class="muted">Back to briefs</span> + <span class="muted">Proceed to AI wizard</span>.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/publisher-brief-ai-wizard.html">publisher-brief-ai-wizard.html</a></td>
+              <td><span class="tag pub">👤 Publisher</span></td>
+              <td>
+                AI chat wizard. Asks targeted questions based on the draft to produce structured fields for matching.
+                Checklist shows what’s missing.
+              </td>
+              <td>
+                Publisher nav. Right actions:
+                <span class="muted">Back to draft</span> + <span class="muted">Proceed to payment</span>
+                (also “Pay & submit” in the checklist panel).
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/publisher-pay-submit.html">publisher-pay-submit.html</a></td>
+              <td><span class="tag pub">👤 Publisher</span></td>
+              <td>
+                Checkout step. Collects payment for pool posting and submits the brief to the pool.
+                Primary CTA completes submission.
+              </td>
+              <td>
+                Publisher nav. Right actions:
+                <span class="muted">Back</span> + <span class="muted">Help</span>.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/publisher-brief-detail-published.html">publisher-brief-detail-published.html</a></td>
+              <td><span class="tag pub">👤 Publisher</span></td>
+              <td>
+                Published brief state. Shows pool status, manufacturer activity, and controls (pause/duplicate/cancel).
+              </td>
+              <td>
+                Publisher nav. Right actions:
+                <span class="muted">Back to briefs</span> + <span class="muted">View orders</span>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
 
-  <div class="section-group">
-    <h2 class="section-title">💻 Application Portals</h2>
-    <div class="grid">
-      <div class="emoji-card">
-        <h3>👤 Publisher Portal</h3>
-        <ul class="link-list">
-          <li><a href="publisher-dashboard-full.html"><span class="emoji-icon">📈</span> Dashboard</a></li>
-          <li><a href="publisher-briefs-full.html"><span class="emoji-icon">📝</span> My Briefs</a></li>
-          <li><a href="publisher-orders-full.html"><span class="emoji-icon">📦</span> Order History</a></li>
-        </ul>
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Manufacturer quote + order flow</h2>
+          <div class="hint">Pool → Quote detail → Orders → Order detail (editable)</div>
+        </div>
       </div>
 
-      <div class="emoji-card">
-        <h3>🏭 Manufacturer Portal</h3>
-        <ul class="link-list">
-          <li><a href="manufacturer-dashboard-full.html"><span class="emoji-icon">📊</span> Dashboard</a></li>
-          <li><a href="manufacturer-quote-pool-full.html"><span class="emoji-icon">🌊</span> Quote Pool</a></li>
-          <li><a href="manufacturer-orders-full.html"><span class="emoji-icon">🛠️</span> Active Orders</a></li>
-        </ul>
-      </div>
+      <div class="table-wrap" role="region" aria-label="Manufacturer flow table">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:220px">Page</th>
+              <th style="width:120px">Role</th>
+              <th style="width:420px">Description</th>
+              <th style="width:420px">Header: what the user sees</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="page"><a href="/manufacturer-dashboard-empty.html">manufacturer-dashboard-empty.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Manufacturer dashboard (empty state). Introduces the system and prompts first actions.
+              </td>
+              <td>
+                Manufacturer nav (Dashboard / Quote pool / Orders). Right actions vary by state (typically Back/Primary CTA).
+              </td>
+            </tr>
 
-      <div class="emoji-card">
-        <h3>🔍 Public Tracking</h3>
-        <ul class="link-list">
-          <li><a href="public-orders.html"><span class="emoji-icon">🌐</span> Global Feed</a></li>
-          <li><a href="public-order-detail.html"><span class="emoji-icon">📍</span> Order Status</a></li>
-        </ul>
+            <tr>
+              <td class="page"><a href="/manufacturer-dashboard-full.html">manufacturer-dashboard-full.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Manufacturer dashboard (full state). Shows workload, recent activity, and quick links.
+              </td>
+              <td>
+                Manufacturer nav with Dashboard highlighted. Right actions typically include context CTA(s).
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/manufacturer-quote-pool-empty.html">manufacturer-quote-pool-empty.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Quote pool list (empty state). No matching briefs available (or filters too strict).
+              </td>
+              <td>
+                Manufacturer nav with Quote pool highlighted. Right actions: back/filters (prototype).
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/manufacturer-quote-pool-full.html">manufacturer-quote-pool-full.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Quote pool list (full state). Manufacturer can browse briefs and open a quote detail to accept.
+              </td>
+              <td>
+                Manufacturer nav with Quote pool highlighted. Right actions: back/primary CTA (prototype).
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/manufacturer-quote-detail.html">manufacturer-quote-detail.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Quote request detail. Shows overview, attachments, and an “Accept request” flow to convert to order.
+              </td>
+              <td>
+                Manufacturer nav with Quote pool highlighted. Right actions:
+                <span class="muted">Back to pool</span> + <span class="muted">Accept request</span>.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/manufacturer-orders-empty.html">manufacturer-orders-empty.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Orders list (empty state). No accepted work yet.
+              </td>
+              <td>
+                Manufacturer nav with Orders highlighted. Right actions: back/primary CTA (prototype).
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/manufacturer-orders-full.html">manufacturer-orders-full.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Orders list (full state). Shows active orders, statuses, and next actions.
+              </td>
+              <td>
+                Manufacturer nav with Orders highlighted. Right actions: back/primary CTA (prototype).
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/manufacturer-order-detail-editable.html">manufacturer-order-detail-editable.html</a></td>
+              <td><span class="tag mfg">🏭 Manufacturer</span></td>
+              <td>
+                Editable order detail. Manage milestones, post updates, and set shipping/tracking.
+              </td>
+              <td>
+                Manufacturer nav with Orders highlighted. Right actions:
+                <span class="muted">Back to orders</span> + <span class="muted">Post update</span>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
 
-  <div class="section-group">
-    <h2 class="section-title">⚙️ System & Auth</h2>
-    <div class="grid">
-      <div class="emoji-card">
-        <h3>🔐 Security</h3>
-        <ul class="link-list">
-          <li><a href="auth-signin.html"><span class="emoji-icon">🔑</span> Sign In</a></li>
-          <li><a href="auth-join.html"><span class="emoji-icon">✨</span> Create Account</a></li>
-        </ul>
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Public and shared pages</h2>
+          <div class="hint">Non-authenticated browsing and shared tracking</div>
+        </div>
       </div>
-      <div class="emoji-card">
-        <h3>⚠️ Edge Cases</h3>
-        <ul class="link-list">
-          <li><a href="404.html"><span class="emoji-icon">👻</span> 404 Error</a></li>
-          <li><a href="maintenance.html"><span class="emoji-icon">🚧</span> Maintenance</a></li>
-        </ul>
+
+      <div class="table-wrap" role="region" aria-label="Public and shared pages table">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:220px">Page</th>
+              <th style="width:120px">Role</th>
+              <th style="width:420px">Description</th>
+              <th style="width:420px">Header: what the user sees</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="page"><a href="/public-orders.html">public-orders.html</a></td>
+              <td><span class="tag public">🌐 Public</span></td>
+              <td>
+                Public orders listing. Status-only view used for transparency / trust.
+              </td>
+              <td>
+                Public nav/marketing header (brand + high-level links). Right action often routes to sign-in / dashboards.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/public-order-detail.html">public-order-detail.html</a></td>
+              <td><span class="tag public">🌐 Public</span></td>
+              <td>
+                Public order detail. Shows milestone/status timeline without revealing pricing or files.
+              </td>
+              <td>
+                Public nav/marketing header. Emphasis on trust + “how it works”.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/dashboard-settings.html">dashboard-settings.html</a></td>
+              <td><span class="tag shared">⚙️ Shared</span></td>
+              <td>
+                Settings page used by authenticated users (publisher/manufacturer) for profile, notifications, etc.
+              </td>
+              <td>
+                Authenticated header with primary nav appropriate to role; Settings highlighted.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/how-it-works.html">how-it-works.html</a></td>
+              <td><span class="tag public">🌐 Public</span></td>
+              <td>
+                Explains the system: pool posting → acceptance → milestones → public tracking.
+              </td>
+              <td>
+                Public nav/marketing header. Right action routes into sign-in / get started.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/for-publishers.html">for-publishers.html</a></td>
+              <td><span class="tag public">🌐 Public</span></td>
+              <td>
+                Publisher marketing page describing value props and flow.
+              </td>
+              <td>
+                Public nav/marketing header with CTA to start a brief.
+              </td>
+            </tr>
+
+            <tr>
+              <td class="page"><a href="/for-manufacturers.html">for-manufacturers.html</a></td>
+              <td><span class="tag public">🌐 Public</span></td>
+              <td>
+                Manufacturer marketing page describing pool browsing and order conversion.
+              </td>
+              <td>
+                Public nav/marketing header with CTA to create manufacturer account/sign in.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="hint" style="margin-top:.75rem">
+        Want me to expand this table to include the rest of your ~44 pages? If you drop your /mnt/data folder list (or zip),
+        I’ll auto-generate the full index with every filename + accurate header description.
       </div>
     </div>
-  </div>
-</div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/for-publishers.html">For publishers</a>
+        <a href="/for-manufacturers.html">For manufacturers</a>
+      </div>
+
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
 
 </body>
 </html>
-
-
-
-
-
-
