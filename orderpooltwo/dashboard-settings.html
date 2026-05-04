@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings — Order Pool</title>
+  <meta name="description" content="Account, notification, and workspace settings for Order Pool." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- APP HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="brand">Order Pool</span>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-link" href="/publisher-dashboard-full.html">Dashboard</a>
+        <a class="nav-link" href="/publisher-briefs-full.html">Briefs</a>
+        <a class="nav-link" href="/publisher-orders-full.html">Orders</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/publisher-dashboard-full.html" class="header-btn ghost">Back</a>
+        <a href="/auth-signin.html" class="header-btn primary">Sign out</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- PAGE INTRO -->
+    <section class="section">
+      <h1>Settings</h1>
+      <p class="page-sub">
+        Manage your account details, notifications, and defaults. Keeping this accurate improves matching and reduces back-and-forth.
+      </p>
+
+      <div class="publisher-stats">
+        <div class="stat-pill">
+          <div class="stat-label">Account</div>
+          <div class="stat-desc">Active</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Role</div>
+          <div class="stat-desc">Publisher / Manufacturer</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Plan</div>
+          <div class="stat-desc">(Plan name)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE + NOTIFICATIONS -->
+    <section class="section">
+      <div class="auth-grid">
+
+        <!-- PROFILE -->
+        <div class="auth-card">
+          <h2>Profile</h2>
+          <p class="text-muted">Used for invoices, collaboration, and support.</p>
+
+          <form class="form">
+
+            <div class="field">
+              <input id="company" type="text" placeholder=" " />
+              <label for="company">Company / studio name</label>
+            </div>
+
+            <div class="field">
+              <input id="name" type="text" placeholder=" " />
+              <label for="name">Contact name</label>
+            </div>
+
+            <div class="field">
+              <input id="email" type="email" placeholder=" " />
+              <label for="email">Email address</label>
+            </div>
+
+            <div class="field">
+              <select id="timezone">
+                <option>America/Vancouver</option>
+                <option>America/Los_Angeles</option>
+                <option>America/New_York</option>
+                <option>Europe/London</option>
+              </select>
+              <label for="timezone">Timezone</label>
+            </div>
+
+            <div class="field">
+              <input id="location" type="text" placeholder=" " />
+              <label for="location">Location (general)</label>
+            </div>
+
+            <button class="button-primary button-full">Save profile</button>
+          </form>
+        </div>
+
+        <!-- NOTIFICATIONS -->
+        <div class="auth-card auth-side">
+          <h2>Notifications</h2>
+          <p class="text-muted">Control how and when you’re notified.</p>
+
+          <ul class="role-list">
+            <li>
+              <strong>Email updates</strong>
+              <span>Orders, acceptance events, questions</span>
+            </li>
+            <li>
+              <strong>Digest</strong>
+              <span>Daily or weekly summary</span>
+            </li>
+            <li>
+              <strong>Critical alerts</strong>
+              <span>Timeline risk, approvals needed</span>
+            </li>
+          </ul>
+
+          <form class="form">
+            <div class="field">
+              <input id="notify-email" type="email" placeholder=" " />
+              <label for="notify-email">Notification email</label>
+            </div>
+
+            <div class="field">
+              <select id="digest">
+                <option>Off</option>
+                <option>Daily</option>
+                <option>Weekly</option>
+              </select>
+              <label for="digest">Digest frequency</label>
+            </div>
+
+            <button class="button-primary button-full">Save notifications</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MANUFACTURER SETTINGS -->
+    <section class="section">
+      <h2>Manufacturer settings</h2>
+      <p class="page-sub">Only relevant if you operate as a manufacturer.</p>
+
+      <div class="auth-grid">
+
+        <div class="auth-card">
+          <h3>Capabilities</h3>
+
+          <form class="form">
+            <div class="field">
+              <input id="categories" type="text" placeholder=" " />
+              <label for="categories">Categories</label>
+            </div>
+
+            <div class="field">
+              <input id="moq" type="text" placeholder=" " />
+              <label for="moq">Typical MOQ</label>
+            </div>
+
+            <div class="field">
+              <input id="regions" type="text" placeholder=" " />
+              <label for="regions">Shipping regions</label>
+            </div>
+
+            <div class="field">
+              <textarea id="notes" rows="4" placeholder=" "></textarea>
+              <label for="notes">Notes (optional)</label>
+            </div>
+
+            <button class="button-primary button-full">Save capabilities</button>
+          </form>
+        </div>
+
+        <div class="auth-card">
+          <h3>Lead times</h3>
+
+          <form class="form">
+            <div class="field">
+              <input id="sample" type="text" placeholder=" " />
+              <label for="sample">Sampling lead time</label>
+            </div>
+
+            <div class="field">
+              <input id="production" type="text" placeholder=" " />
+              <label for="production">Production lead time</label>
+            </div>
+
+            <div class="field">
+              <input id="capacity" type="text" placeholder=" " />
+              <label for="capacity">Current capacity note</label>
+            </div>
+
+            <button class="button-primary button-full">Save lead times</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BILLING + SECURITY -->
+    <section class="section">
+      <div class="auth-grid">
+
+        <div class="auth-card">
+          <h2>Billing</h2>
+
+          <form class="form">
+            <div class="field">
+              <input id="billing-email" type="email" placeholder=" " />
+              <label for="billing-email">Billing email</label>
+            </div>
+
+            <div class="field">
+              <input id="tax" type="text" placeholder=" " />
+              <label for="tax">Tax number (optional)</label>
+            </div>
+
+            <button class="button-primary button-full">Save billing</button>
+          </form>
+        </div>
+
+        <div class="auth-card">
+          <h2>Security</h2>
+
+          <form class="form">
+            <div class="field field-password">
+              <input id="new-password" type="password" placeholder=" " />
+              <label for="new-password">New password</label>
+              <button class="password-toggle" type="button">Show</button>
+            </div>
+
+            <div class="field field-password">
+              <input id="confirm-password" type="password" placeholder=" " />
+              <label for="confirm-password">Confirm password</label>
+              <button class="password-toggle" type="button">Show</button>
+            </div>
+
+            <button class="button-primary button-full">Save security</button>
+          </form>
+
+          <div class="featured-row">
+            <div class="collab-card">
+              <div class="collab-body">
+                <div class="collab-title">Danger zone</div>
+                <p class="collab-desc">
+                  Delete account and permanently remove access to dashboards and private data.
+                </p>
+                <a class="featured-link" href="/contact.html">Contact support →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-brand-text">
+        Order Pool is a shared manufacturing request platform built on transparency and execution.
+      </p>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© Order Pool</span>
+    </div>
+  </footer>
+
+  <!-- password toggle -->
+  <script>
+    document.querySelectorAll(".password-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const input = btn.parentElement.querySelector("input");
+        const show = input.type === "password";
+        input.type = show ? "text" : "password";
+        btn.textContent = show ? "Hide" : "Show";
+      });
+    });
+  </script>
+
+</body>
+</html>

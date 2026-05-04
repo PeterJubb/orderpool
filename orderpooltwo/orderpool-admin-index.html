@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OrderPool Admin Atlas</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:linear-gradient(180deg,#f8fafc,#eef2ff);color:#0f172a}
+.container{max-width:1200px;margin:0 auto;padding:40px 20px}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#3d20ae,#6d5dfc);
+  color:white;
+  padding:40px;
+  border-radius:24px;
+  margin-bottom:40px;
+  box-shadow:0 20px 50px rgba(61,32,174,.25);
+}
+.hero h1{font-size:2.8rem;margin-bottom:10px}
+.hero p{opacity:.9;max-width:600px}
+.badges{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.15);padding:6px 10px;border-radius:999px;font-size:.8rem}
+
+/* GRID */
+.section{margin-bottom:40px}
+.section-title{font-size:1.3rem;font-weight:800;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  border:1px solid #e2e8f0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  transition:.2s;
+  position:relative;
+  overflow:hidden;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 15px 40px rgba(0,0,0,.08)}
+
+.card.large{
+  grid-column:span 2;
+  background:linear-gradient(135deg,#ffffff,#f1f5ff);
+}
+
+.icon{font-size:1.4rem}
+.title{font-weight:800;font-size:1.1rem}
+.desc{color:#64748b;font-size:.92rem;line-height:1.4}
+
+.link{
+  margin-top:auto;
+  font-weight:700;
+  text-decoration:none;
+  color:#3d20ae;
+}
+.link::after{content:" →"}
+
+/* SIDE PANEL */
+.panel{
+  background:linear-gradient(135deg,#fefce8,#fff7ed);
+  border:1px solid #fde68a;
+  border-radius:18px;
+  padding:20px;
+}
+.panel h3{margin-bottom:8px}
+.panel p{font-size:.9rem;color:#78350f;line-height:1.4}
+
+@media(max-width:900px){
+  .card.large{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <h1>OrderPool Admin Atlas ⚙️</h1>
+  <p>Command center for marketplace flow — control orders, protect escrow, manage supply, and resolve risk.</p>
+  <div class="badges">
+    <div class="badge">10 Core Systems</div>
+    <div class="badge">Live Operations</div>
+    <div class="badge">Escrow Protected 💰</div>
+    <div class="badge">Disputes Managed ⚠️</div>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<div class="section">
+  <div class="section-title">🔥 Core Surfaces</div>
+  <div class="grid">
+
+    <div class="card large">
+      <div class="icon">📊</div>
+      <div class="title">Dashboard</div>
+      <div class="desc">Live system overview. Alerts, health, and what needs intervention right now.</div>
+      <a class="link" href="orderpool-admin-dashboard-mvp.html">Enter dashboard</a>
+    </div>
+
+    <div class="card large">
+      <div class="icon">📦</div>
+      <div class="title">Orders</div>
+      <div class="desc">Main operational surface. Track every order, detect risk, and intervene fast.</div>
+      <a class="link" href="orderpool-admin-orders-list-mvp.html">Review orders</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">💳</div>
+      <div class="title">Payments</div>
+      <div class="desc">Escrow control, payouts, and refund handling.</div>
+      <a class="link" href="orderpool-admin-payments-mvp.html">Inspect payments</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚠️</div>
+      <div class="title">Disputes</div>
+      <div class="desc">Resolve quality issues, delays, and conflicts.</div>
+      <a class="link" href="orderpool-admin-disputes-mvp.html">Open dispute desk</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- OPERATIONS -->
+<div class="section">
+  <div class="section-title">⚙️ Operations</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">🧾</div>
+      <div class="title">Briefs</div>
+      <div class="desc">Approve and clean incoming production briefs.</div>
+      <a class="link" href="orderpool-admin-briefs-queue-mvp.html">Review briefs</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔍</div>
+      <div class="title">Order Detail</div>
+      <div class="desc">Deep intervention layer for any single order.</div>
+      <a class="link" href="orderpool-admin-order-detail-mvp.html">Inspect order</a>
+    </div>
+
+    <div class="panel">
+      <h3>How Admin Works 🧠</h3>
+      <p>Keep orders flowing, protect escrow, intervene early, and maintain a clean audit trail. Every page supports one of these decisions.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- PEOPLE -->
+<div class="section">
+  <div class="section-title">👥 Supply & Buyers</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">🏭</div>
+      <div class="title">Manufacturers</div>
+      <div class="desc">Control supply quality and performance.</div>
+      <a class="link" href="orderpool-admin-manufacturers-mvp.html">View supply</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛍️</div>
+      <div class="title">Publishers</div>
+      <div class="desc">Manage buyers, spend, and risk.</div>
+      <a class="link" href="orderpool-admin-publishers-mvp.html">View buyers</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- SYSTEM -->
+<div class="section">
+  <div class="section-title">🧯 Risk & Governance</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">🚩</div>
+      <div class="title">Flags</div>
+      <div class="desc">Central alert system for issues and anomalies.</div>
+      <a class="link" href="orderpool-admin-flags-moderation-mvp.html">Monitor flags</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">📜</div>
+      <div class="title">Activity Log</div>
+      <div class="desc">Full audit trail of every action.</div>
+      <a class="link" href="orderpool-admin-activity-log-mvp.html">View audit trail</a>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>

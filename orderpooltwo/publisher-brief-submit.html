@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Submit brief — Publisher — Order Pool</title>
+  <meta name="description" content="Submit and pay to publish a brief into the manufacturer quote pool." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (canonical – authenticated) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    nav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:800;
+      min-width:180px;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .nav-links a[aria-current="page"]{
+      color:#0f172a;
+      font-weight:900;
+    }
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:650;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background:#3d20ae;
+      color:#fff;
+      border-color:#3d20ae;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#e5e7eb;
+    }
+    .btn-secondary:hover{background:#f8fafc}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 4rem}
+    .section{margin-bottom:3rem}
+    h1{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+    h3{font-size:1.05rem;font-weight:900}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:900px}
+
+    /* Pills */
+    .meta{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      margin-top:1.25rem;
+    }
+    .pill{
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:.45rem .85rem;
+      font-size:.75rem;
+      font-weight:800;
+      background:#f8fafc;
+      color:#475569;
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1.5rem;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.75rem;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+      margin-top:.5rem;
+    }
+    .item{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:.85rem;
+      background:#fafcff;
+    }
+    .item p{font-size:.9rem}
+
+    /* Form */
+    label{
+      font-size:.75rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      color:#475569;
+      margin-bottom:.25rem;
+      display:block;
+    }
+    input{
+      width:100%;
+      padding:.7rem .8rem;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      font-family:inherit;
+      font-size:.95rem;
+    }
+
+    .actions{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-top:.75rem;
+    }
+
+    @media(max-width:1000px){
+      .grid{grid-template-columns:1fr}
+      main{padding:2.5rem 1.25rem}
+      h1{font-size:2.2rem}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/publisher-dashboard-full.html" class="brand">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="/publisher-briefs-full.html" aria-current="page">Briefs</a></li>
+        <li><a href="/publisher-orders-full.html">Orders</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/publisher-brief-detail-draft.html">Back</a>
+        <a class="btn btn-primary" href="/publisher-brief-detail-submitted.html">View submitted</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="section">
+      <h1>Submit brief</h1>
+      <p class="lead">
+        Submitting publishes your request to the manufacturer quote pool.
+        Once published, this brief becomes locked.
+      </p>
+
+      <div class="meta">
+        <span class="pill">Brief: Accessory packaging refresh</span>
+        <span class="pill">Current: Draft</span>
+        <span class="pill">After submit: In pool</span>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="section">
+      <div class="grid">
+
+        <!-- LEFT -->
+        <div class="card">
+          <h2>Confirm details</h2>
+          <p>
+            Manufacturers decide quickly. Confirm the essentials before publishing.
+          </p>
+
+          <div class="list">
+            <div class="item">
+              <h3>Quantity</h3>
+              <p>2,500 units • MOQ 1,000</p>
+            </div>
+            <div class="item">
+              <h3>Timeline</h3>
+              <p>Samples in 2 weeks • Production in 6 weeks</p>
+            </div>
+            <div class="item">
+              <h3>Constraints</h3>
+              <p>Matte finish, spot UV logo, shelf-ready, insert tray</p>
+            </div>
+            <div class="item">
+              <h3>Assets</h3>
+              <p>Brand guide, dieline, reference images</p>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-secondary" href="/publisher-brief-detail-draft.html">Edit draft</a>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="card">
+          <h2>Pay & publish</h2>
+          <p>
+            Payment publishes this brief into the pool where manufacturers can accept it.
+          </p>
+
+          <div class="list">
+            <div class="item">
+              <h3>Submission fee</h3>
+              <p>$___ (placeholder)</p>
+            </div>
+            <div class="item">
+              <h3>Payment method</h3>
+              <p>Card (placeholder)</p>
+            </div>
+          </div>
+
+          <label>Billing email</label>
+          <input type="email" placeholder="billing@company.com" />
+
+          <label>PO / reference (optional)</label>
+          <input type="text" placeholder="e.g. PO-1042" />
+
+          <div class="item">
+            <h3>Confirm</h3>
+            <p>
+              By publishing, you confirm this brief is accurate and ready for manufacturers.
+              You agree to the <a href="/terms.html">Terms</a>.
+            </p>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary">Pay & publish</button>
+            <a class="btn btn-secondary" href="/publisher-brief-detail-draft.html">Back to draft</a>
+          </div>
+
+          <p style="font-size:.9rem;color:#64748b">
+            After publishing, this brief will appear as <strong>In pool</strong> until accepted.
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>

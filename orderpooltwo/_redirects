@@ -1,0 +1,5 @@
+# Lowercase any legacy capital-O admin links
+/Orderpool-admin-*  /orderpool-admin-:splat  301!
+
+# Friendly admin shortcut
+/admin  /orderpool-admin-index  302

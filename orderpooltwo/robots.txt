@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Block admin prototype pages from indexing
+Disallow: /orderpool-admin-
+Disallow: /admin

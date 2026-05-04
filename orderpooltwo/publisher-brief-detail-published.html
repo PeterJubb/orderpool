@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Brief — Published — Publisher — Order Pool</title>
+  <meta name="description" content="Publisher view of a published brief that is live in the pool and available for manufacturers to accept." />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+      line-height:1.6;
+      color:#0f172a;
+      background:#ffffff;
+    }
+
+    /* Header (scoped so footer never inherits) */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      padding:1rem 2rem;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .topnav{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:900;
+    }
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .nav-links{
+      display:flex;
+      gap:1.35rem;
+      list-style:none;
+      flex:1;
+      justify-content:center;
+      flex-wrap:wrap;
+      padding:0 .5rem;
+    }
+    .nav-links a{
+      color:#64748b;
+      text-decoration:none;
+      font-weight:850;
+      font-size:.95rem;
+      padding:.3rem .2rem;
+      border-radius:10px;
+    }
+    .nav-links a[aria-current="page"]{color:#0f172a;font-weight:950}
+    .nav-links a:hover{color:#0f172a;background:#f8fafc}
+    .nav-actions{
+      display:flex;
+      gap:.75rem;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    /* Buttons */
+    .btn{
+      padding:.65rem 1.15rem;
+      border-radius:10px;
+      font-size:.95rem;
+      font-weight:850;
+      border:1px solid transparent;
+      background:none;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      white-space:nowrap;
+    }
+    .btn-primary{background:#3d20ae;color:#fff;border-color:#3d20ae}
+    .btn-primary:hover{filter:brightness(.97)}
+    .btn-secondary{background:#fff;color:#0f172a;border-color:#e5e7eb}
+    .btn-secondary:hover{background:#f8fafc}
+    .btn-ghost{background:transparent;color:#0f172a;border-color:transparent}
+    .btn-ghost:hover{background:#f8fafc}
+    .btn-danger{
+      background:#fff;
+      color:#b91c1c;
+      border-color:rgba(239,68,68,.35);
+    }
+    .btn-danger:hover{background:rgba(239,68,68,.06)}
+
+    /* Layout */
+    main{max-width:1200px;margin:0 auto;padding:3rem 2rem 2.5rem}
+    .section{margin-bottom:2.25rem}
+    h1{font-size:2.4rem;font-weight:950;letter-spacing:-.02em;margin-bottom:.4rem}
+    h2{font-size:1.35rem;font-weight:950;margin-bottom:.25rem}
+    h3{font-size:1.05rem;font-weight:950}
+    p{color:#475569}
+    .lead{font-size:1.05rem;max-width:920px}
+
+    /* Pills */
+    .meta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+    .pill{
+      border:1px solid #e5e7eb;
+      background:#fff;
+      border-radius:999px;
+      padding:.42rem .75rem;
+      font-size:.78rem;
+      font-weight:900;
+      color:#334155;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+    }
+    .pill.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
+    .pill.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .pill.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.25rem}
+    .card{
+      border:1px solid #e5e7eb;
+      border-radius:20px;
+      padding:1.25rem;
+      background:#fff;
+    }
+    .card-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap
+    }
+
+    /* Key/Value blocks */
+    .dl{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:1rem}
+    .kv{
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:.9rem;
+      background:#fafcff;
+    }
+    .kv strong{display:block;font-weight:950;color:#0f172a;margin-bottom:.15rem}
+    .kv span{display:block;color:#64748b;font-weight:800;font-size:.92rem}
+
+    /* Lists / rows */
+    .rows{display:flex;flex-direction:column;gap:.75rem;margin-top:1rem}
+    .row{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:1rem;
+      background:#fafcff;
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .row .title{font-weight:950;color:#0f172a}
+    .row .sub{color:#64748b;font-weight:850;font-size:.92rem;margin-top:.15rem}
+    .row .right{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+    .badge{
+      border-radius:999px;
+      padding:.35rem .65rem;
+      font-weight:950;
+      font-size:.78rem;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      color:#334155;
+      white-space:nowrap;
+    }
+    .badge.good{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#065f46}
+    .badge.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10);color:#7c2d12}
+    .badge.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:#1e3a8a}
+
+    /* Callouts */
+    .stack{display:flex;flex-direction:column;gap:1.25rem}
+    .callout{
+      border-radius:20px;
+      border:1px solid rgba(61,32,174,.25);
+      background:linear-gradient(135deg,rgba(61,32,174,.10),rgba(99,102,241,.08));
+      padding:1.1rem;
+    }
+    .callout p{color:#334155}
+    .callout-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.9rem}
+
+    /* Visibility box */
+    .note{
+      border:1px dashed rgba(61,32,174,.35);
+      background:rgba(61,32,174,.06);
+      border-radius:18px;
+      padding:1rem;
+      margin-top:1rem;
+    }
+    .note strong{display:block;font-weight:950;margin-bottom:.25rem}
+
+    /* Footer */
+    footer{border-top:1px solid #e5e7eb;background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:1.25rem 2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    }
+    .footer-left{display:flex;align-items:center;gap:.6rem;font-weight:950;color:#0f172a}
+    .footer-left img{width:26px;height:26px;object-fit:contain}
+    .footer-links{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-links a{text-decoration:none;color:#64748b;font-weight:850;font-size:.92rem}
+    .footer-links a:hover{color:#0f172a}
+    .footer-meta{font-size:.8rem;color:#94a3b8;font-weight:850}
+
+    @media(max-width:1100px){
+      .grid{grid-template-columns:1fr}
+      .dl{grid-template-columns:1fr}
+    }
+    @media(max-width:720px){
+      main{padding:2.25rem 1.25rem 2rem}
+      header{padding:1rem 1.25rem}
+      h1{font-size:2.05rem}
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="topnav">
+      <a class="brand" href="publisher-briefs-full.html">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </a>
+
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="publisher-dashboard-full.html">Dashboard</a></li>
+        <li><a href="publisher-briefs-full.html" aria-current="page">Briefs</a></li>
+        <li><a href="publisher-orders-full.html">Orders</a></li>
+        <li><a href="dashboard-settings.html">Settings</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="publisher-briefs-full.html">Back to briefs</a>
+        <a class="btn btn-primary" href="publisher-orders-full.html">View orders</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="section">
+      <h1>Published brief: Retail display packaging</h1>
+      <p class="lead">
+        Your brief is live in the pool. Manufacturers can now accept it and convert it into an order.
+        You’ll see updates here as acceptance and milestones happen.
+      </p>
+
+      <div class="meta" aria-label="Published status">
+        <span class="pill good">✅ Published</span>
+        <span class="pill info">Pool ID: BR-01928</span>
+        <span class="pill">Qty: 2,500 units</span>
+        <span class="pill">Target: 6 weeks</span>
+        <span class="pill warn">Awaiting acceptance</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid">
+
+        <!-- LEFT -->
+        <div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Brief details</h2>
+                <p>What manufacturers see in the pool (structured).</p>
+              </div>
+              <a class="btn btn-ghost" href="public-order-detail.html">Preview public page →</a>
+            </div>
+
+            <div class="dl" aria-label="Brief fields">
+              <div class="kv">
+                <strong>Category</strong>
+                <span>Packaging (retail display)</span>
+              </div>
+              <div class="kv">
+                <strong>Quantity</strong>
+                <span>2,500 units</span>
+              </div>
+              <div class="kv">
+                <strong>Timeline</strong>
+                <span>6 weeks total (incl. sampling)</span>
+              </div>
+              <div class="kv">
+                <strong>Ship-to region</strong>
+                <span>Lower Mainland, BC</span>
+              </div>
+              <div class="kv">
+                <strong>Materials & finishes</strong>
+                <span>350gsm SBS, matte lamination, spot UV</span>
+              </div>
+              <div class="kv">
+                <strong>Sampling</strong>
+                <span>Physical sample required before production</span>
+              </div>
+              <div class="kv">
+                <strong>Decision criteria</strong>
+                <span>Quality first, minimize risk</span>
+              </div>
+              <div class="kv">
+                <strong>Visibility</strong>
+                <span>Status-only public tracking</span>
+              </div>
+            </div>
+
+            <div class="note">
+              <strong>Visibility rules</strong>
+              <p>
+                Manufacturers see all private details after acceptance. The public page shows only milestone status — no pricing or files.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1.25rem">
+            <div class="card-head">
+              <div>
+                <h2>Manufacturer activity</h2>
+                <p>What’s happening in the pool right now.</p>
+              </div>
+            </div>
+
+            <div class="rows" aria-label="Manufacturer activity list">
+              <div class="row">
+                <div>
+                  <div class="title">Your brief is discoverable in the pool</div>
+                  <div class="sub">6 manufacturers match your category + region</div>
+                </div>
+                <div class="right">
+                  <span class="badge info">In pool</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="title">No acceptance yet</div>
+                  <div class="sub">You’ll be notified immediately when a manufacturer accepts</div>
+                </div>
+                <div class="right">
+                  <span class="badge warn">Waiting</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="title">Suggested improvement</div>
+                  <div class="sub">Add alternate material option to widen matches</div>
+                </div>
+                <div class="right">
+                  <a class="btn btn-secondary" href="publisher-brief-detail-draft.html">Duplicate as draft</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="stack">
+          <div class="callout">
+            <h2>What happens next</h2>
+            <p>
+              Manufacturers can accept at any time. Once accepted, you’ll see an order created automatically with milestones and updates.
+            </p>
+            <div class="callout-actions">
+              <a class="btn btn-primary" href="public-orders.html">View public orders</a>
+              <a class="btn btn-secondary" href="publisher-orders-full.html">Go to orders</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Controls</h2>
+            <p>Manage your published brief.</p>
+
+            <div class="rows" style="margin-top:1rem">
+              <div class="row" style="background:#fff">
+                <div>
+                  <div class="title">Pause brief</div>
+                  <div class="sub">Hide from the pool without deleting</div>
+                </div>
+                <div class="right">
+                  <button class="btn btn-secondary" type="button">Pause</button>
+                </div>
+              </div>
+
+              <div class="row" style="background:#fff">
+                <div>
+                  <div class="title">Duplicate as draft</div>
+                  <div class="sub">Create a new draft version for changes</div>
+                </div>
+                <div class="right">
+                  <a class="btn btn-secondary" href="publisher-brief-detail-draft.html">Duplicate</a>
+                </div>
+              </div>
+
+              <div class="row" style="background:rgba(239,68,68,.05);border-color:rgba(239,68,68,.25)">
+                <div>
+                  <div class="title">Cancel brief</div>
+                  <div class="sub">Remove from pool (use only if needed)</div>
+                </div>
+                <div class="right">
+                  <button class="btn btn-danger" type="button">Cancel</button>
+                </div>
+              </div>
+            </div>
+
+            <p style="margin-top:.75rem;color:#64748b;font-weight:850;font-size:.9rem">
+              In real logic: some actions become disabled after acceptance.
+            </p>
+          </div>
+
+          <div class="card">
+            <h2>Notifications</h2>
+            <p>Who gets alerted when a manufacturer accepts.</p>
+
+            <div class="dl" style="grid-template-columns:1fr;margin-top:1rem">
+              <div class="kv">
+                <strong>Primary</strong>
+                <span>ops@northshorestudio.com</span>
+              </div>
+              <div class="kv">
+                <strong>Backup</strong>
+                <span>production@northshorestudio.com</span>
+              </div>
+            </div>
+
+            <div class="callout-actions" style="margin-top:1rem">
+              <a class="btn btn-secondary" href="dashboard-settings.html">Edit notification settings</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="Orderpool_logo.png" alt="Order Pool logo" />
+        <span>Order Pool</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="for-publishers.html">For publishers</a>
+        <a href="for-manufacturers.html">For manufacturers</a>
+      </div>
+
+      <div class="footer-meta">© 2026 Order Pool</div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+

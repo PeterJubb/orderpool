@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrderPool Admin — Orders</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background: #ffffff;
+      border-right: 1px solid #e2e8f0;
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+    }
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: #3d20ae;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+    .nav-group { margin-bottom: 22px; }
+    .nav-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 10px;
+      padding: 0 10px;
+    }
+    .nav-item {
+      display: block;
+      padding: 12px 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #334155;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .nav-item.active {
+      background: #ede9fe;
+      color: #3d20ae;
+    }
+    .main { padding: 28px; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    h1 {
+      font-size: 2rem;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .sub {
+      color: #64748b;
+      font-size: 0.98rem;
+      max-width: 760px;
+    }
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: 1px solid #dbe1ea;
+      background: white;
+      color: #0f172a;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn.primary {
+      background: #3d20ae;
+      color: white;
+      border-color: #3d20ae;
+    }
+    .toolbar {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    }
+    .toolbar-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search {
+      flex: 1 1 280px;
+      min-width: 220px;
+      padding: 12px 14px;
+      border: 1px solid #dbe1ea;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      background: #fff;
+    }
+    .filter, .bulk-action {
+      padding: 12px 14px;
+      border: 1px solid #dbe1ea;
+      border-radius: 12px;
+      background: #fff;
+      color: #334155;
+      font-weight: 600;
+      min-width: 140px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 18px;
+      align-items: start;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .muted {
+      color: #64748b;
+      font-size: 0.92rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      text-align: left;
+      padding: 14px 10px;
+      border-bottom: 1px solid #eef2f7;
+      vertical-align: middle;
+      font-size: 0.95rem;
+    }
+    th {
+      color: #64748b;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .checkbox {
+      width: 16px;
+      height: 16px;
+    }
+    .order-id {
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .order-meta {
+      display: block;
+      color: #64748b;
+      font-size: 0.86rem;
+      margin-top: 4px;
+    }
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: #f1f5f9;
+      color: #334155;
+      white-space: nowrap;
+    }
+    .pill.green { background: #ecfdf5; color: #047857; }
+    .pill.yellow { background: #fffbeb; color: #a16207; }
+    .pill.red { background: #fef2f2; color: #b91c1c; }
+    .pill.blue { background: #eff6ff; color: #1d4ed8; }
+    .row-action {
+      color: #3d20ae;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .summary-list {
+      display: grid;
+      gap: 12px;
+    }
+    .summary-item {
+      border: 1px solid #eef2f7;
+      border-radius: 14px;
+      padding: 14px;
+      background: #fcfdff;
+    }
+    .summary-title {
+      font-weight: 750;
+      margin-bottom: 4px;
+    }
+    .summary-meta {
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .pager-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    @media (max-width: 1180px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 860px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      .main { padding: 18px; }
+      .toolbar-row { flex-direction: column; align-items: stretch; }
+      .search, .filter, .bulk-action { width: 100%; }
+      .card { overflow-x: auto; }
+      table { min-width: 900px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge">OP</div>
+        <div>OrderPool Admin</div>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">Overview</div>
+        <a class="nav-item" href="#">Dashboard</a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">Operations</div>
+        <a class="nav-item active" href="#">Orders</a>
+        <a class="nav-item" href="#">Briefs</a>
+        <a class="nav-item" href="#">Disputes</a>
+        <a class="nav-item" href="#">Payments</a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">People</div>
+        <a class="nav-item" href="#">Manufacturers</a>
+        <a class="nav-item" href="#">Publishers</a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">System</div>
+        <a class="nav-item" href="#">Flags</a>
+        <a class="nav-item" href="#">Activity Log</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1>Orders</h1>
+          <div class="sub">Main admin surface for monitoring all order flow, spotting risk, and stepping in when execution breaks.</div>
+        </div>
+        <div class="top-actions">
+          <button class="btn">Export CSV</button>
+          <button class="btn primary">Create manual order</button>
+        </div>
+      </div>
+
+      <section class="toolbar">
+        <div class="toolbar-row">
+          <input class="search" type="text" value="Search by order ID, publisher, manufacturer..." />
+          <select class="filter">
+            <option>All statuses</option>
+            <option>Awaiting approval</option>
+            <option>In production</option>
+            <option>At risk</option>
+            <option>Dispute</option>
+            <option>Delivered</option>
+          </select>
+          <select class="filter">
+            <option>All manufacturers</option>
+            <option>Assigned</option>
+            <option>Unassigned</option>
+          </select>
+          <select class="filter">
+            <option>Newest first</option>
+            <option>Oldest first</option>
+            <option>Highest value</option>
+            <option>Most urgent</option>
+          </select>
+          <select class="bulk-action">
+            <option>Bulk actions</option>
+            <option>Force status update</option>
+            <option>Assign manufacturer</option>
+            <option>Pause orders</option>
+            <option>Cancel orders</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="card">
+          <div class="section-head">
+            <div>
+              <div class="section-title">All orders</div>
+              <div class="muted">214 total orders · 9 need intervention today</div>
+            </div>
+            <div class="muted">Showing 1–8</div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th><input class="checkbox" type="checkbox" /></th>
+                <th>Order</th>
+                <th>Publisher</th>
+                <th>Manufacturer</th>
+                <th>Status</th>
+                <th>Escrow</th>
+                <th>Deadline</th>
+                <th>Risk</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2063</span>
+                  <span class="order-meta">Printed carton packaging</span>
+                </td>
+                <td>Pine & Press</td>
+                <td>Shenzhen PackWorks</td>
+                <td><span class="pill yellow">At risk</span></td>
+                <td>$12,800</td>
+                <td>Apr 18</td>
+                <td><span class="pill yellow">Late milestone</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2058</span>
+                  <span class="order-meta">Rigid box production</span>
+                </td>
+                <td>Northstar Goods</td>
+                <td>Dongguan Box Lab</td>
+                <td><span class="pill blue">In production</span></td>
+                <td>$24,300</td>
+                <td>Apr 24</td>
+                <td><span class="pill green">Healthy</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2057</span>
+                  <span class="order-meta">Retail display inserts</span>
+                </td>
+                <td>Atlas Retail</td>
+                <td>Vanta Print Group</td>
+                <td><span class="pill red">Dispute</span></td>
+                <td>$8,600</td>
+                <td>Apr 15</td>
+                <td><span class="pill red">Quality issue</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2054</span>
+                  <span class="order-meta">Custom mailer boxes</span>
+                </td>
+                <td>Harbor Supply</td>
+                <td>Unassigned</td>
+                <td><span class="pill yellow">Awaiting pull</span></td>
+                <td>$0</td>
+                <td>Apr 22</td>
+                <td><span class="pill yellow">No manufacturer yet</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2052</span>
+                  <span class="order-meta">Label and sleeve run</span>
+                </td>
+                <td>Harbor Supply</td>
+                <td>Foxline Packaging</td>
+                <td><span class="pill yellow">Awaiting approval</span></td>
+                <td>$6,200</td>
+                <td>Apr 19</td>
+                <td><span class="pill yellow">Escrow pending</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2048</span>
+                  <span class="order-meta">Folding carton set</span>
+                </td>
+                <td>Northstar Goods</td>
+                <td>Shenzhen PackWorks</td>
+                <td><span class="pill red">Stalled</span></td>
+                <td>$17,900</td>
+                <td>Apr 16</td>
+                <td><span class="pill red">No updates</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2041</span>
+                  <span class="order-meta">Corrugated shipper boxes</span>
+                </td>
+                <td>Fieldhouse Supply</td>
+                <td>Pacific Carton Co.</td>
+                <td><span class="pill green">Delivered</span></td>
+                <td>$10,400</td>
+                <td>Apr 10</td>
+                <td><span class="pill green">Complete</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+              <tr>
+                <td><input class="checkbox" type="checkbox" /></td>
+                <td>
+                  <span class="order-id">#OP-2039</span>
+                  <span class="order-meta">Hang tag production</span>
+                </td>
+                <td>Wick & Form</td>
+                <td>Foxline Packaging</td>
+                <td><span class="pill blue">Sampling</span></td>
+                <td>$4,900</td>
+                <td>Apr 21</td>
+                <td><span class="pill green">On track</span></td>
+                <td><a class="row-action" href="#">Open</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pagination">
+            <div class="muted">8 selected results on this page</div>
+            <div class="pager-buttons">
+              <button class="btn">Previous</button>
+              <button class="btn">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div>
+              <div class="section-title">Orders summary</div>
+              <div class="muted">Today’s operational snapshot</div>
+            </div>
+          </div>
+
+          <div class="summary-list">
+            <div class="summary-item">
+              <div class="summary-title">11 awaiting approval</div>
+              <div class="summary-meta">Orders blocked by escrow, admin review, or missing confirmation.</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-title">4 stalled orders</div>
+              <div class="summary-meta">No manufacturer update in more than 72 hours.</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-title">3 active disputes</div>
+              <div class="summary-meta">Two quality issues, one shipping mismatch.</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-title">6 ready for payout</div>
+              <div class="summary-meta">Delivered and awaiting admin release of manufacturer funds.</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-title">Fastest-moving manufacturer</div>
+              <div class="summary-meta">Foxline Packaging pulled 5 briefs this week.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
